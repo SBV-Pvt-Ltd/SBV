@@ -3,7 +3,8 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><!--  JQUERY  -->
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<!--  JQUERY  -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
   
@@ -11,11 +12,123 @@
 	<script type="text/javascript">
 		
 	</script>
+	<style>
+		.header {
+			position: sticky;
+			background: #555;
+			color: black;
+		}
+		.sticky {
+			position: fixed;
+			top: 0;
+			width: 100%;
+		}
+		#introduction_video {
+			border:1px solid black; 
+		}
+		.inner_div {
+			margin-left: 40px;
+			margin-top: 20px;
+			border:1px solid black; 
+			border-radius: 10px;
+			height: 100px; 
+			width: 250px; 
+			float: left; 
+		}
+		.inner_div:hover {
+			border:1px solid blue; 
+			font-size: 20px;
+			background: lightgoldenrodyellow;
+		}
+	</style>
 </head>
 
 <body>
-	<h1>Saharsh Bhadani Venture Private Limited</h1>
+	<div class="header" id="header-section">
+		<center>
+			<h1 style="font-family:Lucida Handwriting">Saharsh Bhadani Venture Private Limited</h1><hr>
+		</center>
+	</div>
+	<script>
+		window.onscroll = function() {myFunction()};
+		var header = document.getElementById("header-section");
+		var sticky = header.offsetTop;
+		
+		function myFunction() {
+		  if (window.pageYOffset > sticky) {
+			header.classList.add("sticky");
+		  } else {
+			header.classList.remove("sticky");
+		  }
+		}
+	</script>
+	<div id="introduction_video" style="width: 100%; height: 600px;">
+		<video width="100%" height="100%" controls autoplay>
+			<source src="./Video/sample.mov" type="video/mp4">
+			Your browser does not support the videos.
+		  </video> 
+	</div>
+	<!--
+	Business Consultancy and Business Analytics- using data analytics and other principles of management such 
+	as use of softwares to create insights, dashboards, and business solutions to customers and partner 
+	companies.
 
+	Software Development and IT Services- using various software development processes, utilize the concepts of 
+	machine learning and artificial intelligence to design, develop, deploy, test software components as per the 
+	requirements of customers and partner companies.
+
+	Robotics and industrial automation business- as manufacturers, producers, processors, makers, inventors, 
+	convertors, importers, exporters, traders, buyers, sellers, retailers, wholesalers, suppliers, indenters, 
+	packers, movers, preservers, stockist, agents, sub-agents, merchants, distributors, consignors, jobbers, 
+	brokers, concessionaires or otherwise deal by manufacturing semiconductor based electronic components, 
+	electrical components, as well as electromechanical components to enhance performance of businesses across 
+	all sectors,
+
+	Content creation and Graphic designing- using various softwares and tools to create audio, visual, as well 
+	as audio-visual content for customers and partner companies.
+
+	Finance and Investment Consultants- To act as financial consultants, management consultants, personal 
+	finance management consultant, portfolio management consultant and provide advice, services, consultancy in 
+	various fields, general administrative, secretarial, commercial, financial legal, economic, labour, 
+	industrial, public relations, scientific, technical, direct and indirect taxation and other levies, 
+	statistical, accountancy, quality control and data processing,
+
+	-->
+	<div id="left-outer-div" style="width: 20%; float: left;">
+		<p style="font-size: 32px;">Services offered</p>
+	</div>
+	<div id="right-outer-div" style="width: 80%; float: left;">
+        <div class= "inner_div"> 
+			<center>
+				<h3>Business Consulting</h3>
+			</center>
+        </div>
+		<div class= "inner_div"> 
+			<center>
+				<h3>Business Analytics</h3>
+			</center>
+        </div>
+        <div class= "inner_div"> 
+			<center>
+				<h3>Software Development and IT Services</h3>
+			</center>
+        </div>
+		<div class= "inner_div"> 
+			<center>
+				<h3>Robotics and industrial automation</h3>
+			</center>
+        </div>
+		<div class= "inner_div"> 
+			<center>
+				<h3>Content creation and Graphic designing</h3>
+			</center>
+        </div>
+		<div class= "inner_div"> 
+			<center>
+				<h3>Finance and Investment Consulting</h3>
+			</center>
+        </div>
+    </div>	
 
 </body>
 
