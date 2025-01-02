@@ -15,7 +15,7 @@
 	<style>
 		.header {
 			position: sticky;
-			background: #555;
+			background: lightgray;
 			color: black;
 		}
 		.sticky {
@@ -28,7 +28,8 @@
 		}
 		.inner_div {
 			margin-left: 40px;
-			margin-top: 20px;
+			margin-top: 10px;
+			margin-bottom: 10px;
 			border:1px solid black; 
 			border-radius: 10px;
 			height: 100px; 
@@ -40,34 +41,60 @@
 			font-size: 20px;
 			background: lightgoldenrodyellow;
 		}
+		
 	</style>
 </head>
 
 <body>
-	<div class="header" id="header-section">
-		<center>
-			<h1 style="font-family:Lucida Handwriting">Saharsh Bhadani Venture Private Limited</h1><hr>
-		</center>
-	</div>
-	<script>
-		window.onscroll = function() {myFunction()};
-		var header = document.getElementById("header-section");
-		var sticky = header.offsetTop;
-		
-		function myFunction() {
-		  if (window.pageYOffset > sticky) {
-			header.classList.add("sticky");
-		  } else {
-			header.classList.remove("sticky");
-		  }
-		}
-	</script>
-	<div id="introduction_video" style="width: 100%; height: 600px;">
-		<video width="100%" height="100%" controls autoplay>
-			<source src="./Video/sample.mov" type="video/mp4">
-			Your browser does not support the videos.
-		  </video> 
-	</div>
+	<section class="header" id="head-menu">
+		<div id="logo-section">
+
+		</div>
+		<div id="header-section">
+			<center>
+				<h1 style="font-family:Lucida Handwriting">Saharsh Bhadani Venture Private Limited</h1>
+				<hr>
+			</center>
+		</div>
+		<div id="menu-section">
+			<!--
+			"Home," "About," "Services" or "Contact."
+			-->
+		</div>
+		<script>
+			window.onscroll = function() {myFunction()};
+			var header = document.getElementById("head-menu");
+			var sticky = header.offsetTop;
+			
+			function myFunction() {
+				if (window.pageYOffset > sticky) {
+					header.classList.add("sticky");
+				} else {
+					header.classList.remove("sticky");
+				}
+			}
+		</script>
+	</section>
+	<section id="intro">
+		<div id="introduction_video" style="width: 100%; height: 600px;">
+			<video width="100%" height="100%" preload  controls autoplay>
+				<source src="./Video/sample.mov" type="video/mp4">
+				Your browser does not support the videos.
+			</video> 
+		</div>
+	</section>
+	<hr>
+	<section id="about-us">
+		<div style="width: 100%;">
+			<p style="font-size: 32px;">About Us</p><br>
+			<div id="right-outer-div">
+				<h2>Team</h2><br>
+				<h2>Location</h2><br>
+			</div>
+		</div>
+	</section>
+	<hr>
+	<section id="offered-services">
 	<!--
 	Business Consultancy and Business Analytics- using data analytics and other principles of management such 
 	as use of softwares to create insights, dashboards, and business solutions to customers and partner 
@@ -92,44 +119,105 @@
 	various fields, general administrative, secretarial, commercial, financial legal, economic, labour, 
 	industrial, public relations, scientific, technical, direct and indirect taxation and other levies, 
 	statistical, accountancy, quality control and data processing,
-
 	-->
-	<div id="left-outer-div" style="width: 20%; float: left;">
-		<p style="font-size: 32px;">Services offered</p>
-	</div>
-	<div id="right-outer-div" style="width: 80%; float: left;">
-        <div class= "inner_div"> 
-			<center>
-				<h3>Business Consulting</h3>
-			</center>
-        </div>
-		<div class= "inner_div"> 
-			<center>
-				<h3>Business Analytics</h3>
-			</center>
-        </div>
-        <div class= "inner_div"> 
-			<center>
-				<h3>Software Development and IT Services</h3>
-			</center>
-        </div>
-		<div class= "inner_div"> 
-			<center>
-				<h3>Robotics and industrial automation</h3>
-			</center>
-        </div>
-		<div class= "inner_div"> 
-			<center>
-				<h3>Content creation and Graphic designing</h3>
-			</center>
-        </div>
-		<div class= "inner_div"> 
-			<center>
-				<h3>Finance and Investment Consulting</h3>
-			</center>
-        </div>
-    </div>	
+		<p style="font-size: 32px;">Featured Services</p>
+		<div id="right-outer-div" style="width: 100%; float: left;">
+			<div class= "inner_div"> 
+				<center>
+					<h3>Business Consultation</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Business Analytics</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Software Development</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>IT Consultation</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>IT Services</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Robotics</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Industrial automation</h3>
+				</center>
+			</div>
 
+			<div class= "inner_div"> 
+				<center>
+					<h3>Content creation</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Graphic designing</h3>
+				</center>
+			</div>
+			<div class= "inner_div"> 
+				<center>
+					<h3>Finance and Investment Consultation</h3>
+				</center>
+			</div>
+		</div>
+	</section>
+	<section id="page-footer">
+		<hr>
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 33.33%;"><h2>Contact details</h2></td>
+				<td style="width: 33.33%;"><h2>Support</h2></td>
+				<td style="width: 33.33%;"><h2>Book an appointment</h2></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					<p>29B/1F&nbsp;Bakul&nbsp;Bagan&nbsp;Row,</p>
+					<p>Kolkata,&nbsp;West-Bengal,&nbsp;India&nbsp;-&nbsp;700&nbsp;025</p>
+					<br>
+					<p>Email:&nbsp;SaharshBhadaniVenture@gmail.com</p>
+					<p>Mobile:&nbsp;+91&nbsp;9168669610</p>
+				</td>
+				<td style="vertical-align: top">
+					Frequently asked questions<br>
+					Policy<br>
+					Payments<br>
+					Provide a feedback<br>
+				</td>
+				<td style="vertical-align: top">
+					Chat now - Chat<br>
+					Call - Number<br>
+					Email - mailto<br>
+					Visit - google map location<br>
+					Request callback - Fill a form<br>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 50%;">
+					<p><h2>Follow us on</h2></p>
+					<p>LinkedIn | Facebook | X | Instagram | YouTube | Google</p>
+				</td>
+				<td style="width: 50%; vertical-align: bottom;">
+					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+				</td>
+			</tr>
+		</table>
+	</section>
 </body>
-
 </html>
