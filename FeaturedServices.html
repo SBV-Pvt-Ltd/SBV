@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Load an icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	
+	<style>
+		.header {
+			background: #d2ab67;
+			color: black;
+			width: 100%;
+		}
+		#navbar {
+			position: sticky;
+			top: 0;
+			overflow: hidden;
+			background-color: #f2f2f2;
+		}
+		#navbar a {
+			float: left;
+			display: block;
+			color: #333;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+		}
+		#navbar a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		#navbar a.active {
+			background-color: #04AA6D;
+			color: white;
+		}
+		#logo-section {
+			display: block;
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: auto;
+			object-fit: scale-down;
+			margin-left: 50px;
+			margin-right: 0;
+		}
+		.topnav .search-container {
+			float: right;
+		}
+		.topnav input[type=text] {
+			padding: 6px;
+			margin-top: 8px;
+			font-size: 17px;
+			border: none;
+		}
+		.topnav .search-container button {
+			float: right;
+			padding: 6px 10px;
+			margin-top: 8px;
+			margin-right: 16px;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
+		.topnav .search-container button:hover {
+			background: #ccc;
+		}
+		@media screen and (max-width: 600px) {
+			.topnav .search-container {
+				float: none;
+			}
+			.topnav a, .topnav input[type=text], .topnav .search-container button {
+				float: none;
+				display: block;
+				text-align: left;
+				width: 100%;
+				margin: 0;
+				padding: 14px;
+			}
+			.topnav input[type=text] {
+				border: 1px solid #ccc;
+			}
+		}
+		#company_name {
+			vertical-align: top; 
+			font-family:Lucida Handwriting; 
+			float: left;
+		}
+		
+		#page-footer {
+			background-color: #f2f2f2;
+			color: #333;
+			z-index: 999;
+		}
+		.web-content {
+			width: 80%;
+			padding-left: 10%;
+			padding-right: 10%;
+		}
+		#page-footer-table {
+			width: 90%;
+			padding-left: 5%;
+			padding-right: 5%;
+			z-index: 999;
+		}	
+		#logo-navbar {
+			display: block;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: 10%;
+			object-fit: scale-down;
+			float: left;
+			margin-left: 50px;
+		}
+		.logo-navbar-hide {
+			background-size: 0px;
+		}
+		.logo-navbar-show {
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header" id="myHeader">
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 14%;">
+					<div id="logo-section">
+					</div>
+				</td>
+				<td style="width: 56%;">
+					<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
+				</td>
+				<td style="width: 30%;">
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+	  
+	<div id="navbar" class="topnav" style="width: 100%;">
+		<div id="logo-navbar">
+
+		</div>
+		<a href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
+		<a href="#about-us">About Us</a>
+		<a href="#offered-services">Featured Services</a>
+		<a href="#contact-us">Contact Us</a>
+		
+		<div class="search-container">
+			<form action="/action_page.php">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
+	</div>
+	
+	<section id="offered-services" class="web-content" style="display: flex; max-height: 815px;">
+	<!--
+	Business Consultancy and Business Analytics- using data analytics and other principles of management such 
+	as use of softwares to create insights, dashboards, and business solutions to customers and partner 
+	companies.
+
+	Software Development and IT Services- using various software development processes, utilize the concepts of 
+	machine learning and artificial intelligence to design, develop, deploy, test software components as per the 
+	requirements of customers and partner companies.
+
+	Robotics and industrial automation business- as manufacturers, producers, processors, makers, inventors, 
+	convertors, importers, exporters, traders, buyers, sellers, retailers, wholesalers, suppliers, indenters, 
+	packers, movers, preservers, stockist, agents, sub-agents, merchants, distributors, consignors, jobbers, 
+	brokers, concessionaires or otherwise deal by manufacturing semiconductor based electronic components, 
+	electrical components, as well as electromechanical components to enhance performance of businesses across 
+	all sectors,
+
+	Content creation and Graphic designing- using various softwares and tools to create audio, visual, as well 
+	as audio-visual content for customers and partner companies.
+
+	Finance and Investment Consultants- To act as financial consultants, management consultants, personal 
+	finance management consultant, portfolio management consultant and provide advice, services, consultancy in 
+	various fields, general administrative, secretarial, commercial, financial legal, economic, labour, 
+	industrial, public relations, scientific, technical, direct and indirect taxation and other levies, 
+	statistical, accountancy, quality control and data processing,
+	-->
+		<div id="left-outer-div" style="text-align: justify; flex: 1; padding: 1em; max-height: 815px; overflow-x: hidden; overflow-y: auto;">
+			<br><br><br>
+			<div id="BusinessConsultation">
+				<br>
+				<p style="font-size: 32px;">Business Consultation</p>
+				<p>We specialize in providing innovative and 
+					strategic business consulting services to help companies unlock their full potential. 
+					Whether you're a startup seeking guidance or an established organization looking to evolve, 
+					our expert consultants are here to offer customized solutions that deliver measurable results.</p>
+				<br>
+				<b>Our Business Consultation Services include:</b>
+				<br>
+				<ol>
+					<li><b>Business Strategy Development:</b></li>
+					<ul type="disc">
+						<li>
+							Crafting long-term strategies that align with your business goals and market demands.
+						</li>
+						<li>
+							Conducting market research to identify new growth opportunities.
+						</li>
+						<li>
+							Optimizing operational efficiency and resource allocation for sustained success.
+						</li>
+					</ul>
+					<li><b>Market Research & Analysis:</b></li>
+					<ul type="disc">
+						<li>
+							In-depth analysis of your industry, competitors, and customer behaviors.
+						</li>
+						<li>
+							Identifying emerging trends, threats, and opportunities that shape your market landscape.
+						</li>
+						<li>
+							Delivering actionable insights that guide data-driven decision-making.
+						</li>
+					</ul>
+					<li><b>Financial Planning & Management:</b></li>
+					<ul type="disc">
+						<li>
+							Assisting with budgeting, forecasting, and financial modeling to ensure long-term financial health.
+						</li>
+						<li>
+							Offering risk management solutions to protect your business from market fluctuations.
+						</li>
+						<li>
+							Streamlining financial operations for greater profitability.
+						</li>
+					</ul>
+					<li><b>Organizational Development & Change Management:</b></li>
+					<ul type="disc">
+						<li>
+							Helping businesses navigate organizational changes, mergers, and restructures smoothly.
+						</li>
+						<li>
+							Building a high-performance culture through leadership training and development.
+						</li>
+						<li>
+							Enhancing team collaboration and communication for more effective problem-solving.
+						</li>
+					</ul>
+					<li><b>Operational Optimization:</b></li>
+					<ul type="disc">
+						<li>
+							Streamlining business processes to reduce waste, improve efficiency, and increase scalability.
+						</li>
+						<li>
+							Implementing best practices in supply chain management, logistics, and procurement.							
+						</li>
+						<li>
+							Leveraging technology to automate routine tasks and enhance productivity.
+						</li>
+					</ul>	
+					<li><b>Digital Transformation & IT Strategy:</b></li>
+					<ul type="disc">
+						<li>
+							Guiding businesses through the digital transformation journey with modern tools and technologies.
+						</li>
+						<li>
+							Developing IT strategies that support business growth and improve customer experience.							
+						</li>
+						<li>
+							Evaluating and implementing software solutions that meet your company's unique needs.
+						</li>
+					</ul>
+					<li><b>Marketing & Brand Positioning:</b></li>
+					<ul type="disc">
+						<li>
+							Crafting targeted marketing strategies that resonate with your audience.	
+						</li>
+						<li>
+							Enhancing brand identity and presence in competitive markets.
+						</li>
+						<li>
+							Developing campaigns that drive sales and strengthen customer loyalty.
+						</li>
+					</ul>
+					<li><b>Leadership Coaching & Training:</b></li>
+					<ul type="disc">
+						<li>
+							Offering personalized coaching for executives and managers to enhance leadership skills.	
+						</li>
+						<li>
+							Providing training programs designed to improve decision-making, problem-solving, and team management.
+						</li>
+						<li>
+							Building leadership pipelines that empower your workforce for the future.
+						</li>
+					</ul>
+				</ol>
+				<b>Why Should You Choose Us?</b>
+				<ul type="disc">
+					<li>
+						<b>Expertise:</b> Our consultants bring years of industry-specific experience to the table, providing you with actionable insights and best practices.	
+					</li>
+					<li>
+						<b>Personalised and Tailored Solutions:</b> We understand that every business is unique. That's why we offer personalized consulting services that align with your goals, resources, and challenges.
+					</li>
+						<b>Results-Driven Approach:</b> We are committed to delivering tangible results. We measure success through improved efficiency, profitability, and sustainable growth.
+					<li>
+						<b>Long-Term Partnership:</b> We’re not just a consulting service; we’re your strategic partner for the long haul. We help you not only navigate change but thrive in it.
+					</li>
+				</ul>
+				<b>How Do We Work:</b>
+				<ol>
+					<li>
+						<b>Initial Consultation:</b> We begin with a discovery session to understand your business’s needs, challenges, and goals.	
+					</li>
+					<li>
+						<b>Strategy Development:</b> Based on our findings, we craft a customized action plan tailored to your unique situation.
+					</li>
+					<li>
+						<b>Implementation Support:</b> We guide and assist you during the execution phase to ensure a smooth transition and long-term success.
+					</li>
+					<li>
+						<b>Continuous Monitoring & Adjustment:</b> Our commitment to your success doesn’t end with implementation. We continuously monitor progress and adjust strategies as needed to ensure ongoing growth and improvement.
+					</li>
+				</ol>
+				<b>Industries We Serve:</b>
+				<ul>
+					<li>Technology & Software</li>
+					<li>Healthcare & Life Sciences</li>
+					<li>Retail & E-Commerce</li>
+					<li>Finance & Banking</li>
+					<li>Manufacturing & Supply Chain</li>
+					<li>Energy & Utilities</li>
+					<li>Non-Profit & Social Enterprises</li>
+					<li>Real Estate & Construction</li>
+				</ul>
+				<b>Start Your Journey With Us Today</b>
+				<p>
+					Whether you’re aiming for operational efficiency, market expansion, or improved financial 
+					performance, Saharsh Bhadani Venture Private Limited is here to help. Get in touch with us 
+					today to schedule your consultation and begin transforming your business for success.
+				</p>
+				<b>Contact Us:</b><br>
+				Our Phone Number: +91 9168669610<br>
+				Our Email Address: SaharshBhadaniVenture@gmail.com<br>
+				Our Website URL: https://sbv-pvt-ltd.github.io/SBV/<br>
+				Our Office Location: <a target="_blank" ;
+				href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+				Location in Google Map: Saharsh Bhadani Venture Private Limited</a>
+			</div>
+			<br><br><br>
+			<div id="BusinessAnalytics">
+				<p style="font-size: 32px;">Business Analytics</p>
+				<br>
+				<p>We specialize in providing comprehensive Business
+					 Analytics services that help organizations unlock the full potential of their data. In 
+					 today’s fast-paced business environment, making informed, data-driven decisions is key to 
+					 achieving success. Our expert team utilizes advanced tools, techniques, and methodologies 
+					 to analyze complex data sets and generate actionable insights that drive growth, improve 
+					 operational efficiency, and optimize performance.</p>
+				<br>
+				<b>Our Business Analytics Services Include:</b>
+				<ol>
+					<li>
+						<b>Data Visualization & Reporting</b><br>
+						<p>
+							Transform raw data into easy-to-understand visual reports and dashboards. Our 
+							intuitive visualizations make it easier for stakeholders at all levels to grasp 
+							critical insights and trends, leading to better, faster decision-making.
+						</p>
+					</li>
+					<li>
+						<b>Predictive Analytics</b><br>
+						<p>
+							Leverage the power of historical data to predict future trends. Our predictive 
+							models help businesses anticipate market shifts, customer behavior, demand patterns,
+							 and more, allowing you to stay ahead of the curve and make proactive decisions.
+						</p>
+					</li>
+					<li>
+						<b>Descriptive Analytics</b><br>
+						<p>
+							Our descriptive analytics services help you understand the “what” behind your 
+							business performance. By analyzing historical data, we provide a clear picture of 
+							past behaviors, trends, and patterns, offering a solid foundation for making 
+							informed decisions.
+						</p>
+					</li>
+					<li>
+						<b>Prescriptive Analytics</b><br>
+						<p>
+							Go beyond predictions with prescriptive analytics. We identify the best actions for 
+							achieving desired outcomes by evaluating various business scenarios. This enables 
+							companies to optimize processes, reduce costs, and enhance overall efficiency.
+						</p>
+					</li>
+					<li>
+						<b>Customer Analytics</b><br>
+						<p>
+							Understand your customers like never before. We provide deep insights into customer 
+							behavior, preferences, purchasing patterns, and satisfaction levels, helping 
+							businesses create personalized marketing strategies and improve customer engagement.
+						</p>
+					</li>
+					<li>
+						<b>Operational Analytics</b><br>
+						<p>
+							Optimize your operations with data-driven insights. We analyze business processes to 
+							identify inefficiencies, bottlenecks, and areas for improvement, helping streamline 
+							workflows and maximize productivity.
+						</p>
+					</li>
+					<li>
+						<b>Financial Analytics</b><br>
+						<p>
+							Make more informed financial decisions with the help of data-driven insights. Our 
+							financial analytics services help organizations analyze revenue trends, expense 
+							patterns, and profitability, enabling better budget management and resource 
+							allocation.
+						</p>
+					</li>
+					<li>
+						<b>Market & Competitive Analysis</b><br>
+						<p>
+							Gain a competitive edge with comprehensive market and competitor analysis. We 
+							provide insights into market trends, industry performance, competitor strategies, 
+							and consumer behavior, helping businesses identify growth opportunities and 
+							mitigate risks.
+						</p>
+					</li>
+				</ol>
+				<b>Why Choose Us?</b><br>
+				<ul>
+					<li>
+						<b>Expertise Across Industries: </b>
+						Our team has experience working across a wide range of industries, including finance, healthcare, retail, manufacturing, and technology. We tailor our analytics solutions to meet the unique needs of your industry.<br>
+					</li>
+					<li>
+						<b>Customized Solutions: </b>
+						We understand that every business is different. Our services are personalized to address your specific challenges and goals, ensuring maximum impact and relevance.<br>
+					</li>
+					<li>
+						<b>Advanced Tools & Technologies: </b>
+						We use cutting-edge tools and technologies like machine learning, artificial intelligence, and cloud-based platforms to provide the most accurate, up-to-date insights.<br>
+					</li>
+					<li>
+						<b>Actionable Insights: </b>
+						Our ultimate goal is to deliver insights that lead to action. We don’t just present data; we translate it into strategies that can be implemented to drive measurable business outcomes.<br>
+					</li>
+					<li>
+						<b>Scalable & Flexible Services: </b>
+						Whether you're a small business or a large enterprise, our solutions are scalable and flexible to adapt to your changing needs and business growth.<br>
+					</li>
+				</ul>
+				<br>
+				<b>Our Process:</b>
+				<ol>
+					<li>
+						<b>Discovery: </b>
+						We begin by understanding your business objectives, challenges, and data sources.
+						<br>
+					</li>
+					<li>
+						<b>Data Collection & Integration: </b>
+						We gather data from various internal and external sources and integrate them into a unified system.
+						<br>
+					</li>
+					<li>
+						<b>Analysis & Insights: </b>
+						Using advanced analytical techniques, we extract insights and identify trends that matter most to your business.
+						<br>
+					</li>
+					<li>
+						<b>Reporting & Actionable Strategies: </b>
+						We provide easy-to-understand reports and actionable recommendations to guide your decision-making process.
+						<br>
+					</li>
+					<li>
+						<b>Continuous Improvement: </b>
+						Analytics is an ongoing process. We work with you to refine your strategies and ensure continuous optimization.
+						<br>
+					</li>
+				</ol>					
+				<b>Industries We Serve:</b>
+				<ul>
+					<li>Finance & Banking</li>
+					<li>Healthcare & Pharmaceuticals</li>
+					<li>Retail & E-commerce</li>
+					<li>Manufacturing & Supply Chain</li>
+					<li>Telecommunications</li>
+					<li>Energy & Utilities</li>
+				</ul>
+				<br>
+				<b>Get Started Today</b><br>
+				<p>
+					Empower your business with data-driven decisions and achieve sustained growth and 
+					profitability. Contact us today for a consultation and let our Business Analytics team help 
+					you unlock your company’s full potential.
+				</p>
+				<br>
+				<b>Contact Us:</b><br>
+				Our Phone Number: +91 9168669610<br>
+				Our Email Address: SaharshBhadaniVenture@gmail.com<br>
+				Our Website URL: https://sbv-pvt-ltd.github.io/SBV/<br>
+				Our Office Location: <a target="_blank" ;
+				href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+				Location in Google Map: Saharsh Bhadani Venture Private Limited</a>
+			</div>
+			<br><br><br>
+			<div id= "SoftwareDevelopment"> 
+				<p style="font-size: 32px;">Software Development</p><br>
+				<p>
+					We provide top-tier Software Development services designed to elevate your business with 
+					cutting-edge technology. Whether you're looking to build custom software solutions, enhance 
+					existing systems, or develop innovative applications, we have the expertise to deliver 
+					high-quality, scalable, and secure solutions tailored to your specific needs.
+				</p>
+				<p>
+					Our experienced team of developers, designers, and engineers work collaboratively with you to 
+					bring your ideas to life, enabling your organization to stay competitive, improve operational 
+					efficiency, and provide enhanced user experiences.
+				</p><br>
+				<b>Our Software Development Services Include:</b>
+				<ol>
+					<li>
+						<b>Custom Software Development</b><br>
+						We specialize in creating tailored software solutions that meet your business requirements. Whether it's a web, desktop, or mobile application, we craft bespoke software that is scalable, secure, and optimized for your operations.		
+					</li>
+					<li>
+						<b>Mobile App Development</b><br>
+						In today’s mobile-first world, we help businesses develop high-performing, intuitive, and engaging mobile applications for iOS and Android platforms. Our apps are designed to provide seamless user experiences while meeting your business goals.
+					</li>
+					<li>
+						<b>Enterprise Software Development</b><br>
+						We develop robust enterprise software solutions that streamline processes, integrate systems, and drive productivity at scale. From customer relationship management (CRM) to enterprise resource planning (ERP), our software enhances efficiency and fosters growth within large organizations.
+					</li>
+					<li>
+						<b>Web Application Development</b><br>
+						Our team builds responsive, user-friendly, and feature-rich web applications that function seamlessly across devices and platforms. We use the latest technologies and best practices to create web apps that help you engage users and drive business outcomes.						
+					</li>
+					<li>
+						<b>Software Integration</b><br>
+						We assist businesses in integrating disparate software systems to create a unified platform that works efficiently. Our integration services ensure smooth data flow, improve automation, and eliminate operational silos across various tools, applications, and systems.
+					</li>
+					<li>
+						<b>Cloud-Based Solutions</b><br>
+						Take advantage of cloud computing with our secure, scalable cloud-based software solutions. We design and implement cloud applications that help you scale your business, increase flexibility, and reduce operational costs while ensuring data security and availability.
+					</li>
+					<li>
+						<b>Software Maintenance & Support</b><br>
+						We provide ongoing maintenance and support services to ensure that your software runs smoothly and stays up-to-date with the latest features and security patches. Our proactive approach minimizes downtime and ensures your systems continue to perform at optimal levels.						
+					</li>
+					<li>
+						<b>Software Testing & Quality Assurance</b><br>
+						Our quality assurance and testing team ensures that every software solution we deliver is bug-free, secure, and performs as expected. We conduct thorough testing through various stages of the development process to ensure the highest quality standards are met.						
+					</li>
+				</ol>
+				<br>
+				<b>Why Choose Us?</b><br>
+				<ul>
+					<li>
+						<b>Tailored Solutions: </b>
+						We understand that every business has unique requirements. Our custom software solutions are designed to meet your specific needs, challenges, and goals.	
+					</li>
+					<li>
+						<b>Experienced Development Team: </b>
+						Our developers are skilled in a wide range of technologies and frameworks, ensuring that we can handle projects of any complexity, from startups to large enterprises.
+					</li>
+					<li>
+						<b>Agile Development Methodology: </b>
+						We adopt agile practices, ensuring flexibility and collaboration throughout the development process. This helps us deliver faster results and make adjustments based on your feedback.
+					</li>
+					<li>
+						<b>Cutting-Edge Technologies: </b>
+						We stay up to date with the latest trends and technologies in software development, using tools such as AI, machine learning, cloud computing, and blockchain to create innovative solutions.
+					</li>
+					<li>
+						<b>End-to-End Service: </b>
+						From initial consultation and concept development to deployment and maintenance, we offer a comprehensive range of services to support every stage of your software’s lifecycle.
+					</li>
+					<li>
+						<b>Customer-Centric Approach: </b>
+						We focus on building long-term partnerships with our clients, providing ongoing support and always prioritizing your satisfaction.						
+					</li>
+				</ul>
+				<br>
+				<b>Our Development Process:</b><br>
+				<ol>
+					<li>
+						<b>Discovery & Requirement Gathering: </b><br>
+						We begin by understanding your business needs, objectives, and challenges to define the scope and requirements of your project.	
+					</li>
+					<li>
+						<b>Planning & Architecture: </b><br>
+						Our team develops a clear project roadmap, ensuring optimal architecture and a well-defined timeline for delivery.
+					</li>
+					<li>
+						<b>Design & Prototyping: </b><br>
+						We create wireframes and prototypes, working closely with you to refine the user interface (UI) and user experience (UX) design.						
+					</li>
+					<li>
+						<b>Development & Implementation: </b><br>
+						Using agile methodologies, we begin the development process, building the software with continuous testing and feedback.
+					</li>
+					<li>
+						<b>Testing & Quality Assurance: </b><br>
+						We conduct rigorous testing to ensure the solution is secure, functional, and user-friendly.
+					</li>
+					<li>
+						<b>Deployment & Maintenance: </b><br>
+						Once the software is ready, we deploy it and provide ongoing support, ensuring it remains up-to-date, secure, and optimized.
+					</li>
+				</ol>
+				<br>
+				<b>Technologies We Work With:</b><br>
+				<ul>
+					<li>
+						<b>Programming Languages: </b>
+						Java, Python, JavaScript, C#, PHP, Ruby, Swift, Kotlin, and more.	
+					</li>
+					<li>
+						<b>Frameworks & Libraries: </b>
+						Angular, React, Vue.js, Node.js, .NET, Django, Laravel, Spring, and more.
+					</li>
+					<li>
+						<b>Databases: </b>
+						MySQL, PostgreSQL, MongoDB, Oracle, SQL Server, Firebase, and others.
+					</li>
+					<li>
+						<b>Cloud Platforms: </b>
+						AWS, Microsoft Azure, Google Cloud Platform.
+					</li>
+					<li>
+						<b>Mobile Platforms: </b>
+						iOS, Android (Native and Hybrid solutions).
+					</li>
+					<li>
+						<b>DevOps & CI/CD: </b>
+						Jenkins, Docker, Kubernetes, GitLab, and more.
+					</li>
+				</ul>
+				<br>
+				<b>Industries We Serve:</b><br>
+				<ul>
+					<li>
+						Healthcare & Life Sciences
+					</li>
+					<li>
+						Finance & FinTech
+					</li>
+					<li>
+						E-commerce & Retail
+					</li>
+					<li>
+						Education & EdTech
+					</li>
+					<li>
+						Travel & Hospitality
+					</li>
+					<li>
+						Logistics & Supply Chain					
+					</li>
+					<li>
+						Real Estate & Property Management
+					</li>
+					<li>
+						Entertainment & Media
+					</li>
+				</ul>
+				<br>
+				<b>Get Started Today</b><br>
+				Ready to transform your business with innovative software solutions? At Saharsh Bhadani Venture 
+				Private Limited, we are passionate about bringing your vision to life through custom software 
+				development. Contact us today for a consultation, and let’s build the future of your business 
+				together.
+				<br>
+				<b>Contact Us:</b><br>
+				Our Phone Number: +91 9168669610<br>
+				Our Email Address: SaharshBhadaniVenture@gmail.com<br>
+				Our Website URL: https://sbv-pvt-ltd.github.io/SBV/<br>
+				Our Office Location: <a target="_blank" ;
+				href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+				Location in Google Map: Saharsh Bhadani Venture Private Limited</a>
+			</div>
+			<br><br><br>
+			<div id= "ITConsultation"> 
+				<p style="font-size: 32px;">IT Consultation</p>
+			</div>
+			<br><br><br>
+			<div id= "ITServices">
+				<p style="font-size: 32px;">IT Services</p> 
+			</div>
+			<br><br><br>
+			<div id= "Robotics"> 
+				<p style="font-size: 32px;">Robotics</p> 
+			</div>
+			<br><br><br>
+			<div id= "IndustrialAutomation"> 
+				<p style="font-size: 32px;">Industrial automation</p>
+			</div>
+			<br><br><br>
+			<div id= "ContentCreation"> 
+				<p style="font-size: 32px;">Content creation</p>
+			</div>
+			<br><br><br>
+			<div id= "GraphicDesigning"> 
+				<p style="font-size: 32px;">Graphic designing</p>
+			</div>
+			<br><br><br>
+			<div id= "FinanceInvestmentConsultation"> 
+				<p style="font-size: 32px;">Finance and Investment Consultation</p>
+			</div>
+		</div>
+		<div id="right-outer-div" style="flex: 1; padding: 1em; max-height: 815px; position: relative; z-index: 0;">
+			<!-- https://forms.gle/Kk5uJSHSxDDzTfj49 -->
+			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScaOTxF6uA-lFV2VMMyXmgg_sFWgcVeqQauGwIaQeBNW1Nacw/viewform?embedded=true" width="550" height="810" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+		</div>
+
+	</section>
+	
+	<section id="page-footer">
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+		<!-- 
+		contact details: Company-> contact details, career, investors, alumni, newsroom, -->
+			<tr>
+				<td style="width: 33.33%;"><h2>Contact details</h2></td>
+				<td style="width: 33.33%;"><h2>Support</h2></td>
+				<td style="width: 33.33%;"><h2>Book an appointment</h2></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					<p>29B/1F&nbsp;Bakul&nbsp;Bagan&nbsp;Row,</p>
+					<p>Kolkata,&nbsp;West-Bengal,&nbsp;India&nbsp;-&nbsp;700&nbsp;025</p>
+					<br>
+					<p>Email:&nbsp;SaharshBhadaniVenture@gmail.com</p>
+					<p>Mobile:&nbsp;+91&nbsp;9168669610</p>
+				</td>
+				<td style="vertical-align: top">
+					Frequently asked questions<br>
+					Policy<br>
+					Payments<br>
+					Provide a feedback<br>
+				</td>
+				<td style="vertical-align: top">
+					Chat now - <a target="_blank" href="https://wa.me/919168669610?text=">Chat with us on WhatsApp</a><br>
+					Call - <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email - <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit - <a target="_blank" href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Click to see location in Google Maps.</a><br>
+					Request callback - Fill a form<br>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+			<tr>
+				<td style="width: 50%;">
+					<p><h2>Follow us on</h2></p>
+					<p>LinkedIn | Facebook | X | Instagram | YouTube | Google</p>
+				</td>
+				<td style="width: 50%; vertical-align: bottom;">
+					<p>Last updated on : January 04, 2025</p>
+					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+				</td>
+			</tr>
+		</table>
+	</section>
+	<script>
+		window.onscroll = function() {myFunction()};
+		
+		var header = document.getElementById("myHeader");
+		var logo_navbar = document.getElementById("logo-navbar");
+		var sticky = header.offsetTop;
+		
+		function myFunction() {
+		  if (window.pageYOffset > 6*sticky) {
+			logo_navbar.classList.add("logo-navbar-show");
+			logo_navbar.classList.remove("logo-navbar-hide");
+		  } else {
+			logo_navbar.classList.remove("logo-navbar-show");
+			logo_navbar.classList.add("logo-navbar-hide");
+		  }
+		}
+		</script>
+	<!--Code for WhatsApp-->
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+	<script>
+		var wa_btnSetting = {
+			"btnColor":"#16BE45",
+			"ctaText":"",
+			"cornerRadius":40,
+			"marginBottom":20,
+			"marginLeft":20,
+			"marginRight":20,
+			"btnPosition":"right",
+			"whatsAppNumber":"919168669610",
+			"welcomeMessage":"Hello",
+			"zIndex":999999,
+			"btnColorScheme":"light"
+		};
+		window.onload = () => {
+			_waEmbed(wa_btnSetting);
+		};
+	</script>
+	<!--2nd type
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+        <script>
+          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"911234567890","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
+          var wa_widgetSetting = {"title":"BrandName","subTitle":"Typically replies in a day","headerBackgroundColor":"#FBFFC8","headerColorScheme":"dark","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#1A1A1A","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"https://uploads-ssl.webflow.com/5f68a65cd5188c058e27c898/6204c4267b92625c9770f687_whatsapp-chat-widget-dummy-logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
+          window.onload = () => {
+            _waEmbed(wa_btnSetting, wa_widgetSetting);
+          };
+        </script>
+	-->
+
+	  
+</body>
+</html>
