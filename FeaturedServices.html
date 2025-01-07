@@ -154,17 +154,30 @@
 		<div id="logo-navbar">
 
 		</div>
-		<a href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
-		<a href="#about-us">About Us</a>
-		<a href="#offered-services">Featured Services</a>
-		<a href="#contact-us">Contact Us</a>
-		
+		<a onclick="navigateToIndex('#')"><i class="fa fa-fw fa-home"></i> Home</a> 
+		<a onclick="navigateToIndex('#about-us')">About Us</a>
+		<a onclick="navigateToIndex('#offered-services')">Featured Services</a>
+		<a onclick="navigateToIndex('#contact-us')">Contact Us</a>
+		<script>
+			function navigateToIndex(pageName) {
+				current_url = window.location.href;
+				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+				new_url = current_url_refined+ "index.html";
+				new_url_section = new_url;
+				if(pageName.localeCompare("#") != 0){
+					new_url_section = new_url + pageName;
+				}
+				window.location.replace(new_url_section);	
+			}
+		</script>
+		<!--
 		<div class="search-container">
 			<form action="/action_page.php">
 				<input type="text" placeholder="Search.." name="search">
 				<button type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
+		-->
 	</div>
 	
 	<section id="offered-services" class="web-content" style="display: flex; max-height: 815px;">
@@ -193,7 +206,7 @@
 	industrial, public relations, scientific, technical, direct and indirect taxation and other levies, 
 	statistical, accountancy, quality control and data processing,
 	-->
-		<div id="left-outer-div" style="text-align: justify; flex: 1; padding: 1em; max-height: 815px; overflow-x: hidden; overflow-y: auto;">
+		<div id="left-outer-div" style="text-align: justify; flex: 1; padding: 1em; max-height: 805px; overflow-x: hidden; overflow-y: auto;">
 			<br><br><br>
 			<div id="BusinessConsultation">
 				<br>
@@ -1358,7 +1371,7 @@
 		</div>
 		<div id="right-outer-div" style="flex: 1; padding: 1em; max-height: 815px; position: relative; z-index: 0;">
 			<!-- https://forms.gle/Kk5uJSHSxDDzTfj49 -->
-			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScaOTxF6uA-lFV2VMMyXmgg_sFWgcVeqQauGwIaQeBNW1Nacw/viewform?embedded=true" width="700" height="810" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScaOTxF6uA-lFV2VMMyXmgg_sFWgcVeqQauGwIaQeBNW1Nacw/viewform?embedded=true" width="700" height="805" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 		</div>
 
@@ -1384,7 +1397,7 @@
 				</td>
 				<td style="vertical-align: top">
 					Frequently asked questions<br>
-					Policy<br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/policy.html">Policy</a><br>
 					Payments<br>
 					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
 				</td>
@@ -1405,7 +1418,7 @@
 					<p>LinkedIn | Facebook | X | Instagram | YouTube | Google</p>
 				</td>
 				<td style="width: 50%; vertical-align: bottom;">
-					<p>Last updated on : January 05, 2025</p>
+					<p>Last updated on : January 08, 2025</p>
 					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 				</td>
 			</tr>

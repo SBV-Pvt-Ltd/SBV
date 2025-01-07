@@ -160,41 +160,53 @@
 </head>
 
 <body>
-	<header>
-		<div class="header" id="myHeader">
-			<table style="width: 100%;">
-				<tr>
-					<td style="width: 14%;">
-						<div id="logo-section">
-						</div>
-					</td>
-					<td style="width: 56%;">
-						<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
-					</td>
-					<td style="width: 30%;">
-						
-					</td>
-				</tr>
-			</table>
+	<div class="header" id="myHeader">
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 14%;">
+					<div id="logo-section">
+					</div>
+				</td>
+				<td style="width: 56%;">
+					<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
+				</td>
+				<td style="width: 30%;">
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+		
+	<div id="navbar" class="topnav" style="width: 100%;">
+		<div id="logo-navbar">
+
 		</div>
-		  
-		<div id="navbar" class="topnav" style="width: 100%;">
-			<div id="logo-navbar">
-	
-			</div>
-			<a href="#"><i class="fa fa-fw fa-home"></i> Home</a> 
-			<a href="#about-us">About Us</a>
-			<a href="#offered-services">Featured Services</a>
-			<a href="#contact-us">Contact Us</a>
-			
-			<div class="search-container">
-				<form action="/action_page.php">
-					<input type="text" placeholder="Search.." name="search">
-					<button type="submit"><i class="fa fa-search"></i></button>
-				</form>
-			</div>
+		<a onclick="navigateToIndex('#')"><i class="fa fa-fw fa-home"></i> Home</a> 
+		<a onclick="navigateToIndex('#about-us')">About Us</a>
+		<a onclick="navigateToIndex('#offered-services')">Featured Services</a>
+		<a onclick="navigateToIndex('#contact-us')">Contact Us</a>
+		<script>
+			function navigateToIndex(pageName) {
+				current_url = window.location.href;
+				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+				new_url = current_url_refined+ "index.html";
+				new_url_section = new_url;
+				if(pageName.localeCompare("#") != 0){
+					new_url_section = new_url + pageName;
+				}
+				window.location.replace(new_url_section);	
+			}
+		</script>
+
+		<!--
+		<div class="search-container">
+			<form action="/action_page.php">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
 		</div>
-	</header>
+		-->
+	</div>
 	
 	<section id="intro">
 		<div id="introduction_video" style="width: 100%; height: 550px;">
@@ -333,9 +345,10 @@
 			function navigateTo(pageName) {
 				current_url = window.location.href;
 				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-				new_url = current_url_refined+ "FeaturedServices.html"
-				new_url_section = new_url + "#"+pageName
-				window.open(new_url_section, "_blank");
+				new_url = current_url_refined+ "FeaturedServices.html";
+				new_url_section = new_url + "#"+pageName;
+				window.location.replace(new_url_section)
+				//window.open(new_url_section, "_blank");
 			}
 		</script>
 	</section>
@@ -480,9 +493,9 @@
 				</td>
 				<td style="vertical-align: top">
 					Frequently asked questions<br>
-					Policy<br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/policy.html">Policy</a><br>
 					Payments<br>
-					Provide a feedback<br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
 				</td>
 				<td style="vertical-align: top">
 					Chat now - <a target="_blank" href="https://wa.me/919168669610?text=">Chat with us on WhatsApp</a><br>
