@@ -96,8 +96,12 @@
 						}
 					</script>
 				</td>
-				<td style="width: 50%; vertical-align: bottom;">
-					<p>Last updated on : January 21, 2025</p>
+				<td style="width: 10%; vertical-align: bottom;">
+					<p><h2>More</h2></p>
+					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">Blog</a><br>
+				</td>
+				<td style="width: 40%; vertical-align: bottom;">
+					<p>Last updated on : <span id="last_updated_on"></span></p>
 					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 				</td>
 			</tr>
@@ -122,6 +126,7 @@
 		};
 		window.onload = () => {
 			_waEmbed(wa_btnSetting);
+			document.getElementById('last_updated_on').textContent = last_updated_on;
 		};
 	</script>
 	<!--2nd type
