@@ -11,7 +11,8 @@
 
 	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
 	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
-	
+	<script src="Constant.js"></script>
+
 	<style>
 		.header {
 			background: #d2ab67;
@@ -279,7 +280,34 @@
 			<tr>
 				<td style="width: 50%;">
 					<p><h2>Follow us on</h2></p>
-					<p>LinkedIn | Facebook | X | Instagram | YouTube | Google</p>
+					<div style="color: blue;">
+						<a target="_blank" href="" onclick="openLink('linkedIn')">LinkedIn</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('facebook')">Facebook</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('twitter')">X</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('instagram')">Instagram</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('youtube')">YouTube</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('google')">Google</a>&nbsp;
+					</div>
+					<script>
+						function openLink(pageName) {
+							url_to_visit = ""
+							if(pageName=="linkedIn")
+								url_to_visit=linkedIn
+							else if(pageName=="facebook")
+								url_to_visit=facebook
+							else if(pageName=="twitter")
+								url_to_visit=twitter
+							else if(pageName=="instagram")
+								url_to_visit=instagram
+							else if(pageName=="youtube")
+								url_to_visit=youtube
+							else if(pageName=="google")
+								url_to_visit=google_business
+							else
+								url_to_visit=website
+							window.open(url_to_visit); 
+						}
+					</script>
 				</td>
 				<td style="width: 50%; vertical-align: bottom;">
 					<p>Last updated on : January 21, 2025</p>
