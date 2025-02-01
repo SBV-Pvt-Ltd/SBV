@@ -8,8 +8,9 @@ website= "https://sbv-pvt-ltd.github.io/SBV/";
 threads= "";
 instagram= "https://www.instagram.com/bhadanisaharsh/";
 blogs="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/";
-last_updated_on = "January 31, 2025";
+last_updated_on = "February 01, 2025";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
-    "https://www.youtube.com/embed/O9cf_yC0pGo"
+    "https://www.youtube.com/embed/O9cf_yC0pGo",
+    "https://www.youtube.com/embed/WqsuHgNwuyY"
     ]; 
