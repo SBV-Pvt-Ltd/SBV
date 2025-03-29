@@ -76,7 +76,14 @@
 		<div class="w3-container w3-display-container">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
 			<h4>Please provide your details and we will contact you soon.</h4>
-			<form action="/action_page.php" target="_blank">
+			<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white" 
+				action="https://django-hello-world-pink-ten.vercel.app"
+				method="get"
+				target="display-frame"
+				onsubmit="close_modal(this)">
+				<input type="hidden" value="SAVE_LEADS" name="query">
+				<input type="hidden" value="leads_form" name="module">
+						
 				<div class="w3-section">
 					<label>Name</label>
 					<input class="w3-input" type="text" name="Name" required>
@@ -110,6 +117,13 @@
 					<button type="submit" class="w3-button w3-left-align w3-theme w3-teal">Submit</button>
 				</div>
 			</form>
+			<script>
+				function close_modal(form) {
+					alert("We will contact you soon.");
+					document.getElementById('id01').style.display = 'none';
+				}
+			</script>
+			<iframe name="display-frame" style="width:0px;height:0px;border:2px solid white"></iframe>
 		</div>
 		<div class="w3-bar-block">
 			<a href="#project" class="w3-bar-item w3-button w3-padding-16">
@@ -176,7 +190,7 @@
 		<!-- Slideshow Header -->
 		<div class="w3-container" id="project">
 
-			<h2 class="w3-text-green">Sample Projects</h2>
+			<h2 class="w3-text-green">Sample Graphics Designing Projects</h2>
 			<div class="w3-display-container mySlides">
 				<img src="./w3images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
 				<div class="w3-display-bottomleft w3-container w3-black">
@@ -230,12 +244,24 @@
 			<i class="fa fa-phone" style="width:30px"></i> WhatsApp & Phone no: +91 9168669610<br>
 			<i class="fa fa-envelope" style="width:30px"> </i> Email: SaharshBhadaniVenture@gmail.com <br>
 			<h4><b><u>Questions? Go ahead, ask them:</u></b></h4>
-			<form action="/action_page.php" target="_blank" style="margin-top: 10px;">
+			<form style="margin-top: 10px;"
+				action="https://django-hello-world-pink-ten.vercel.app"
+				method="get"
+				target="display-frame1"
+				onsubmit="close_modal1(this)">
+				<input type="hidden" value="SAVE_LEADS" name="query">
+				<input type="hidden" value="message" name="module">				
 				<p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" style="margin-top: 10px;"></p>
 				<p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email" style="margin-top: 10px;"></p>
 				<p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" style="margin-top: 10px;"></p>
 				<button type="submit" class="w3-button w3-teal w3-third" style="margin-top: 10px;">Send a Message</button>
 			</form>
+			<script>
+				function close_modal1(form) {
+					alert("We will contact you soon.");
+				}
+			</script>
+			<iframe name="display-frame1" style="width:0px;height:0px;border:2px solid white"></iframe>
 		</div>
 
 		<!-- Footer -->

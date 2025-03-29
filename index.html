@@ -143,6 +143,25 @@
 
 		</div>
 	</div>
+	<script>
+		const formEL =document.querySelector('.form_leads');
+		formEL.addEventListener('submit', event => {
+			event.preventDefault();
+
+			const formData = new FormData(formEL);
+			const data = Object.fromEntries(formData);
+
+			fetch(save_data_db_url, {
+				method: 'get',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			}).then(res => res.json())
+			  .then(data => alert(data))
+			  .catch(error => alert(error))
+		});
+	</script>
 
 	<!-- Modal -->
 	<div id="id01" class="w3-modal">
@@ -154,8 +173,13 @@
 			</header>
 			<div class="w3-container">
 				<div class="w3-col m7" style="width: 100%;">
-					<form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php"
-						target="_blank">
+					<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white" 
+						action="https://django-hello-world-pink-ten.vercel.app"
+						method="get"
+						target="display-frame"
+						onsubmit="close_modal(this)">
+						<input type="hidden" value="SAVE_LEADS" name="query">
+						<input type="hidden" value="leads_form" name="module">
 						<div class="w3-section">
 							<label>Name</label>
 							<input class="w3-input" type="text" name="Name" required>
@@ -190,6 +214,13 @@
 						</div>
 
 					</form>
+					<script>
+						function close_modal(form){
+							alert("We will contact you soon.");
+							document.getElementById('id01').style.display='none';
+						}
+					</script>
+					<iframe name="display-frame" style="width:0px;height:0px;border:2px solid white"></iframe>
 				</div>
 			</div>
 			<footer class="w3-container w3-teal">

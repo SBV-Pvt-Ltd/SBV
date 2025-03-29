@@ -15,6 +15,7 @@ policy_page_name="policy.html"
 payments_page_name="payments.html"
 careers_page_name="careers.html"
 explore_page_name="explore.html"
+save_data_db_url="https://django-hello-world-pink-ten.vercel.app"
 
 last_updated_on = "March 29, 2025";
 const youtube_videos = [
