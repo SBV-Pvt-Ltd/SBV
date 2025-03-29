@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Load an icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<script src="Constant.js"></script>
+
+	<style>
+		.header {
+			background: #d2ab67;
+			color: black;
+			width: 100%;
+		}
+		#navbar {
+			position: sticky;
+			top: 0;
+			overflow: hidden;
+			background-color: #f2f2f2;
+		}
+		#navbar a {
+			float: left;
+			display: block;
+			color: #333;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+		}
+		#navbar a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		#navbar a.active {
+			background-color: #04AA6D;
+			color: white;
+		}
+		#logo-section {
+			display: block;
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: auto;
+			object-fit: scale-down;
+			margin-left: 50px;
+			margin-right: 0;
+		}
+		.topnav .search-container {
+			float: right;
+		}
+		.topnav input[type=text] {
+			padding: 6px;
+			margin-top: 8px;
+			font-size: 17px;
+			border: none;
+		}
+		.topnav .search-container button {
+			float: right;
+			padding: 6px 10px;
+			margin-top: 8px;
+			margin-right: 16px;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
+		.topnav .search-container button:hover {
+			background: #ccc;
+		}
+		@media screen and (max-width: 600px) {
+			.topnav .search-container {
+				float: none;
+			}
+			.topnav a, .topnav input[type=text], .topnav .search-container button {
+				float: none;
+				display: block;
+				text-align: left;
+				width: 100%;
+				margin: 0;
+				padding: 14px;
+			}
+			.topnav input[type=text] {
+				border: 1px solid #ccc;
+			}
+		}
+		#company_name {
+			vertical-align: top; 
+			font-family:Lucida Handwriting; 
+			float: left;
+		}
+		.inner_div {
+			margin-right: 40px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border:1px solid black; 
+			border-radius: 10px;
+			height: 50px; 
+			width: 250px; 
+			float: left; 
+		}
+		.inner_div:hover {
+			border:1px solid blue; 
+			font-size: 20px;
+			background: lightgoldenrodyellow;
+			vertical-align: middle;
+		}
+		img.map_image:hover {
+			content: url("./images/Map_location_satellite_view.png");
+		}
+		.management-photo-1 {
+			height: 200px;
+			width: auto;
+			border: 1px solid black;
+		}
+		.management-photo-2 {
+			height: 200px;
+			width: auto;
+			border: 1px solid black;
+		}
+		#page-footer {
+			background-color: #f2f2f2;
+			color: #333;
+		}
+		.web-content {
+			width: 80%;
+			padding-left: 10%;
+			padding-right: 10%;
+		}
+		#page-footer-table {
+			width: 90%;
+			padding-left: 5%;
+			padding-right: 5%;
+
+		}	
+		#logo-navbar {
+			display: block;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: 10%;
+			object-fit: scale-down;
+			float: left;
+			margin-left: 50px;
+		}
+		.logo-navbar-hide {
+			background-size: 0px;
+		}
+		.logo-navbar-show {
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+		}
+		ol > li::marker {
+			font-weight: bold;
+			font-size: 24px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header" id="myHeader">
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 14%;">
+					<div id="logo-section">
+					</div>
+				</td>
+				<td style="width: 56%;">
+					<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
+				</td>
+				<td style="width: 30%;">
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+		
+	<div id="navbar" class="topnav" style="width: 100%;">
+		<div id="logo-navbar">
+
+		</div>
+		<a onclick="navigateToIndex('#')"><i class="fa fa-fw fa-home"></i> Home</a> 
+		<a onclick="navigateToIndex('#about-us')">About Us</a>
+		<a onclick="navigateToIndex('#offered-services')">Featured Services</a>
+		<a onclick="navigateToIndex('#contact-us')">Contact Us</a>
+		<script>
+			function navigateToIndex(pageName) {
+				current_url = window.location.href;
+				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+				new_url = current_url_refined+ "index.html";
+				new_url_section = new_url;
+				if(pageName.localeCompare("#") != 0){
+					new_url_section = new_url + pageName;
+				}
+				window.location.replace(new_url_section);	
+			}
+		</script>
+
+		<!--
+		<div class="search-container">
+			<form action="/action_page.php">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
+		-->
+	</div>
+	<section id="policy" class="web-content">
+		<br><br><br>
+		<div style="width: 100%;">
+			<p style="font-size: 32px;">Saharsh Bhadani Venture Private Limited Website Policy</p><br>
+			<p>Last updated on: January 08, 2025</p>
+			<div style="text-align: justify;">
+				<ol>
+					<li>
+						<h2><b>Introduction</b></h2><br>
+						<p>
+							Welcome to Saharsh Bhadani Venture Private Limited’s website 
+							(<a href="https://sbv-pvt-ltd.github.io/SBV/">https://sbv-pvt-ltd.github.io/SBV/</a>). By using this website, you agree to abide by 
+							the following terms and conditions. If you do not agree with any part of this 
+							policy, please refrain from using the website. This policy governs the use of the 
+							website and its services, and it forms a contract between you and Saharsh Bhadani 
+							Venture Private Limited.
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Acceptance of Terms</b></h2><br>
+						<p>
+							By accessing or using this website, you are accepting and agreeing to comply with 
+							these terms and conditions. If you are accessing the website on behalf of a company 
+							or another legal entity, you represent and warrant that you are authorized to 
+							accept these terms on their behalf.
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Changes to the Website Policy</b></h2><br>
+						<p>
+							Saharsh Bhadani Venture Private Limited reserves the right to modify, update, or 
+							amend this website policy at any time. All changes will be posted on this page with 
+							an updated date. By continuing to use the website after any such changes, you 
+							accept the new terms. We encourage users to review this policy periodically.
+
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Privacy and Data Protection</b></h2><br>
+						<p>
+							Your privacy is important to us. Please read our [<a href="#privacy-policy">Privacy Policy</a>] carefully to 
+							understand how we collect, use, and protect your personal information. By using 
+							this website, you agree to our collection and processing of personal data as 
+							described in the Privacy Policy.
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Data Collection: </b>We may collect personal data when you interact with the 
+								website (e.g., through forms, emails, or other communication channels).
+							</li>
+							<li>
+								<b>Cookies: </b>This website uses cookies to improve your experience. You can 
+								control cookies through your browser settings. For more details, read our 
+								[<a href="#cookies-policy">Cookies Policy</a>].
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>Use of the Website</b></h2><br>
+						<p>
+							You agree to use the website only for lawful purposes and in accordance with these 
+							terms. You are responsible for ensuring that your use of the website does not:
+						</p>
+						<ul type="disc">
+							<li>
+								Violate any applicable local, national, or international law or regulation.
+							</li>
+							<li>
+								Infringe on any third-party rights, including intellectual property rights.
+							</li>
+							<li>
+								Cause harm or disruption to the website, servers, or systems.
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>User-Generated Content</b></h2><br>
+						<p>
+							We may allow users to submit content, such as reviews, feedback, or comments, 
+							through the website. By submitting content, you agree to the following:
+						</p>
+						<ul type="disc">
+							<li>
+								You grant Saharsh Bhadani Venture Private Limited a non-exclusive, worldwide, 
+								royalty-free license to use, reproduce, modify, and distribute your content.
+							</li>
+							<li>
+								Your content must not be defamatory, offensive, illegal, or infringe on 
+								third-party rights.
+							</li>
+							<li>
+								Saharsh Bhadani Venture Private Limited reserves the right to remove any 
+								content that violates these guidelines or our terms.
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>Intellectual Property</b></h2><br>
+						<p>
+							All content on this website, including text, graphics, logos, images, software, and 
+							other materials, is the property of Saharsh Bhadani Venture Private Limited or its 
+							licensors and is protected by Indian and international copyright, trademark, and 
+							intellectual property laws.
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Trademark: </b>The company’s name and logo are registered trademarks of 
+								Saharsh Bhadani Venture Private Limited. You may not use these trademarks 
+								without prior written permission.
+							</li>
+							<li>
+								<b>Usage: </b>You may view and download material from the website for personal 
+								use, but you may not reproduce, distribute, or modify the content without 
+								permission.
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>Third-Party Links</b></h2><br>
+						<p>
+							Our website may contain links to third-party websites. These links are provided for 
+							your convenience and do not imply endorsement or approval of the content on those 
+							websites. Saharsh Bhadani Venture Private Limited is not responsible for the 
+							content, privacy policies, or practices of any third-party sites. Use of such links 
+							is at your own risk.
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Service Availability</b></h2><br>
+						<p>
+							We strive to keep the website operational at all times, but we cannot guarantee 
+							uninterrupted access. The website may be subject to maintenance, upgrades, or other 
+							technical issues. We are not responsible for any disruptions or downtime.
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Limitation of Liability: </b>Saharsh Bhadani Venture Private Limited does 
+								not guarantee that the website will be error-free, free of viruses, or 
+								continuously available. We are not liable for any damages or losses arising 
+								from the use or inability to use the website.
+							</li>
+							<br>
+						</ul>
+					</li>
+					<li>
+						<h2><b>Payment and Pricing</b></h2><br>
+						<p>
+							For services provided through this website, payment terms will be outlined in 
+							specific service agreements. All payments should be made using the available 
+							methods indicated on the website.
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Billing and Invoices: </b>Payments for services will be billed as per the 
+								agreed terms and service agreements. All fees are non-refundable unless 
+								otherwise stated.
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>Account Security</b></h2><br>
+						<p>
+							If you register for an account on the website, you are responsible for maintaining 
+							the confidentiality of your account information and password. You agree to 
+							immediately notify Saharsh Bhadani Venture Private Limited of any unauthorized use 
+							of your account or any other breach of security.
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Indemnity</b></h2><br>
+						<p>
+							You agree to indemnify, defend, and hold harmless Saharsh Bhadani Venture Private 
+							Limited, its directors, employees, agents, and affiliates from any claims, losses, 
+							liabilities, damages, or expenses (including legal fees) arising out of your use of 
+							the website, violation of this policy, or infringement of third-party rights.
+						</p>
+						<br>
+					</li>
+					<li>
+						<h2><b>Governing Law and Dispute Resolution</b></h2><br>
+						<p>
+							This website policy is governed by and construed in accordance with the laws of 
+							India. Any disputes arising out of or relating to this policy shall be resolved 
+							exclusively in the courts located in Kolkata, India.
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Arbitration: </b>Any disputes that cannot be resolved amicably shall be 
+								referred to binding arbitration in accordance with the Arbitration and 
+								Conciliation Act, 1996.
+							</li>
+						</ul>
+						<br>
+					</li>
+					<li>
+						<h2><b>Termination of Use</b></h2><br>
+						<p>
+							Saharsh Bhadani Venture Private Limited reserves the right to suspend or terminate 
+							your access to the website at any time, without notice, for any reason, including 
+							violation of these terms and conditions. Upon termination, you must cease using the 
+							website and destroy any copies of content downloaded or obtained from the website.
+						</p>	
+						<br>					
+					</li>
+					<li>
+						<h2><b>Contact Information</b></h2><br>
+						<p>
+							If you have any questions or concerns regarding this Website Policy, please contact 
+							us:
+						</p>
+						<ul type="disc">
+							<li>
+								<b>Email: </b>SaharshBhadaniVenture@gmail.com
+							</li>
+							<li>
+								<b>Phone: </b>+91&nbsp;9168669610
+							</li>
+							<li>
+								<b>Address: </b>29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025
+							</li>
+						</ul>
+						<br>						
+					</li>
+				</ol>
+			</div>
+		</div>
+	</section>
+	<hr>
+	<section id="privacy-policy" class="web-content">
+		<br><br><br>
+		<div style="width: 100%;">
+			<p style="font-size: 32px;">Saharsh Bhadani Venture Private Limited Privacy Policy</p><br>
+			<p>Last updated on: January 21, 2025</p>
+			<div style="text-align: justify;">
+				<ol>
+					<li><h2><b>Introduction</b></h2></li><br>
+					<p>
+						Saharsh Bhadani Venture Private Limited (“we,” “our,” or “us”) is committed to 
+						protecting your privacy and ensuring that your personal information is handled in a 
+						safe and responsible manner. This Privacy Policy explains how we collect, use, 
+						disclose, and protect your personal information when you visit our website 
+						(<a href="https://sbv-pvt-ltd.github.io/SBV/">https://sbv-pvt-ltd.github.io/SBV/</a>) or engage with our services.
+					</p>
+					<p>
+						By accessing or using our website, you consent to the collection and use of your 
+						information in accordance with this Privacy Policy. If you do not agree with the terms 
+						of this policy, please do not use our website.
+					</p>
+					<br>
+					<li><h2><b>Information We Collect</b></h2></li><br>
+					<p>
+						We collect the following types of information when you interact with our website:
+					</p>
+					<ul type="disc">
+						<li><b>Personal Identifiable Information (PII):</b></li>
+						<ul>
+							<li><b>Contact Information: </b>This includes your name, email address, phone 
+							number, and other details you provide when registering on our website, subscribing 
+							to newsletters, or requesting information about our services.</li>
+							<li><b>Demographic Information: </b>This includes your location, preferences, and 
+							other personal details you may voluntarily share with us.</li>
+						</ul>
+						<li><b>Non-Personal Information:</b></li>
+						<ul>
+							<li><b>Cookies and Usage Data: </b>We collect data related to your website usage, 
+							including your IP address, browser type, device type, pages visited, time spent on the 
+							website, and other analytics data. This information helps us improve user experience 
+							and analyze trends.</li>
+						</ul>
+					</ul>
+					<br>
+					<li><h2><b>How We Collect Information</b></h2></li><br>
+					<p>
+						<ul type="disc">
+							<li><b>Direct Interactions: </b>We collect personal information directly from you 
+								when you:</li>
+								<ul>
+									<li>Register or create an account on our website.</li>
+									<li>Fill out forms (e.g., contact forms, service request forms).</li>
+									<li>Subscribe to newsletters, blogs, or updates.</li>
+									<li>Communicate with us via email, phone, or chat.</li>
+								</ul>
+							<li><b>Cookies and Tracking Technologies: </b>We use cookies, web beacons, and 
+								similar technologies to collect data automatically about your interactions with 
+								our website. For more details on cookies, please refer to our [<a href="#cookies-policy">Cookies Policy</a>].
+							</li>
+						</ul>
+					</p>
+					<br>
+					<li><h2><b>How We Use Your Information</b></h2></li><br>
+					<p>We use your information for the following purposes:</p>
+					<ul type="disc">
+						<li><b>To Provide and Improve Services: </b>We use your personal information to deliver 
+							the services you request, respond to inquiries, and provide customer support. We may 
+							also use the information to improve our services, develop new offerings, and enhance 
+							the user experience.
+						</li>
+						<li><b>Marketing and Communication: </b>With your consent, we may send you promotional 
+							emails, newsletters, or offers related to our services. You can opt-out of marketing 
+							communications at any time by following the unsubscribe link in the emails or by 
+							contacting us directly.
+						</li>
+						<li><b>To Personalize User Experience: </b>We may use your information to personalize 
+							the content and advertisements displayed on our website, making them more relevant 
+							to your interests.
+						</li>
+						<li><b>Legal Compliance: </b>We may use your information to comply with legal 
+							obligations, resolve disputes, and enforce agreements.
+						</li>
+					</ul>
+					<br>
+					<li><h2><b>Sharing Your Information</b></h2></li><br>
+					<p>
+						We do not sell, trade, or rent your personal information to third parties. However, we 
+						may share your information in the following situations:
+					</p>
+					<ul type="disc">
+						<li>
+							<b>Service Providers: </b>We may share your information with third-party service 
+							providers (such as payment processors, email marketing platforms, and hosting 
+							providers) who help us operate our business. These providers are required to use 
+							your information only for the purposes for which it was shared and are obligated to 
+							keep it confidential.
+						</li>
+						<li>
+							<b>Legal Requirements: </b>We may disclose your information if required to do so by 
+							law or in response to a valid legal request (e.g., court order, government inquiry).
+						</li>
+						<li>
+							<b>Business Transfers: </b>If we are involved in a merger, acquisition, or sale of 
+							assets, your information may be transferred as part of that transaction. We will 
+							notify you via email or a notice on our website before your personal data is 
+							transferred and becomes subject to a different privacy policy.
+						</li>
+					</ul>
+					<br>
+					<li><h2><b>Data Retention</b></h2></li><br>
+					<p>
+						We retain your personal information only for as long as necessary to fulfill the 
+						purposes outlined in this Privacy Policy, unless a longer retention period is required 
+						or permitted by law. If you wish to delete your personal information, you may contact 
+						us at the details below, and we will make reasonable efforts to delete it from our 
+						records.
+					</p>
+					<br>
+					<li><h2><b>Data Security</b></h2></li><br>
+					<p>
+						We take appropriate technical and organizational measures to safeguard your personal 
+						information against unauthorized access, alteration, disclosure, or destruction. These 
+						measures include encryption, firewalls, and secure servers. However, please note that 
+						no method of transmission over the internet or electronic storage is 100% secure. While 
+						we strive to protect your personal data, we cannot guarantee its absolute security.					
+					</p>
+					<br>
+					<li><h2><b>Your Rights</b></h2></li><br>
+					<p>
+						You have the following rights regarding your personal information:
+					</p>
+					<ul type="disc">
+						<li><b>Access: </b>You have the right to request a copy of the personal data we hold 
+							about you.
+						</li>
+						<li><b>Correction: </b>You can request to update or correct your personal information 
+							if it is inaccurate or incomplete.
+						</li>
+						<li><b>Deletion: </b>You can request the deletion of your personal data, subject to 
+							certain exceptions.
+						</li>
+						<li><b>Opt-out of Marketing Communications: </b>You can opt-out of receiving marketing 
+							emails by following the unsubscribe instructions in the email or by contacting us directly.
+						</li>
+						<li><b>Withdraw Consent: </b>If we are processing your data based on consent, you have 
+							the right to withdraw that consent at any time.
+						</li>
+						<li><b>Data Portability: </b>You may request a copy of your personal information in a 
+							machine-readable format to transfer to another service provider.
+						</li>
+					</ul>
+					<p>
+						To exercise these rights, please contact us at the details provided in Section 10.
+					</p>
+					<br>			
+					<li><h2><b>Third-Party Links</b></h2></li><br>
+					<p>
+						Our website may contain links to third-party websites that are not operated by us. We 
+						are not responsible for the privacy practices or content of those external sites. We 
+						recommend that you review the privacy policies of those sites before sharing any 
+						personal information.				
+					</p>
+					<br>
+					<li><h2><b>Contact Us</b></h2></li><br>
+					<p>
+						If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your personal data, please contact us:
+					</p>
+					<ul type="disc">
+						<li>
+							<b>Email: </b>SaharshBhadaniVenture@gmail.com
+						</li>
+						<li>
+							<b>Phone: </b>+91&nbsp;9168669610
+						</li>
+						<li>
+							<b>Address: </b>29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025
+						</li>
+					</ul>
+					<br>
+					<li><h2><b>Consent</b></h2></li><br>
+					<p>
+						By using our website, you consent to the collection, use, and sharing of your personal 
+						information as described in this Privacy Policy. If you do not agree with any aspect of 
+						this policy, please do not use the website.
+					</p>
+					<br>
+					<li><h2><b>Governing Law</b></h2></li><br>
+					<p>
+						This Privacy Policy is governed by and construed in accordance with the laws of India. 
+						Any disputes arising from this Privacy Policy will be subject to the exclusive 
+						jurisdiction of the courts in Kolkata, India.
+					</p>
+				</ol>
+			</div>
+		</div>
+	</section>
+	<hr>
+	<section id="cookies-policy" class="web-content">
+		<br><br><br>
+		<div style="width: 100%;">
+			<p style="font-size: 32px;">Cookies Policy for Saharsh Bhadani Venture Private Limited</p><br>
+			<p>Effective Date and Last updated on: January 08, 2025</p>
+			<br>
+			<div style="text-align: justify;">
+				<p>
+					This Cookies Policy explains how Saharsh Bhadani Venture Private Limited ("we," "our," or 
+					"us") uses cookies and similar technologies on our website [<a href="https://sbv-pvt-ltd.github.io/SBV/">https://sbv-pvt-ltd.github.io/SBV/</a>] (the "Site"). 
+					By using our Site, you consent to our use of cookies as described in this policy.
+
+				</p>
+				<ol>
+					<li><h2><b>What Are Cookies?</b></h2></li>
+					<p>
+						Cookies are small text files that are placed on your device (computer, tablet, or 
+						mobile phone) when you visit a website. These cookies help the website remember your 
+						preferences, enhance your user experience, and improve the performance of the Site. 
+						Cookies can also help us track website traffic and analyze trends.
+					</p>
+					<br>
+					<li><h2><b>Types of Cookies We Use</b></h2></li>
+					<p>We use the following types of cookies on our Site:</p>
+					<ul type="disc">
+						<li><b>Essential Cookies: </b>These cookies are necessary for the functioning of our website. They enable basic functionalities such as security, authentication, and managing user preferences.</li>
+						<li><b>Performance Cookies: </b>These cookies help us analyze how users interact with our website, allowing us to improve its performance and enhance user experience. Examples include Google Analytics cookies, which track how visitors use our website.</li>
+						<li><b>Functionality Cookies: </b>These cookies allow our Site to remember the choices you make (such as language preferences or region) and provide enhanced, more personalized features.</li>
+						<li><b>Advertising/Targeting Cookies: </b>These cookies are used to deliver targeted ads and measure the effectiveness of advertising campaigns. These cookies track your browsing habits to show ads that are relevant to you.</li>
+					</ul>
+					<br>
+					<li><h2><b>How We Use Cookies</b></h2></li>
+					<p>We use cookies for the following purposes:</p>
+					<ul type="disc">
+						<li>To improve the functionality and performance of our website</li>
+						<li>To analyze user behavior and gather statistics</li>
+						<li>To personalize content and advertisements</li>
+						<li>To remember your preferences and settings</li>
+						<li>To ensure security and smooth operation of the Site</li>
+					</ul>
+					<br>
+					<li><h2><b>Third-Party Cookies</b></h2></li>
+					<p>
+						We may allow third-party service providers, such as Google Analytics, advertising 
+						partners, and social media platforms, to place cookies on your device when you visit 
+						our Site. These third-party cookies may collect information about your activities on 
+						our Site and other websites to deliver more relevant content and ads to you.
+					</p>
+					<p>
+						For more information on how these third parties use cookies, please review their 
+						respective privacy and cookie policies:
+						<ul type="disc">
+							<li>Google Analytics: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></li>
+							<li>Google Ads: <a href="https://policies.google.com/technologies/ads">https://policies.google.com/technologies/ads</a></li>
+						</ul>
+					</p>
+					<br>
+					<li><h2><b>Managing Cookies</b></h2></li>
+					<p>
+						You can control or delete cookies through your browser settings. Most web browsers 
+						allow you to block or delete cookies. However, please note that blocking cookies may 
+						affect the functionality of the Site and your ability to access certain services.
+					</p>
+					<p>
+						To manage cookies in popular browsers, you can refer to the following links:
+						<ul type="disc">
+							<li>Google Chrome: <a href="https://support.google.com/chrome/answer/95647">https://support.google.com/chrome/answer/95647</a></li>
+							<li>Mozilla Firefox: <a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences">https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences</a></li>
+							<li>Microsoft Edge: <a href="https://support.microsoft.com/en-us/microsoft-edge/manage-cookies-and-site-data-in-microsoft-edge-d0f16b2c-8b6b-4d2d-bd95-8e0d7e8d8e1d">https://support.microsoft.com/en-us/microsoft-edge/manage-cookies-and-site-data-in-microsoft-edge-d0f16b2c-8b6b-4d2d-bd95-8e0d7e8d8e1d</a></li>
+							<li>Safari: <a href="https://support.apple.com/en-us/HT201265">https://support.apple.com/en-us/HT201265</a></li>
+						</ul>
+					</p>
+					<br>
+					<li><h2><b>Consent</b></h2></li>
+					<p>
+						By using our Site, you consent to the use of cookies in accordance with this Cookies 
+						Policy. If you do not agree to the use of cookies, you should either disable cookies 
+						through your browser settings or refrain from using our Site.
+					</p>
+					<br>
+					<li><h2><b>Updates to This Cookies Policy</b></h2></li>
+					<p>
+						We may update this Cookies Policy from time to time. Any changes to this policy will be 
+						posted on this page with an updated "Effective Date." We encourage you to periodically 
+						review this policy to stay informed about how we use cookies.
+					</p>
+					<br>
+					<li><h2><b>Contact Us</b></h2></li>
+					<p>
+						If you have any questions about this Cookies Policy or how we use cookies, please 
+						contact us at:<br>
+						Saharsh Bhadani Venture Private Limited,<br>
+						29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+						Email: SaharshBhadaniVenture@gmail.com<br>
+						Phone: +91&nbsp;9168669610<br>
+					</p>
+				</ol>
+			</div>
+		</div>
+	</section>
+
+	<section id="page-footer">
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+		<!-- 
+		contact details: Company-> contact details, career, investors, alumni, newsroom, -->
+			<tr>
+				<td style="width: 33.33%;"><h2>Contact details</h2></td>
+				<td style="width: 33.33%;"><h2>Support</h2></td>
+				<td style="width: 33.33%;"><h2>Book an appointment</h2></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					<p>29B/1F&nbsp;Bakul&nbsp;Bagan&nbsp;Row,</p>
+					<p>Kolkata,&nbsp;West-Bengal,&nbsp;India&nbsp;-&nbsp;700&nbsp;025</p>
+					<br>
+					<p>Email:&nbsp;SaharshBhadaniVenture@gmail.com</p>
+					<p>Mobile:&nbsp;+91&nbsp;9168669610</p>
+				</td>
+				<td style="vertical-align: top">
+					<a href="https://sbv-pvt-ltd.github.io/SBV/careers.html">Careers</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/faq.html">Frequently asked questions</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/policy.html">Policy</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/payments.html">Payments</a><br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+				</td>
+				<td style="vertical-align: top">
+					Chat now - <a target="_blank" href="https://wa.me/919168669610?text=">Chat with us on WhatsApp</a><br>
+					Call - <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email - <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit - <a target="_blank" href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Click to see location in Google Maps.</a><br>
+					Request callback - <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google form</a><br>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+			<tr>
+				<td style="width: 33.33%;">
+					<p><h2>Follow us on</h2></p>
+					<div style="color: blue;">
+						<a target="_blank" href="" onclick="openLink('linkedIn')">LinkedIn</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('facebook')">Facebook</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('twitter')">X</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('instagram')">Instagram</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('youtube')">YouTube</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('google')">Google</a>&nbsp;
+					</div>
+					<script>
+						function openLink(pageName) {
+							url_to_visit = ""
+							if(pageName=="linkedIn")
+								url_to_visit=linkedIn
+							else if(pageName=="facebook")
+								url_to_visit=facebook
+							else if(pageName=="twitter")
+								url_to_visit=twitter
+							else if(pageName=="instagram")
+								url_to_visit=instagram
+							else if(pageName=="youtube")
+								url_to_visit=youtube
+							else if(pageName=="google")
+								url_to_visit=google_business
+							else
+								url_to_visit=website
+							window.open(url_to_visit); 
+						}
+					</script>
+				</td>
+				<td style="width: 16.66%; vertical-align: bottom;">
+					<p><h2>More</h2></p>
+					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">Blog</a><br>
+				</td>
+				<td style="width: 50%; vertical-align: bottom;">
+					<p>Last updated on : <span id="last_updated_on"></span></p>
+					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+				</td>
+			</tr>
+		</table>
+	</section>
+	<script>
+		window.onscroll = function() {myFunction()};
+		
+		var header = document.getElementById("myHeader");
+		var logo_navbar = document.getElementById("logo-navbar");
+		var sticky = header.offsetTop;
+		
+		function myFunction() {
+		  if (window.pageYOffset > 6*sticky) {
+			logo_navbar.classList.add("logo-navbar-show");
+			logo_navbar.classList.remove("logo-navbar-hide");
+		  } else {
+			logo_navbar.classList.remove("logo-navbar-show");
+			logo_navbar.classList.add("logo-navbar-hide");
+		  }
+		}
+		</script>
+	<!--Code for WhatsApp-->
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+	<script>
+		var wa_btnSetting = {
+			"btnColor":"#16BE45",
+			"ctaText":"",
+			"cornerRadius":40,
+			"marginBottom":20,
+			"marginLeft":20,
+			"marginRight":20,
+			"btnPosition":"right",
+			"whatsAppNumber":"919168669610",
+			"welcomeMessage":"Hello",
+			"zIndex":999999,
+			"btnColorScheme":"light"
+		};
+		window.onload = () => {
+			_waEmbed(wa_btnSetting);
+			document.getElementById('last_updated_on').textContent = last_updated_on;
+		};
+	</script>
+	<!--2nd type
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+        <script>
+          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"911234567890","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
+          var wa_widgetSetting = {"title":"BrandName","subTitle":"Typically replies in a day","headerBackgroundColor":"#FBFFC8","headerColorScheme":"dark","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#1A1A1A","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"https://uploads-ssl.webflow.com/5f68a65cd5188c058e27c898/6204c4267b92625c9770f687_whatsapp-chat-widget-dummy-logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
+          window.onload = () => {
+            _waEmbed(wa_btnSetting, wa_widgetSetting);
+          };
+        </script>
+	-->
+
+	  
+</body>
+</html>

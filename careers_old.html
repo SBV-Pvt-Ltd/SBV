@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Load an icon library -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<script src="Constant.js"></script>
+
+	<style>
+		.header {
+			background: #d2ab67;
+			color: black;
+			width: 100%;
+		}
+		#navbar {
+			position: sticky;
+			top: 0;
+			overflow: hidden;
+			background-color: #f2f2f2;
+		}
+		#navbar a {
+			float: left;
+			display: block;
+			color: #333;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			font-size: 17px;
+		}
+		#navbar a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		#navbar a.active {
+			background-color: #04AA6D;
+			color: white;
+		}
+		#logo-section {
+			display: block;
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: auto;
+			object-fit: scale-down;
+			margin-left: 50px;
+			margin-right: 0;
+		}
+		.topnav .search-container {
+			float: right;
+		}
+		.topnav input[type=text] {
+			padding: 6px;
+			margin-top: 8px;
+			font-size: 17px;
+			border: none;
+		}
+		.topnav .search-container button {
+			float: right;
+			padding: 6px 10px;
+			margin-top: 8px;
+			margin-right: 16px;
+			background: #ddd;
+			font-size: 17px;
+			border: none;
+			cursor: pointer;
+		}
+		.topnav .search-container button:hover {
+			background: #ccc;
+		}
+		@media screen and (max-width: 600px) {
+			.topnav .search-container {
+				float: none;
+			}
+			.topnav a, .topnav input[type=text], .topnav .search-container button {
+				float: none;
+				display: block;
+				text-align: left;
+				width: 100%;
+				margin: 0;
+				padding: 14px;
+			}
+			.topnav input[type=text] {
+				border: 1px solid #ccc;
+			}
+		}
+		#company_name {
+			vertical-align: top; 
+			font-family:Lucida Handwriting; 
+			float: left;
+		}
+		.inner_div {
+			margin-right: 40px;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			border:1px solid black; 
+			border-radius: 10px;
+			height: 50px; 
+			width: 250px; 
+			float: left; 
+		}
+		.inner_div:hover {
+			border:1px solid blue; 
+			font-size: 20px;
+			background: lightgoldenrodyellow;
+			vertical-align: middle;
+		}
+		img.map_image:hover {
+			content: url("./images/Map_location_satellite_view.png");
+		}
+		.management-photo-1 {
+			height: 200px;
+			width: auto;
+			border: 1px solid black;
+		}
+		.management-photo-2 {
+			height: 200px;
+			width: auto;
+			border: 1px solid black;
+		}
+		#page-footer {
+			background-color: #f2f2f2;
+			color: #333;
+		}
+		.web-content {
+			width: 80%;
+			padding-left: 10%;
+			padding-right: 10%;
+		}
+		#page-footer-table {
+			width: 90%;
+			padding-left: 5%;
+			padding-right: 5%;
+
+		}	
+		#logo-navbar {
+			display: block;
+			background-repeat: no-repeat;
+			height: 45px;
+			width: 10%;
+			object-fit: scale-down;
+			float: left;
+			margin-left: 50px;
+		}
+		.logo-navbar-hide {
+			background-size: 0px;
+		}
+		.logo-navbar-show {
+			background-image: url(./Logo/Logo.png);
+			background-size: 130px;
+		}
+		ol > li::marker {
+			font-weight: bold;
+			font-size: 24px;
+		}
+		.web-content table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+		.web-content table.scrolldown tbody{
+
+			/* Set the height of table body */
+			max-height: 100px;
+
+			/* Set vertical scroll */
+			overflow-y: auto;
+
+			/* Hide the horizontal scroll */
+			overflow-x: hidden;
+			}
+
+		.web-content td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		.web-content tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header" id="myHeader">
+		<table style="width: 100%;">
+			<tr>
+				<td style="width: 14%;">
+					<div id="logo-section">
+					</div>
+				</td>
+				<td style="width: 56%;">
+					<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
+				</td>
+				<td style="width: 30%;">
+					
+				</td>
+			</tr>
+		</table>
+	</div>
+		
+	<div id="navbar" class="topnav" style="width: 100%;">
+		<div id="logo-navbar">
+
+		</div>
+		<a onclick="navigateToIndex('#')"><i class="fa fa-fw fa-home"></i> Home</a> 
+		<a onclick="navigateToIndex('#about-us')">About Us</a>
+		<a onclick="navigateToIndex('#offered-services')">Featured Services</a>
+		<a onclick="navigateToIndex('#contact-us')">Contact Us</a>
+		<script>
+			function navigateToIndex(pageName) {
+				current_url = window.location.href;
+				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+				new_url = current_url_refined+ "index.html";
+				new_url_section = new_url;
+				if(pageName.localeCompare("#") != 0){
+					new_url_section = new_url + pageName;
+				}
+				window.location.replace(new_url_section);	
+			}
+		</script>
+
+		<!--
+		<div class="search-container">
+			<form action="/action_page.php">
+				<input type="text" placeholder="Search.." name="search">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+		</div>
+		-->
+	</div>
+	<section id="careers" class="web-content">
+		<br><br><br>
+		<div style="width: 100%;">
+			<p style="font-size: 32px;">Frequently Asked Questions (FAQs)</p><br>
+			<p>Last updated on: January 08, 2025</p>
+			<div style="text-align: justify;">
+				<div id="join-our-team" style="border: 1px solid black; left: 10px">
+					<center><h1>Join our team</h1></center>
+					<p>Click on the link below:</p><br>
+					<a href="https://forms.gle/1chXs2BeCmCAet9W8">Provide your details and upload your latest resume and then somebody from our team will get in touch with you.</a>
+					<br><br>
+				</div>
+
+				<br>
+				<div id="job-postings" style=" height: 400px; border: 1px solid black;">
+					<center><h1>Available jobs</h1></center>
+					<table>
+						<thead>
+							<tr>
+								<th>Sl. No.</th>
+								<th>Job Role</th>
+								<th>Job Description</th>
+								<th>Location</th>
+								<th>Number of vacancies</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>7</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>8</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>9</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</tbody>						
+					</table> 
+				</div>
+				<hr>
+				If you have any other questions, feel free to contact us directly at [SaharshBhadaniVenture@gmail.com]. We are here to assist you!
+			</div>
+		</div>
+	</section>
+
+	<section id="page-footer">
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+		<!-- 
+		contact details: Company-> contact details, career, investors, alumni, newsroom, -->
+			<tr>
+				<td style="width: 33.33%;"><h2>Contact details</h2></td>
+				<td style="width: 33.33%;"><h2>Support</h2></td>
+				<td style="width: 33.33%;"><h2>Book an appointment</h2></td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top">
+					<p>29B/1F&nbsp;Bakul&nbsp;Bagan&nbsp;Row,</p>
+					<p>Kolkata,&nbsp;West-Bengal,&nbsp;India&nbsp;-&nbsp;700&nbsp;025</p>
+					<br>
+					<p>Email:&nbsp;SaharshBhadaniVenture@gmail.com</p>
+					<p>Mobile:&nbsp;+91&nbsp;9168669610</p>
+				</td>
+				<td style="vertical-align: top">
+					<a href="https://sbv-pvt-ltd.github.io/SBV/careers.html">Careers</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/faq.html">Frequently asked questions</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/policy.html">Policy</a><br>
+					<a href="https://sbv-pvt-ltd.github.io/SBV/payments.html">Payments</a><br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+				</td>
+				<td style="vertical-align: top">
+					Chat now - <a target="_blank" href="https://wa.me/919168669610?text=">Chat with us on WhatsApp</a><br>
+					Call - <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email - <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit - <a target="_blank" href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Click to see location in Google Maps.</a><br>
+					Request callback - <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google form</a><br>
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<table style="width: 100%;" id="page-footer-table">
+			<tr>
+				<td style="width: 33.33%;">
+					<p><h2>Follow us on</h2></p>
+					<div style="color: blue;">
+						<a target="_blank" href="" onclick="openLink('linkedIn')">LinkedIn</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('facebook')">Facebook</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('twitter')">X</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('instagram')">Instagram</a>&nbsp;|&nbsp; 
+						<a target="_blank" href="" onclick="openLink('youtube')">YouTube</a>&nbsp;|&nbsp;
+						<a target="_blank" href="" onclick="openLink('google')">Google</a>&nbsp;
+					</div>
+					<script>
+						function openLink(pageName) {
+							url_to_visit = ""
+							if(pageName=="linkedIn")
+								url_to_visit=linkedIn
+							else if(pageName=="facebook")
+								url_to_visit=facebook
+							else if(pageName=="twitter")
+								url_to_visit=twitter
+							else if(pageName=="instagram")
+								url_to_visit=instagram
+							else if(pageName=="youtube")
+								url_to_visit=youtube
+							else if(pageName=="google")
+								url_to_visit=google_business
+							else
+								url_to_visit=website
+							window.open(url_to_visit); 
+						}
+					</script>
+				</td>
+				<td style="width: 16.66%; vertical-align: bottom;">
+					<p><h2>More</h2></p>
+					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">Blog</a><br>
+				</td>
+				<td style="width: 50%; vertical-align: bottom;">
+					<p>Last updated on : <span id="last_updated_on"></span></p>
+					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+				</td>
+			</tr>
+		</table>
+	</section>
+	<script>
+		window.onscroll = function() {myFunction()};
+		
+		var header = document.getElementById("myHeader");
+		var logo_navbar = document.getElementById("logo-navbar");
+		var sticky = header.offsetTop;
+		
+		function myFunction() {
+		  if (window.pageYOffset > 6*sticky) {
+			logo_navbar.classList.add("logo-navbar-show");
+			logo_navbar.classList.remove("logo-navbar-hide");
+		  } else {
+			logo_navbar.classList.remove("logo-navbar-show");
+			logo_navbar.classList.add("logo-navbar-hide");
+		  }
+		}
+		</script>
+	<!--Code for WhatsApp-->
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+	<script>
+		var wa_btnSetting = {
+			"btnColor":"#16BE45",
+			"ctaText":"",
+			"cornerRadius":40,
+			"marginBottom":20,
+			"marginLeft":20,
+			"marginRight":20,
+			"btnPosition":"right",
+			"whatsAppNumber":"919168669610",
+			"welcomeMessage":"Hello",
+			"zIndex":999999,
+			"btnColorScheme":"light"
+		};
+		window.onload = () => {
+			_waEmbed(wa_btnSetting);
+			document.getElementById('last_updated_on').textContent = last_updated_on;
+		};
+	</script>
+	<!--2nd type
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+        <script>
+          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"911234567890","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
+          var wa_widgetSetting = {"title":"BrandName","subTitle":"Typically replies in a day","headerBackgroundColor":"#FBFFC8","headerColorScheme":"dark","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#1A1A1A","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"https://uploads-ssl.webflow.com/5f68a65cd5188c058e27c898/6204c4267b92625c9770f687_whatsapp-chat-widget-dummy-logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
+          window.onload = () => {
+            _waEmbed(wa_btnSetting, wa_widgetSetting);
+          };
+        </script>
+	-->
+
+	  
+</body>
+</html>

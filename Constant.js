@@ -8,7 +8,15 @@ website= "https://sbv-pvt-ltd.github.io/SBV/";
 threads= "";
 instagram= "https://www.instagram.com/bhadanisaharsh/";
 blogs="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/";
-last_updated_on = "February 01, 2025";
+features_service_page_name="FeaturesServices.html";
+index_page_name="index.html";
+faq_page_name="faq.html";
+policy_page_name="policy.html"
+payments_page_name="payments.html"
+careers_page_name="careers.html"
+explore_page_name="explore.html"
+
+last_updated_on = "March 29, 2025";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
     "https://www.youtube.com/embed/O9cf_yC0pGo",

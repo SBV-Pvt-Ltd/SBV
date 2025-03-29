@@ -4,611 +4,546 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="description" content="Website of Saharsh Bhadani Venture Private Limited.">
-	<meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting">
+	<meta name="keywords"
+		content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting">
 	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
-	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Load an icon library -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
 	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<link rel="stylesheet" href="./css/w3.css">
+	<link rel="stylesheet" href="./css/w3-theme-black.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="Constant.js"></script>
-	
-	<style>
-		.header {
-			background: #d2ab67;
-			color: black;
-			width: 100%;
-		}
-		#navbar {
-			position: sticky;
-			top: 0;
-			overflow: hidden;
-			background-color: #f2f2f2;
-		}
-		#navbar a {
-			float: left;
-			display: block;
-			color: #333;
-			text-align: center;
-			padding: 14px 16px;
-			text-decoration: none;
-			font-size: 17px;
-		}
-		#navbar a:hover {
-			background-color: #ddd;
-			color: black;
-		}
-
-		#navbar a.active {
-			background-color: #04AA6D;
-			color: white;
-		}
-		#logo-section {
-			display: block;
-			background-image: url(./Logo/Logo.png);
-			background-size: 130px;
-			background-repeat: no-repeat;
-			height: 45px;
-			width: auto;
-			object-fit: scale-down;
-			margin-left: 50px;
-			margin-right: 0;
-		}
-		.topnav .search-container {
-			float: right;
-		}
-		.topnav input[type=text] {
-			padding: 6px;
-			margin-top: 8px;
-			font-size: 17px;
-			border: none;
-		}
-		.topnav .search-container button {
-			float: right;
-			padding: 6px 10px;
-			margin-top: 8px;
-			margin-right: 16px;
-			background: #ddd;
-			font-size: 17px;
-			border: none;
+	<style type="text/css">
+		a:hover {
 			cursor: pointer;
-		}
-		.topnav .search-container button:hover {
-			background: #ccc;
-		}
-		@media screen and (max-width: 600px) {
-			.topnav .search-container {
-				float: none;
-			}
-			.topnav a, .topnav input[type=text], .topnav .search-container button {
-				float: none;
-				display: block;
-				text-align: left;
-				width: 100%;
-				margin: 0;
-				padding: 14px;
-			}
-			.topnav input[type=text] {
-				border: 1px solid #ccc;
-			}
-		}
-		#company_name {
-			vertical-align: top; 
-			font-family:Lucida Handwriting; 
-			float: left;
-		}
-		.inner_div {
-			margin-right: 40px;
-			margin-top: 10px;
-			margin-bottom: 10px;
-			border:1px solid black; 
-			border-radius: 10px;
-			height: 50px; 
-			width: 250px; 
-			float: left; 
-		}
-		.inner_div:hover {
-			border:1px solid blue; 
-			font-size: 20px;
-			background: lightgoldenrodyellow;
-			vertical-align: middle;
-		}
-		img.map_image:hover {
-			content: url("./images/Map_location_satellite_view.png");
-		}
-		.management-photo-1 {
-			height: 200px;
-			width: auto;
-			border: 1px solid black;
-		}
-		.management-photo-2 {
-			height: 200px;
-			width: auto;
-			border: 1px solid black;
-		}
-		#page-footer {
-			background-color: #f2f2f2;
-			color: #333;
-		}
-		.web-content {
-			width: 80%;
-			padding-left: 10%;
-			padding-right: 10%;
-		}
-		#page-footer-table {
-			width: 90%;
-			padding-left: 5%;
-			padding-right: 5%;
-
-		}	
-		#logo-navbar {
-			display: block;
-			background-repeat: no-repeat;
-			height: 45px;
-			width: 10%;
-			object-fit: scale-down;
-			float: left;
-			margin-left: 50px;
-		}
-		.logo-navbar-hide {
-			background-size: 0px;
-		}
-		.logo-navbar-show {
-			background-image: url(./Logo/Logo.png);
-			background-size: 130px;
 		}
 	</style>
 </head>
 
-<body>
-	<div class="header" id="myHeader">
-		<table style="width: 100%;">
-			<tr>
-				<td style="width: 14%;">
-					<div id="logo-section">
-					</div>
-				</td>
-				<td style="width: 56%;">
-					<h1 id="company_name">Saharsh Bhadani Venture Private Limited</h1>
-				</td>
-				<td style="width: 30%;">
-					
-				</td>
-			</tr>
-		</table>
-	</div>
-		
-	<div id="navbar" class="topnav" style="width: 100%;">
-		<div id="logo-navbar">
+<body id="myPage">
+	<script>
+		function navigateTo(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url = current_url_refined + features_service_page_name;
+			new_url_section = new_url + "#" + pageName;
+			window.location.replace(new_url_section)
+			//window.open(new_url_section, "_blank");
+		}
 
-		</div>
-		<a onclick="navigateToIndex('#')"><i class="fa fa-fw fa-home"></i> Home</a> 
-		<a onclick="navigateToIndex('#about-us')">About Us</a>
-		<a onclick="navigateToIndex('#offered-services')">Featured Services</a>
-		<a onclick="navigateToIndex('#contact-us')">Contact Us</a>
-		<script>
-			function navigateToIndex(pageName) {
-				current_url = window.location.href;
-				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-				new_url = current_url_refined+ "index.html";
-				new_url_section = new_url;
-				if(pageName.localeCompare("#") != 0){
-					new_url_section = new_url + pageName;
-				}
-				window.location.replace(new_url_section);	
+		function navigateToIndex(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url = current_url_refined + index_page_name;
+			new_url_section = new_url;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = new_url + pageName;
 			}
-		</script>
+			window.location.replace(new_url_section);
+		}
 
-		<!--
-		<div class="search-container">
-			<form action="/action_page.php">
-				<input type="text" placeholder="Search.." name="search">
-				<button type="submit"><i class="fa fa-search"></i></button>
-			</form>
+		function navigateToPage(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url_section = current_url_refined;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = current_url_refined + pageName;
+			}
+			window.location.replace(new_url_section);
+		}
+
+		function navigateToPageInAnotherTab(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url_section = current_url_refined;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = current_url_refined + pageName;
+			}
+			window.open(new_url_section);
+		}
+	</script>
+
+	<!-- Sidebar on click -->
+	<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2"
+		id="mySidebar">
+		<a href="javascript:void(0)" onclick="w3_close()"
+			class="w3-bar-item w3-button w3-display-topright w3-text-teal">Close
+			<i class="fa fa-remove"></i>
+		</a>
+		<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button" style="font-size: 20px;">Business
+			Consultation</a>
+		<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button" style="font-size: 20px;">Business
+			Analytics</a>
+		<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button" style="font-size: 20px;">Software
+			Development</a>
+		<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button" style="font-size: 20px;">IT
+			Consultation</a>
+		<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button" style="font-size: 20px;">IT Services</a>
+		<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button" style="font-size: 20px;">Robotics</a>
+		<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button"
+			style="font-size: 20px;">Industrial Automation</a>
+		<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button" style="font-size: 20px;">Content
+			Creation</a>
+		<a onclick="navigateTo('GraphicDesigning')" href="#" class="w3-bar-item w3-button"
+			style="font-size: 20px;">Graphic Designing</a>
+
+	</nav>
+
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-theme-d2 w3-left-align">
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2"
+				href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
+				<i class="fa fa-home" style="color: black;"></i>
+				<img src="./Logo/Logo.png" alt="Company Logo" width="45" height="15">
+			</a>
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
+				Us</a>
+			<div class="w3-dropdown-hover w3-hide-small">
+				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications">Featured
+					Services&nbsp;<i class="fa fa-caret-down"></i></button>
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
+					<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button">Business
+						Consultation</a>
+					<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button">Business Analytics</a>
+					<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button">Software
+						Development</a>
+					<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button">IT Consultation</a>
+					<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button">IT Services</a>
+					<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button">Robotics</a>
+					<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button">Industrial
+						Automation</a>
+					<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button">Content Creation</a>
+					<a onclick="navigateTo('GraphicDesigning')" class="w3-bar-item w3-button">Graphic Designing</a>
+				</div>
+			</div>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact
+				Us</a>
+
 		</div>
-		-->
+
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button">About Us</a>
+			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button">Contact Us</a>
+		</div>
 	</div>
-	
-	<section id="intro">
-		<div id="introduction_video" style="width: 100%; height: 550px;">
-			<!--
-			"https://www.youtube.com/embed/Ag995qpzNlw", 
-			"https://www.youtube.com/embed/O9cf_yC0pGo", 		
-			-->
-			<iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/O9cf_yC0pGo" width="100%" height="100%" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-			</iframe>
+
+	<!-- Image Header -->
+	<div class="w3-display-container w3-animate-opacity">
+		<img src="./w3images/sailboat.png" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+		<div class="w3-container w3-display-bottomleft w3-margin-bottom">
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal button_color_red" title="Go To W3.CSS">
+				GET IN TOUCH
+			</button>
+
 		</div>
-	</section>
-	<hr>
-	<section id="about-us" class="web-content">
-		<br><br><br>
-		<div style="width: 100%;">
-			<p style="font-size: 32px;">About Us</p><br>
-			<div style="text-align: justify;">
+	</div>
+
+	<!-- Modal -->
+	<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-top">
+			<header class="w3-container w3-teal w3-display-container">
+				<span onclick="document.getElementById('id01').style.display='none'"
+					class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+				<h2>Please provide your details and we will contact you soon.</h2>
+			</header>
+			<div class="w3-container">
+				<div class="w3-col m7" style="width: 100%;">
+					<form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php"
+						target="_blank">
+						<div class="w3-section">
+							<label>Name</label>
+							<input class="w3-input" type="text" name="Name" required>
+						</div>
+						<div class="w3-section">
+							<label>Email</label>
+							<input class="w3-input" type="email" name="Email" required>
+						</div>
+						<div class="w3-section">
+							<label>Country</label>
+							<input class="w3-input" type="text" name="Country" required>
+						</div>
+						<div class="w3-section">
+							<label>Phone number</label>
+							<input class="w3-input" type="number" name="PhoneNumber" required>
+						</div>
+						<div class="w3-section">
+							<label>Company Name</label>
+							<input class="w3-input" type="text" name="CompanyName" required>
+						</div>
+						<div class="w3-section">
+							<label>Product or services interested in</label>
+							<input class="w3-input" type="text" name="interestedIn" required>
+						</div>
+						<div class="w3-section">
+							<label>Remarks (if any)</label>
+							<input class="w3-input" type="text" name="Message">
+						</div>
+						<div class="w3-row">
+							<button type="reset" class="w3-red w3-button w3-right w3-theme ">Clear</button>
+							<button type="submit" class="w3-button w3-left-align w3-theme w3-teal">Submit</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+			<footer class="w3-container w3-teal">
+				<p id="modal_footer_message">&nbsp;</p>
+			</footer>
+		</div>
+	</div>
+
+	<!-- Team Container -->
+	<div class="w3-container w3-padding-64 w3-center" id="team">
+		<h2>About Us</h2>
+
+		<div class="w3-row" style="color: #003134;">
+			<div>
+				<div class="w3-quarter">
+					<br>
+					<img src="./images/Mr-SaharshBhadani.jpg" alt="Boss" style="width:45%"
+						class="w3-circle w3-hover-opacity">
+					<br>
+					<h3>Mr. Saharsh Bhadani</h3>
+					<p>(Director and Promoter)</p>
+					<br>
+				</div>
+
+				<div class="w3-quarter">
+					<br>
+					<img src="./images/Dr-HarshitBhadani.jpg" alt="Boss" style="width:46%"
+						class="w3-circle w3-hover-opacity">
+					<br>
+					<h3>Dr. Harshit Bhadani</h3>
+					<p>(Director)</p>
+					<br>
+				</div>
+			</div>
+
+			<div style="text-align: left; text-align: justify; color: #003134;">
 				<p>
-					Indian Prime Minister once famously remarked, "Data is the new oil," emphasizing the growing significance of data in today's world. Much like how oil, and by extension energy, gives companies in the petroleum and petrochemical industries a competitive advantage, data now serves as a crucial resource for modern businesses. Just as energy drives growth in traditional sectors, data empowers businesses to leverage lean principles, streamline operations, and enhance decision-making. This, in turn, enables the adoption of more sustainable and efficient business practices, setting the stage for long-term success in an increasingly data-driven economy.  
-				</p>
-				<p>
-					At Saharsh Bhadani Venture Private Limited, we view our clients as true partners, and our team is equipped with the expertise and tools necessary to harness and analyze the data generated by our partner companies. By transforming this data into actionable insights, we empower our partners to optimize their operations and achieve maximum efficiency. Our goal is to help our partners gain a competitive edge, while simultaneously nurturing and strengthening their business ecosystems. We firmly believe in the power of a symbiotic ecosystem, where the collective growth and success of all stakeholders drives our own growth, creating a cycle of continuous improvement and shared prosperity.  
+					Indian Prime Minister once famously remarked, "Data is the new oil," emphasizing the growing
+					significance of data in today's world. Much like how oil, and by extension energy, gives companies
+					in the petroleum and petrochemical industries a competitive advantage, data now serves as a crucial
+					resource for modern businesses. Just as energy drives growth in traditional sectors, data empowers
+					businesses to leverage lean principles, streamline operations, and enhance decision-making. This, in
+					turn, enables the adoption of more sustainable and efficient business practices, setting the stage
+					for long-term success in an increasingly data-driven economy. <br>
+					At Saharsh Bhadani Venture Private Limited, we view our clients as true partners, and our team is
+					equipped with the expertise and tools necessary to harness and analyze the data generated by our
+					partner companies. By transforming this data into actionable insights, we empower our partners to
+					optimize their operations and achieve maximum efficiency. Our goal is to help our partners gain a
+					competitive edge, while simultaneously nurturing and strengthening their business ecosystems. We
+					firmly believe in the power of a symbiotic ecosystem, where the collective growth and success of all
+					stakeholders drives our own growth, creating a cycle of continuous improvement and shared
+					prosperity.
 				</p>
 				<br>
-				<h2>Our Management</h2><br>
-				<table style="width: 50%;">
-					<tr>
-						<td style="width: 50%;">
-							<img class="management-photo-1" src="./images/Mr-SaharshBhadani.jpg" alt="Photo of Mr. Saharsh Bhadani.">
-						</td>
-						<td style="width: 50%;">
-							<img class="management-photo-2" src="./images/Dr-HarshitBhadani.jpg" alt="Photo of Dr. Harshit Bhadani.">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>Mr. Saharsh Bhadani</b><br><p>(Director and Promoter)</p>
-						</td>
-						<td>
-							<b>Dr. Harshit Bhadani</b><br><p>(Director)</p>
-						</td>
-					</tr>
-				</table>
-				<br>
-				<h2>Our Location</h2><br>
+				<center>
+					<h2>Our Location</h2><br>
+				</center>
+
 				<p>
-					The company is strategically situated in the vibrant metropolitan city of Kolkata, West Bengal, India. As one of the country's most prominent urban centers, Kolkata serves as a hub for commerce, culture, and technology. Positioned in this dynamic city, the company benefits from its access to a robust business ecosystem, a rich talent pool, and a thriving infrastructure. Kolkata's diverse industries, coupled with its increasing focus on digital transformation, create an ideal environment for fostering innovation and driving growth. This prime location allows the company to tap into local and global markets, ensuring that it remains at the forefront of emerging trends and technologies.
-				</p>
-				<p>
-					Kolkata is well-positioned to become a leading hub for business analytics, driven by its growing digital infrastructure, expanding talent pool, and vibrant business ecosystem. The city’s diverse industries, from manufacturing to finance and healthcare, stand to benefit immensely from the adoption of data-driven decision-making. By overcoming challenges related to talent, data security, and infrastructure, Kolkata can harness the full potential of business analytics to foster economic growth, enhance operational efficiencies, and support innovation across various sectors. As Kolkata embraces the future of business analytics, it is poised to become a key player in India’s data-driven economy.
+					The company is strategically situated in the vibrant metropolitan city of Kolkata, West Bengal,
+					India. As one of the country's most prominent urban centers, Kolkata serves as a hub for commerce,
+					culture, and technology. Positioned in this dynamic city, the company benefits from its access to a
+					robust business ecosystem, a rich talent pool, and a thriving infrastructure. Kolkata's diverse
+					industries, coupled with its increasing focus on digital transformation, create an ideal environment
+					for fostering innovation and driving growth. This prime location allows the company to tap into
+					local and global markets, ensuring that it remains at the forefront of emerging trends and
+					technologies. <br>
+					Kolkata is well-positioned to become a leading hub for business analytics, driven by its growing
+					digital infrastructure, expanding talent pool, and vibrant business ecosystem. The city’s diverse
+					industries, from manufacturing to finance and healthcare, stand to benefit immensely from the
+					adoption of data-driven decision-making. By overcoming challenges related to talent, data security,
+					and infrastructure, Kolkata can harness the full potential of business analytics to foster economic
+					growth, enhance operational efficiencies, and support innovation across various sectors. As Kolkata
+					embraces the future of business analytics, it is poised to become a key player in India’s
+					data-driven economy.
 				</p>
 			</div>
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS">
+				GET IN TOUCH
+			</button>
 		</div>
-	</section>
-	<hr>
-	<section id="offered-services" class="web-content" style="display: inline-table">
-		<br><br><br>
-	<!--
-	Business Consultancy and Business Analytics- using data analytics and other principles of management such 
-	as use of softwares to create insights, dashboards, and business solutions to customers and partner 
-	companies.
+	</div>
 
-	Software Development and IT Services- using various software development processes, utilize the concepts of 
-	machine learning and artificial intelligence to design, develop, deploy, test software components as per the 
-	requirements of customers and partner companies.
-
-	Robotics and industrial automation business- as manufacturers, producers, processors, makers, inventors, 
-	convertors, importers, exporters, traders, buyers, sellers, retailers, wholesalers, suppliers, indenters, 
-	packers, movers, preservers, stockist, agents, sub-agents, merchants, distributors, consignors, jobbers, 
-	brokers, concessionaires or otherwise deal by manufacturing semiconductor based electronic components, 
-	electrical components, as well as electromechanical components to enhance performance of businesses across 
-	all sectors,
-
-	Content creation and Graphic designing- using various softwares and tools to create audio, visual, as well 
-	as audio-visual content for customers and partner companies.
-
-	Finance and Investment Consultants- To act as financial consultants, management consultants, personal 
-	finance management consultant, portfolio management consultant and provide advice, services, consultancy in 
-	various fields, general administrative, secretarial, commercial, financial legal, economic, labour, 
-	industrial, public relations, scientific, technical, direct and indirect taxation and other levies, 
-	statistical, accountancy, quality control and data processing,
-	-->
-		<p style="font-size: 32px;">Featured Services</p>
-		<div id="right-outer-div" style="width: 100%; float: left;">
-			<div class= "inner_div" onclick="navigateTo('BusinessConsultation')"> 
-				<center>
+	<!-- Featured Services Row -->
+	<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="FeaturedServices">
+		<h2>Featured Services</h2>
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('BusinessConsultation')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/business-consulting.jpg" alt="Business Consultation" style="width:100%">
+				<div class="w3-container">
 					<h3>Business Consultation</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('BusinessAnalytics')"> 
-				<center>
-					<h3>Business Analytics</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('SoftwareDevelopment')"> 
-				<center>
-					<h3>Software Development</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('ITConsultation')"> 
-				<center>
-					<h3>IT Consultation</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('ITServices')"> 
-				<center>
-					<h3>IT Services</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('Robotics')"> 
-				<center>
-					<h3>Robotics</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('IndustrialAutomation')"> 
-				<center>
-					<h3>Industrial automation</h3>
-				</center>
-			</div>
-
-			<div class= "inner_div" onclick="navigateTo('ContentCreation')"> 
-				<center>
-					<h3>Content creation</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('GraphicDesigning')"> 
-				<center>
-					<h3>Graphic designing</h3>
-				</center>
-			</div>
-			<div class= "inner_div" onclick="navigateTo('FinanceInvestmentConsultation')"> 
-				<center>
-					<h3>Finance and Investment Consultation</h3>
-				</center>
+				</div>
 			</div>
 		</div>
-		<script>
-			function navigateTo(pageName) {
-				current_url = window.location.href;
-				var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-				new_url = current_url_refined+ "FeaturedServices.html";
-				new_url_section = new_url + "#"+pageName;
-				window.location.replace(new_url_section)
-				//window.open(new_url_section, "_blank");
-			}
-		</script>
-	</section>
-	<hr>
-	<section id="contact-us" class="web-content">
-		<br><br><br>
-		<p style="font-size: 32px;">Get in touch with us</p>
+
+		<div class="w3-quarter" style="margin-top: 14px; cursor: pointer;" onclick="navigateTo('BusinessAnalytics')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/business-analytics.png" alt="Business Analytics"
+					style="width:100%; border-bottom: 1px solid black;">
+				<div class="w3-container">
+					<h3>Business Analytics</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('SoftwareDevelopment')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/software-development.png" alt="Software Development" style="width:100%">
+				<div class="w3-container">
+					<h3>Software Development</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('ITConsultation')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/IT_consulting.jpg" alt="IT Consultation" style="width:100%">
+				<div class="w3-container">
+					<h3>IT Consultation</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('ITServices')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/it-services.jpg" alt="IT Services" style="width:100%">
+				<div class="w3-container">
+					<h3>IT Managed Services</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('Robotics')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/industrial-automation.jpg" alt="Robotics" style="width:100%">
+				<div class="w3-container">
+					<h3>Robotics & Automation</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('ContentCreation')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/content-creation.jpg" alt="Content Creation" style="width:100%">
+				<div class="w3-container">
+					<h3>Content Creation</h3>
+				</div>
+			</div>
+		</div>
+
+		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('GraphicDesigning')">
+			<div class="w3-card w3-white">
+				<img src="./w3images/graphic-design-company.jpg" alt="Graphic Designing" style="width:100%">
+				<div class="w3-container">
+					<h3>Graphic Designing</h3>
+				</div>
+			</div>
+		</div>
+
 		<center>
-			<table style="width: 60%;">
-				<tr>
-					<td style="width: 20%;">
-						<i class="fa fa-building-o" style="font-size:40px"></i>
-					</td>
-					<td style="width: 80%;">
-						<div style="text-align: left">
-							<p style="color: teal;"><b>Address</b></p>
-							<p>
-								Saharsh Bhadani Venture Private Limited,<br> 
-								29B/1F, Bakul Bagan Row, Bhowanipore, <br>
-								Kolkata, West Bengal, India- 700 025
-							</p>
-							<a target="_blank" ;
-								href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
-								View on Google Map
-							</a>
-							<p><br></p>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="width: 20%;">
-						<i class="fa fa-phone" style="font-size:40px; margin-left: 0px;"></i>
-					</td>
-					<td style="width: 80%;">
-						<div style="text-align: left">
-							<p style="color: teal;"><b>Phone numbers</b></p>
-							<p>
-								+91 9168669610
-							</p>
-							<br>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="width: 20%;">
-						<i class="material-icons" style="font-size:40px">email</i>
-					</td>
-					<td style="width: 80%;">
-						<div style="text-align: left">
-							<p style="color: teal;"><b>Email</b></p>
-							<p>SaharshBhadaniVenture@gmail.com</p>
-							<br>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="width: 20%;">
-						<i class="material-icons" style="font-size:40px">sms</i>
-					</td>
-					<td style="width: 80%;">
-						<div style="text-align: left">
-							<p style="color: teal;"><b>SMS</b></p>
-							<p>
-								+91 9168669610
-								<br>
-							</p>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td style="width: 20%;">
-						<i class="fa fa-whatsapp" style="font-size:42px; margin-left: 0px;"></i>
-					</td>
-					<td style="width: 80%;">
-						<div style="text-align: left">
-							<p style="color: teal;"><b>WhatsApp</b></p>
-							<p>+91 9168669610</p>
-							<br>
-						</div>
-					</td>
-				</tr>
-			</table>
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
 		</center>
 
-		<div id="location_on_map">
-			<center>
-				<table>
-					<tr>
-						<td style="width: 50%;">
-							<h1>Location on Google map</h1>
-							<div>
-								<a target="_blank" ;
-									href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
-									<img class="map_image" ; src="./images/Map_location.png" alt="View on map"
-										style="width:600px; height:300px;">
-								</a>
-								<center>
-									<a target="_blank" ;
-										href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
-									Click to enlarge the location in another tab.</a>
-								</center>
-								<br>
-							</div>
-						</td>
-						<td style="width: 50%; vertical-align: middle">
-							<div style="text-align: left; text-align: justify;">
-								&nbsp;&nbsp;&nbsp;Saharsh Bhadani Venture Private Limited,
-								<br>&nbsp;&nbsp;&nbsp;29B/1F Bakul Bagan Row, Kolkata, West Bengal, India -700025
-								<br>
-								<br>&nbsp;&nbsp;&nbsp;Landmark: Near Lansdowne Market, Kolkata-700025
-								<br>
-								<br>&nbsp;&nbsp;&nbsp;Phone numbers: +91 9168669610
-								<br>
-								<br>&nbsp;&nbsp;&nbsp;Email: SaharshBhadaniVenture@gmail.com
-								<br>
-								<br>&nbsp;&nbsp;&nbsp;WhatsApp: +91 9168669610
-								<br>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</center>
-		</div>
-	</section>
-	<section id="page-footer">
-		<hr>
-		<table style="width: 100%;" id="page-footer-table">
-		<!-- 
-		contact details: Company-> contact details, career, investors, alumni, newsroom, -->
-			<tr>
-				<td style="width: 33.33%;"><h2>Contact details</h2></td>
-				<td style="width: 33.33%;"><h2>Support</h2></td>
-				<td style="width: 33.33%;"><h2>Book an appointment</h2></td>
-			</tr>
-			<tr>
-				<td style="vertical-align: top">
-					<p>29B/1F&nbsp;Bakul&nbsp;Bagan&nbsp;Row,</p>
-					<p>Kolkata,&nbsp;West-Bengal,&nbsp;India&nbsp;-&nbsp;700&nbsp;025</p>
+
+
+
+	</div>
+
+	<!-- Container -->
+	<div class="w3-container" style="position:relative">
+		<a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+			style="position:absolute;top:-28px;right:24px">+</a>
+	</div>
+
+	<!-- Contact Container -->
+	<div class="w3-container w3-padding-64 w3-theme-l5" id="contact" style="word-wrap: break-word;">
+		<div class="w3-row">
+			<div class="w3-third">
+				<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
+				<h3>Address</h3>
+				<p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Saharsh Bhadani Venture Private Limited,<br>
+					29B/1F, Bakul Bagan Row, Bhowanipore,<br>
+					Kolkata, West Bengal, India- 700 025 </p>
+				<p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +91 9168669610</p>
+				<p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>SaharshBhadaniVenture@gmail.com</p>
+			</div>
+			<div class="w3-third">
+				<div>
+					<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Map</span></div>
+					<h3>Location</h3>
+					<a target="_blank" ;
+						href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+						<img class="map_image" ; src="./images/Map_location.png" alt="View on map"
+							style="width:70%; height:auto;">
+					</a>
 					<br>
-					<p>Email:&nbsp;SaharshBhadaniVenture@gmail.com</p>
-					<p>Mobile:&nbsp;+91&nbsp;9168669610</p>
-				</td>
-				<td style="vertical-align: top">
-					<a href="https://sbv-pvt-ltd.github.io/SBV/careers.html">Careers</a><br>
-					<a href="https://sbv-pvt-ltd.github.io/SBV/faq.html">Frequently asked questions</a><br>
-					<a href="https://sbv-pvt-ltd.github.io/SBV/policy.html">Policy</a><br>
-					<a href="https://sbv-pvt-ltd.github.io/SBV/payments.html">Payments</a><br>
-					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
-				</td>
-				<td style="vertical-align: top">
-					Chat now - <a target="_blank" href="https://wa.me/919168669610?text=">Chat with us on WhatsApp</a><br>
-					Call - <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
-					Email - <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
-					Visit - <a target="_blank" href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Click to see location in Google Maps.</a><br>
-					Request callback - <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google form</a><br>
-				</td>
-			</tr>
-		</table>
-		<hr>
-		<table style="width: 100%;" id="page-footer-table">
-			<tr>
-				<td style="width: 33.33%;">
-					<p><h2>Follow us on</h2></p>
-					<div style="color: blue;">
-						<a target="_blank" href="" onclick="openLink('linkedIn')">LinkedIn</a>&nbsp;|&nbsp; 
-						<a target="_blank" href="" onclick="openLink('facebook')">Facebook</a>&nbsp;|&nbsp; 
-						<a target="_blank" href="" onclick="openLink('twitter')">X</a>&nbsp;|&nbsp;
-						<a target="_blank" href="" onclick="openLink('instagram')">Instagram</a>&nbsp;|&nbsp; 
-						<a target="_blank" href="" onclick="openLink('youtube')">YouTube</a>&nbsp;|&nbsp;
-						<a target="_blank" href="" onclick="openLink('google')">Google</a>&nbsp;
+					<a target="_blank" ;
+						href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+						Click to enlarge the location in another tab.</a>
+
+					<br>
+				</div>
+			</div>
+			<div class="w3-third">
+				<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">More</span>
+					<br>
+					<h3>Blogs</h3>
+					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">Blog - Saharsh
+						Bhadani</a><br>
+					<br>
+					<h3>Explore Projects</h3>
+					<a target="_blank" onclick="navigateToPageInAnotherTab(explore_page_name)"><u>Sample projects</u></a><br>
+				</div>
+			</div>
+		</div>
+		<center>
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
+		</center>
+	</div>
+
+	<!-- Footer -->
+	<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Contact details</p>
+				</li>
+				<li class="w3-padding-16">
+					<div style="text-align: left; text-align: justify;word-wrap: break-word;">
+						29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+						Landmark: Near Lansdowne Market<br>
+						WhatsApp & Phone no: +91 9168669610<br>
+						Email: SaharshBhadaniVenture@gmail.com
 					</div>
-					<script>
-						function openLink(pageName) {
-							url_to_visit = ""
-							if(pageName=="linkedIn")
-								url_to_visit=linkedIn
-							else if(pageName=="facebook")
-								url_to_visit=facebook
-							else if(pageName=="twitter")
-								url_to_visit=twitter
-							else if(pageName=="instagram")
-								url_to_visit=instagram
-							else if(pageName=="youtube")
-								url_to_visit=youtube
-							else if(pageName=="google")
-								url_to_visit=google_business
-							else
-								url_to_visit=website
-							window.open(url_to_visit); 
-						}
-					</script>
-				</td>
-				<td style="width: 16.66%; vertical-align: bottom;">
-					<p><h2>More</h2></p>
-					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">Blog</a><br>
-				</td>
-				<td style="width: 50%; vertical-align: bottom;">
-					<p>Last updated on : <span id="last_updated_on"></span></p>
-					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
-				</td>
-			</tr>
-		</table>
-	</section>
-	<script>
-		window.onscroll = function() {myFunction()};
-		
-		var header = document.getElementById("myHeader");
-		var logo_navbar = document.getElementById("logo-navbar");
-		var sticky = header.offsetTop;
-		
-		function myFunction() {
-		  if (window.pageYOffset > 6*sticky) {
-			logo_navbar.classList.add("logo-navbar-show");
-			logo_navbar.classList.remove("logo-navbar-hide");
-		  } else {
-			logo_navbar.classList.remove("logo-navbar-show");
-			logo_navbar.classList.add("logo-navbar-hide");
-		  }
-		}
-		</script>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Support</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					<a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+					<a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a><br>
+					<a onclick="navigateToPage(policy_page_name)"><u>Policy</u></a><br>
+					<a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a><br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">For appointment</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					Chat now: <a target="_blank" href="https://wa.me/919168669610?text=">WhatsApp chat</a><br>
+					Call: <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit: <a target="_blank"
+						href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Location
+						in Map.</a><br>
+					Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google
+						form</a><br>
+				</li>
+			</ul>
+		</div>
+		<center>
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
+		</center>
+	</div>
+	<!-- Footer -->
+	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+		<h4>Follow Us</h4>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"><i
+				class="fa fa-facebook"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter"><i
+				class="fa fa-twitter"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+				class="fa fa-google-plus"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+				class="fa fa-instagram"></i></a>
+		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i
+				class="fa fa-linkedin"></i></a>
+		<p>Last updated on : <span id="last_updated_on"></span></p>
+		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+
+		<div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+			<span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
+			<a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
+					<i class="fa fa-chevron-circle-up"></i></span></a>
+		</div>
+	</footer>
 	<!--Code for WhatsApp-->
 	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
 	<script>
 		var wa_btnSetting = {
-			"btnColor":"#16BE45",
-			"ctaText":"",
-			"cornerRadius":40,
-			"marginBottom":20,
-			"marginLeft":20,
-			"marginRight":20,
-			"btnPosition":"right",
-			"whatsAppNumber":"919168669610",
-			"welcomeMessage":"Hello",
-			"zIndex":999999,
-			"btnColorScheme":"light"
+			"btnColor": "#16BE45",
+			"ctaText": "",
+			"cornerRadius": 40,
+			"marginBottom": 20,
+			"marginLeft": 20,
+			"marginRight": 20,
+			"btnPosition": "right",
+			"whatsAppNumber": "919168669610",
+			"welcomeMessage": "Hello",
+			"zIndex": 999999,
+			"btnColorScheme": "light"
 		};
 		window.onload = () => {
 			_waEmbed(wa_btnSetting);
-			let play_index = Math.floor(Math.random() * youtube_videos.length);			 
-			document.getElementById('introduction_video_iframe').setAttribute('src', youtube_videos[play_index]);
 			document.getElementById('last_updated_on').textContent = last_updated_on;
+
 		};
 	</script>
-	<!--2nd type
-	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-        <script>
-          var wa_btnSetting = {"btnColor":"#16BE45","ctaText":"WhatsApp Us","cornerRadius":40,"marginBottom":20,"marginLeft":20,"marginRight":20,"btnPosition":"right","whatsAppNumber":"911234567890","welcomeMessage":"Hello","zIndex":999999,"btnColorScheme":"light"};
-          var wa_widgetSetting = {"title":"BrandName","subTitle":"Typically replies in a day","headerBackgroundColor":"#FBFFC8","headerColorScheme":"dark","greetingText":"Hi there! \nHow can I help you?","ctaText":"Start Chat","btnColor":"#1A1A1A","cornerRadius":40,"welcomeMessage":"Hello","btnColorScheme":"light","brandImage":"https://uploads-ssl.webflow.com/5f68a65cd5188c058e27c898/6204c4267b92625c9770f687_whatsapp-chat-widget-dummy-logo.png","darkHeaderColorScheme":{"title":"#333333","subTitle":"#4F4F4F"}};  
-          window.onload = () => {
-            _waEmbed(wa_btnSetting, wa_widgetSetting);
-          };
-        </script>
-	-->
 
-	  
+	<script>
+		// Script for side navigation
+		function w3_open() {
+			var x = document.getElementById("mySidebar");
+			x.style.width = "300px";
+			x.style.paddingTop = "10%";
+			x.style.display = "block";
+		}
+
+		// Close side navigation
+		function w3_close() {
+			document.getElementById("mySidebar").style.display = "none";
+		}
+
+		// Used to toggle the menu on smaller screens when clicking on the menu button
+		function openNav() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+
 </body>
+
 </html>

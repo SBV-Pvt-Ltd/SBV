@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<link rel="stylesheet" href="./css/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-family: "Raleway", Arial, Helvetica, sans-serif
+		}
+
+		.mySlides {
+			display: none
+		}
+	</style>
+	<script src="Constant.js"></script>
+	<script>
+		function navigateTo(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url = current_url_refined + features_service_page_name;
+			new_url_section = new_url + "#" + pageName;
+			window.location.replace(new_url_section)
+			//window.open(new_url_section, "_blank");
+		}
+
+		function navigateToIndex(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url = current_url_refined + index_page_name;
+			new_url_section = new_url;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = new_url + pageName;
+			}
+			window.location.replace(new_url_section);
+		}
+
+		function navigateToPage(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url_section = current_url_refined;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = current_url_refined + pageName;
+			}
+			window.location.replace(new_url_section);
+		}
+
+		function navigateToPageInAnotherTab(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			new_url_section = current_url_refined;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = current_url_refined + pageName;
+			}
+			window.open(new_url_section);
+		}
+	</script>
+</head>
+
+<body class="w3-content w3-border-left w3-border-right">
+
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px" id="mySidebar">
+		<div class="w3-container w3-display-container">
+			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
+			<h4>Please provide your details and we will contact you soon.</h4>
+			<form action="/action_page.php" target="_blank">
+				<div class="w3-section">
+					<label>Name</label>
+					<input class="w3-input" type="text" name="Name" required>
+				</div>
+				<div class="w3-section">
+					<label>Email</label>
+					<input class="w3-input" type="email" name="Email" required>
+				</div>
+				<div class="w3-section">
+					<label>Country</label>
+					<input class="w3-input" type="text" name="Country" required>
+				</div>
+				<div class="w3-section">
+					<label>Phone number</label>
+					<input class="w3-input" type="number" name="PhoneNumber" required>
+				</div>
+				<div class="w3-section">
+					<label>Company Name</label>
+					<input class="w3-input" type="text" name="CompanyName" required>
+				</div>
+				<div class="w3-section">
+					<label>Product or services interested in</label>
+					<input class="w3-input" type="text" name="interestedIn" required>
+				</div>
+				<div class="w3-section">
+					<label>Remarks (if any)</label>
+					<input class="w3-input" type="text" name="Message">
+				</div>
+				<div class="w3-row">
+					<button type="reset" class="w3-button w3-right w3-theme w3-red">Clear</button>
+					<button type="submit" class="w3-button w3-left-align w3-theme w3-teal">Submit</button>
+				</div>
+			</form>
+		</div>
+		<div class="w3-bar-block">
+			<a href="#project" class="w3-bar-item w3-button w3-padding-16">
+				<img src="./Logo/project_icon.png" alt="Project icon" height="25px" ; width="auto">
+				Projects
+			</a>
+			<a href="#contact" class="w3-bar-item w3-button w3-padding-16">
+				<i class="fa fa-envelope" style="font-size: 24px"></i> Contact Us
+			</a>
+		</div>
+	</nav>
+
+	<!-- Top menu on small screens -->
+	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
+		<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
+			<i class="fa fa-home" style="color: black;"></i>
+			<img src="./Logo/Logo.png" alt="Company Logo" width="45" height="15">
+		</a>
+
+		<a href="javascript:void(0)" class="w3-right w3-bar-item w3-button" onclick="w3_open()"><i
+				class="fa fa-bars"></i></a>
+	</header>
+
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+		id="myOverlay"></div>
+
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main w3-white" style="margin-left:260px">
+		<!--Top menu on large screens -->
+		<div class="w3-bar w3-hide-small w3-hide-medium w3-xlarge w3-border w3-black">
+			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
+				<i class="fa fa-home" style="color: black;"></i>
+				<img src="./Logo/Logo.png" alt="Company Logo" width="45" height="15">
+			</a>
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
+				Us</a>
+			<div class="w3-dropdown-hover w3-hide-small">
+				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications">Featured
+					Services&nbsp;<i class="fa fa-caret-down"></i></button>
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
+					<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button">Business
+						Consultation</a>
+					<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button">Business Analytics</a>
+					<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button">Software
+						Development</a>
+					<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button">IT Consultation</a>
+					<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button">IT Services</a>
+					<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button">Robotics</a>
+					<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button">Industrial
+						Automation</a>
+					<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button">Content Creation</a>
+					<a onclick="navigateTo('GraphicDesigning')" class="w3-bar-item w3-button">Graphic Designing</a>
+				</div>
+			</div>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact
+				Us</a>
+		</div>
+
+		<!-- Push down content on small screens -->
+		<div class="w3-hide-large" style="margin-top:80px"></div>
+
+		<!-- Slideshow Header -->
+		<div class="w3-container" id="project">
+
+			<h2 class="w3-text-green">Sample Projects</h2>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Living Room</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Dining Room</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Bedroom</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Living Room II</p>
+				</div>
+			</div>
+		</div>
+		<div class="w3-row-padding w3-section">
+			<div class="w3-col s3">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/livingroom.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
+			</div>
+			<div class="w3-col s3">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/diningroom.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
+			</div>
+			<div class="w3-col s3">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/bedroom.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
+			</div>
+			<div class="w3-col s3">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/livingroom2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
+			</div>
+		</div>
+
+
+		<!-- Contact -->
+		<div class="w3-container" id="contact">
+			<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
+			<i class="fa fa-map-marker" style="width:30px"></i> 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India -
+			700025<br>
+			<i class="fa fa-phone" style="width:30px"></i> WhatsApp & Phone no: +91 9168669610<br>
+			<i class="fa fa-envelope" style="width:30px"> </i> Email: SaharshBhadaniVenture@gmail.com <br>
+			<h4><b><u>Questions? Go ahead, ask them:</u></b></h4>
+			<form action="/action_page.php" target="_blank" style="margin-top: 10px;">
+				<p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" style="margin-top: 10px;"></p>
+				<p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email" style="margin-top: 10px;"></p>
+				<p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" style="margin-top: 10px;"></p>
+				<button type="submit" class="w3-button w3-teal w3-third" style="margin-top: 10px;">Send a Message</button>
+			</form>
+		</div>
+
+		<!-- Footer -->
+		<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+			<div class="w3-third w3-margin-bottom">
+				<ul class="w3-ul w3-border w3-hover-shadow">
+					<li class="w3-theme-l2 w3-black">
+						<p class="w3-xlarge">Contact details</p>
+					</li>
+					<li class="w3-padding-16">
+						<div style="text-align: left; text-align: justify;word-wrap: break-word;">
+							29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+							Phone no: +91 9168669610<br>
+							SaharshBhadaniVenture@gmail.com
+						</div>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w3-third w3-margin-bottom">
+				<ul class="w3-ul w3-border w3-hover-shadow">
+					<li class="w3-theme-l2 w3-black">
+						<p class="w3-xlarge">Support</p>
+					</li>
+					<li class="w3-padding-16" style="text-align: left;">
+						<a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+						<a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a><br>
+						<a onclick="navigateToPage(policy_page_name)"><u>Policy</u></a><br>
+						<a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a><br>
+						<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+					</li>
+				</ul>
+			</div>
+
+			<div class="w3-third w3-margin-bottom">
+				<ul class="w3-ul w3-border w3-hover-shadow">
+					<li class="w3-theme-l2 w3-black">
+						<p class="w3-xlarge">For appointment</p>
+					</li>
+					<li class="w3-padding-16" style="text-align: left;">
+						Chat now: <a target="_blank" href="https://wa.me/919168669610?text=">WhatsApp chat</a><br>
+						Call: <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+						Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+						Visit: <a target="_blank"
+							href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Location
+							in Map.</a><br>
+						Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google
+							form</a><br>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+			<h4>Follow Us</h4>
+			<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"><i
+					class="fa fa-facebook"></i></a>
+			<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter"><i
+					class="fa fa-twitter"></i></a>
+			<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+					class="fa fa-google-plus"></i></a>
+			<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+					class="fa fa-instagram"></i></a>
+			<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i
+					class="fa fa-linkedin"></i></a>
+			<p>Last updated on : <span id="last_updated_on"></span></p>
+			<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+		</footer>
+		<!-- End page content -->
+
+		<!--Code for WhatsApp-->
+		<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+		
+		<script>
+			// Script to open and close sidebar when on tablets and phones
+			function w3_open() {
+				document.getElementById("mySidebar").style.display = "block";
+				document.getElementById("myOverlay").style.display = "block";
+			}
+
+			function w3_close() {
+				document.getElementById("mySidebar").style.display = "none";
+				document.getElementById("myOverlay").style.display = "none";
+			}
+
+			// Slideshow Apartment Images
+			var slideIndex = 1;
+			showDivs(slideIndex);
+
+			function plusDivs(n) {
+				showDivs(slideIndex += n);
+			}
+
+			function currentDiv(n) {
+				showDivs(slideIndex = n);
+			}
+
+			function showDivs(n) {
+				var i;
+				var x = document.getElementsByClassName("mySlides");
+				var dots = document.getElementsByClassName("demo");
+				if (n > x.length) { slideIndex = 1 }
+				if (n < 1) { slideIndex = x.length }
+				for (i = 0; i < x.length; i++) {
+					x[i].style.display = "none";
+				}
+				for (i = 0; i < dots.length; i++) {
+					dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+				}
+				x[slideIndex - 1].style.display = "block";
+				dots[slideIndex - 1].className += " w3-opacity-off";
+			}
+
+			var wa_btnSetting = {
+				"btnColor": "#16BE45",
+				"ctaText": "",
+				"cornerRadius": 40,
+				"marginBottom": 20,
+				"marginLeft": 20,
+				"marginRight": 20,
+				"btnPosition": "right",
+				"whatsAppNumber": "919168669610",
+				"welcomeMessage": "Hello",
+				"zIndex": 999999,
+				"btnColorScheme": "light"
+			};
+
+			window.onload = () => {
+				w3_open();
+				_waEmbed(wa_btnSetting);
+				document.getElementById('last_updated_on').textContent = last_updated_on;
+
+			}
+		</script>
+
+</body>
+
+</html>
