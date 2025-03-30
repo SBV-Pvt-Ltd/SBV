@@ -508,15 +508,15 @@
 	<!-- Footer -->
 	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
 		<h4>Follow Us</h4>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"><i
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook" onclick="openLink('facebook')"><i
 				class="fa fa-facebook"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter"><i
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')"><i
 				class="fa fa-twitter"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')"><i
 				class="fa fa-google-plus"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Instagram" onclick="openLink('instagram')"><i
 				class="fa fa-instagram"></i></a>
-		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i
+		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin" onclick="openLink('linkedIn')"><i
 				class="fa fa-linkedin"></i></a>
 		<p>Last updated on : <span id="last_updated_on"></span></p>
 		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
@@ -526,6 +526,26 @@
 			<a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
 					<i class="fa fa-chevron-circle-up"></i></span></a>
 		</div>
+		<script>
+			function openLink(pageName) {
+				url_to_visit = ""
+				if(pageName=="linkedIn")
+					url_to_visit=linkedIn
+				else if(pageName=="facebook")
+					url_to_visit=facebook
+				else if(pageName=="twitter")
+					url_to_visit=twitter
+				else if(pageName=="instagram")
+					url_to_visit=instagram
+				else if(pageName=="youtube")
+					url_to_visit=youtube
+				else if(pageName=="google")
+					url_to_visit=google_business
+				else
+					url_to_visit=website
+				window.open(url_to_visit); 
+			}
+		</script>
 	</footer>
 	<!--Code for WhatsApp-->
 	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
