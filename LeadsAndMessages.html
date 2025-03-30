@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./css/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<script src="Constant.js"></script>
+	<style>
+		body,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5 {
+			font-family: "Raleway", sans-serif
+		}
+
+		.w3-quarter img {
+			margin-bottom: -6px;
+			cursor: pointer
+		}
+
+		.w3-quarter img:hover {
+			opacity: 0.6;
+			transition: 0.3s
+		}
+	</style>
+	<script>
+		var new_leads_list = [];
+		var message_list= [];
+		var discarded_message_list= [];
+		var discarded_leads_list = [];
+		var saved_leads_list = [];
+	</script>
+</head>
+
+<body class="w3-light-grey">
+
+	<!-- Sidebar/menu -->
+	<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large"
+		style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
+		<a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a>
+		<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">New Leads</a>
+		<a href="#messages" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Messages</a>
+		<a href="#saved" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Saved Leads</a>
+	</nav>
+
+	<!-- Top menu on small screens -->
+	<header class="w3-container w3-top w3-white w3-xlarge w3-padding-16">
+		<Span class="w3-left w3-padding">Leads and Messages</Span>
+		<a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+	</header>
+
+	<!-- Overlay effect when opening sidebar on small screens -->
+	<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+		id="myOverlay"></div>
+
+	<!-- !PAGE CONTENT! -->
+	<div class="w3-main w3-content" style="max-width:1600px;margin-top:83px">
+		<center><h3>New Leads</h3></center>
+		
+		<!-- Content grid -->
+		<div class="w3-row w3-grayscale-min" id="new_leads_container">
+
+		</div>
+
+		<!-- Pagination -->
+		<div class="w3-center w3-padding-32">
+			<div class="w3-bar">
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+				<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+			</div>
+		</div>
+
+		<!-- Modal for full size images on click-->
+		<div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+			<span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+			<div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+				<img id="img01" class="w3-image">
+				<p id="caption"></p>
+			</div>
+		</div>
+
+		<!-- Messages section -->
+		<div class="w3-container w3-dark-grey w3-center w3-text-light-grey w3-padding-32" id="messages">
+			<h3>Messages</h3>
+			<!-- Content grid -->
+			<div class="w3-row w3-grayscale-min" id="message_container">
+
+			</div>
+
+			<!-- Pagination -->
+			<div class="w3-center w3-padding-32">
+				<div class="w3-bar">
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Saved section -->
+		<div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="saved">
+			<center><h3>Saved Leads</h3></center>
+			<!-- Content grid -->
+			<div class="w3-row w3-grayscale-min" id="saved_leads_container">
+				
+			</div>
+
+			<!-- Pagination -->
+			<div class="w3-center w3-padding-32">
+				<div class="w3-bar">
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="w3-container w3-padding-32 w3-grey">
+			<div class="w3-row-padding">
+				<div class="w3-third">
+					<h3>INFO</h3>
+					<p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae,
+						ultricies congue gravida diam non fringilla.</p>
+				</div>
+
+				<div class="w3-third">
+					<h3>BLOG POSTS</h3>
+					<ul class="w3-ul">
+						<li class="w3-padding-16 w3-hover-black">
+							<img src="./w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+							<span class="w3-large">Lorem</span><br>
+							<span>Sed mattis nunc</span>
+						</li>
+						<li class="w3-padding-16 w3-hover-black">
+							<img src="./w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+							<span class="w3-large">Ipsum</span><br>
+							<span>Praes tinci sed</span>
+						</li>
+					</ul>
+				</div>
+
+				<div class="w3-third">
+					<h3>POPULAR TAGS</h3>
+					<p>
+						<span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">New York</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">London</span>
+						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">IKEA</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">NORWAY</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">DIY</span>
+						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Ideas</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Baby</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Family</span>
+						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">News</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Clothing</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Shopping</span>
+						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sports</span> <span
+							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Games</span>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp"
+				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+
+		<!-- End page content -->
+	</div>
+
+	<script>
+		const SAVE_LEADS_FUTURE = async (id) => {
+			try {
+				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+				let response = await fetch(save_data_db_url+"?query=SAVE_LEADS_FUTURE&timestamp="+id);
+				clearTimeout(timeId);
+				let responseJson = await response.json();
+				if("successful".localeCompare(responseJson[0].userAction) == 0){
+					location.reload();
+				}
+				else {
+					alert("Something went wrong");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		const DISCARD_NEW_LEADS = async (id) => {
+			try {
+				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+				let response = await fetch(save_data_db_url+"?query=DISCARD_NEW_LEADS&timestamp="+id);
+				clearTimeout(timeId);
+				let responseJson = await response.json();
+				if("successful".localeCompare(responseJson[0].userAction) == 0){
+					location.reload();
+				}
+				else {
+					alert("Something went wrong");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		const DISCARD_MESSAGE = async (id) => {
+			try {
+				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+				let response = await fetch(save_data_db_url+"?query=DISCARD_MESSAGE&timestamp="+id);
+				clearTimeout(timeId);
+				let responseJson = await response.json();
+				if("successful".localeCompare(responseJson[0].userAction) == 0){
+					location.reload();
+				}
+				else {
+					alert("Something went wrong");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+		const DISCARD_SAVED_LEAD = async (id) => {
+			try {
+				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+				let response = await fetch(save_data_db_url+"?query=DISCARD_SAVED_LEAD&timestamp="+id);
+				clearTimeout(timeId);
+				let responseJson = await response.json();
+				if("successful".localeCompare(responseJson[0].userAction) == 0){
+					location.reload();
+				}
+				else {
+					alert("Something went wrong");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+		const FETCH_LEADS_MESSAGES = async () => {
+			try {
+				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+				let response = await fetch(save_data_db_url+"?query=FETCH_LEADS_MESSAGES");
+				clearTimeout(timeId);
+				let responseJson = await response.json();
+				//alert(responseJson.length);
+				message_list = new Array();
+				new_leads_list = new Array();
+				saved_leads_list = new Array();
+				discarded_leads_list = new Array();
+				discarded_message_list = new Array();
+				for(var i=0; i<responseJson.length; i++){
+					entity = responseJson[i];
+					if("message".localeCompare(entity.module) == 0){
+						if(entity.read == 0){
+							message_list.push(entity);
+						}
+						else {
+							discarded_message_list.push(entity);
+						}
+					}
+					else if("leads_form".localeCompare(entity.module) == 0){
+						if(entity.read == 0){
+							new_leads_list.push(entity);
+						}
+						else if(entity.read == 2){
+							saved_leads_list.push(entity);
+						}
+						else {
+							discarded_leads_list.push(entity);
+						}
+					}
+				}
+				
+				if(new_leads_list.length == 0){
+					node_div = create_empty_div_container("No new leads.");
+					document.getElementById("new_leads_container").appendChild(node_div);
+				}
+				for(var i = 0; i < new_leads_list.length; i++){
+					new_leads_div = create_leads_div_container(new_leads_list[i]);
+					document.getElementById("new_leads_container").appendChild(new_leads_div);
+				}
+
+				if(message_list.length == 0){
+					node_div_1 = create_empty_div_container("No new message.");
+					document.getElementById("message_container").appendChild(node_div_1);
+				}
+				for(var i = 0; i < message_list.length; i++){
+					new_message_div = create_message_div_container(message_list[i]);
+					document.getElementById("message_container").appendChild(new_message_div);
+				}
+
+				if(saved_leads_list.length == 0){
+					node_div_2 = create_empty_div_container("No saved leads.");
+					document.getElementById("saved_leads_container").appendChild(node_div_2);
+				}
+				for(var i = 0; i < saved_leads_list.length; i++){
+					saved_leads_div = create_saved_leads_div_container(saved_leads_list[i]);
+					document.getElementById("saved_leads_container").appendChild(saved_leads_div);
+				}
+
+				//alert("total:"+responseJson.length+", new_leads_list: "+new_leads_list.length+", saved_leads_list: "+saved_leads_list.length+", message_list: "+message_list.length)
+
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+		function save_lead_for_future(){
+			SAVE_LEADS_FUTURE(this.id);
+		}
+
+		function discard_lead_now(){
+			DISCARD_NEW_LEADS(this.id);
+		}
+
+		function discard_saved_lead_now(){
+			DISCARD_SAVED_LEAD(this.id);
+		}
+
+		function discard_message_now(){
+			DISCARD_MESSAGE(this.id);
+		}
+
+		function create_leads_div_container(lead_element){
+			
+			const node_div = document.createElement("div");
+			node_div.classList.add("w3-quarter");
+			node_div.style.marginTop = "10px";
+			node_div.style.marginBottom = "10px";
+			node_div.style.position = "relative";
+			//node_div.style.textAlign = "center";
+			node_div.style.wordWrap = "break-word";
+						
+			const container_image = document.createElement("IMG");
+			container_image.src = './w3images/Container.jpg';
+			container_image.alt = "Container";
+			container_image.style.width = "100%";
+			
+			node_div.appendChild(container_image);
+
+			name_text_node = create_text_node("Name: "+lead_element.Name, "5%");
+			node_div.appendChild(name_text_node);
+
+			email_text_node = create_text_node("Email: "+lead_element.Email, "15%");
+			node_div.appendChild(email_text_node);
+
+			country_text_node = create_text_node("Country: "+lead_element.Country, "25%");
+			node_div.appendChild(country_text_node);
+
+			phone_number_text_node = create_text_node("Phone Number: "+lead_element.PhoneNumber, "35%");
+			node_div.appendChild(phone_number_text_node);
+
+			company_name_text_node = create_text_node("Company Name: "+lead_element.CompanyName, "45%");
+			node_div.appendChild(company_name_text_node);
+
+			interested_in_text_node = create_text_node("Interested In: "+lead_element.interestedIn, "55%");
+			node_div.appendChild(interested_in_text_node);
+
+			message_text_node = create_text_node("Message: "+lead_element.Message, "65%");
+			node_div.appendChild(message_text_node);
+
+			timestamp_text_node = create_text_node("Timestamp: "+lead_element.timestamp, "75%");
+			node_div.appendChild(timestamp_text_node);
+
+			const save_button = document.createElement("button");
+			save_button.classList.add("w3-button");
+			save_button.classList.add("w3-left-align");
+			save_button.classList.add("w3-theme");
+			save_button.classList.add("w3-teal");
+			save_button.id = lead_element.timestamp.toString();
+			save_button.textContent= "Save";
+			save_button.style.position = "absolute";
+			save_button.style.top = "90%";
+			save_button.style.left = "5%";
+			save_button.style.color = "black";
+			//save_button.onclick = "save_lead_for_future()";
+			save_button.addEventListener("click", save_lead_for_future);
+			node_div.appendChild(save_button);
+
+			const discard_button = document.createElement("button");
+			discard_button.classList.add("w3-button");
+			discard_button.classList.add("w3-right");
+			discard_button.classList.add("w3-theme");
+			discard_button.classList.add("w3-red");
+			discard_button.id = lead_element.timestamp.toString();
+			discard_button.textContent= "Discard";
+			discard_button.style.position = "absolute";
+			discard_button.style.top = "90%";
+			discard_button.style.right = "5%";
+			discard_button.style.color = "black";	
+			discard_button.addEventListener("click", discard_lead_now);
+
+			node_div.appendChild(discard_button);
+
+
+			return node_div;
+		}
+
+		function create_saved_leads_div_container(lead_element){
+			
+			const node_div = document.createElement("div");
+			node_div.classList.add("w3-quarter");
+			node_div.style.marginTop = "10px";
+			node_div.style.marginBottom = "10px";
+			node_div.style.position = "relative";
+			//node_div.style.textAlign = "center";
+			node_div.style.wordWrap = "break-word";
+						
+			const container_image = document.createElement("IMG");
+			container_image.src = './w3images/Container.jpg';
+			container_image.alt = "Container";
+			container_image.style.width = "100%";
+			
+			node_div.appendChild(container_image);
+
+			name_text_node = create_text_node("Name: "+lead_element.Name, "5%");
+			node_div.appendChild(name_text_node);
+
+			email_text_node = create_text_node("Email: "+lead_element.Email, "15%");
+			node_div.appendChild(email_text_node);
+
+			country_text_node = create_text_node("Country: "+lead_element.Country, "25%");
+			node_div.appendChild(country_text_node);
+
+			phone_number_text_node = create_text_node("Phone Number: "+lead_element.PhoneNumber, "35%");
+			node_div.appendChild(phone_number_text_node);
+
+			company_name_text_node = create_text_node("Company Name: "+lead_element.CompanyName, "45%");
+			node_div.appendChild(company_name_text_node);
+
+			interested_in_text_node = create_text_node("Interested In: "+lead_element.interestedIn, "55%");
+			node_div.appendChild(interested_in_text_node);
+
+			message_text_node = create_text_node("Message: "+lead_element.Message, "65%");
+			node_div.appendChild(message_text_node);
+
+			timestamp_text_node = create_text_node("Timestamp: "+lead_element.timestamp, "75%");
+			node_div.appendChild(timestamp_text_node);
+
+			const discard_button = document.createElement("button");
+			discard_button.classList.add("w3-button");
+			discard_button.classList.add("w3-right");
+			discard_button.classList.add("w3-theme");
+			discard_button.classList.add("w3-red");
+			discard_button.id = lead_element.timestamp.toString();
+			discard_button.textContent= "Discard";
+			discard_button.style.position = "absolute";
+			discard_button.style.top = "90%";
+			discard_button.style.right = "5%";
+			discard_button.style.color = "black";	
+			discard_button.addEventListener('click', discard_saved_lead_now)
+			node_div.appendChild(discard_button);
+
+
+			return node_div;
+		}
+
+		function create_text_node(message, top_position){
+			const textnode = document.createElement("div");
+			textnode.textContent = message;
+			textnode.style.position = "absolute";
+			textnode.style.top = top_position;
+			textnode.style.left = "5%";
+			textnode.style.color = "black";
+			textnode.style.width = "auto";
+
+			//overflow-y: hidden; and overflow-x: auto;
+			textnode.style.overflowX = "auto";
+			textnode.style.overflowY = "hidden";
+
+			return textnode;
+		}
+
+		function create_message_div_container(message_element){
+			
+			const node_div = document.createElement("div");
+			node_div.classList.add("w3-quarter");
+			node_div.style.marginTop = "10px";
+			node_div.style.position = "relative";
+			//node_div.style.textAlign = "center";
+			node_div.style.wordWrap = "break-word";
+			
+			const container_image = document.createElement("IMG");
+			container_image.src = './w3images/Container.jpg';
+			container_image.alt = "Container";
+			container_image.style.width = "100%";
+			
+			node_div.appendChild(container_image);
+
+			name_text_node = create_text_node("Name: "+message_element.Name, "5%");
+			node_div.appendChild(name_text_node);
+
+			email_text_node = create_text_node("Email: "+message_element.Email, "15%");
+			node_div.appendChild(email_text_node);
+
+			timestamp_text_node = create_text_node("Timestamp: "+message_element.timestamp, "35%");
+			node_div.appendChild(timestamp_text_node);
+
+			message_text_node = create_text_node("Message: "+message_element.Message, "50%");
+			node_div.appendChild(message_text_node);
+
+			const discard_button = document.createElement("button");
+			discard_button.classList.add("w3-button");
+			discard_button.classList.add("w3-right");
+			discard_button.classList.add("w3-theme");
+			discard_button.classList.add("w3-red");
+			discard_button.id = message_element.timestamp.toString();
+			discard_button.textContent= "Discard";
+			discard_button.style.position = "absolute";
+			discard_button.style.top = "90%";
+			discard_button.style.right = "5%";
+			discard_button.style.color = "black";	
+			discard_button.onclick = "discard_message_now("+message_element.timestamp+")";
+			discard_button.addEventListener('click', discard_message_now);
+			node_div.appendChild(discard_button);
+
+
+			return node_div;
+		}
+
+
+		function create_empty_div_container(text_message){
+			
+			const node_div = document.createElement("div");
+			node_div.classList.add("w3-quarter");
+			node_div.style.marginTop = "10px";
+			node_div.style.position = "relative";
+			node_div.style.textAlign = "center";
+			
+			const container_image = document.createElement("IMG");
+			container_image.src = './w3images/Container.jpg';
+			container_image.alt = "Container";
+			container_image.style.width = "100%";
+			
+			node_div.appendChild(container_image);
+
+			const textnode = document.createElement("div");
+			textnode.textContent = text_message;
+			textnode.style.position = "absolute";
+			textnode.style.top = "50%";
+			textnode.style.left = "30%";
+			textnode.style.color = "black";
+			textnode.style.transform = "translate('-50%', '-50%')";
+			node_div.appendChild(textnode);
+			return node_div;
+		}
+
+		window.onload = () => {
+			FETCH_LEADS_MESSAGES();
+		}
+
+		// Script to open and close sidebar
+		function w3_open() {
+			document.getElementById("mySidebar").style.display = "block";
+			document.getElementById("myOverlay").style.display = "block";
+		}
+
+		function w3_close() {
+			document.getElementById("mySidebar").style.display = "none";
+			document.getElementById("myOverlay").style.display = "none";
+		}
+
+		// Modal Image Gallery
+		function onClick(element) {
+			document.getElementById("img01").src = element.src;
+			document.getElementById("modal01").style.display = "block";
+			var captionText = document.getElementById("caption");
+			captionText.innerHTML = element.alt;
+		}
+
+	</script>
+
+
+</body>
+
+</html>
