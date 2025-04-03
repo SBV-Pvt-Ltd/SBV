@@ -29,6 +29,44 @@
 			transition: 0.3s
 		}
 	</style>
+	<style type="text/css">
+		.loader{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #f7f9fb;
+			transition: opacity 0.75s, visibility 0.75s;
+		}
+
+		.loader-hidden{
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		.loader::after{
+			content: "";
+			width: 75px;
+			height: 75px;
+			border: 15px solid#dddddd;
+			border-top-color: #7449f5;
+			border-radius: 50%;
+			animation: loading 0.75s ease infinite;
+		}
+
+		@keyframes loading {
+			from{
+				transform: rotate(0turn);
+			}
+			to {
+				transform: rotate(1turn);
+			}
+		}
+	</style>
 	<script>
 		var new_leads_list = [];
 		var message_list= [];
@@ -39,6 +77,8 @@
 </head>
 
 <body class="w3-light-grey">
+
+	<div class="loader"></div>
 
 	<!-- Sidebar/menu -->
 	<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large"
@@ -186,6 +226,8 @@
 
 	<script>
 		const SAVE_LEADS_FUTURE = async (id) => {
+			const loader = document.querySelector(".loader");
+
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 				let response = await fetch(save_data_db_url+"?query=SAVE_LEADS_FUTURE&timestamp="+id);
@@ -202,6 +244,8 @@
 			}
 		}
 		const DISCARD_NEW_LEADS = async (id) => {
+			const loader = document.querySelector(".loader");
+
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 				let response = await fetch(save_data_db_url+"?query=DISCARD_NEW_LEADS&timestamp="+id);
@@ -218,6 +262,8 @@
 			}
 		}
 		const DISCARD_MESSAGE = async (id) => {
+			const loader = document.querySelector(".loader");
+
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 				let response = await fetch(save_data_db_url+"?query=DISCARD_MESSAGE&timestamp="+id);
@@ -235,6 +281,8 @@
 		}
 
 		const DISCARD_SAVED_LEAD = async (id) => {
+			const loader = document.querySelector(".loader");
+
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 				let response = await fetch(save_data_db_url+"?query=DISCARD_SAVED_LEAD&timestamp="+id);
@@ -252,6 +300,7 @@
 		}
 
 		const FETCH_LEADS_MESSAGES = async () => {
+			const loader = document.querySelector(".loader");
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 				let response = await fetch(save_data_db_url+"?query=FETCH_LEADS_MESSAGES");
@@ -312,12 +361,16 @@
 					saved_leads_div = create_saved_leads_div_container(saved_leads_list[i]);
 					document.getElementById("saved_leads_container").appendChild(saved_leads_div);
 				}
-
+				
 				//alert("total:"+responseJson.length+", new_leads_list: "+new_leads_list.length+", saved_leads_list: "+saved_leads_list.length+", message_list: "+message_list.length)
 
 			} catch (error) {
 				console.log(error);
 			}
+			loader.classList.add("loader-hidden");
+			loader.addEventListener("transitioned", () => {
+				document.body.removeChild("loader");
+			})
 		}
 
 		function save_lead_for_future(){
