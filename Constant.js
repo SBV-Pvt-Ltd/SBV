@@ -15,6 +15,7 @@ policy_page_name="policy.html";
 payments_page_name="payments.html";
 careers_page_name="careers.html";
 explore_page_name="explore.html";
+explore_page_name_project_section="explore.html#project";
 save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
 working_local= false;
 
