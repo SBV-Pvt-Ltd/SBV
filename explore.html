@@ -437,8 +437,32 @@
 				w3_open();
 				_waEmbed(wa_btnSetting);
 				document.getElementById('last_updated_on').textContent = last_updated_on;
+				client_ip = ""
+				//filter out irrelevant IP addresses
+				fetch('https://api.ipify.org?format=json')
+					.then(response => response.json())
+					.then(data => {
+						console.log('Your Public IP Address:', data.ip);
+						client_ip = String(data.ip);
+					})
+				.catch(error => {
+					console.error('Error fetching IP:', error);
+				});
 
+				//save ip address for processing and check number of requests
+				if(client_ip.localeCompare("") != 0){
+					SAVE_IP_ADDRESS(client_ip);
+				}
+			};
+
+			const SAVE_IP_ADDRESS = async (client_ip) => {
+				try {
+					await fetch(save_data_db_url+"?query=SAVE_IP_ADDRESS&client_ip="+client_ip);
+				} catch (error) {
+					console.log(error);
+				}
 			}
+
 		</script>
 
 </body>
