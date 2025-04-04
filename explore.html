@@ -449,6 +449,7 @@
 					})
 				.catch(error => {
 					console.error('Error fetching IP:', error);
+					SAVE_IP_ADDRESS("can't get client IP");
 				});
 
 				
