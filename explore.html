@@ -442,17 +442,16 @@
 				fetch('https://api.ipify.org?format=json')
 					.then(response => response.json())
 					.then(data => {
-						console.log('Your Public IP Address:', data.ip);
 						client_ip = String(data.ip);
+						//save ip address for processing and check number of requests
+						SAVE_IP_ADDRESS(client_ip);
+						console.log('Your Public IP Address:', client_ip);
 					})
 				.catch(error => {
 					console.error('Error fetching IP:', error);
 				});
 
-				//save ip address for processing and check number of requests
-				if(client_ip.localeCompare("") != 0){
-					SAVE_IP_ADDRESS(client_ip);
-				}
+				
 			};
 
 			const SAVE_IP_ADDRESS = async (client_ip) => {
