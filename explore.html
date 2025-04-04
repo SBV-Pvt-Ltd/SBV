@@ -43,7 +43,7 @@
 		function navigateTo(pageName) {
 			current_url = window.location.href;
 			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-			current_url_refined = "https://SaharshBhadani.com/";
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
 			new_url = current_url_refined + features_service_page_name;
 			new_url_section = new_url + "#" + pageName;
 			window.location.replace(new_url_section)
@@ -53,7 +53,7 @@
 		function navigateToIndex(pageName) {
 			current_url = window.location.href;
 			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-			current_url_refined = "https://SaharshBhadani.com/";
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
 			new_url = current_url_refined + index_page_name;
 			new_url_section = new_url;
 			if (pageName.localeCompare("#") != 0) {
@@ -65,7 +65,7 @@
 		function navigateToPage(pageName) {
 			current_url = window.location.href;
 			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-			current_url_refined = "https://SaharshBhadani.com/";
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
 			new_url_section = current_url_refined;
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = current_url_refined + pageName;
@@ -76,7 +76,7 @@
 		function navigateToPageInAnotherTab(pageName) {
 			current_url = window.location.href;
 			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
-			current_url_refined = "https://SaharshBhadani.com/";
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
 			new_url_section = current_url_refined;
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = current_url_refined + pageName;

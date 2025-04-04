@@ -11,13 +11,14 @@ blogs="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/";
 features_service_page_name="FeaturesServices.html";
 index_page_name="index.html";
 faq_page_name="faq.html";
-policy_page_name="policy.html"
-payments_page_name="payments.html"
-careers_page_name="careers.html"
-explore_page_name="explore.html"
-save_data_db_url="https://django-hello-world-pink-ten.vercel.app"
+policy_page_name="policy.html";
+payments_page_name="payments.html";
+careers_page_name="careers.html";
+explore_page_name="explore.html";
+save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
+working_local= false;
 
-last_updated_on = "March 29, 2025";
+last_updated_on = "April 04, 2025";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
     "https://www.youtube.com/embed/O9cf_yC0pGo",
