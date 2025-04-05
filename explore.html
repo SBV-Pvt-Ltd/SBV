@@ -437,8 +437,11 @@
 				w3_open();
 				_waEmbed(wa_btnSetting);
 				document.getElementById('last_updated_on').textContent = last_updated_on;
-				client_ip = ""
 				//filter out irrelevant IP addresses
+				FETCH_IP_SAVE_IP();				
+			};
+
+			const FETCH_IP_SAVE_IP = async () => {
 				fetch('https://api.ipify.org?format=json')
 					.then(response => response.json())
 					.then(data => {
@@ -451,9 +454,7 @@
 					console.error('Error fetching IP:', error);
 					SAVE_IP_ADDRESS("can't get client IP");
 				});
-
-				
-			};
+			}
 
 			const SAVE_IP_ADDRESS = async (client_ip) => {
 				try {
