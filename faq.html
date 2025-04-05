@@ -98,8 +98,10 @@
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2"
 				href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
 			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
-				<i class="fa fa-home" style="color: black;"></i>
-				<img src="./Logo/Logo.png" alt="Company Logo" width="75" height="25">
+				<div style="display: flex;">
+					<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
+					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
+				</div>
 			</a>
 			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
 				Us</a>
@@ -149,7 +151,7 @@
 						onsubmit="close_modal(this)">
 						<input type="hidden" value="SAVE_LEADS" name="query">
 						<input type="hidden" value="leads_form" name="module">
-						
+
 						<div class="w3-section">
 							<label>Name</label>
 							<input class="w3-input" type="text" name="Name" required>

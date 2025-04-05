@@ -2,11 +2,11 @@
 <html>
 
 <head>
-	<meta charset="UTF-8"/>
+	<meta charset="UTF-8" />
 	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
-	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<link rel="icon" sizes="196x196" type="image/x-icon" href="./Logo/Logo.png">
 	<link rel="stylesheet" href="./css/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,17 +29,55 @@
 		/* Chrome, Safari, Edge, Opera */
 		input::-webkit-outer-spin-button,
 		input::-webkit-inner-spin-button {
-		  -webkit-appearance: none;
-		  margin: 0;
+			-webkit-appearance: none;
+			margin: 0;
 		}
-		
+
 		/* Firefox */
 		input[type=number] {
-		  -moz-appearance: textfield;
+			-moz-appearance: textfield;
 		}
-		</style>
+
+		/* For Previous and Next in Expore project section */
+		.explore_left {
+			text-decoration: none;
+			display: inline-block;
+			padding: 8px 16px;
+		}
+
+		.explore_right {
+			text-decoration: none;
+			display: inline-block;
+			padding: 8px 16px;
+		}
+
+		.explore_left:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		.explore_right:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		.previous {
+			color: white;
+		}
+
+		.next {
+			color: white;
+		}
+
+		.round {
+			border-radius: 50%;
+		}
+	</style>
 	<script src="Constant.js"></script>
+	<script src="ConstantExploreHelperPage.js"></script>
 	<script>
+		var project_type_index = 0;
+
 		function navigateTo(pageName) {
 			current_url = window.location.href;
 			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
@@ -93,14 +131,12 @@
 		<div class="w3-container w3-display-container">
 			<i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
 			<h4>Please provide your details and we will contact you soon.</h4>
-			<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white" 
-				action="https://django-hello-world-pink-ten.vercel.app"
-				method="get"
-				target="display-frame"
+			<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white"
+				action="https://django-hello-world-pink-ten.vercel.app" method="get" target="display-frame"
 				onsubmit="close_modal(this)">
 				<input type="hidden" value="SAVE_LEADS" name="query">
 				<input type="hidden" value="leads_form" name="module">
-						
+
 				<div class="w3-section">
 					<label>Name</label>
 					<input class="w3-input" type="text" name="Name" required>
@@ -159,10 +195,11 @@
 	<!-- Top menu on small screens -->
 	<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
 		<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
-			<i class="fa fa-home" style="color: black;"></i>
-			<img src="./Logo/Logo.png" alt="Company Logo" width="75" height="25">
+			<div style="display: flex;">
+				<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
+				<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
+			</div>
 		</a>
-
 		<a href="javascript:void(0)" class="w3-right w3-bar-item w3-button" onclick="w3_open()"><i
 				class="fa fa-bars"></i></a>
 	</header>
@@ -177,8 +214,10 @@
 		<!--Top menu on large screens -->
 		<div class="w3-bar w3-hide-small w3-hide-medium w3-xlarge w3-border w3-black">
 			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
-				<i class="fa fa-home" style="color: black;"></i>
-				<img src="./Logo/Logo.png" alt="Company Logo" width="45" height="15">
+				<div style="display: flex;">
+					<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
+					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
+				</div>
 			</a>
 			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
 				Us</a>
@@ -209,7 +248,12 @@
 		<div class="w3-container" id="about-us">
 			<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">About Us</div>
 			<div style="text-align: left; text-align: justify; color: #003134;">
-				At Saharsh Bhadani Venture Private Limited, we are a leading service provider committed to delivering cutting-edge solutions that drive business transformation and innovation. We understand that every business is unique, which is why we tailor our services to meet the specific needs and objectives of each client. Our team of highly skilled professionals combines technical expertise with deep industry knowledge to ensure that we provide solutions that not only enhance operational efficiency but also lead to long-term business success. <br>
+				At <a href="https://www.SaharshBhadani.com" target="_blank">Saharsh Bhadani Venture Private Limited</a>,
+				we are a leading service provider committed to delivering cutting-edge solutions that drive business
+				transformation and innovation. We understand that every business is unique, which is why we tailor our
+				services to meet the specific needs and objectives of each client. Our team of highly skilled
+				professionals combines technical expertise with deep industry knowledge to ensure that we provide
+				solutions that not only enhance operational efficiency but also lead to long-term business success. <br>
 				Our wide range of services includes:
 				<ul>
 					<li><b>Data Analytics & Business Analytics</b></li>
@@ -221,10 +265,14 @@
 					<li><b>Content Creation & Graphics Designing</b></li>
 
 				</ul>
-				At Saharsh Bhadani Venture Private Limited, we believe in fostering long-lasting partnerships with our clients by delivering exceptional service, innovative solutions, and measurable results. Whether you're a startup or an established enterprise, we are here to help you navigate the complexities of the digital age and achieve your business goals. <br>
+				At <a href="https://www.SaharshBhadani.com" target="_blank">Saharsh Bhadani Venture Private Limited</a>,
+				we believe in fostering long-lasting partnerships with our clients by delivering exceptional service,
+				innovative solutions, and measurable results. Whether you're a startup or an established enterprise, we
+				are here to help you navigate the complexities of the digital age and achieve your business goals. <br>
 				<p style="font-family:Lucida Handwriting;">
 					<br>
-					Let us bring your ideas to life and help you stay ahead of the curve with our tailored solutions. Together, we can shape a successful future.
+					Let us bring your ideas to life and help you stay ahead of the curve with our tailored solutions.
+					Together, we can shape a successful future.
 				</p>
 			</div>
 		</div>
@@ -236,18 +284,22 @@
 			700025<br>
 			<i class="fa fa-phone" style="width:30px"></i> WhatsApp & Phone no: +91 9168669610<br>
 			<i class="fa fa-envelope" style="width:30px"> </i> Email: SaharshBhadaniVenture@gmail.com <br>
+			<i class="fa fa-info-circle" style="width:30px"> </i> Visit our website: <a target="_blank"
+				href="https://www.SaharshBhadani.com">https://www.SaharshBhadani.com</a> <br>
+
 			<h4><b><u>Questions? Go ahead, ask them:</u></b></h4>
-			<form style="margin-top: 10px;"
-				action="https://django-hello-world-pink-ten.vercel.app"
-				method="get"
-				target="display-frame1"
-				onsubmit="close_modal1(this)">
+			<form style="margin-top: 10px;" action="https://django-hello-world-pink-ten.vercel.app" method="get"
+				target="display-frame1" onsubmit="close_modal1(this)">
 				<input type="hidden" value="SAVE_LEADS" name="query">
-				<input type="hidden" value="message" name="module">				
-				<p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" style="margin-top: 10px;"></p>
-				<p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email" style="margin-top: 10px;"></p>
-				<p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" style="margin-top: 10px;"></p>
-				<button type="submit" class="w3-button w3-teal w3-third" style="margin-top: 10px;">Send a Message</button>
+				<input type="hidden" value="message" name="module">
+				<p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"
+						style="margin-top: 10px;"></p>
+				<p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"
+						style="margin-top: 10px;"></p>
+				<p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"
+						style="margin-top: 10px;"></p>
+				<button type="submit" class="w3-button w3-teal w3-third" style="margin-top: 10px;">Send a
+					Message</button>
 			</form>
 			<script>
 				function close_modal1(form) {
@@ -260,53 +312,254 @@
 		<!-- Slideshow Header -->
 		<div class="w3-container" id="project">
 			<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Project Catalogue</div>
-			<h3 class="w3-text-green">Sample Graphics Designing Projects</h3>
+
+			<div class="w3-row w3-display-container" style="width:100%;margin-bottom: 5px">
+				<a onclick="handle_left_shift()" style="cursor:pointer;"
+					class="w3-display-bottomleft w3-teal w3-button previous round explore_left">&#8249;</a>
+				<h2 class="w3-text-green w3-center" id="project_type_heading">Graphics Designing</h2>
+				<a onclick="handle_right_shift()" style="cursor:pointer;"
+					class="w3-display-bottomright w3-teal w3-button next round explore_right">&#8250;</a>
+			</div>
+
 			<div class="w3-display-container mySlides">
-				<img src="./w3images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+				<img src="./w3images/Disclamer-message.jpg" style="width:100%;margin-bottom:-6px">
 				<div class="w3-display-bottomleft w3-container w3-black">
-					<p>Living Room</p>
+					<p>New Website Under Construction.</p>
 				</div>
 			</div>
 			<div class="w3-display-container mySlides">
-				<img src="./w3images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+				<img src="./w3images/1_graphics_design_1.png" style="width:100%;margin-bottom:-6px">
 				<div class="w3-display-bottomleft w3-container w3-black">
-					<p>Dining Room</p>
+					<p>Featured Services At Glance.</p>
 				</div>
 			</div>
 			<div class="w3-display-container mySlides">
-				<img src="./w3images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+				<img src="./w3images/1_graphics_design_2.jpg" style="width:100%;margin-bottom:-6px">
 				<div class="w3-display-bottomleft w3-container w3-black">
-					<p>Bedroom</p>
+					<p>Our company logo: Butterflies do speak</p>
 				</div>
 			</div>
 			<div class="w3-display-container mySlides">
-				<img src="./w3images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+				<img src="./w3images/1_graphics_design_4.jpg" style="width:100%;margin-bottom:-6px">
 				<div class="w3-display-bottomleft w3-container w3-black">
-					<p>Living Room II</p>
+					<p>Three hearts in our company logo</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/Ag995qpzNlw" width="675px"
+					height="375px" title="YouTube video player" frameborder="0"
+					allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+			</div>
+			<div class="w3-display-container mySlides">
+				<iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/O9cf_yC0pGo" width="675px"
+					height="375px" title="YouTube video player" frameborder="0"
+					allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+			</div>
+			<div class="w3-display-container mySlides">
+				<iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/WqsuHgNwuyY" width="675px"
+					height="375px" title="YouTube video player" frameborder="0"
+					allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+				</iframe>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/3_business_consulting_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Business Consulting 1.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/3_business_consulting_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Business Consulting 2.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/3_business_consulting_3.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Business Consulting 3.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/4_website_development_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Website development 1.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/4_website_development_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Website development 2.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/4_website_development_3.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Website development 3.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/5_software_development_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Software development 1.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/5_software_development_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Software development 2.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/5_software_development_3.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Software development 3.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/6_mobile_app_development_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Mobile app development 1.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/6_mobile_app_development_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Mobile app development 2.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/6_mobile_app_development_3.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>Mobile app development 3.</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/7_ai_enabled_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>AI Enabled 1</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/7_ai_enabled_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>AI Enabled 2</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/8_ML_project_1.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>ML Project 1</p>
+				</div>
+			</div>
+			<div class="w3-display-container mySlides">
+				<img src="./w3images/8_ML_project_2.jpg" style="width:100%;margin-bottom:-6px">
+				<div class="w3-display-bottomleft w3-container w3-black">
+					<p>ML Project II</p>
 				</div>
 			</div>
 		</div>
 		<div class="w3-row-padding w3-section">
-			<div class="w3-col s3">
-				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/livingroom.jpg"
-					style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
+			<div class="w3-col s3" id="div_1">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/Disclamer-message.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Disclamer message">
 			</div>
-			<div class="w3-col s3">
-				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/diningroom.jpg"
-					style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
+			<div class="w3-col s3" id="div_2">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/1_graphics_design_1.png"
+					style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Company logo 1">
 			</div>
-			<div class="w3-col s3">
-				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/bedroom.jpg"
-					style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
+			<div class="w3-col s3" id="div_3">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/1_graphics_design_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Company logo 2">
 			</div>
-			<div class="w3-col s3">
-				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/livingroom2.jpg"
-					style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
+			<div class="w3-col s3" id="div_4">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/1_graphics_design_4.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Company logo 3">
 			</div>
-			<br>
-			<p class="w3-text-red">* We will upload more projects soon.</p>
+			<div class="w3-col s3" id="div_5">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/youtube_video.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(5)" title="Business Analytics 1">
+			</div>
+			<div class="w3-col s3" id="div_6">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/youtube_video.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(6)" title="Business Analytics 2">
+			</div>
+			<div class="w3-col s3" id="div_7">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/youtube_video.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(7)" title="Business Analytics 3">
+			</div>
+			<div class="w3-col s3" id="div_8">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/3_business_consulting_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(8)" title="business consulting 1">
+			</div>
+			<div class="w3-col s3" id="div_9">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/3_business_consulting_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(9)" title="business consulting 2">
+			</div>
+			<div class="w3-col s3" id="div_10">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/3_business_consulting_3.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(10)" title="business consulting 3">
+			</div>
+			<div class="w3-col s3" id="div_11">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/4_website_development_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(11)" title="Website development 1">
+			</div>
+			<div class="w3-col s3" id="div_12">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/4_website_development_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(12)" title="Website development 2">
+			</div>
+			<div class="w3-col s3" id="div_13">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/4_website_development_3.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(13)" title="Website development 3">
+			</div>
+			<div class="w3-col s3" id="div_14">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/5_software_development_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(14)" title="Software development 1">
+			</div>
+			<div class="w3-col s3" id="div_15">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/5_software_development_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(15)" title="software development 2">
+			</div>
+			<div class="w3-col s3" id="div_16">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/5_software_development_3.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(16)" title="Software development 3">
+			</div>
+			<div class="w3-col s3" id="div_17">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/6_mobile_app_development_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(17)" title="mobile app development 1">
+			</div>
+			<div class="w3-col s3" id="div_18">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/6_mobile_app_development_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(18)" title="mobile app development 2">
+			</div>
+			<div class="w3-col s3" id="div_19">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/6_mobile_app_development_3.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(19)" title="mobile app development 3">
+			</div>
+			<div class="w3-col s3" id="div_20">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/7_ai_enabled_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(20)" title="AI Enabled 1">
+			</div>
+			<div class="w3-col s3" id="div_21">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/7_ai_enabled_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(21)" title="AI Enabled 2">
+			</div>
+			<div class="w3-col s3" id="div_22">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/8_ML_project_1.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(22)" title="ML Project 1">
+			</div>
+			<div class="w3-col s3" id="div_23">
+				<img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/8_ML_project_2.jpg"
+					style="width:100%;cursor:pointer" onclick="currentDiv(23)" title="ML Project 2">
+			</div>
 		</div>
-		
+		<br>
+		<p class="w3-text-red">* We will upload more projects soon.</p>
+
 		<!-- Footer -->
 		<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
 			<div class="w3-third w3-margin-bottom">
@@ -377,9 +630,70 @@
 		<!-- End page content -->
 
 		<!--Code for WhatsApp-->
-		<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-		
+		<script async
+			src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+
 		<script>
+			//handle click on right or left of project
+			function handle_left_shift() {
+				if (project_type_index == 0) {
+					project_type_index = project_type.length - 1;
+				} else {
+					project_type_index = project_type_index - 1;
+				}
+				document.getElementById("project_type_heading").innerHTML = project_type[project_type_index];
+				prepare_content_for_slides(project_type_index);
+			}
+
+			function handle_right_shift() {
+				if (project_type_index == project_type.length - 1) {
+					project_type_index = 0;
+				} else {
+					project_type_index = project_type_index + 1;
+				}
+				document.getElementById("project_type_heading").innerHTML = project_type[project_type_index];
+				prepare_content_for_slides(project_type_index);
+			}
+
+			function prepare_content_for_slides(project_type_index) {
+				divs_to_show = [];
+				if (project_type_index == 0) {
+					divs_to_show = project_type_indices["Graphics Designing"];
+				} else if (project_type_index == 1) {
+					divs_to_show = project_type_indices["Business Analytics"];
+				} else if (project_type_index == 2) {
+					divs_to_show = project_type_indices["Business Consulting"];
+				} else if (project_type_index == 3) {
+					divs_to_show = project_type_indices["Website Development"];
+				} else if (project_type_index == 4) {
+					divs_to_show = project_type_indices["Software Development"];
+				} else if (project_type_index == 5) {
+					divs_to_show = project_type_indices["Mobile App Development"];
+				} else if (project_type_index == 6) {
+					divs_to_show = project_type_indices["AI Enabled"];
+				} else if (project_type_index == 7) {
+					divs_to_show = project_type_indices["ML Projects"];
+				} else if (project_type_index == 8) {
+					divs_to_show = project_type_indices["Other Projects"];
+				} else {
+					divs_to_show = [1];
+					alert("Something went wrong.");
+				}
+				show_divs_to_show_and_hide_rest(divs_to_show);
+				currentDiv(divs_to_show[0]);
+			}
+
+			function show_divs_to_show_and_hide_rest(divs_to_show) {
+				for (var i = 1; i <= 23; i++) {
+					div_id = "div_" + String(i);
+					if (divs_to_show.includes(i)) {
+						document.getElementById(div_id).style.display = "block";
+					} else {
+						document.getElementById(div_id).style.display = "none";
+					}
+				}
+			}
+
 			// Script to open and close sidebar when on tablets and phones
 			function w3_open() {
 				document.getElementById("mySidebar").style.display = "block";
@@ -437,8 +751,9 @@
 				w3_open();
 				_waEmbed(wa_btnSetting);
 				document.getElementById('last_updated_on').textContent = last_updated_on;
+				prepare_content_for_slides(project_type_index);
 				//filter out irrelevant IP addresses
-				FETCH_IP_SAVE_IP();				
+				//FETCH_IP_SAVE_IP();				
 			};
 
 			const FETCH_IP_SAVE_IP = async () => {
@@ -450,15 +765,15 @@
 						SAVE_IP_ADDRESS(client_ip);
 						console.log('Your Public IP Address:', client_ip);
 					})
-				.catch(error => {
-					console.error('Error fetching IP:', error);
-					SAVE_IP_ADDRESS("can't get client IP");
-				});
+					.catch(error => {
+						console.error('Error fetching IP:', error);
+						SAVE_IP_ADDRESS("can't get client IP");
+					});
 			}
 
 			const SAVE_IP_ADDRESS = async (client_ip) => {
 				try {
-					await fetch(save_data_db_url+"?query=SAVE_IP_ADDRESS&client_ip="+client_ip);
+					await fetch(save_data_db_url + "?query=SAVE_IP_ADDRESS&client_ip=" + client_ip);
 				} catch (error) {
 					console.log(error);
 				}

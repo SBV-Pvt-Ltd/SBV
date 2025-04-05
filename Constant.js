@@ -17,11 +17,8 @@ careers_page_name="careers.html";
 explore_page_name="explore.html";
 explore_page_name_project_section="explore.html#project";
 save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
+working_local= false;
 
-url_for_leaches = "https://www.indiacode.nic.in/show-data?actid=AC_CEN_5_23_00037_186045_1523266765688&sectionId=46208&sectionno=425&orderno=482";
-list_leach = [
-    
-];
 
 last_updated_on = "April 05, 2025";
 const youtube_videos = [

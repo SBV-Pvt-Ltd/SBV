@@ -108,8 +108,10 @@
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2"
 				href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
 			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
-				<i class="fa fa-home" style="color: black;"></i>
-				<img src="./Logo/Logo.png" alt="Company Logo" width="75" height="25">
+				<div style="display: flex;">
+					<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
+					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
+				</div>
 			</a>
 			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
 				Us</a>
@@ -156,7 +158,7 @@
 		</div>
 	</div>
 	<script>
-		const formEL =document.querySelector('.form_leads');
+		const formEL = document.querySelector('.form_leads');
 		formEL.addEventListener('submit', event => {
 			event.preventDefault();
 
@@ -170,8 +172,8 @@
 				},
 				body: JSON.stringify(data)
 			}).then(res => res.json())
-			  .then(data => alert(data))
-			  .catch(error => alert(error))
+				.then(data => alert(data))
+				.catch(error => alert(error))
 		});
 	</script>
 
@@ -185,10 +187,8 @@
 			</header>
 			<div class="w3-container">
 				<div class="w3-col m7" style="width: 100%;">
-					<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white" 
-						action="https://django-hello-world-pink-ten.vercel.app"
-						method="get"
-						target="display-frame"
+					<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white"
+						action="https://django-hello-world-pink-ten.vercel.app" method="get" target="display-frame"
 						onsubmit="close_modal(this)">
 						<input type="hidden" value="SAVE_LEADS" name="query">
 						<input type="hidden" value="leads_form" name="module">
@@ -227,9 +227,9 @@
 
 					</form>
 					<script>
-						function close_modal(form){
+						function close_modal(form) {
 							alert("We will contact you soon.");
-							document.getElementById('id01').style.display='none';
+							document.getElementById('id01').style.display = 'none';
 						}
 					</script>
 					<iframe name="display-frame" style="width:0px;height:0px;border:2px solid white"></iframe>
@@ -448,7 +448,9 @@
 						Bhadani</a><br>
 					<br>
 					<h3>Explore Projects</h3>
-					<a target="_blank" onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)"><u>Sample projects</u></a><br>
+					<a target="_blank"
+						onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)"><u>Sample
+							projects</u></a><br>
 				</div>
 			</div>
 		</div>
@@ -520,16 +522,16 @@
 	<!-- Footer -->
 	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
 		<h4>Follow Us</h4>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook" onclick="openLink('facebook')"><i
-				class="fa fa-facebook"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"
+			onclick="openLink('facebook')"><i class="fa fa-facebook"></i></a>
 		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')"><i
 				class="fa fa-twitter"></i></a>
 		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')"><i
 				class="fa fa-google-plus"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Instagram" onclick="openLink('instagram')"><i
-				class="fa fa-instagram"></i></a>
-		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin" onclick="openLink('linkedIn')"><i
-				class="fa fa-linkedin"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Instagram"
+			onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
+		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"
+			onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
 		<p>Last updated on : <span id="last_updated_on"></span></p>
 		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 
@@ -541,21 +543,21 @@
 		<script>
 			function openLink(pageName) {
 				url_to_visit = ""
-				if(pageName=="linkedIn")
-					url_to_visit=linkedIn
-				else if(pageName=="facebook")
-					url_to_visit=facebook
-				else if(pageName=="twitter")
-					url_to_visit=twitter
-				else if(pageName=="instagram")
-					url_to_visit=instagram
-				else if(pageName=="youtube")
-					url_to_visit=youtube
-				else if(pageName=="google")
-					url_to_visit=google_business
+				if (pageName == "linkedIn")
+					url_to_visit = linkedIn
+				else if (pageName == "facebook")
+					url_to_visit = facebook
+				else if (pageName == "twitter")
+					url_to_visit = twitter
+				else if (pageName == "instagram")
+					url_to_visit = instagram
+				else if (pageName == "youtube")
+					url_to_visit = youtube
+				else if (pageName == "google")
+					url_to_visit = google_business
 				else
-					url_to_visit=website
-				window.open(url_to_visit); 
+					url_to_visit = website
+				window.open(url_to_visit);
 			}
 		</script>
 	</footer>
