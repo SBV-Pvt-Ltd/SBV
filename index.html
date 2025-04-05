@@ -66,6 +66,14 @@
 			}
 			window.open(new_url_section);
 		}
+
+		function navigateToExplorePageInAnotherTab(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+			new_url_section = current_url_refined + pageName;
+			window.open(new_url_section);
+		}
 	</script>
 
 	<!-- Sidebar on click -->
@@ -440,7 +448,7 @@
 						Bhadani</a><br>
 					<br>
 					<h3>Explore Projects</h3>
-					<a target="_blank" onclick="navigateToPageInAnotherTab(explore_page_name_project_section)"><u>Sample projects</u></a><br>
+					<a target="_blank" onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)"><u>Sample projects</u></a><br>
 				</div>
 			</div>
 		</div>
