@@ -21,12 +21,12 @@ const project_type = [
 const project_type_indices = {
     "Graphics Designing": [2, 3, 4, 1],
     "Business Analytics": [5, 6, 7, 1],
-    "Business Consulting": [8, 9, 10, 1],
-    "Website Development": [11, 12, 13, 1],
-    "Software Development": [14, 15, 16, 1],
-    "Mobile Apps": [17, 18, 19, 1],
-    "AI Enabled": [20, 21, 1],
-    "ML Projects": [22, 23, 1],
+    "Business Consulting": [1],
+    "Website Development": [1],
+    "Software Development": [1],
+    "Mobile Apps": [1],
+    "AI Enabled": [1],
+    "ML Projects": [1],
     "Other Projects": [1]
 };
 
