@@ -17,15 +17,18 @@ const project_type = [
     "Other Projects"
 ];
 
+//update everytime after addition of content
+total_number_of_content = 24;
+
 //maintain the same sequence
 const project_type_indices = {
     "Graphics Designing": [2, 3, 4, 1],
-    "Business Analytics": [5, 6, 7, 1],
+    "Business Analytics": [24, 1],
     "Business Consulting": [1],
     "Website Development": [1],
     "Software Development": [1],
     "Mobile Apps": [1],
-    "AI Enabled": [1],
+    "AI Enabled": [5, 6, 7, 1],
     "ML Projects": [1],
     "Other Projects": [1]
 };

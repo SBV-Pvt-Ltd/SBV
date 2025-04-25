@@ -284,7 +284,7 @@
                 <div class="w3-display-container mySlides">
                     <iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/Ag995qpzNlw" style="aspect-ratio: 16 / 9; width: 100% !important;"
                             title="YouTube video player" frameborder="0"
-                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                     </iframe>
                 </div>
@@ -398,6 +398,16 @@
                         <p>ML Project II</p>
                     </div>
                 </div>
+                <div class="w3-display-container mySlides">
+                    <iframe id="introduction_video_iframe" src="https://www.youtube.com/embed/rNUHkUYFoFo" style="aspect-ratio: 16 / 9; width: 100% !important;"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                    <div class="w3-display-bottomright w3-container w3-black">
+                        <a href="https://drive.google.com/file/d/1-hFspF5W-QhATbwoLwDtZf1A1WzY0APq/view?usp=drive_link" target="_blank">Click here to see data file.</a>
+                    </div>
+                </div>
             </div>
             <div class="w3-row-padding w3-section">
                 <div class="w3-col s3" id="div_1">
@@ -491,6 +501,10 @@
                 <div class="w3-col s3" id="div_23">
                     <img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/8_ML_project_2.jpg"
                          style="width:100%;cursor:pointer" onclick="currentDiv(23)" title="ML Project 2">
+                </div>
+                <div class="w3-col s3" id="div_24">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="./w3images/2_business_analytics_4.jpg"
+                         style="width:100%;cursor:pointer" onclick="currentDiv(24)" title="Business Analytics 4">
                 </div>
             </div>
             <br>
@@ -643,9 +657,16 @@
         <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')"><i class="fa fa-google-plus"></i></a>
         <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Instagram" onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
         <a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin" onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
-        <p>Last updated on : <span id="last_updated_on"></span></p>
-        <p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
-
+        <div class="w3-hide-small w3-hide-medium w3-xlarge">
+            <div style="margin-left:260px; text-align:left">
+                <p style="font-size: 16px"><br /><br />Last updated on : <span id="last_updated_on"></span></p>
+                <p style="font-size: 16px">&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+        <div class="w3-hide-large">
+            <p>Last updated on : <span id="last_updated_on"></span></p>
+            <p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+        </div>
         <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
             <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
             <a class="w3-button w3-theme" href="#">
@@ -654,27 +675,27 @@
                 </span>
             </a>
         </div>
-        <script>
-            function openLink(pageName) {
-                url_to_visit = ""
-                if (pageName == "linkedIn")
-                    url_to_visit = linkedIn
-                else if (pageName == "facebook")
-                    url_to_visit = facebook
-                else if (pageName == "twitter")
-                    url_to_visit = twitter
-                else if (pageName == "instagram")
-                    url_to_visit = instagram
-                else if (pageName == "youtube")
-                    url_to_visit = youtube
-                else if (pageName == "google")
-                    url_to_visit = google_business
-                else
-                    url_to_visit = website
-                window.open(url_to_visit);
-            }
-        </script>
-    </footer>
+            <script>
+                function openLink(pageName) {
+                    url_to_visit = ""
+                    if (pageName == "linkedIn")
+                        url_to_visit = linkedIn
+                    else if (pageName == "facebook")
+                        url_to_visit = facebook
+                    else if (pageName == "twitter")
+                        url_to_visit = twitter
+                    else if (pageName == "instagram")
+                        url_to_visit = instagram
+                    else if (pageName == "youtube")
+                        url_to_visit = youtube
+                    else if (pageName == "google")
+                        url_to_visit = google_business
+                    else
+                        url_to_visit = website
+                    window.open(url_to_visit);
+                }
+            </script>
+</footer>
     <!-- End page content -->
     <!--Code for WhatsApp-->
     <script async
@@ -731,7 +752,7 @@
         }
 
         function show_divs_to_show_and_hide_rest(divs_to_show) {
-            for (var i = 1; i <= 23; i++) {
+            for (var i = 1; i <= total_number_of_content; i++) {
                 div_id = "div_" + String(i);
                 if (divs_to_show.includes(i)) {
                     document.getElementById(div_id).style.display = "block";
