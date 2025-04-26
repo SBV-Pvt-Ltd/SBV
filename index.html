@@ -277,9 +277,9 @@
 	<!-- Featured Services Row -->
 	<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="FeaturedServices">
 		<h2>Featured Services</h2>
-		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('BusinessConsultation')">
+		<div class="w3-quarter" style="margin-top: 14px; cursor: pointer;" onclick="navigateTo('BusinessConsultation')">
 			<div class="w3-card w3-white w3-hover-opacity w3-hover-teal">
-				<img src="./w3images/business-consulting.jpg" alt="Business Consultation" style="width:100%">
+				<img src="./w3images/business-consulting.png" alt="Business Consultation" style="width:100%; border-bottom: 1px solid black;">
 				<div class="w3-container">
 					<h3>Business Consultation</h3>
 				</div>
@@ -296,9 +296,9 @@
 			</div>
 		</div>
 
-		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('SoftwareDevelopment')">
+		<div class="w3-quarter" style="margin-top: 14px; cursor: pointer;" onclick="navigateTo('SoftwareDevelopment')">
 			<div class="w3-card w3-white w3-hover-opacity w3-hover-teal">
-				<img src="./w3images/software-development.png" alt="Software Development" style="width:100%">
+				<img src="./w3images/software-development.png" alt="Software Development" style="width:100%; border-bottom: 1px solid black;">
 				<div class="w3-container">
 					<h3>Software Development</h3>
 				</div>
@@ -316,7 +316,7 @@
 
 		<div class="w3-quarter" style="margin-top: 15px; cursor: pointer;" onclick="navigateTo('ITServices')">
 			<div class="w3-card w3-white w3-hover-opacity w3-hover-teal">
-				<img src="./w3images/it-services.jpg" alt="IT Services" style="width:100%">
+				<img src="./w3images/IT-services.jpg" alt="IT Services" style="width:100%">
 				<div class="w3-container">
 					<h3>IT Managed Services</h3>
 				</div>
@@ -368,8 +368,8 @@
 		   style="position:absolute;top:-28px;right:24px">+</a>
 	</div>
 
-	<!-- Contact Container -->
-	<div class="w3-container w3-padding-64 w3-theme-l5" id="contact" style="word-wrap: break-word;">
+	<!-- Contact Container : large & small screen-->
+	<div class="w3-container w3-padding-64 w3-theme-l5 w3-large w3-hide-medium w3-small" id="contact" style="word-wrap: revert-layer;">
 		<div class="w3-row">
 			<div class="w3-third">
 				<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
@@ -380,7 +380,7 @@
 					Kolkata, West Bengal, India- 700 025
 				</p>
 				<p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +91 9168669610</p>
-				<p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>&nbsp;SaharshBhadaniVenture@gmail.com</p>
+				<p><i class="fa fa-envelope-o w3-text-teal w3-xlarge w3-large"></i>&nbsp;SaharshBhadaniVenture@gmail.com</p>
 				<p><i class="w3-text-teal material-icons" style="font-size: 30px">language</i>&nbsp;<a href="https://www.SaharshBhadani.com">https://www.SaharshBhadani.com</a></p>
 
 			</div>
@@ -416,8 +416,69 @@
 					<a target="_blank"
 					   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
 						<u>
-							Sample
-							projects
+							project Catelog
+						</u>
+					</a><br>
+				</div>
+			</div>
+		</div>
+		<center>
+			<button onclick="document.getElementById('id01').style.display='block'"
+					class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
+		</center>
+	</div>
+
+	<!-- Contact Container : small screen-->
+	<div class="w3-container w3-padding-64 w3-theme-l5 w3-hide-large w3-medium w3-hide-small" id="contact" style="word-wrap: revert-layer;">
+		<div class="w3-row">
+			<div class="w3-third">
+				<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
+				<h3>Address</h3>
+				<p>
+					<i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Saharsh Bhadani Venture Private Limited,<br>
+					29B/1F, Bakul Bagan Row, Bhowanipore,<br>
+					Kolkata, West Bengal, India- 700 025
+				</p>
+				<p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +91 9168669610</p>
+				<p><i class="fa fa-envelope-o w3-text-teal w3-xlarge w3-large"></i>&nbsp;SaharshBhadaniVenture @gmail.com</p>
+				<p><i class="w3-text-teal material-icons" style="font-size: 30px">language</i>&nbsp;<a href="https://www.SaharshBhadani.com">SaharshBhadani.com</a></p>
+
+			</div>
+			<div class="w3-third">
+				<div>
+					<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Map</span></div>
+					<h3>Location</h3>
+					<a target="_blank" ;
+					   href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+						<img class="map_image w3-hover-shadow" ; src="./images/Map_location.png" alt="View on map"
+							 style="width:70%; height:auto;">
+					</a>
+					<br>
+					<a target="_blank" ;
+					   href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+						Click to enlarge the location in another tab.
+					</a>
+
+					<br>
+				</div>
+			</div>
+			<div class="w3-third">
+				<div class="w3-padding-16">
+					<span class="w3-xlarge w3-border-teal w3-bottombar">More</span>
+					<br>
+					<h3>Blogs</h3>
+					<a target="_blank" href="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/">
+						Blog - Saharsh
+						Bhadani
+					</a><br>
+					<br>
+					<h3>Explore Projects</h3>
+					<a target="_blank"
+					   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
+						<u>
+							project Catelog
 						</u>
 					</a><br>
 				</div>
@@ -509,7 +570,8 @@
 
 
 	<!-- Footer -->
-	<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+	<!-- large and small screen-->
+	<div class="w3-row-padding w3-center w3-padding-64 w3-large w3-small w3-hide-medium" id="pricing">
 		<div class="w3-third w3-margin-bottom">
 			<ul class="w3-ul w3-border w3-hover-shadow">
 				<li class="w3-theme-l2">
@@ -569,6 +631,67 @@
 			</button>
 		</center>
 	</div>
+	<!-- medium screen-->
+	<div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium" id="pricing">
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Contact details</p>
+				</li>
+				<li class="w3-padding-16">
+					<div style="text-align: left; text-align: justify;word-wrap: break-word;">
+						29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
+						WhatsApp & Phone: +91 9168669610<br>
+						Email:SaharshBhadaniVenture@gmail.com
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Support</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					<a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+					<a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a><br>
+					<a onclick="navigateToPage(policy_page_name)"><u>Policy</u></a><br>
+					<a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a><br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Appointment</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					Chat now: <a target="_blank" href="https://wa.me/919168669610?text=">WhatsApp</a><br>
+					Call: <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit: <a target="_blank"
+						 href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+						Location
+						in Map.
+					</a><br>
+					Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+						Fill a Google
+						form
+					</a><br>
+				</li>
+			</ul>
+		</div>
+		<center>
+			<button onclick="document.getElementById('id01').style.display='block'"
+					class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
+		</center>
+	</div>
+
 	<!-- Footer -->
 	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
 		<h4>Follow Us</h4>
