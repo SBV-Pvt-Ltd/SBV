@@ -63,6 +63,23 @@
 			}
 			window.location.replace(new_url_section);
 		}
+        function navigateToPageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.open(new_url_section);
+		}
+        function navigateToExplorePageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined + pageName;
+            window.open(new_url_section);
+        }
 	</script>
 
 	<!-- Sidebar on click -->
@@ -95,35 +112,51 @@
 	<div class="w3-top">
 		<div class="w3-bar w3-theme-d2 w3-left-align">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2"
-				href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+			   href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
 			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
 				<div style="display: flex;">
 					<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
-					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">	
+					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
 				</div>
 			</a>
-			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About
-				Us</a>
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+				About
+				Us
+			</a>
 			<div class="w3-dropdown-hover w3-hide-small">
-				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications">Featured
-					Services&nbsp;<i class="fa fa-caret-down"></i></button>
+				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications">
+					Featured
+					Services&nbsp;<i class="fa fa-caret-down"></i>
+				</button>
 				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
-					<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button">Business
-						Consultation</a>
+					<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button">
+						Business
+						Consultation
+					</a>
 					<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button">Business Analytics</a>
-					<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button">Software
-						Development</a>
+					<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button">
+						Software
+						Development
+					</a>
 					<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button">IT Consultation</a>
 					<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button">IT Services</a>
 					<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button">Robotics</a>
-					<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button">Industrial
-						Automation</a>
+					<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button">
+						Industrial
+						Automation
+					</a>
 					<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button">Content Creation</a>
 					<a onclick="navigateTo('GraphicDesigning')" class="w3-bar-item w3-button">Graphic Designing</a>
 				</div>
 			</div>
-			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact
-				Us</a>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+				Contact
+				Us
+			</a>
+			<a target="_blank" class="w3-bar-item w3-button w3-hide-small w3-hover-white"
+			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
+				Projects
+			</a>
 
 		</div>
 
@@ -132,6 +165,10 @@
 			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button">About Us</a>
 			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
 			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button">Contact Us</a>
+			<a target="_blank" class="w3-bar-item w3-button"
+			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
+				Projects
+			</a>
 		</div>
 	</div>
 
