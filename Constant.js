@@ -6,7 +6,7 @@ facebook= "https://www.facebook.com/profile.php?id=61572408011368";
 google_business= "https://business.google.com/n/3399029183297592580/profile?hl=en-GB&fid=17844265179263711189";
 website= "https://sbv-pvt-ltd.github.io/SBV/";
 threads= "";
-instagram= "https://www.instagram.com/bhadanisaharsh/";
+instagram = "https://www.instagram.com/saharshbhadaniventure/";
 blogs="https://bhadani-saharsh.github.io/blog.saharsh.bhadani/";
 features_service_page_name="FeaturesServices.html";
 index_page_name="index.html";
@@ -16,8 +16,8 @@ payments_page_name="payments.html";
 careers_page_name="careers.html";
 explore_page_name="explore.html";
 explore_page_name_project_section="explore.html#project";
-save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
-working_local= false;
+save_data_db_url = "https://django-hello-world-pink-ten.vercel.app";
+working_local = false;
 
 
 last_updated_on = "April 27, 2025";
