@@ -26,7 +26,7 @@ const project_type_indices = {
     "Business Analytics": [24, 1],
     "Business Consulting": [1],
     "Website Development": [11, 1],
-    "Software Development": [1],
+    "Software Development": [14, 1],
     "Mobile Apps": [1],
     "AI Enabled": [5, 6, 7, 1],
     "ML Projects": [1],
