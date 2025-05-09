@@ -16,11 +16,11 @@ payments_page_name="payments.html";
 careers_page_name="careers.html";
 explore_page_name="explore.html";
 explore_page_name_project_section="explore.html#project";
-save_data_db_url = "https://django-hello-world-pink-ten.vercel.app";
-working_local = false;
+save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
+working_local= false;
 
 
-last_updated_on = "April 27, 2025";
+last_updated_on = "May 09, 2025";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
     "https://www.youtube.com/embed/O9cf_yC0pGo",
