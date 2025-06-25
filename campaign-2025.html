@@ -183,33 +183,34 @@
         </div>
     </section>
 
-    
+
 
     <section class="lead-form" id="contact">
         <script>
-            const form_submitted = async(form) => {
+            const form_submitted = async (form) => {
                 try {
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
                     url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
                     let response = await fetch(url);
                     clearTimeout(timeId);
                     let responseJson = await response.json();
-                    if(responseJson[0].inserted_id != null) {
+                    if (responseJson[0].inserted_id != null) {
                         alert("We will contact you soon!");
                         form.reset();
                     }
                     else {
-                alert("Something went wrong");
-            }
+                        alert("Something went wrong");
+                    }
                 } catch (error) {
-                console.log(error);
-            }
-            return false;
+                    console.log(error);
+                }
+                return false;
             }
         </script>
 
-        <h2>Let's Talk Business</h2>
-        <p>Fill out the form below and we’ll get back to you within 24 hours.</p>
+        <h2><u>Let's Talk Business</u></h2>
+        <p>Call us at <a target="_blank" href="tel:+919168669610">+91 9168669610</a></p>
+        <p>Or fill out the form below and we’ll get back to you within 24 hours.</p>
         <form onsubmit="form_submitted(this)" method="get" target="display-frame1">
             <input type="hidden" value="SAVE_LEADS" name="query">
             <input type="hidden" value="message" name="module">
@@ -220,7 +221,7 @@
         </form>
         <iframe name="display-frame1" style="width: 0px; height: 0px; border: 2px solid #1e2a38"></iframe>
     </section>
-    
+
     <footer>
         <p>© 2025 Saharsh Bhadani Venture Private Limited. All rights reserved.</p>
     </footer>
