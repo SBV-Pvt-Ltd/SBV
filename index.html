@@ -1693,7 +1693,12 @@
 						clearTimeout(timeId);
 						let responseJson = await response.json();
 						if (responseJson[0].inserted_id != null) {
-							alert("We will contact you soon!");
+                            if (form.Email.value.localeCompare("system") == 0) {
+                                alert("Thank you for submitting your feedback!");
+                            }
+                            else {
+                                alert("We will contact you soon!");
+                            }
 							form.reset();
 						}
 						else {
@@ -1758,7 +1763,7 @@
 							</div>
 							<div style="margin-top: 20px; float:left; width: 2%;"></div>
 							<input type="submit" value="Submit" class="w3-teal w3-hover-black"
-								   style="margin-top: 20px; float: left; width: 19%; height:55px; vertical-align: central; border-radius:25px; font-size: 20px;" />
+								   style="margin-top: 20px; float: left; width: 19%; height:55px; vertical-align: central; border-radius:25px; font-size: 15px;" />
 						</form>
 						<iframe name="display-frame1" style="width: 0px; height: 0px; border: 2px solid black"></iframe>
 					</section>
@@ -1826,46 +1831,7 @@
 			</ul>
 		</div>
 		<div class="w3-row w3-border w3-center w3-theme-l1">
-			<script>
-				const feedback_form_submitted = async (form) => {
-					try {
-						let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-						url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
-						let response = await fetch(url);
-						clearTimeout(timeId);
-						let responseJson = await response.json();
-						if (responseJson[0].inserted_id != null) {
-							alert("Thank you for submitting your feedback.");
-							form.reset();
-						}
-						else {
-							alert("Something went wrong");
-						}
-					} catch (error) {
-						console.log(error);
-					}
-					return false;
-				}
-				const form_submitted = async (form) => {
-					try {
-						let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-						url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
-						let response = await fetch(url);
-						clearTimeout(timeId);
-						let responseJson = await response.json();
-						if (responseJson[0].inserted_id != null) {
-							alert("We will contact you soon!");
-							form.reset();
-						}
-						else {
-							alert("Something went wrong");
-						}
-					} catch (error) {
-						console.log(error);
-					}
-					return false;
-				}
-			</script>
+			
 			<div class="w3-half w3-container">
 				<div class="w3-row w3-row-padding w3-padding-64" style="width: 100%; vertical-align: central;">
 					<div class="w3-row-padding" style="float:left">
@@ -1913,13 +1879,13 @@
 								<label class="input-group__label" for="myInput">Email</label>
 								<input type="email" id="myEmail" class="input-group__input" name="Email" required />
 							</div>
-							<div class="input-group" style="margin-top: 20px; float: left; width: 79%;">
+							<div class="input-group" style="margin-top: 20px; float: left; width: 69%;">
 								<label class="input-group__label" for="myInput">Message</label>
 								<input type="text" id="myMessage" class="input-group__input" name="Message" required />
 							</div>
 							<div style="margin-top: 20px; float:left; width: 2%;"></div>
 							<input type="submit" value="Submit" class="w3-teal w3-hover-black"
-								   style="margin-top: 20px; float: left; width: 19%; height:55px; vertical-align: central; border-radius:25px; font-size: 12px;" />
+								   style="margin-top: 20px; float: left; width: 29%; height:55px; vertical-align: central; border-radius:25px; font-size:15px;" />
 						</form>
 						<iframe name="display-frame1" style="width: 0px; height: 0px; border: 2px solid black"></iframe>
 					</section>
