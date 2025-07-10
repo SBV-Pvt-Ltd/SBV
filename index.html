@@ -143,41 +143,40 @@
 			z-index: 3;
 		}
 
-		/* Style the buttons inside the tab */
-		.tab button {
-			display: block;
-			border: None;
-			border-bottom: 1px solid gray;
-			border-top: 1px solid gray;
-			background-color: inherit;
-			color: white;
-			padding: 22px 16px;
-			width: 100%;
-			outline: none;
-			text-align: left;
-			cursor: pointer;
-			transition: 0.3s;
-			font-size: 15px;
-			z-index: 3;
+			/* Style the buttons inside the tab */
+			.tab button {
+				display: block;
+				border: None;
+				border-bottom: 1px solid gray;
+				border-top: 1px solid gray;
+				background-color: inherit;
+				color: white;
+				padding: 22px 16px;
+				width: 100%;
+				outline: none;
+				text-align: left;
+				cursor: pointer;
+				transition: 0.3s;
+				font-size: 15px;
+				z-index: 3;
+			}
 
-		}
+				/* Change background color of buttons on hover */
+				.tab button:hover {
+					border-bottom: 1px solid white;
+					border-top: 1px solid white;
+					background-color: #ccc;
+					color: black;
+				}
 
-		/* Change background color of buttons on hover */
-		.tab button:hover {
-			border-bottom: 1px solid white;
-			border-top: 1px solid white;
-			background-color: #ccc;
-			color: black;
-		}
-
-		/* Create an active/current "tab button" class */
-		.tab button.active {
-			border-bottom: 1px solid white;
-			border-top: 1px solid white;
-			background-color: #888;
-			color: darkblue;
-			font-weight: bold;
-		}
+				/* Create an active/current "tab button" class */
+				.tab button.active {
+					border-bottom: 1px solid white;
+					border-top: 1px solid white;
+					background-color: #888;
+					color: darkblue;
+					font-weight: bold;
+				}
 
 		/* Style the tab content */
 		.tabcontent {
@@ -206,22 +205,22 @@
 			transition: 0.3s ease;
 		}
 
-		.service-card:hover {
-			transform: translateY(-5px);
-		}
+			.service-card:hover {
+				transform: translateY(-5px);
+			}
 
-		.service-card h5 {
-			font-weight: bold;
-			text-align: center;
-			margin-top: 0;
-			color: #1e2a38;
-		}
+			.service-card h5 {
+				font-weight: bold;
+				text-align: center;
+				margin-top: 0;
+				color: #1e2a38;
+			}
 
-		.service-card p {
-			padding: 10px;
-			margin-top: -12px;
-			color: #1e2a38;
-		}
+			.service-card p {
+				padding: 10px;
+				margin-top: -12px;
+				color: #1e2a38;
+			}
 
 		@property --bg-angle {
 			inherits: false;
@@ -366,67 +365,81 @@
 			transition: background-position 0.8s ease-out;
 		}
 
-		.input-group__input:hover {
-			box-sizing: border-box;
-			background-position: 100% 0;
+			.input-group__input:hover {
+				box-sizing: border-box;
+				background-position: 100% 0;
+			}
+
+			.input-group__input:focus {
+				box-sizing: border-box;
+				outline: 2px dashed #ad2b89;
+				outline-offset: 0.5em;
+			}
+
+		.toggle_additional_feature_button {
+			background-color: #2e8b57;
+			color: #fff;
+			border: none;
+			padding: 12px 24px;
+			border-radius: 8px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
 		}
 
-		.input-group__input:focus {
-			box-sizing: border-box;
-			outline: 2px dashed #ad2b89;
-			outline-offset: 0.5em;
-		}
-        .toggle_additional_feature_button {
-            background-color: #2e8b57;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-		.toggle_additional_feature_button:hover {
-		    background-color: #246b45;
-		}
-        .watch_featured_videos_button {
+			.toggle_additional_feature_button:hover {
+				background-color: #246b45;
+			}
+
+		.watch_featured_videos_button {
 			margin-top: 5px;
-            background-color: #FF0000; 
-			border: none; 
-			border-radius: 8px; 
-			padding: 12px 24px; 
-			color: white; 
+			background-color: #FF0000;
+			border: none;
+			border-radius: 8px;
+			padding: 12px 24px;
+			color: white;
 			font-size: 16px;
-        }
-        .watch_featured_videos_button:hover {
-			background-color: #8B0000;
-        }
-        .take_interactive_tour_button {
-            background-color: #2563eb; 
-			color: white; 
-			padding: 12px 24px; 
-			font-size: 16px; 
-			border: none; 
-			border-radius: 6px; 
+		}
+
+			.watch_featured_videos_button:hover {
+				background-color: #8B0000;
+			}
+
+		.take_interactive_tour_button {
+			background-color: #2563eb;
+			color: white;
+			padding: 12px 24px;
+			font-size: 16px;
+			border: none;
+			border-radius: 6px;
 			cursor: pointer;
 			margin-top: 5px;
-        }
-        .take_interactive_tour_button:hover {
-			background-color: #00008B;
-        }
-	</style>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17022645722"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
+		}
 
-		gtag('config', 'AW-17022645722');
-	</script>
+			.take_interactive_tour_button:hover {
+				background-color: #00008B;
+			}
+	</style>
+	<!-- Google Tag Manager -->
+	<script>
+	(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-M66SZF7K');</script>
+	<!-- End Google Tag Manager -->
 </head>
 
 <body id="myPage">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript>
+		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M66SZF7K"
+				height="0" width="0" style="display:none;visibility:hidden"></iframe>
+	</noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<script>
 		function delay(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
@@ -1693,12 +1706,12 @@
 						clearTimeout(timeId);
 						let responseJson = await response.json();
 						if (responseJson[0].inserted_id != null) {
-                            if (form.Email.value.localeCompare("system") == 0) {
-                                alert("Thank you for submitting your feedback!");
-                            }
-                            else {
-                                alert("We will contact you soon!");
-                            }
+							if (form.Email.value.localeCompare("system") == 0) {
+								alert("Thank you for submitting your feedback!");
+							}
+							else {
+								alert("We will contact you soon!");
+							}
 							form.reset();
 						}
 						else {
@@ -1831,7 +1844,7 @@
 			</ul>
 		</div>
 		<div class="w3-row w3-border w3-center w3-theme-l1">
-			
+
 			<div class="w3-half w3-container">
 				<div class="w3-row w3-row-padding w3-padding-64" style="width: 100%; vertical-align: central;">
 					<div class="w3-row-padding" style="float:left">
@@ -1976,7 +1989,7 @@
 			document.getElementById('testimonial_hide_content_3').hidden = true;
 			document.getElementById('additional_featured_content').hidden = true;
 			document.getElementById('toggle_additinal_features_div_2').hidden = true;
-            document.addEventListener('contextmenu', event => event.preventDefault());
+			document.addEventListener('contextmenu', event => event.preventDefault());
 		};
 	</script>
 
