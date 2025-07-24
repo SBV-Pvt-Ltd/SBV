@@ -5,7 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saharsh Bhadani Venture Pvt. Ltd. - Empowering Your Business</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style type="text/css">
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f9fb;
+            transition: opacity 0.75s, visibility 0.75s;
+        }
 
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 15px solid#dddddd;
+            border-top-color: #7449f5;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
+        }
+    </style>
     <style>
         body {
             margin: 0;
@@ -126,7 +164,7 @@
     </style>
     <!-- Google Tag Manager: head section -->
     <script>
-    (function (w, d, s, l, i) {
+        (function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
                 'gtm.start':
                     new Date().getTime(), event: 'gtm.js'
@@ -207,11 +245,14 @@
         <script>
             const form_submitted = async (form) => {
                 try {
+                    const loader = document.querySelector(".loader");
+                    loader.classList.remove("loader-hidden");
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
                     url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
                     let response = await fetch(url);
                     clearTimeout(timeId);
                     let responseJson = await response.json();
+                    loader.classList.add("loader-hidden");
                     if (responseJson[0].inserted_id != null) {
                         alert("We will contact you soon!");
                         form.reset();
@@ -246,8 +287,11 @@
     <script>
         window.onload = () => {
             document.addEventListener('contextmenu', event => event.preventDefault());
+
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader-hidden");
         };
     </script>
-
+    <div class="loader"></div>
 </body>
 </html>

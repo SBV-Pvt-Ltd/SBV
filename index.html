@@ -25,6 +25,46 @@
 
 	</script>
 	<style type="text/css">
+		.loader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #f7f9fb;
+			transition: opacity 0.75s, visibility 0.75s;
+		}
+
+		.loader-hidden {
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		.loader::after {
+			content: "";
+			width: 75px;
+			height: 75px;
+			border: 15px solid#dddddd;
+			border-top-color: #7449f5;
+			border-radius: 50%;
+			animation: loading 0.75s ease infinite;
+		}
+
+		@keyframes loading {
+			from {
+				transform: rotate(0turn);
+			}
+
+			to {
+				transform: rotate(1turn);
+			}
+		}
+	</style>
+
+	<style type="text/css">
 		:root {
 			--one: 250px;
 		}
@@ -143,40 +183,40 @@
 			z-index: 3;
 		}
 
-			/* Style the buttons inside the tab */
-			.tab button {
-				display: block;
-				border: None;
-				border-bottom: 1px solid gray;
-				border-top: 1px solid gray;
-				background-color: inherit;
-				color: white;
-				padding: 22px 16px;
-				width: 100%;
-				outline: none;
-				text-align: left;
-				cursor: pointer;
-				transition: 0.3s;
-				font-size: 15px;
-				z-index: 3;
-			}
+		/* Style the buttons inside the tab */
+		.tab button {
+			display: block;
+			border: None;
+			border-bottom: 1px solid gray;
+			border-top: 1px solid gray;
+			background-color: inherit;
+			color: white;
+			padding: 22px 16px;
+			width: 100%;
+			outline: none;
+			text-align: left;
+			cursor: pointer;
+			transition: 0.3s;
+			font-size: 15px;
+			z-index: 3;
+		}
 
-				/* Change background color of buttons on hover */
-				.tab button:hover {
-					border-bottom: 1px solid white;
-					border-top: 1px solid white;
-					background-color: #ccc;
-					color: black;
-				}
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+			border-bottom: 1px solid white;
+			border-top: 1px solid white;
+			background-color: #ccc;
+			color: black;
+		}
 
-				/* Create an active/current "tab button" class */
-				.tab button.active {
-					border-bottom: 1px solid white;
-					border-top: 1px solid white;
-					background-color: #888;
-					color: darkblue;
-					font-weight: bold;
-				}
+		/* Create an active/current "tab button" class */
+		.tab button.active {
+			border-bottom: 1px solid white;
+			border-top: 1px solid white;
+			background-color: #888;
+			color: darkblue;
+			font-weight: bold;
+		}
 
 		/* Style the tab content */
 		.tabcontent {
@@ -205,22 +245,22 @@
 			transition: 0.3s ease;
 		}
 
-			.service-card:hover {
-				transform: translateY(-5px);
-			}
+		.service-card:hover {
+			transform: translateY(-5px);
+		}
 
-			.service-card h5 {
-				font-weight: bold;
-				text-align: center;
-				margin-top: 0;
-				color: #1e2a38;
-			}
+		.service-card h5 {
+			font-weight: bold;
+			text-align: center;
+			margin-top: 0;
+			color: #1e2a38;
+		}
 
-			.service-card p {
-				padding: 10px;
-				margin-top: -12px;
-				color: #1e2a38;
-			}
+		.service-card p {
+			padding: 10px;
+			margin-top: -12px;
+			color: #1e2a38;
+		}
 
 		@property --bg-angle {
 			inherits: false;
@@ -422,7 +462,7 @@
 	</style>
 	<!-- Google Tag Manager -->
 	<script>
-	(function (w, d, s, l, i) {
+		(function (w, d, s, l, i) {
 			w[l] = w[l] || []; w[l].push({
 				'gtm.start':
 					new Date().getTime(), event: 'gtm.js'
@@ -431,6 +471,7 @@
 					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
 		})(window, document, 'script', 'dataLayer', 'GTM-M66SZF7K');</script>
 	<!-- End Google Tag Manager -->
+
 </head>
 
 <body id="myPage">
@@ -1700,12 +1741,15 @@
 			<script>
 				const form_submitted = async (form) => {
 					try {
+						const loader = document.querySelector(".loader");
+						loader.classList.remove("loader-hidden");
 						let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
 						url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
 						let response = await fetch(url);
 						clearTimeout(timeId);
 						let responseJson = await response.json();
 						if (responseJson[0].inserted_id != null) {
+                            loader.classList.add("loader-hidden");
 							if (form.Email.value.localeCompare("system") == 0) {
 								alert("Thank you for submitting your feedback!");
 							}
@@ -1990,6 +2034,9 @@
 			document.getElementById('additional_featured_content').hidden = true;
 			document.getElementById('toggle_additinal_features_div_2').hidden = true;
 			document.addEventListener('contextmenu', event => event.preventDefault());
+
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader-hidden");
 		};
 	</script>
 
@@ -2017,6 +2064,8 @@
 			}
 		}
 	</script>
+	<div class="loader"></div>
+
 </body>
 
 </html>
