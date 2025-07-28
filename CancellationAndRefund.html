@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Website of Saharsh Bhadani Venture Private Limited.">
+	<meta name="keywords"
+		content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting">
+	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<link rel="stylesheet" href="./css/w3.css">
+	<link rel="stylesheet" href="./css/w3-theme-black.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="Constant.js"></script>
+
+	<style type="text/css">
+		ol li {
+			font-size: 32px;
+			margin-left: 20px;
+		}
+		a:hover {
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body id="myPage">
+	<script>
+		function navigateTo(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+
+			new_url = current_url_refined + features_service_page_name;
+			new_url_section = new_url + "#" + pageName;
+			window.location.replace(new_url_section)
+			//window.open(new_url_section, "_blank");
+		}
+
+		function navigateToIndex(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+
+			new_url = current_url_refined + index_page_name;
+			new_url_section = new_url;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = new_url + pageName;
+			}
+			window.location.replace(new_url_section);
+		}
+
+		function navigateToPage(pageName) {
+			current_url = window.location.href;
+			var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+
+			new_url_section = current_url_refined;
+			if (pageName.localeCompare("#") != 0) {
+				new_url_section = current_url_refined + pageName;
+			}
+			window.location.replace(new_url_section);
+		}
+        function navigateToPageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.open(new_url_section);
+        }
+
+        function navigateToExplorePageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined + pageName;
+            window.open(new_url_section);
+        }
+	</script>
+
+	<!-- Sidebar on click -->
+	<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2"
+		id="mySidebar">
+		<a href="javascript:void(0)" onclick="w3_close()"
+			class="w3-bar-item w3-button w3-display-topright w3-text-teal">Close
+			<i class="fa fa-remove"></i>
+		</a>
+		<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button" style="font-size: 20px;">Business
+			Consultation</a>
+		<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button" style="font-size: 20px;">Business
+			Analytics</a>
+		<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button" style="font-size: 20px;">Software
+			Development</a>
+		<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button" style="font-size: 20px;">IT
+			Consultation</a>
+		<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button" style="font-size: 20px;">IT Services</a>
+		<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button" style="font-size: 20px;">Robotics</a>
+		<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button"
+			style="font-size: 20px;">Industrial Automation</a>
+		<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button" style="font-size: 20px;">Content
+			Creation</a>
+		<a onclick="navigateTo('GraphicDesigning')" href="#" class="w3-bar-item w3-button"
+			style="font-size: 20px;">Graphic Designing</a>
+
+	</nav>
+
+	<!-- Navbar -->
+	<div class="w3-top">
+		<div class="w3-bar w3-theme-d2 w3-left-align">
+			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2"
+			   href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+			<a onclick="navigateToIndex('#')" class="w3-bar-item w3-button w3-teal">
+				<div style="display: flex;">
+					<i class="fa fa-home" style="color: black; font-size: 23px;"></i>
+					<img src="./Logo/Logo.png" alt="Company Logo" width="63" height="21">
+				</div>
+			</a>
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+				About
+				Us
+			</a>
+			<div class="w3-dropdown-hover w3-hide-small">
+				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications">
+					Featured
+					Services&nbsp;<i class="fa fa-caret-down"></i>
+				</button>
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block">
+					<a onclick="navigateTo('BusinessConsultation')" class="w3-bar-item w3-button">
+						Business
+						Consultation
+					</a>
+					<a onclick="navigateTo('BusinessAnalytics')" class="w3-bar-item w3-button">Business Analytics</a>
+					<a onclick="navigateTo('SoftwareDevelopment')" class="w3-bar-item w3-button">
+						Software
+						Development
+					</a>
+					<a onclick="navigateTo('ITConsultation')" class="w3-bar-item w3-button">IT Consultation</a>
+					<a onclick="navigateTo('ITServices')" class="w3-bar-item w3-button">IT Services</a>
+					<a onclick="navigateTo('Robotics')" class="w3-bar-item w3-button">Robotics</a>
+					<a onclick="navigateTo('IndustrialAutomation')" class="w3-bar-item w3-button">
+						Industrial
+						Automation
+					</a>
+					<a onclick="navigateTo('ContentCreation')" class="w3-bar-item w3-button">Content Creation</a>
+					<a onclick="navigateTo('GraphicDesigning')" class="w3-bar-item w3-button">Graphic Designing</a>
+				</div>
+			</div>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
+				Contact
+				Us
+			</a>
+			<a target="_blank" class="w3-bar-item w3-button w3-hide-small w3-hover-white"
+			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
+				Projects
+			</a>
+
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+			<a onclick="navigateToIndex('#team')" class="w3-bar-item w3-button">About Us</a>
+			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
+			<a onclick="navigateToIndex('#contact')" class="w3-bar-item w3-button">Contact Us</a>
+			<a target="_blank" class="w3-bar-item w3-button"
+			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
+				Projects
+			</a>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div id="id01" class="w3-modal">
+		<div class="w3-modal-content w3-card-4 w3-animate-top">
+			<header class="w3-container w3-teal w3-display-container">
+				<span onclick="document.getElementById('id01').style.display='none'"
+					class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+				<h2>Please provide your details and we will contact you soon.</h2>
+			</header>
+			<div class="w3-container">
+				<div class="w3-col m7" style="width: 100%;">
+					<form class="form_leads w3-container w3-card-4 w3-padding-16 w3-white" 
+						action="https://django-hello-world-pink-ten.vercel.app"
+						method="get"
+						target="display-frame"
+						onsubmit="close_modal(this)">
+						<input type="hidden" value="SAVE_LEADS" name="query">
+						<input type="hidden" value="leads_form" name="module">
+						
+						<div class="w3-section">
+							<label>Name</label>
+							<input class="w3-input" type="text" name="Name" required>
+						</div>
+						<div class="w3-section">
+							<label>Email</label>
+							<input class="w3-input" type="email" name="Email" required>
+						</div>
+						<div class="w3-section">
+							<label>Country</label>
+							<input class="w3-input" type="text" name="Country" required>
+						</div>
+						<div class="w3-section">
+							<label>Phone number</label>
+							<input class="w3-input" type="number" name="PhoneNumber" required>
+						</div>
+						<div class="w3-section">
+							<label>Company Name</label>
+							<input class="w3-input" type="text" name="CompanyName" required>
+						</div>
+						<div class="w3-section">
+							<label>Product or services interested in</label>
+							<input class="w3-input" type="text" name="interestedIn" required>
+						</div>
+						<div class="w3-section">
+							<label>Remarks (if any)</label>
+							<input class="w3-input" type="text" name="Message">
+						</div>
+						<div class="w3-row">
+							<button type="reset" class="w3-button w3-right w3-theme">Clear</button>
+							<button type="submit" class="w3-button w3-left-align w3-theme">Submit</button>
+						</div>
+
+					</form>
+					<script>
+						function close_modal(form){
+							alert("We will contact you soon.");
+							document.getElementById('id01').style.display='none';
+						}
+					</script>
+					<iframe name="display-frame" style="width:0px;height:0px;border:2px solid white"></iframe>
+				</div>
+			</div>
+			<footer class="w3-container w3-teal">
+				<p id="modal_footer_message">&nbsp;</p>
+			</footer>
+		</div>
+	</div>
+	<!-- Fixed button at the bottom -->
+	<div style="position:fixed; bottom:15px; left: 10px; display: flex; justify-content: center; align-items: center;">
+		<button onclick="document.getElementById('id01').style.display='block'"
+			class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS">
+			GET IN TOUCH
+		</button>
+	</div>
+
+	<!-- faq -->
+	<div class="w3-container w3-padding-64" style="text-align: justify;">
+		<section id="policy" class="web-content">
+			<br><br><br>
+			<div style="width: 100%;">
+				<p style="font-size: 32px;">Saharsh Bhadani Venture Private Limited Website Policy</p><br>
+				<div style="text-align: justify;">
+					<h1>Cancellation and Refund</h1>
+
+					<p>
+						SAHARSH BHADANI VENTURE PRIVATE LIMITED believes in helping its customers as far as possible, and has therefore a liberal cancellation policy. Under this policy:
+					</p>
+					<ul>
+						<li>
+							Cancellations will be considered only if the request is made within 2-3 days of placing the order. However, the cancellation request may not be entertained if the orders have 
+							been communicated to the vendors/merchants and they have initiated the process of shipping them.
+						</li>
+						<li>
+							SAHARSH BHADANI VENTURE PRIVATE LIMITED does not accept cancellation requests for perishable items like flowers, eatables etc. However, refund/replacement can be made if the 
+							customer establishes that the quality of product delivered is not good.
+						</li>
+						<li>
+							In case of receipt of damaged or defective items please report the same to our Customer Service team. The request will, however, be entertained once the merchant has checked 
+							and determined the same at his own end. This should be reported within 2-3 days of receipt of the products.
+						</li>
+						<li>
+							In case you feel that the product received is not as shown on the site or as per your expectations, you must bring it to the notice of our customer service within 2-3 days of 
+							receiving the product. The Customer Service Team after looking into your complaint will take an appropriate decision.
+						</li>
+						<li>
+							In case of complaints regarding products that come with a warranty from manufacturers, please refer the issue to them.
+						</li>
+						<li>
+							In case of any Refunds approved by the SAHARSH BHADANI VENTURE PRIVATE LIMITED, it’ll take 2-3 days for the refund to be processed to the end customer.
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+	<!-- Footer -->
+	<div class="w3-row-padding w3-center w3-padding-64" id="pricing">
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Contact details</p>
+				</li>
+				<li class="w3-padding-16">
+					<div style="text-align: left; text-align: justify;word-wrap: break-word;">
+						29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+						Landmark: Near Lansdowne Market<br>
+						WhatsApp & Phone no: +91 9168669610<br>
+						Email: SaharshBhadaniVenture@gmail.com
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">Support</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					<a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+					<a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a>&nbsp;|&nbsp;
+					<a onclick="navigateToPage(policy_page_name)"><u>Privacy Policy</u></a>
+					<br>
+					<a onclick="navigateToPage(tnc_page_name)"><u>Terms and Conditions</u></a>&nbsp;|&nbsp;
+					<a onclick="navigateToPage(cnr_page_name)"><u>Cancellation and Refund</u></a>
+					<br>
+					<a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a>&nbsp;|&nbsp;
+					<a onclick="navigateToPage(snd_page_name)"><u>Shipping and Delivery</u></a>
+					<br>
+					<a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+				</li>
+			</ul>
+		</div>
+
+		<div class="w3-third w3-margin-bottom">
+			<ul class="w3-ul w3-border w3-hover-shadow">
+				<li class="w3-theme-l2">
+					<p class="w3-xlarge">For appointment</p>
+				</li>
+				<li class="w3-padding-16" style="text-align: left;">
+					Chat now: <a target="_blank" href="https://wa.me/919168669610?text=">WhatsApp chat</a><br>
+					Call: <a target="_blank" href="tel:+919168669610">+91 9168669610</a><br>
+					Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+					Visit: <a target="_blank"
+						href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">Location
+						in Map.</a><br>
+					Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">Fill a Google
+						form</a><br>
+				</li>
+			</ul>
+		</div>
+		<center>
+			<button onclick="document.getElementById('id01').style.display='block'"
+				class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px;">
+				GET IN TOUCH
+			</button>
+		</center>
+	</div>
+	<!-- Footer -->
+	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+		<h4>Follow Us</h4>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"><i
+				class="fa fa-facebook"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter"><i
+				class="fa fa-twitter"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+				class="fa fa-google-plus"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
+				class="fa fa-instagram"></i></a>
+		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i
+				class="fa fa-linkedin"></i></a>
+		<p>Last updated on : <span id="last_updated_on"></span></p>
+		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+
+		<div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+			<span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
+			<a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
+					<i class="fa fa-chevron-circle-up"></i></span></a>
+		</div>
+	</footer>
+	<!--Code for WhatsApp-->
+	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+	<script>
+		var wa_btnSetting = {
+			"btnColor": "#16BE45",
+			"ctaText": "",
+			"cornerRadius": 40,
+			"marginBottom": 20,
+			"marginLeft": 20,
+			"marginRight": 20,
+			"btnPosition": "right",
+			"whatsAppNumber": "919168669610",
+			"welcomeMessage": "Hello",
+			"zIndex": 999999,
+			"btnColorScheme": "light"
+		};
+		window.onload = () => {
+			_waEmbed(wa_btnSetting);
+			document.getElementById('last_updated_on').textContent = last_updated_on;
+
+		};
+	</script>
+
+	<script>
+		// Script for side navigation
+		function w3_open() {
+			var x = document.getElementById("mySidebar");
+			x.style.width = "300px";
+			x.style.paddingTop = "10%";
+			x.style.display = "block";
+		}
+
+		// Close side navigation
+		function w3_close() {
+			document.getElementById("mySidebar").style.display = "none";
+		}
+
+		// Used to toggle the menu on smaller screens when clicking on the menu button
+		function openNav() {
+			var x = document.getElementById("navDemo");
+			if (x.className.indexOf("w3-show") == -1) {
+				x.className += " w3-show";
+			} else {
+				x.className = x.className.replace(" w3-show", "");
+			}
+		}
+	</script>
+
+</body>
+
+</html>
