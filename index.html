@@ -1750,7 +1750,8 @@
 						const loader = document.querySelector(".loader");
 						loader.classList.remove("loader-hidden");
 						let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-						url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
+						message_to_save = '$index$' + form.Message.value
+						url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + message_to_save;
 						let response = await fetch(url);
 						clearTimeout(timeId);
 						let responseJson = await response.json();
