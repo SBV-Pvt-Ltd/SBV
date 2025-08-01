@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="Landing page to capture leads for Saharsh Bhadani Venture Private Limited.">
+    <meta name="keywords"
+          content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development">
+    <meta name="author" content="Saharsh Bhadani Venture Private Limited">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saharsh Bhadani Venture Pvt. Ltd. - Empowering Your Business</title>
+    <title>Saharsh Bhadani Venture Pvt. Ltd.</title>
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style type="text/css">
         .loader {
@@ -28,8 +33,8 @@
             content: "";
             width: 75px;
             height: 75px;
-            border: 15px solid#dddddd;
-            border-top-color: #7449f5;
+            border: 15px solid #dddddd;
+            border-top-color: #009688;
             border-radius: 50%;
             animation: loading 0.75s ease infinite;
         }
@@ -138,8 +143,8 @@
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin: 10px 0;
-            border: none;
+            margin: 10px 10px;
+            border: 1px solid black;
             border-radius: 4px;
         }
 
@@ -148,6 +153,7 @@
                 color: white;
                 cursor: pointer;
                 font-size: 1em;
+
                 transition: background 0.3s ease;
             }
 
@@ -248,13 +254,19 @@
                     const loader = document.querySelector(".loader");
                     loader.classList.remove("loader-hidden");
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                    url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + form.Message.value;
+                    message_to_save = '$landing-page$' + form.Message.value
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + message_to_save;
                     let response = await fetch(url);
                     clearTimeout(timeId);
                     let responseJson = await response.json();
-                    loader.classList.add("loader-hidden");
                     if (responseJson[0].inserted_id != null) {
-                        alert("We will contact you soon!");
+                        loader.classList.add("loader-hidden");
+                        if (form.Email.value.localeCompare("system") == 0) {
+                            alert("Thank you for submitting your feedback!");
+                        }
+                        else {
+                            alert("We will contact you soon!");
+                        }
                         form.reset();
                     }
                     else {
@@ -284,12 +296,29 @@
     <footer>
         <p>© 2025 Saharsh Bhadani Venture Private Limited. All rights reserved.</p>
     </footer>
-    <script>
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script type="text/javascript">
+	    var wa_btnSetting = {
+		    "btnColor": "#16BE45",
+		    "ctaText": "",
+		    "cornerRadius": 40,
+		    "marginBottom": 20,
+		    "marginLeft": 20,
+		    "marginRight": 20,
+		    "btnPosition": "right",
+		    "whatsAppNumber": "919168669610",
+		    "welcomeMessage": "Hello",
+		    "zIndex": 999999,
+		    "btnColorScheme": "light"
+        };
+    </script>
+    <script type="text/javascript">
         window.onload = () => {
             document.addEventListener('contextmenu', event => event.preventDefault());
 
             const loader = document.querySelector(".loader");
             loader.classList.add("loader-hidden");
+            _waEmbed(wa_btnSetting);
         };
     </script>
     <div class="loader"></div>
