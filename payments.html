@@ -35,7 +35,7 @@
 
 			new_url = current_url_refined + features_service_page_name;
 			new_url_section = new_url + "#" + pageName;
-			window.location.replace(new_url_section)
+            window.location.href = new_url_section;
 			//window.open(new_url_section, "_blank");
 		}
 
@@ -49,7 +49,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = new_url + pageName;
 			}
-			window.location.replace(new_url_section);
+            window.location.href = new_url_section;
 		}
 
 		function navigateToPage(pageName) {
@@ -61,7 +61,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = current_url_refined + pageName;
 			}
-			window.location.replace(new_url_section);
+            window.location.href = new_url_section;
 		}
         function navigateToPageInAnotherTab(pageName) {
             current_url = window.location.href;
@@ -259,6 +259,13 @@
 					<div id="bank-account-details" style="border: 1px solid black; height: 100px">
 						<h1>Bank Account Details</h1>
 	
+					</div>
+					<div id="razorpay" style="border: 1px solid black; height: 120px; padding: 10px;">
+						<h1>Securely pay with Razorpay</h1>
+
+						<form>
+							<script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QzNRhzNZB0HLtp" async></script>
+						</form>
 					</div>
 					<div id="paypal-details" style="border: 1px solid black; height: 100px">
 						<h1>Paypal Details</h1>

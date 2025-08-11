@@ -36,7 +36,7 @@
 
 			new_url = current_url_refined + features_service_page_name;
 			new_url_section = new_url + "#" + pageName;
-			window.location.replace(new_url_section)
+            window.location.href = new_url_section;
 			//window.open(new_url_section, "_blank");
 		}
 
@@ -50,7 +50,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = new_url + pageName;
 			}
-			window.location.replace(new_url_section);
+            window.location.href = new_url_section;
 		}
 
 		function navigateToPage(pageName) {
@@ -62,7 +62,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = current_url_refined + pageName;
 			}
-			window.location.replace(new_url_section);
+            window.location.href = new_url_section;
 		}
         function navigateToPageInAnotherTab(pageName) {
             current_url = window.location.href;

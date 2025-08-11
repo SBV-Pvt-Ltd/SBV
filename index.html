@@ -3,9 +3,8 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="description" content="Website of Saharsh Bhadani Venture Private Limited.">
-	<meta name="keywords"
-		  content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
+	<meta name="description" content="Official Homepage of Saharsh Bhadani Venture Private Limited.">
+	<meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
 	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
@@ -16,7 +15,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<script src="Constant.js"></script>
-	<script>
+	<script type="text/javascript">
 		var w = window.innerWidth;
 		var testiminial_1_hidden = true;
 		var testiminial_2_hidden = true;
@@ -494,7 +493,7 @@
 			if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
 			new_url = current_url_refined + features_service_page_name;
 			new_url_section = new_url + "#" + pageName;
-			window.location.replace(new_url_section)
+			window.location.href = new_url_section;
 			//window.open(new_url_section, "_blank");
 		}
 
@@ -507,7 +506,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = new_url + pageName;
 			}
-			window.location.replace(new_url_section);
+			window.location.href = new_url_section;
 		}
 
 		function navigateToPage(pageName) {
@@ -518,7 +517,7 @@
 			if (pageName.localeCompare("#") != 0) {
 				new_url_section = current_url_refined + pageName;
 			}
-			window.location.replace(new_url_section);
+			window.location.href = new_url_section;
 		}
 
 		function navigateToPageInAnotherTab(pageName) {
@@ -964,7 +963,7 @@
 
 		<!-- Navbar on small screens -->
 		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
-			<a onclick="navigateToPage('aboutUs,html')" class="w3-bar-item w3-button">About Us</a>
+			<a onclick="navigateToPage('aboutUs.html')" class="w3-bar-item w3-button">About Us&nbsp;<i class="fa fa-caret-down"></i></a>
 			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
 			<a target="_blank" class="w3-bar-item w3-button"
 			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
