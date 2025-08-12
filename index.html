@@ -291,7 +291,7 @@
 		.why_choose_us_main {
 			width: 100%;
 			box-sizing: border-box;
-			background: radial-gradient( circle, oklch(0.15 0.2 330 / 0), oklch(0.15 0.2 330 / 1) ), linear-gradient( 344deg in oklch, oklch(0.3 0.37 310), oklch(0.35 0.37 330), oklch(0.3 0.37 310) );
+			//background: radial-gradient( circle, oklch(0.15 0.2 330 / 0), oklch(0.15 0.2 330 / 1) ), linear-gradient( 344deg in oklch, oklch(0.3 0.37 310), oklch(0.35 0.37 330), oklch(0.3 0.37 310) );
 			display: grid;
 		}
 
@@ -301,9 +301,9 @@
             padding: 16px;
             box-sizing: border-box;
             border-radius: 1rem;
-            box-shadow: 0.125rem 0.25rem 0.25rem 0.5rem oklch(0.1 0.37 315 / 0.25);
-            color: white;
-            border: 6px solid #5600CC;
+            //box-shadow: 0.125rem 0.25rem 0.25rem 0.5rem oklch(0.1 0.37 315 / 0.25);
+            //color: white;
+            border: 6px solid #009688;
             & h3
 
 		{
@@ -316,22 +316,19 @@
 		}
 
 		background:
-		/* Background colors don’t work with `background-origin`, so use a gradient. */
-		linear-gradient( to bottom, oklch(0.1 0.2 240 / 0.95), oklch(0.1 0.2 240 / 0.95) ) padding-box, /* ends at inner border edges */
-		conic-gradient( from var(--bg-angle) in oklch longer hue, oklch(0.85 0.37 0) 0 0 ) border-box; /* extends to outer border edges */
-		/* a clear border lets the background gradient shine through */
+		transparent;
 		}
 
 		.testimonials_container {
 			width: 100%;
-			background: linear-gradient(100deg, #402, #006);
+			//background: linear-gradient(100deg, #402, #006);
 			padding: 2em;
 			min-height: 100vh;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			background-color: #ffffff;
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 55'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23fff' stroke-width='7' opacity='.1'%3E%3Cpath d='M-345 34.5s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 48.3 0 48.3s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 20.7s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 34.5 0 34.5s115-13.8 115-13.8S172.5 6.9 230 6.9s115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8m-920 27.6s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 62.1 0 62.1s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 6.9s57.5-13.8 115-13.8S-115 6.9-115 6.9-57.5 20.7 0 20.7 115 6.9 115 6.9 172.5-6.9 230-6.9 345 6.9 345 6.9s57.5 13.8 115 13.8S575 6.9 575 6.9'/%3E%3Cpath d='M-345-6.9s57.5-13.8 115-13.8S-115-6.9-115-6.9-57.5 6.9 0 6.9 115-6.9 115-6.9s57.5-13.8 115-13.8S345-6.9 345-6.9 402.5 6.9 460 6.9 575-6.9 575-6.9m-920 69s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 75.9 0 75.9s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3C/g%3E%3C/svg%3E%0A"), linear-gradient(80deg, #202, #006);
+			//background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 55'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23fff' stroke-width='7' opacity='.1'%3E%3Cpath d='M-345 34.5s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 48.3 0 48.3s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 20.7s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 34.5 0 34.5s115-13.8 115-13.8S172.5 6.9 230 6.9s115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8m-920 27.6s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 62.1 0 62.1s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 6.9s57.5-13.8 115-13.8S-115 6.9-115 6.9-57.5 20.7 0 20.7 115 6.9 115 6.9 172.5-6.9 230-6.9 345 6.9 345 6.9s57.5 13.8 115 13.8S575 6.9 575 6.9'/%3E%3Cpath d='M-345-6.9s57.5-13.8 115-13.8S-115-6.9-115-6.9-57.5 6.9 0 6.9 115-6.9 115-6.9s57.5-13.8 115-13.8S345-6.9 345-6.9 402.5 6.9 460 6.9 575-6.9 575-6.9m-920 69s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 75.9 0 75.9s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3C/g%3E%3C/svg%3E%0A"), linear-gradient(80deg, #202, #006);
 			background-position: 50% 50%;
 			animation: background-move 10s linear infinite;
 			background-size: 100vw auto, 100% 100%;
@@ -361,7 +358,7 @@
 			.input-group {
 				box-sizing: border-box;
 				position: relative;
-				mix-blend-mode: lighten;
+				mix-blend-mode: darken;
 			}
 
 			.input-group__label {
@@ -369,7 +366,7 @@
 				position: absolute;
 				left: 3em;
 				top: -0.28em;
-				background: #000;
+				background: #fff;
 			}
 		}
 
@@ -380,14 +377,13 @@
 			text-transform: uppercase;
 			font-size: 0.875em;
 			letter-spacing: 0.1em;
-			color: #ccd;
-			color: rgba(255, 220, 255, 0.6);
+			color: gray;
 			cursor: pointer;
 		}
 
 		.input-group__input {
 			box-sizing: border-box;
-			color: #fff;
+			color: #000;
 			font-size: 1.25rem;
 			line-height: 1;
 			border-style: none;
@@ -396,7 +392,7 @@
 			width: 100%;
 			padding: 0.8em 1em;
 			border: 0.25em solid transparent;
-			background-image: linear-gradient(#000, #000), linear-gradient(120deg, #f09 0%, #0ff 50%, #9f0 100%);
+			background-image: linear-gradient(#fff, #fff), linear-gradient(120deg, #f09 0%, #0ff 50%, #9f0 100%);
 			background-origin: border-box;
 			background-clip: padding-box, border-box;
 			border-radius: 1.8em;
@@ -404,16 +400,16 @@
 			transition: background-position 0.8s ease-out;
 		}
 
-			.input-group__input:hover {
-				box-sizing: border-box;
-				background-position: 100% 0;
-			}
+		.input-group__input:hover {
+			box-sizing: border-box;
+			background-position: 100% 0;
+		}
 
-			.input-group__input:focus {
-				box-sizing: border-box;
-				outline: 2px dashed #ad2b89;
-				outline-offset: 0.5em;
-			}
+		.input-group__input:focus {
+			box-sizing: border-box;
+			outline: 2px dashed #ad2b89;
+			outline-offset: 0.5em;
+		}
 
 		.toggle_additional_feature_button {
 			background-color: #2e8b57;
@@ -426,9 +422,9 @@
 			transition: background-color 0.3s ease;
 		}
 
-			.toggle_additional_feature_button:hover {
-				background-color: #246b45;
-			}
+		.toggle_additional_feature_button:hover {
+			background-color: #246b45;
+		}
 
 		.watch_featured_videos_button {
 			margin-top: 5px;
@@ -440,9 +436,9 @@
 			font-size: 16px;
 		}
 
-			.watch_featured_videos_button:hover {
-				background-color: #8B0000;
-			}
+		.watch_featured_videos_button:hover {
+			background-color: #8B0000;
+		}
 
 		.take_interactive_tour_button {
 			background-color: #2563eb;
@@ -455,9 +451,9 @@
 			margin-top: 5px;
 		}
 
-			.take_interactive_tour_button:hover {
-				background-color: #00008B;
-			}
+		.take_interactive_tour_button:hover {
+			background-color: #00008B;
+		}
 	</style>
 	<!-- Google Tag Manager -->
 	<script>
@@ -963,7 +959,7 @@
 
 		<!-- Navbar on small screens -->
 		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
-			<a onclick="navigateToPage('aboutUs.html')" class="w3-bar-item w3-button">About Us&nbsp;<i class="fa fa-caret-down"></i></a>
+			<a onclick="navigateToPage('aboutUs.html')" class="w3-bar-item w3-button">About Us</a>
 			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
 			<a target="_blank" class="w3-bar-item w3-button"
 			   onclick="navigateToExplorePageInAnotherTab(explore_page_name_project_section)">
@@ -978,7 +974,7 @@
 	<div class="w3-display-container w3-animate-opacity"
 		 style="background-image: url('./w3images/home_screen_display.gif'); width: 100%; height: 600px; min-height: 300px; max-height: 600px; background-size: 100% 100%; background-color: black; background-position: center; background-repeat: no-repeat; padding: 50px; ">
 		<!--Add play and pause button. Saharsh-->
-		<!-- use only 3 fonts for heading, sub heading and text--> 
+		<!-- use only 3 fonts for heading, sub heading and text-->
 	</div>
 	<div class="w3-large w3-display-container w3-animate-opacity" style="width: 100%; height: 60px; background-color: #009688;">
 		<div class="w3-container w3-display-bottomleft w3-margin-bottom">
@@ -1079,7 +1075,7 @@
 		   style="position:absolute;top:-28px;right:24px">+</a>
 	</div>
 	<!-- Large and Small screens-->
-	<div class="w3-row-padding w3-padding-64 w3-theme-l1 w3-hide-medium" id="FeaturedServices">
+	<div class="w3-row-padding w3-padding-64 w3-theme-index1 w3-hide-medium" id="FeaturedServices">
 		<h2 class="w3-wide w3-center">
 			<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">FEATURED SERVICES</span></div>
 		</h2>
@@ -1141,7 +1137,7 @@
 
 	</div>
 
-	<div class="w3-row-padding w3-theme-l1 w3-hide-medium" id="FeaturedServices" style="margin-top: -50px;">
+	<div class="w3-row-padding w3-theme-index1 w3-hide-medium" id="FeaturedServices" style="margin-top: -50px;">
 		<div class="w3-quarter" style="cursor: pointer; margin-bottom: 15px" onclick="navigateTo('ContentCreation')">
 			<div class="w3-card outer_container">
 				<center>
@@ -1168,7 +1164,7 @@
 		</div>
 	</div>
 	<!-- Medium screens-->
-	<div class="w3-row-padding w3-padding-64 w3-theme-l1 w3-hide-large w3-hide-small w3-medium" id="FeaturedServices">
+	<div class="w3-row-padding w3-padding-64 w3-theme-index1 w3-hide-large w3-hide-small w3-medium" id="FeaturedServices">
 		<h2 class="w3-wide w3-center">
 			<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">FEATURED SERVICES</span></div>
 		</h2>
@@ -1230,7 +1226,7 @@
 		</div>
 
 	</div>
-	<div class="w3-row-padding w3-theme-l1  w3-hide-large w3-hide-small w3-medium" id="FeaturedServices" style="margin-top: -35px;">
+	<div class="w3-row-padding w3-theme-index1  w3-hide-large w3-hide-small w3-medium" id="FeaturedServices" style="margin-top: -35px;">
 
 		<div class="w3-quarter" style="margin-bottom: 14px; cursor: pointer;" onclick="navigateTo('BusinessAnalytics')">
 			<div class="w3-card outer_container">
@@ -1262,7 +1258,7 @@
 	</div>
 
 
-	<div class="w3-row-padding w3-theme-l1">
+	<div class="w3-row-padding w3-theme-index1">
 		<center>
 			<button onclick="document.getElementById('id01').style.display='block'"
 					class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-bottom: 10px; margin-top: 15px; border-radius: 25px;">
@@ -1270,6 +1266,7 @@
 			</button>
 		</center>
 	</div>
+	<div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
 
 	<!--Why choose us?-->
 	<!-- Container -->
@@ -1292,7 +1289,7 @@
 			}
 		}
 	</script>
-	<div class="why_choose_us_main w3-theme-l1 w3-row-padding w3-padding-64" id="WhyChooseOurServices">
+	<div class="why_choose_us_main w3-theme-index1 w3-row-padding w3-padding-64" id="WhyChooseOurServices">
 		<center>
 			<h2 class="w3-wide">
 				<span class="w3-xlarge w3-border-teal w3-bottombar">WHY CHOOSE US</span>
@@ -1575,7 +1572,9 @@
 			}
 		}
 	</script>
-	<div class="w3-theme-l1 testimonials_container" id="testimonials">
+	<div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+
+	<div class="w3-theme-index1 testimonials_container" id="testimonials">
 		<div class="w3-container w3-content " style="word-break: break-word; text-align: justify">
 			<h2 class="w3-wide w3-center">
 				<div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">TESTIMONIALS</span></div>
@@ -1640,6 +1639,7 @@
 		<a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
 		   style="position:absolute;top:-28px;right:24px">+</a>
 	</div>
+	<div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
 
 
 
@@ -1679,8 +1679,10 @@
 				 style="background: #41295a; /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #2F0743, #41295a); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ ">
 
 				-->
-	<div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium w3-theme-l1" id="contactUs"
+	<div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium w3-theme-index1" id="contactUs">
+		<!--
 		 style="background: #141E30; /* fallback for old browsers */ background: -webkit-linear-gradient(to right, #243B55, #141E30); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ ">
+		-->
 		<center>
 			<button onclick="document.getElementById('id01').style.display='block'"
 					class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 20px; border-radius:25px; margin-bottom: 20px;">
@@ -1758,7 +1760,7 @@
 						clearTimeout(timeId);
 						let responseJson = await response.json();
 						if (responseJson[0].inserted_id != null) {
-                            loader.classList.add("loader-hidden");
+							loader.classList.add("loader-hidden");
 							if (form.Email.value.localeCompare("system") == 0) {
 								alert("Thank you for submitting your feedback!");
 							}
@@ -2044,8 +2046,8 @@
 			document.getElementById('toggle_additinal_features_div_2').hidden = true;
 			document.addEventListener('contextmenu', event => event.preventDefault());
 
-            const loader = document.querySelector(".loader");
-            loader.classList.add("loader-hidden");
+			const loader = document.querySelector(".loader");
+			loader.classList.add("loader-hidden");
 		};
 	</script>
 
