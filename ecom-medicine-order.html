@@ -93,6 +93,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Karma:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
         /* W3 overrides */
@@ -606,6 +607,7 @@
             }
 
             .main-title, .subtitle {
+                justify-content: center;
                 text-align: center;
             }
         }
@@ -673,7 +675,7 @@
 
     <!-- Main content -->
     <main id="main-content" class="w3-main w3-content w3-padding container" style="margin-top:100px">
-        <h1 class="main-title">We are Leading Pharmaceuticals Distributor and Third Party Manufacturer in Patna, Bihar</h1>
+        <h1 class="main-title">We are Leading Pharmaceuticals Distributor and Third Party Manufacturer</h1>
         <p class="subtitle">Your trusted pharmaceuticals distributor now accepts orders online - Order from your WhatsApp now!</p>
 
         <!-- Product catalog -->
@@ -723,10 +725,9 @@
 
         <!-- About section -->
         <section id="about" aria-labelledby="about-heading">
-            <div class="w3-container w3-padding-32 w3-center">
-                <h2 id="about-heading">About Us</h2>
+            <div class="w3-container w3-padding-32">
+                <h2 id="about-heading">About Us - Who are we!</h2>
                 <div class="w3-padding-32">
-                    <h3>Who are we!</h3>
                     <p><em>Our Passion For Genuine and Good Products</em></p>
                 </div>
             </div>
@@ -736,19 +737,36 @@
         <footer class="w3-row-padding w3-padding-32">
             <div class="w3-third">
                 <h3>Address</h3>
+                <button class="btn" id="googleMapLocationButton" onclick="openGoogleMap()">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    Locate on Google Maps
+                </button>
                 <address>
-                    Dabla Biotech<br>
-                    Patna, Bihar<br>
-                    India
+                    Our Stockist: <br />
+                    TRADE PHARMACIA<br />
+                    Shop no. 106, 1st floor<br />
+                    Govinda complex,<br />
+                    GM RD, Patna<br />
                 </address>
+
             </div>
             <div class="w3-third">
                 <h3>Payment Options</h3>
-                <p>Multiple payment methods accepted including digital payments and QR codes.</p>
+                <button class="btn" id="qrCodeForPayment" onclick="getQRCode()">
+                    <i class="fa fa-qrcode" aria-hidden="true"></i>
+                    QR Code to Pay
+                </button>
+                <p>Multiple payment methods accepted including digital payments and QR codes available.</p>
             </div>
             <div class="w3-third">
                 <h3>Contact</h3>
+                <button class="btn" id="qrCodeForPayment" onclick="dialCustCare()">
+                    <i class="fas fa-phone-square" aria-hidden="true"></i>
+                    Call customer-care
+                </button>
                 <p>WhatsApp: +91 7903854010</p>
+                <p>Customer care: +91 9470894639</p>
+                <p>Email: dablabiotechnew@gmail.com</p>
             </div>
         </footer>
 
@@ -1033,7 +1051,7 @@
 
                 message += `Total Amount: ${utils.formatCurrency(total)}\n`;
                 message += `Total Items: ${count}\n\n`;
-                message += "Please confirm that you have received my order and let me know the next steps for delivery and payment.";
+                message += "Please confirm receipt of my order and inform me of the next steps regarding delivery and payment. I also understand that your working hours are from 10:00 AM to 08:00 PM, and your customer care number is +91 9470894639.";
 
                 return message;
             }
@@ -1074,6 +1092,19 @@
         function closeCartPanel() {
             elements.cartPanel.classList.remove('show');
             elements.cartPanel.setAttribute('aria-hidden', 'true');
+        }
+        // User actions
+        function openGoogleMap() {
+            var googleMapsUrl = "https://www.google.com/maps/place/TRADE+PHARMACIA/@25.616168,85.1572452,17z/data=!3m1!4b1!4m6!3m5!1s0x39ed596716f2d2d1:0xc9abfdeefaac499!8m2!3d25.6161632!4d85.1598201!16s%2Fg%2F11h3p23lnl?entry=ttu&g_ep=EgoyMDI1MDkwOS4wIKXMDSoASAFQAw%3D%3D";
+            window.open(googleMapsUrl, "_blank");
+        }
+        function getQRCode() {
+            var getCodeLink = "https://lh3.googleusercontent.com/d/1EbuXkCiLy1vNXOY2LT0DNKtU9EyubXQv";
+            openImageModal(getCodeLink, 'QR Code For Payments')
+        }
+        function dialCustCare() {
+            var custCareNo = "+919470894639";
+            window.open('tel:' + custCareNo, '_blank');
         }
 
         // Product interaction functions
