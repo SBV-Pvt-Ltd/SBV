@@ -10,7 +10,7 @@ instagram = "";
 
 // Configuration - 917903854010
 const CONFIG = {
-    whatsappNumber: "+919168669610",
+    whatsappNumber: "+917903854010",
     spreadsheetId: '1ZilazHW44UHB03semgMtwA2Qfhn3OROgWqC6GPPW6ro',
     apiKey: 'AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0',
     range: 'Form responses 1!A2:J'
