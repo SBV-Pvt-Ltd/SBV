@@ -7,7 +7,7 @@
     <meta name="keywords" content="Dabla,Biotech,Dabla Biotech,Pharmaceuticals Distributor,Third Party Manufacturer,Patna,Binod Seth">
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
 
-    <title>Dabla Biotech - Leading Pharmaceuticals Distributor in Patna, Bihar</title>
+    <title>Dabla Biotech - Leading Pharmaceuticals Distributor</title>
 
     <!-- Preconnect for faster font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -1194,6 +1194,13 @@
 
             const whatsappUrl = `https://api.whatsapp.com/send?phone=${CONFIG.whatsappNumber}&text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, "_blank");
+            state.cart = {};
+            state.products.forEach(product => {
+                product.qty = 0;
+                const qtyInput = document.getElementById(`qty_${product.id}`);
+                if (qtyInput) qtyInput.value = 0;
+            });
+            cart.updateUI();
         }
 
         // Initialize application
