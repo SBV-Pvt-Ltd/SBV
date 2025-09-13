@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="Official page for file handling of Saharsh Bhadani Venture Private Limited.">
+	<meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
+	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+	<link rel="stylesheet" href="./css/w3.css">
+	<link rel="stylesheet" href="./css/w3-theme-black.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<script src="Constant.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+	<script type="text/javascript">
+		const YOUR_API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+		const YOUR_PUBLIC_FOLDER_ID = "1FkUvIfmVaL1Pk21-HLyp0vQMjoQTcKeN";
+		const CLIENT_ID = "789103313019-d5uf5qfsk7hrvo69ef7hgjaq1k0p63pr.apps.googleusercontent.com";
+		
+		window.onload = () => {
+			gapi.load('client', async () => {
+                await gapi.client.init({
+                    apiKey: YOUR_API_KEY,
+                    clientId: CLIENT_ID,
+                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
+                    scope: 'https://www.googleapis.com/auth/drive'
+                }).then(() => {
+					console.log('GAPI client initialized');
+                    // API client loaded and initialized
+                    // You can now make requests to the Drive API
+                    // Call the function with your public folder ID
+                    listFilesInFolder(YOUR_PUBLIC_FOLDER_ID); // Replace with your public folder ID
+                }, (error) => {
+                    console.error('Error initializing GAPI client:', error);
+                });
+            });
+		};
+
+		function listFilesInFolder(folderId) {
+			alert("here too");
+			gapi.client.drive.files.list({
+				q: `'${folderId}' in parents and trashed=false`,
+				fields: 'files(id, name, mimeType, webContentLink, webViewLink)'
+			}).then(function (response) {
+				var files = response.result.files;
+				alert(files.length);
+				if (files && files.length > 0) {
+					for (var i = 0; i < files.length; i++) {
+						var file = files[i];
+						console.log('Found file: %s (%s)', file.name, file.id);
+						// You can access file details like file.name, file.webContentLink (for direct download), etc.
+						fetch(file.webContentLink)
+							.then(response => response.text())
+							.then(data => console.log('File content:', data))
+							.catch(error => console.error('Error fetching file content:', error));
+					}
+				} else {
+					console.log('No files found in the folder.');
+				}
+			}, function (error) {
+				console.error('Error listing files:', error);
+			});
+		}
+
+		async function listFilesInPublicFolder(folderId) {
+			try {
+				const response = await gapi.client.drive.files.list({
+					q: `'${folderId}' in parents`,
+					fields: 'files(id, name, mimeType, webContentLink, webViewLink)', // Specify desired fields
+					// includeItemsFromAllDrives: true, // If it's a shared drive
+					// supportsAllDrives: true, // If it's a shared drive
+				});
+
+				const files = response.result.files;
+				if (files && files.length > 0) {
+					console.log('Files in public folder:');
+					for (const file of files) {
+						console.log(`- ${file.name} (${file.id}) - Type: ${file.mimeType}`);
+						if (file.webContentLink) {
+							console.log(`  Download Link: ${file.webContentLink}`);
+						}
+						if (file.webViewLink) {
+							console.log(`  View Link: ${file.webViewLink}`);
+						}
+					}
+				} else {
+					console.log('No files found in the public folder.');
+				}
+			} catch (err) {
+				console.error('Error listing files:', err);
+			}
+		}
+
+	</script>
+</head>
+
+<body>
+	<div>
+
+	</div>
+	
+</body>
+
+</html>
