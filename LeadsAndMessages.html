@@ -6,16 +6,589 @@
 	<link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Official page for file handling of Saharsh Bhadani Venture Private Limited.">
+	<meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
+	<meta name="author" content="Saharsh Bhadani Venture Private Limited">
+	<link rel="stylesheet" href="./css/w3-theme-black.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 	<link rel="stylesheet" href="./css/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 	<script src="Constant.js"></script>
-	<style>
-		body,
-		h1,
-		h2,
-		h3,
-		h4,
-		h5 {
+	<script src="https://apis.google.com/js/api.js"></script>
+	<script type="text/javascript">
+		const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+		const FOLDER_ID = "1FkUvIfmVaL1Pk21-HLyp0vQMjoQTcKeN";
+		const CLIENT_ID = "789103313019-d5uf5qfsk7hrvo69ef7hgjaq1k0p63pr.apps.googleusercontent.com";
+		let userID = "";
+		let passwd = "";
+		let drive_spreadsheet = [];
+		let drive_jpg = [];
+		let drive_png = [];
+		let drive_doc = [];
+		let drive_other_files = [];
+		let loginDetails = [];
+		window.onload = () => {
+			readPublicFolder();
+			document.getElementById("lmn_div").style.display = "none";
+		};
+
+		async function readPublicFolder() {
+			const url = `https://www.googleapis.com/drive/v3/files?key=${API_KEY}&q='${FOLDER_ID}' in parents&fields=files(id, name, mimeType, webContentLink)`;
+
+			try {
+				const response = await fetch(url);
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				}
+				const data = await response.json();
+				displayFiles(data.files);
+			} catch (error) {
+				console.error("Error fetching files:", error);
+			}
+		}
+
+		function utility() {
+			const dataToExport = "This is some data to be saved to a file.";
+			const blob = new Blob([dataToExport], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = 'exported_data.txt';
+			document.body.appendChild(a); // Append to body (can be hidden)
+			a.click(); // Programmatically click the link
+			document.body.removeChild(a); // Remove the link
+			URL.revokeObjectURL(url); // Release the object URL
+		}
+
+		async function displayFiles(files) {
+			if (files.length === 0) {
+				alert("No files in folder.");
+			}
+
+			files.forEach(file => {
+				let fileInfo = getFileInfo(file);
+				if (file.mimeType.trim().localeCompare("application/vnd.google-apps.spreadsheet") == 0) {
+					drive_spreadsheet.push(fileInfo);
+				} else if (file.mimeType.trim().localeCompare("application/vnd.google-apps.document") == 0) {
+					drive_doc.push(fileInfo);
+				} else if (file.mimeType.trim().localeCompare("image/png") == 0) {
+					drive_png.push(fileInfo);
+				} else if (file.mimeType.trim().localeCompare("image/jpeg") == 0) {
+					drive_jpg.push(fileInfo);
+				} else {
+					drive_other_files.push(fileInfo);
+				}
+			});
+			if (drive_spreadsheet.length != 1) {
+				alert("Can't validate login. Technical error.");
+			} else if (drive_spreadsheet.length === 1) {
+				var login_spreadsheet = drive_spreadsheet[0];
+				loginDetails.push(await fetchLoginDetails(login_spreadsheet["file_ID"], "Sheet1!A2:B"));
+			}
+		}
+		async function fetchLoginDetails(spreadsheetId, range) {
+			const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+			try {
+				const response = await fetch(url);
+				if (!response.ok) throw new Error('Failed to fetch products');
+
+				const data = await response.json();
+				const detailsFetched = data.values;
+				return detailsFetched;
+			} catch (error) {
+				console.error('Error fetching products:', error);
+				throw error;
+			}
+		}
+
+		function getFileInfo(file) {
+			let fileInfo = {
+				Name: file["name"],
+				MIME_Type: file["mimeType"],
+				file_ID: file["id"],
+				file_name: file["name"]
+			}
+			return fileInfo;
+		}
+
+	</script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		.first_login_page {
+			display: block;
+			overflow-y: scroll;
+		}
+
+		.main_content {
+			font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+			max-height: 100vh;
+			background: #0a0a0f;
+			color: #f6f6f0;
+			overflow-y: scroll;
+			position: relative;
+		}
+
+		/* Dynamic background with aurora effect */
+		.aurora-bg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(ellipse at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%), radial-gradient(ellipse at 40% 80%, rgba(120, 219, 226, 0.3) 0%, transparent 50%);
+			filter: blur(40px);
+			animation: aurora 8s ease-in-out infinite alternate;
+		}
+
+		@keyframes aurora {
+			0% {
+				transform: scale(1) rotate(0deg);
+				opacity: 0.7;
+			}
+
+			50% {
+				transform: scale(1.1) rotate(180deg);
+				opacity: 0.9;
+			}
+
+			100% {
+				transform: scale(1.05) rotate(360deg);
+				opacity: 0.8;
+			}
+		}
+
+		/* Floating geometric shapes */
+		.shape {
+			position: absolute;
+			border-radius: 50%;
+			background: rgba(255, 255, 255, 0.03);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			animation: float 6s ease-in-out infinite;
+		}
+
+			.shape:nth-child(1) {
+				width: 60px;
+				height: 60px;
+				top: 20%;
+				left: 15%;
+				animation-delay: 0s;
+			}
+
+			.shape:nth-child(2) {
+				width: 80px;
+				height: 80px;
+				top: 60%;
+				right: 20%;
+				animation-delay: 2s;
+			}
+
+			.shape:nth-child(3) {
+				width: 40px;
+				height: 40px;
+				top: 80%;
+				left: 70%;
+				animation-delay: 4s;
+				border-radius: 10px;
+			}
+
+			.shape:nth-child(4) {
+				width: 100px;
+				height: 100px;
+				top: 10%;
+				right: 40%;
+				animation-delay: 1s;
+			}
+
+		@keyframes float {
+			0%, 100% {
+				transform: translateY(0px) rotate(0deg);
+			}
+
+			50% {
+				transform: translateY(-30px) rotate(180deg);
+			}
+		}
+
+		.container {
+			position: relative;
+			z-index: 10;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+			padding: 20px;
+		}
+
+		.login-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			max-width: 1000px;
+			width: 100%;
+			background: rgba(15, 15, 25, 0.8);
+			backdrop-filter: blur(20px);
+			border-radius: 24px;
+			overflow: hidden;
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+			animation: slideUp 1s ease-out;
+		}
+
+		@keyframes slideUp {
+			from {
+				opacity: 0;
+				transform: translateY(60px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.brand-section {
+			background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+			padding: 60px 40px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+			.brand-section::before {
+				content: '';
+				position: absolute;
+				top: -50%;
+				left: -50%;
+				width: 200%;
+				height: 200%;
+				background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+				animation: shine 3s ease-in-out infinite;
+			}
+
+		@keyframes shine {
+			0% {
+				transform: translateX(-100%) translateY(-100%) rotate(45deg);
+			}
+
+			50% {
+				transform: translateX(100%) translateY(100%) rotate(45deg);
+			}
+
+			100% {
+				transform: translateX(-100%) translateY(-100%) rotate(45deg);
+			}
+		}
+
+		.brand-logo {
+			width: 80px;
+			height: 80px;
+			background: rgba(255, 255, 255, 0.2);
+			border-radius: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 32px;
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.3);
+		}
+
+			.brand-logo svg {
+				width: 40px;
+				height: 40px;
+				fill: white;
+			}
+
+		.brand-title {
+			font-size: 36px;
+			font-weight: 800;
+			color: white;
+			margin-bottom: 16px;
+			text-align: center;
+			letter-spacing: -1px;
+		}
+
+		.brand-subtitle {
+			color: rgba(255, 255, 255, 0.8);
+			font-size: 18px;
+			text-align: center;
+			line-height: 1.6;
+			max-width: 280px;
+		}
+
+		.login-section {
+			padding: 60px 50px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		.login-header {
+			margin-bottom: 40px;
+		}
+
+		.login-title {
+			font-size: 32px;
+			font-weight: 700;
+			color: white;
+			margin-bottom: 8px;
+			letter-spacing: -0.5px;
+		}
+
+		.login-subtitle {
+			color: rgba(255, 255, 255, 0.6);
+			font-size: 16px;
+			font-weight: 400;
+		}
+
+		.form-group {
+			margin-bottom: 28px;
+			position: relative;
+		}
+
+		.form-label {
+			display: block;
+			color: rgba(255, 255, 255, 0.8);
+			font-size: 14px;
+			font-weight: 600;
+			margin-bottom: 8px;
+			letter-spacing: 0.5px;
+		}
+
+		.form-input {
+			width: 100%;
+			padding: 18px 20px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 12px;
+			color: white;
+			font-size: 16px;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			backdrop-filter: blur(10px);
+		}
+
+			.form-input::placeholder {
+				color: rgba(255, 255, 255, 0.4);
+			}
+
+			.form-input:focus {
+				outline: none;
+				border-color: #6366f1;
+				background: rgba(255, 255, 255, 0.08);
+				box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+				transform: translateY(-2px);
+			}
+
+		.forgot-link {
+			text-align: right;
+			margin-bottom: 32px;
+		}
+
+			.forgot-link a {
+				color: #a78bfa;
+				text-decoration: none;
+				font-size: 14px;
+				font-weight: 500;
+				transition: color 0.3s ease;
+			}
+
+				.forgot-link a:hover {
+					color: #c4b5fd;
+				}
+
+		.login-button {
+			width: 100%;
+			padding: 18px;
+			background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+			color: white;
+			border: none;
+			border-radius: 12px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			position: relative;
+			overflow: hidden;
+			letter-spacing: 0.5px;
+		}
+
+			.login-button:hover {
+				transform: translateY(-3px);
+				box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+			}
+
+			.login-button:active {
+				transform: translateY(-1px);
+			}
+
+			.login-button::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+				transition: left 0.5s ease;
+			}
+
+			.login-button:hover::before {
+				left: 100%;
+			}
+
+		.divider {
+			display: flex;
+			align-items: center;
+			margin: 32px 0;
+			color: rgba(255, 255, 255, 0.4);
+			font-size: 14px;
+		}
+
+			.divider::before,
+			.divider::after {
+				content: '';
+				flex: 1;
+				height: 1px;
+				background: rgba(255, 255, 255, 0.1);
+			}
+
+			.divider span {
+				padding: 0 20px;
+			}
+
+		.social-buttons {
+			display: flex;
+			gap: 16px;
+			margin-bottom: 32px;
+		}
+
+		.social-btn {
+			flex: 1;
+			padding: 16px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 12px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			backdrop-filter: blur(10px);
+		}
+
+			.social-btn:hover {
+				background: rgba(255, 255, 255, 0.1);
+				border-color: rgba(255, 255, 255, 0.2);
+				transform: translateY(-2px);
+			}
+
+			.social-btn svg {
+				width: 24px;
+				height: 24px;
+			}
+
+		.signup-link {
+			text-align: center;
+			color: rgba(255, 255, 255, 0.6);
+			font-size: 14px;
+		}
+
+			.signup-link a {
+				color: #a78bfa;
+				text-decoration: none;
+				font-weight: 600;
+				margin-left: 4px;
+			}
+
+				.signup-link a:hover {
+					color: #c4b5fd;
+				}
+
+		/* Loading state */
+		.loading {
+			opacity: 0.8;
+			pointer-events: none;
+		}
+
+			.loading::after {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 20px;
+				height: 20px;
+				border: 2px solid transparent;
+				border-top: 2px solid white;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+				transform: translate(-50%, -50%);
+			}
+
+		@keyframes spin {
+			from {
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+
+			to {
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+
+		/* Mobile responsiveness */
+		@media (max-width: 768px) {
+			.login-container {
+				grid-template-columns: 1fr;
+				max-width: 400px;
+			}
+
+			.brand-section {
+				padding: 40px 30px;
+			}
+
+			.login-section {
+				padding: 40px 30px;
+			}
+
+			.brand-title {
+				font-size: 28px;
+			}
+
+			.login-title {
+				font-size: 24px;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.container {
+				padding: 10px;
+			}
+
+			.login-section {
+				padding: 30px 24px;
+			}
+
+			.social-buttons {
+				flex-direction: column;
+			}
+		}
+	</style>
+
+	<style type="text/css">
+		.lnm_body,
+		.lnm_body h1,
+		.lnm_body h2,
+		.lnm_body h3,
+		.lnm_body h4,
+		.lnm_body h5 {
 			font-family: "Raleway", sans-serif
 		}
 
@@ -24,13 +597,13 @@
 			cursor: pointer
 		}
 
-		.w3-quarter img:hover {
-			opacity: 0.6;
-			transition: 0.3s
-		}
+			.w3-quarter img:hover {
+				opacity: 0.6;
+				transition: 0.3s
+			}
 	</style>
 	<style type="text/css">
-		.loader{
+		.loader {
 			position: fixed;
 			top: 0;
 			left: 0;
@@ -43,197 +616,136 @@
 			transition: opacity 0.75s, visibility 0.75s;
 		}
 
-		.loader-hidden{
+		.loader-hidden {
 			opacity: 0;
 			visibility: hidden;
 		}
 
-        .loader::after {
-            content: "";
-            width: 75px;
-            height: 75px;
-            border: 15px solid #dddddd;
-            border-top-color: #009688;
-            border-radius: 50%;
-            animation: loading 0.75s ease infinite;
-        }
+		.loader::after {
+			content: "";
+			width: 75px;
+			height: 75px;
+			border: 15px solid #dddddd;
+			border-top-color: #009688;
+			border-radius: 50%;
+			animation: loading 0.75s ease infinite;
+		}
 
 		@keyframes loading {
-			from{
+			from {
 				transform: rotate(0turn);
 			}
+
 			to {
 				transform: rotate(1turn);
 			}
 		}
 	</style>
-	<script>
+	<script type="text/javascript">
 		var new_leads_list = [];
-		var message_list= [];
-		var discarded_message_list= [];
+		var message_list = [];
+		var discarded_message_list = [];
 		var discarded_leads_list = [];
 		var saved_leads_list = [];
 	</script>
 </head>
 
-<body class="w3-light-grey">
+<body class="w3-light-grey lnm_body">
 
-	<div class="loader"></div>
+	<div id="lmn_div">
+		<div class="loader"></div>
 
-	<!-- Sidebar/menu -->
-	<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large"
-		style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
-		<a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a>
-		<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">New Leads</a>
-		<a href="#messages" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Messages</a>
-		<a href="#saved" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Saved Leads</a>
-	</nav>
+		<!-- Sidebar/menu -->
+		<nav class="w3-sidebar w3-bar-block w3-black w3-animate-right w3-top w3-text-light-grey w3-large"
+			 style="z-index:3;width:250px;font-weight:bold;display:none;right:0;" id="mySidebar">
+			<a href="javascript:void()" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-32">CLOSE</a>
+			<a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">New Leads</a>
+			<a href="#messages" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Messages</a>
+			<a href="#saved" onclick="w3_close()" class="w3-bar-item w3-button w3-center w3-padding-16">Saved Leads</a>
+		</nav>
 
-	<!-- Top menu on small screens -->
-	<header class="w3-container w3-top w3-white w3-xlarge w3-padding-16">
-		<Span class="w3-left w3-padding">Leads and Messages</Span>
-		<a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
-	</header>
+		<!-- Top menu on small screens -->
+		<header class="w3-container w3-top w3-white w3-xlarge w3-padding-16">
+			<Span class="w3-left w3-padding">Leads and Messages</Span>
+			<a href="javascript:void(0)" class="w3-right w3-button w3-white" onclick="w3_open()">☰</a>
+		</header>
 
-	<!-- Overlay effect when opening sidebar on small screens -->
-	<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
-		id="myOverlay"></div>
+		<!-- Overlay effect when opening sidebar on small screens -->
+		<div class="w3-overlay w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu"
+			 id="myOverlay"></div>
 
-	<!-- !PAGE CONTENT! -->
-	<div class="w3-main w3-content" style="max-width:1600px;margin-top:83px">
-		<center><h3>New Leads</h3></center>
-		
-		<!-- Content grid -->
-		<div class="w3-row w3-grayscale-min" id="new_leads_container">
+		<!-- !PAGE CONTENT! -->
+		<div class="w3-main w3-content" style="max-width:1600px;margin-top:83px">
+			<center><h3>New Leads</h3></center>
 
-		</div>
-
-		<!-- Pagination -->
-		<div class="w3-center w3-padding-32">
-			<div class="w3-bar">
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-				<a href="#" class="w3-bar-item w3-black w3-button">1</a>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-				<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-			</div>
-		</div>
-
-		<!-- Modal for full size images on click-->
-		<div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
-			<span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
-			<div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-				<img id="img01" class="w3-image">
-				<p id="caption"></p>
-			</div>
-		</div>
-
-		<!-- Messages section -->
-		<div class="w3-container w3-dark-grey w3-center w3-text-light-grey w3-padding-32" id="messages">
-			<h3>Messages</h3>
 			<!-- Content grid -->
-			<div class="w3-row w3-grayscale-min" id="message_container">
+			<div class="w3-row w3-grayscale-min" id="new_leads_container">
 
 			</div>
 
 			<!-- Pagination -->
 			<div class="w3-center w3-padding-32">
-				<div class="w3-bar">
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+
+			</div>
+
+			<!-- Modal for full size images on click-->
+			<div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+				<span class="w3-button w3-black w3-xlarge w3-display-topright">×</span>
+				<div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+					<img id="img01" class="w3-image">
+					<p id="caption"></p>
 				</div>
 			</div>
+
+			<!-- Messages section -->
+			<div class="w3-container w3-dark-grey w3-center w3-text-light-grey w3-padding-32" id="messages">
+				<h3>Messages</h3>
+				<!-- Content grid -->
+				<div class="w3-row w3-grayscale-min" id="message_container">
+
+				</div>
+
+				<!-- Pagination -->
+				<div class="w3-center w3-padding-32">
+
+				</div>
+			</div>
+
+			<!-- Saved section -->
+			<div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="saved">
+				<center><h3>Saved Leads</h3></center>
+				<!-- Content grid -->
+				<div class="w3-row w3-grayscale-min" id="saved_leads_container">
+
+				</div>
+
+				<!-- Pagination -->
+				<div class="w3-center w3-padding-32">
+
+				</div>
+			</div>
+
+			<div class="w3-black w3-center w3-padding-24">
+				&copy;2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.
+			</div>
+
+			<!-- End page content -->
 		</div>
 
-		<!-- Saved section -->
-		<div class="w3-container w3-light-grey w3-padding-32 w3-padding-large" id="saved">
-			<center><h3>Saved Leads</h3></center>
-			<!-- Content grid -->
-			<div class="w3-row w3-grayscale-min" id="saved_leads_container">
-				
-			</div>
-
-			<!-- Pagination -->
-			<div class="w3-center w3-padding-32">
-				<div class="w3-bar">
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-					<a href="#" class="w3-bar-item w3-black w3-button">1</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-					<a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Footer -->
-		<footer class="w3-container w3-padding-32 w3-grey">
-			<div class="w3-row-padding">
-				<div class="w3-third">
-					<h3>INFO</h3>
-					<p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae,
-						ultricies congue gravida diam non fringilla.</p>
-				</div>
-
-				<div class="w3-third">
-					<h3>BLOG POSTS</h3>
-					<ul class="w3-ul">
-						<li class="w3-padding-16 w3-hover-black">
-							<img src="./w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-							<span class="w3-large">Lorem</span><br>
-							<span>Sed mattis nunc</span>
-						</li>
-						<li class="w3-padding-16 w3-hover-black">
-							<img src="./w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-							<span class="w3-large">Ipsum</span><br>
-							<span>Praes tinci sed</span>
-						</li>
-					</ul>
-				</div>
-
-				<div class="w3-third">
-					<h3>POPULAR TAGS</h3>
-					<p>
-						<span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">New York</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">London</span>
-						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">IKEA</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">NORWAY</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">DIY</span>
-						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Ideas</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Baby</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Family</span>
-						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">News</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Clothing</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Shopping</span>
-						<span class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Sports</span> <span
-							class="w3-tag w3-dark-grey w3-small w3-margin-bottom">Games</span>
-					</p>
-				</div>
-			</div>
-		</footer>
-
-		<div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp"
-				title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
-
-		<!-- End page content -->
 	</div>
+
 
 	<script>
 		const SAVE_LEADS_FUTURE = async (id) => {
+            showAlert('You will be logged out! Login again to continue.');
 			const loader = document.querySelector(".loader");
 
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-				let response = await fetch(save_data_db_url+"?query=SAVE_LEADS_FUTURE&timestamp="+id);
+				let response = await fetch(save_data_db_url + "?query=SAVE_LEADS_FUTURE&timestamp=" + id);
 				clearTimeout(timeId);
 				let responseJson = await response.json();
-				if("successful".localeCompare(responseJson[0].userAction) == 0){
+				if ("successful".localeCompare(responseJson[0].userAction) == 0) {
 					location.reload();
 				}
 				else {
@@ -244,14 +756,15 @@
 			}
 		}
 		const DISCARD_NEW_LEADS = async (id) => {
+            showAlert('You will be logged out! Login again to continue.');
 			const loader = document.querySelector(".loader");
 
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-				let response = await fetch(save_data_db_url+"?query=DISCARD_NEW_LEADS&timestamp="+id);
+				let response = await fetch(save_data_db_url + "?query=DISCARD_NEW_LEADS&timestamp=" + id);
 				clearTimeout(timeId);
 				let responseJson = await response.json();
-				if("successful".localeCompare(responseJson[0].userAction) == 0){
+				if ("successful".localeCompare(responseJson[0].userAction) == 0) {
 					location.reload();
 				}
 				else {
@@ -262,14 +775,15 @@
 			}
 		}
 		const DISCARD_MESSAGE = async (id) => {
+            showAlert('You will be logged out! Login again to continue.');
 			const loader = document.querySelector(".loader");
 
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-				let response = await fetch(save_data_db_url+"?query=DISCARD_MESSAGE&timestamp="+id);
+				let response = await fetch(save_data_db_url + "?query=DISCARD_MESSAGE&timestamp=" + id);
 				clearTimeout(timeId);
 				let responseJson = await response.json();
-				if("successful".localeCompare(responseJson[0].userAction) == 0){
+				if ("successful".localeCompare(responseJson[0].userAction) == 0) {
 					location.reload();
 				}
 				else {
@@ -281,14 +795,15 @@
 		}
 
 		const DISCARD_SAVED_LEAD = async (id) => {
+            showAlert('You will be logged out! Login again to continue.');
 			const loader = document.querySelector(".loader");
 
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-				let response = await fetch(save_data_db_url+"?query=DISCARD_SAVED_LEAD&timestamp="+id);
+				let response = await fetch(save_data_db_url + "?query=DISCARD_SAVED_LEAD&timestamp=" + id);
 				clearTimeout(timeId);
 				let responseJson = await response.json();
-				if("successful".localeCompare(responseJson[0].userAction) == 0){
+				if ("successful".localeCompare(responseJson[0].userAction) == 0) {
 					location.reload();
 				}
 				else {
@@ -303,7 +818,7 @@
 			const loader = document.querySelector(".loader");
 			try {
 				let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-				let response = await fetch(save_data_db_url+"?query=FETCH_LEADS_MESSAGES");
+				let response = await fetch(save_data_db_url + "?query=FETCH_LEADS_MESSAGES");
 				clearTimeout(timeId);
 				let responseJson = await response.json();
 				//alert(responseJson.length);
@@ -312,21 +827,21 @@
 				saved_leads_list = new Array();
 				discarded_leads_list = new Array();
 				discarded_message_list = new Array();
-				for(var i=0; i<responseJson.length; i++){
+				for (var i = 0; i < responseJson.length; i++) {
 					entity = responseJson[i];
-					if("message".localeCompare(entity.module) == 0){
-						if(entity.read == 0){
+					if ("message".localeCompare(entity.module) == 0) {
+						if (entity.read == 0) {
 							message_list.push(entity);
 						}
 						else {
 							discarded_message_list.push(entity);
 						}
 					}
-					else if("leads_form".localeCompare(entity.module) == 0){
-						if(entity.read == 0){
+					else if ("leads_form".localeCompare(entity.module) == 0) {
+						if (entity.read == 0) {
 							new_leads_list.push(entity);
 						}
-						else if(entity.read == 2){
+						else if (entity.read == 2) {
 							saved_leads_list.push(entity);
 						}
 						else {
@@ -334,34 +849,34 @@
 						}
 					}
 				}
-				
-				if(new_leads_list.length == 0){
+
+				if (new_leads_list.length == 0) {
 					node_div = create_empty_div_container("No new leads.");
 					document.getElementById("new_leads_container").appendChild(node_div);
 				}
-				for(var i = 0; i < new_leads_list.length; i++){
+				for (var i = 0; i < new_leads_list.length; i++) {
 					new_leads_div = create_leads_div_container(new_leads_list[i]);
 					document.getElementById("new_leads_container").appendChild(new_leads_div);
 				}
 
-				if(message_list.length == 0){
+				if (message_list.length == 0) {
 					node_div_1 = create_empty_div_container("No new message.");
 					document.getElementById("message_container").appendChild(node_div_1);
 				}
-				for(var i = 0; i < message_list.length; i++){
+				for (var i = 0; i < message_list.length; i++) {
 					new_message_div = create_message_div_container(message_list[i]);
 					document.getElementById("message_container").appendChild(new_message_div);
 				}
 
-				if(saved_leads_list.length == 0){
+				if (saved_leads_list.length == 0) {
 					node_div_2 = create_empty_div_container("No saved leads.");
 					document.getElementById("saved_leads_container").appendChild(node_div_2);
 				}
-				for(var i = 0; i < saved_leads_list.length; i++){
+				for (var i = 0; i < saved_leads_list.length; i++) {
 					saved_leads_div = create_saved_leads_div_container(saved_leads_list[i]);
 					document.getElementById("saved_leads_container").appendChild(saved_leads_div);
 				}
-				
+
 				//alert("total:"+responseJson.length+", new_leads_list: "+new_leads_list.length+", saved_leads_list: "+saved_leads_list.length+", message_list: "+message_list.length)
 
 			} catch (error) {
@@ -373,24 +888,24 @@
 			})
 		}
 
-		function save_lead_for_future(){
+		function save_lead_for_future() {
 			SAVE_LEADS_FUTURE(this.id);
 		}
 
-		function discard_lead_now(){
+		function discard_lead_now() {
 			DISCARD_NEW_LEADS(this.id);
 		}
 
-		function discard_saved_lead_now(){
+		function discard_saved_lead_now() {
 			DISCARD_SAVED_LEAD(this.id);
 		}
 
-		function discard_message_now(){
+		function discard_message_now() {
 			DISCARD_MESSAGE(this.id);
 		}
 
-		function create_leads_div_container(lead_element){
-			
+		function create_leads_div_container(lead_element) {
+
 			const node_div = document.createElement("div");
 			node_div.classList.add("w3-quarter");
 			node_div.style.marginTop = "10px";
@@ -398,36 +913,36 @@
 			node_div.style.position = "relative";
 			//node_div.style.textAlign = "center";
 			node_div.style.wordWrap = "break-word";
-						
+
 			const container_image = document.createElement("IMG");
 			container_image.src = './w3images/Container.jpg';
 			container_image.alt = "Container";
 			container_image.style.width = "100%";
-			
+
 			node_div.appendChild(container_image);
 
-			name_text_node = create_text_node("Name: "+lead_element.Name, "5%");
+			name_text_node = create_text_node("Name: " + lead_element.Name, "5%");
 			node_div.appendChild(name_text_node);
 
-			email_text_node = create_text_node("Email: "+lead_element.Email, "15%");
+			email_text_node = create_text_node("Email: " + lead_element.Email, "15%");
 			node_div.appendChild(email_text_node);
 
-			country_text_node = create_text_node("Country: "+lead_element.Country, "25%");
+			country_text_node = create_text_node("Country: " + lead_element.Country, "25%");
 			node_div.appendChild(country_text_node);
 
-			phone_number_text_node = create_text_node("Phone Number: "+lead_element.PhoneNumber, "35%");
+			phone_number_text_node = create_text_node("Phone Number: " + lead_element.PhoneNumber, "35%");
 			node_div.appendChild(phone_number_text_node);
 
-			company_name_text_node = create_text_node("Company Name: "+lead_element.CompanyName, "45%");
+			company_name_text_node = create_text_node("Company Name: " + lead_element.CompanyName, "45%");
 			node_div.appendChild(company_name_text_node);
 
-			interested_in_text_node = create_text_node("Interested In: "+lead_element.interestedIn, "55%");
+			interested_in_text_node = create_text_node("Interested In: " + lead_element.interestedIn, "55%");
 			node_div.appendChild(interested_in_text_node);
 
-			message_text_node = create_text_node("Message: "+lead_element.Message, "65%");
+			message_text_node = create_text_node("Message: " + lead_element.Message, "65%");
 			node_div.appendChild(message_text_node);
 
-			timestamp_text_node = create_text_node("Timestamp: "+lead_element.timestamp, "75%");
+			timestamp_text_node = create_text_node("Timestamp: " + lead_element.timestamp, "75%");
 			node_div.appendChild(timestamp_text_node);
 
 			const save_button = document.createElement("button");
@@ -436,7 +951,7 @@
 			save_button.classList.add("w3-theme");
 			save_button.classList.add("w3-teal");
 			save_button.id = lead_element.timestamp.toString();
-			save_button.textContent= "Save";
+			save_button.textContent = "Save";
 			save_button.style.position = "absolute";
 			save_button.style.top = "90%";
 			save_button.style.left = "5%";
@@ -451,11 +966,11 @@
 			discard_button.classList.add("w3-theme");
 			discard_button.classList.add("w3-red");
 			discard_button.id = lead_element.timestamp.toString();
-			discard_button.textContent= "Discard";
+			discard_button.textContent = "Discard";
 			discard_button.style.position = "absolute";
 			discard_button.style.top = "90%";
 			discard_button.style.right = "5%";
-			discard_button.style.color = "black";	
+			discard_button.style.color = "black";
 			discard_button.addEventListener("click", discard_lead_now);
 
 			node_div.appendChild(discard_button);
@@ -464,8 +979,8 @@
 			return node_div;
 		}
 
-		function create_saved_leads_div_container(lead_element){
-			
+		function create_saved_leads_div_container(lead_element) {
+
 			const node_div = document.createElement("div");
 			node_div.classList.add("w3-quarter");
 			node_div.style.marginTop = "10px";
@@ -473,36 +988,36 @@
 			node_div.style.position = "relative";
 			//node_div.style.textAlign = "center";
 			node_div.style.wordWrap = "break-word";
-						
+
 			const container_image = document.createElement("IMG");
 			container_image.src = './w3images/Container.jpg';
 			container_image.alt = "Container";
 			container_image.style.width = "100%";
-			
+
 			node_div.appendChild(container_image);
 
-			name_text_node = create_text_node("Name: "+lead_element.Name, "5%");
+			name_text_node = create_text_node("Name: " + lead_element.Name, "5%");
 			node_div.appendChild(name_text_node);
 
-			email_text_node = create_text_node("Email: "+lead_element.Email, "15%");
+			email_text_node = create_text_node("Email: " + lead_element.Email, "15%");
 			node_div.appendChild(email_text_node);
 
-			country_text_node = create_text_node("Country: "+lead_element.Country, "25%");
+			country_text_node = create_text_node("Country: " + lead_element.Country, "25%");
 			node_div.appendChild(country_text_node);
 
-			phone_number_text_node = create_text_node("Phone Number: "+lead_element.PhoneNumber, "35%");
+			phone_number_text_node = create_text_node("Phone Number: " + lead_element.PhoneNumber, "35%");
 			node_div.appendChild(phone_number_text_node);
 
-			company_name_text_node = create_text_node("Company Name: "+lead_element.CompanyName, "45%");
+			company_name_text_node = create_text_node("Company Name: " + lead_element.CompanyName, "45%");
 			node_div.appendChild(company_name_text_node);
 
-			interested_in_text_node = create_text_node("Interested In: "+lead_element.interestedIn, "55%");
+			interested_in_text_node = create_text_node("Interested In: " + lead_element.interestedIn, "55%");
 			node_div.appendChild(interested_in_text_node);
 
-			message_text_node = create_text_node("Message: "+lead_element.Message, "65%");
+			message_text_node = create_text_node("Message: " + lead_element.Message, "65%");
 			node_div.appendChild(message_text_node);
 
-			timestamp_text_node = create_text_node("Timestamp: "+lead_element.timestamp, "75%");
+			timestamp_text_node = create_text_node("Timestamp: " + lead_element.timestamp, "75%");
 			node_div.appendChild(timestamp_text_node);
 
 			const discard_button = document.createElement("button");
@@ -511,11 +1026,11 @@
 			discard_button.classList.add("w3-theme");
 			discard_button.classList.add("w3-red");
 			discard_button.id = lead_element.timestamp.toString();
-			discard_button.textContent= "Discard";
+			discard_button.textContent = "Discard";
 			discard_button.style.position = "absolute";
 			discard_button.style.top = "90%";
 			discard_button.style.right = "5%";
-			discard_button.style.color = "black";	
+			discard_button.style.color = "black";
 			discard_button.addEventListener('click', discard_saved_lead_now)
 			node_div.appendChild(discard_button);
 
@@ -523,7 +1038,7 @@
 			return node_div;
 		}
 
-		function create_text_node(message, top_position){
+		function create_text_node(message, top_position) {
 			const textnode = document.createElement("div");
 			textnode.textContent = message;
 			textnode.style.position = "absolute";
@@ -539,32 +1054,32 @@
 			return textnode;
 		}
 
-		function create_message_div_container(message_element){
-			
+		function create_message_div_container(message_element) {
+
 			const node_div = document.createElement("div");
 			node_div.classList.add("w3-quarter");
 			node_div.style.marginTop = "10px";
 			node_div.style.position = "relative";
 			//node_div.style.textAlign = "center";
 			node_div.style.wordWrap = "break-word";
-			
+
 			const container_image = document.createElement("IMG");
 			container_image.src = './w3images/Container.jpg';
 			container_image.alt = "Container";
 			container_image.style.width = "100%";
-			
+
 			node_div.appendChild(container_image);
 
-			name_text_node = create_text_node("Name: "+message_element.Name, "5%");
+			name_text_node = create_text_node("Name: " + message_element.Name, "5%");
 			node_div.appendChild(name_text_node);
 
-			email_text_node = create_text_node("Email: "+message_element.Email, "15%");
+			email_text_node = create_text_node("Email: " + message_element.Email, "15%");
 			node_div.appendChild(email_text_node);
 
-			timestamp_text_node = create_text_node("Timestamp: "+message_element.timestamp, "35%");
+			timestamp_text_node = create_text_node("Timestamp: " + message_element.timestamp, "35%");
 			node_div.appendChild(timestamp_text_node);
 
-			message_text_node = create_text_node("Message: "+message_element.Message, "50%");
+			message_text_node = create_text_node("Message: " + message_element.Message, "50%");
 			node_div.appendChild(message_text_node);
 
 			const discard_button = document.createElement("button");
@@ -573,12 +1088,12 @@
 			discard_button.classList.add("w3-theme");
 			discard_button.classList.add("w3-red");
 			discard_button.id = message_element.timestamp.toString();
-			discard_button.textContent= "Discard";
+			discard_button.textContent = "Discard";
 			discard_button.style.position = "absolute";
 			discard_button.style.top = "90%";
 			discard_button.style.right = "5%";
-			discard_button.style.color = "black";	
-			discard_button.onclick = "discard_message_now("+message_element.timestamp+")";
+			discard_button.style.color = "black";
+			discard_button.onclick = "discard_message_now(" + message_element.timestamp + ")";
 			discard_button.addEventListener('click', discard_message_now);
 			node_div.appendChild(discard_button);
 
@@ -587,19 +1102,19 @@
 		}
 
 
-		function create_empty_div_container(text_message){
-			
+		function create_empty_div_container(text_message) {
+
 			const node_div = document.createElement("div");
 			node_div.classList.add("w3-quarter");
 			node_div.style.marginTop = "10px";
 			node_div.style.position = "relative";
 			node_div.style.textAlign = "center";
-			
+
 			const container_image = document.createElement("IMG");
 			container_image.src = './w3images/Container.jpg';
 			container_image.alt = "Container";
 			container_image.style.width = "100%";
-			
+
 			node_div.appendChild(container_image);
 
 			const textnode = document.createElement("div");
@@ -611,10 +1126,6 @@
 			textnode.style.transform = "translate('-50%', '-50%')";
 			node_div.appendChild(textnode);
 			return node_div;
-		}
-
-		window.onload = () => {
-			FETCH_LEADS_MESSAGES();
 		}
 
 		// Script to open and close sidebar
@@ -636,6 +1147,218 @@
 			captionText.innerHTML = element.alt;
 		}
 
+	</script>
+	<div id="main_content" class="main_content">
+
+		<div class="first_login_page">
+			<!-- Animated background -->
+			<div class="aurora-bg"></div>
+			<div class="shape"></div>
+			<div class="shape"></div>
+			<div class="shape"></div>
+			<div class="shape"></div>
+
+			<div class="container">
+				<div class="login-container">
+					<!-- Brand Section -->
+					<div class="brand-section">
+						<div class="brand-logo">
+							<svg viewBox="0 0 24 24">
+								<path d="M12 2L13.09 6.26L18 5L16.26 9.91L22 12L16.26 14.09L18 19L13.09 17.74L12 22L10.91 17.74L6 19L7.74 14.09L2 12L7.74 9.91L6 5L10.91 6.26L12 2Z" />
+							</svg>
+						</div>
+						<h1 class="brand-title">Saharsh Bhadani Venture Private Limited</h1>
+						<p class="brand-subtitle">Experience the future of digital interaction with our premium platform</p>
+					</div>
+
+					<!-- Login Section -->
+					<div class="login-section">
+						<div class="login-header">
+							<h2 class="login-title">Welcome!</h2>
+							<p class="login-subtitle">Please sign in to your account</p>
+						</div>
+
+						<form id="loginForm">
+							<div class="form-group">
+								<label class="form-label" for="email">Email Address</label>
+								<input type="email"
+									   id="email"
+									   class="form-input"
+									   placeholder="Enter your email"
+									   required>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label" for="password">Password</label>
+								<input type="password"
+									   id="password"
+									   class="form-input"
+									   placeholder="Enter your password"
+									   required>
+							</div>
+
+							<div class="forgot-link">
+								<a href="#" onclick="showAlert('Forgot Password')">Forgot your password?</a>
+							</div>
+
+							<button type="submit" class="login-button" id="loginBtn">
+								Sign In
+							</button>
+						</form>
+
+						<div class="divider">
+							<span>Or continue with</span>
+						</div>
+
+						<div class="social-buttons">
+							<button class="social-btn" onclick="socialLogin('Google')">
+								<svg viewBox="0 0 24 24">
+									<path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+									<path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+									<path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+									<path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+								</svg>
+							</button>
+							<button class="social-btn" onclick="socialLogin('GitHub')">
+								<svg fill="white" viewBox="0 0 24 24">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+								</svg>
+							</button>
+							<button class="social-btn" onclick="socialLogin('Apple')">
+								<svg fill="white" viewBox="0 0 24 24">
+									<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+								</svg>
+							</button>
+						</div>
+
+						<p class="signup-link">
+							Don't have an account?
+							<a href="#" onclick="showAlert('Sign Up')">Create one</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// Form submission
+		document.getElementById('loginForm').addEventListener('submit', function (e) {
+			e.preventDefault();
+
+			const btn = document.getElementById('loginBtn');
+			btn.classList.add('loading');
+			btn.textContent = '';
+			loginEmail = document.getElementById("email").value;
+			loginPassword = document.getElementById("password").value;
+			if ((loginEmail + "," + loginPassword).trim().localeCompare(loginDetails) === 0) {
+				setTimeout(() => {
+					btn.classList.remove('loading');
+					btn.textContent = 'Sign In';
+					showAlert('Welcome back! Login successful.');
+				}, 2500);
+				document.getElementById("main_content").innerHTML = "";
+                document.getElementById("lmn_div").style.display = "block";
+                FETCH_LEADS_MESSAGES();
+			} else {
+				setTimeout(() => {
+					btn.classList.remove('loading');
+					btn.textContent = 'Sign In';
+					showAlert('Sorry! Login un-successful.');
+				}, 2500);
+			}
+		});
+
+		// Social login
+		function socialLogin(provider) {
+			showAlert(`${provider} login initiated (Demo)`);
+		}
+
+		// Alert function
+		function showAlert(message) {
+			const alertDiv = document.createElement('div');
+			alertDiv.style.cssText = `
+					position: fixed;
+					top: 20px;
+					right: 20px;
+					background: rgba(99, 102, 241, 0.9);
+					color: white;
+					padding: 16px 24px;
+					border-radius: 12px;
+					font-weight: 500;
+					z-index: 1000;
+					backdrop-filter: blur(20px);
+					animation: slideInAlert 0.5s ease-out;
+				`;
+			alertDiv.textContent = message;
+
+			document.body.appendChild(alertDiv);
+
+			setTimeout(() => {
+				alertDiv.style.animation = 'slideOutAlert 0.5s ease-out forwards';
+				setTimeout(() => alertDiv.remove(), 500);
+			}, 3000);
+		}
+
+		// Add alert animations
+		const alertStyles = document.createElement('style');
+		alertStyles.textContent = `
+				@keyframes slideInAlert {
+					from {
+						transform: translateX(100%);
+						opacity: 0;
+					}
+					to {
+						transform: translateX(0);
+						opacity: 1;
+					}
+				}
+				@keyframes slideOutAlert {
+					from {
+						transform: translateX(0);
+						opacity: 1;
+					}
+					to {
+						transform: translateX(100%);
+						opacity: 0;
+					}
+				}
+			`;
+		document.head.appendChild(alertStyles);
+
+		// Enhanced input interactions
+		document.querySelectorAll('.form-input').forEach(input => {
+			input.addEventListener('focus', function () {
+				this.parentElement.style.transform = 'scale(1.02)';
+			});
+
+			input.addEventListener('blur', function () {
+				this.parentElement.style.transform = 'scale(1)';
+			});
+		});
+
+		// Dynamic cursor effect
+		document.addEventListener('mousemove', function (e) {
+			const cursor = document.getElementById('cursor') || createCursor();
+			cursor.style.left = e.clientX + 'px';
+			cursor.style.top = e.clientY + 'px';
+		});
+
+		function createCursor() {
+			const cursor = document.createElement('div');
+			cursor.id = 'cursor';
+			cursor.style.cssText = `
+					position: fixed;
+					width: 20px;
+					height: 20px;
+					background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+					border-radius: 50%;
+					pointer-events: none;
+					z-index: 9999;
+					transition: transform 0.1s ease;
+				`;
+			document.body.appendChild(cursor);
+			return cursor;
+		}
 	</script>
 
 
