@@ -47,6 +47,21 @@
             }
         }
 
+        async function getGoogleDoc(docID) {
+            doc_content = "";
+            await fetch(`https://www.googleapis.com/drive/v3/files/${docID}/export?mimeType=text/plain&key=${API_KEY}`)
+                .then(function (res) {
+                    return res.text();
+                }).then(function (text) {
+                    console.log(text);
+                    doc_content = text;
+                }).catch(function () {
+                    console.log("error");
+                    doc_content = "Technical error faced!";
+                });
+            return doc_content;
+        }
+
         function utility() {
             const dataToExport = "This is some data to be saved to a file.";
             const blob = new Blob([dataToExport], { type: 'text/plain' });
@@ -121,14 +136,14 @@
         }
         .first_login_page {
             display: block;
-            overflow-y: scroll;
+            overflow: hidden;
         }
         .main_content {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             max-height: 100vh;
             background: #0a0a0f;
             color: #f6f6f0;
-            overflow-y: scroll;
+            overflow: hidden;
             position: relative;
         }
 
@@ -576,6 +591,27 @@
                 flex-direction: column;
             }
         }
+        .text-content-div {
+            margin-left: 10%;
+            width: 80%;
+            margin-right: 10%;
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 20px;
+        }
+        .image-content-div {
+            margin-left: 10%;
+            width: 80%;
+            margin-right: 10%;
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 20px;
+        }
+        .image-content-div img{
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -673,6 +709,7 @@
         </div>
     </div>
     <script>
+        main_content_div = document.getElementById("main_content");
         // Form submission
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -688,7 +725,7 @@
                     btn.textContent = 'Sign In';
                     showAlert('Welcome back! Login successful.');
                 }, 2500);
-                document.getElementById("main_content").innerHTML = "";
+                prepareDisplayContentPostLogin();
             } else {
                 setTimeout(() => {
                     btn.classList.remove('loading');
@@ -698,6 +735,63 @@
             }
         });
 
+        function createElement(tag, className) {
+            const el = document.createElement(tag);
+            if (className) el.className = className;
+            return el;
+        }
+        async function prepareDisplayContentPostLogin() {
+            main_content_div.innerHTML = ""
+            main_content_div.style.backgroundColor = "white";
+            main_content_div.style.overflowY = "scroll";
+            doc_content = "";
+            if (drive_doc.length > 0) {
+                fileInfo = drive_doc[0];
+                doc_content = await getGoogleDoc(fileInfo["file_ID"]);
+            } else {
+                doc_content = "Nothing to display.";
+            }
+            prepareTextContent(doc_content);
+            prepareJpegImageContent();
+            preparePngImageContent();
+        }
+        function prepareTextContent(doc_content) {
+            const card = createElement('div', 'text-content-div');
+            card.innerHTML = `
+                <div class="product-desc">${doc_content}</div>
+            `;
+            main_content_div.appendChild(card);
+        }
+        function prepareJpegImageContent() {
+            const card = createElement('div', 'image-content-div');
+            card.innerHTML = `
+                <h1><b><u>JPEG Image</u></b></h1>
+            `;
+            main_content_div.appendChild(card);
+            drive_jpg.forEach(jpegFileInfo => {
+                const image_card = createElement('div', 'image-content-div');
+                url = 'https://lh3.googleusercontent.com/d/' + jpegFileInfo['file_ID'];
+                image_card.innerHTML = `
+                    <img src="${url}" alt="${jpegFileInfo['Name']}" class="product-image" />
+                `;
+                main_content_div.appendChild(image_card);
+            });
+        }
+        function preparePngImageContent() {
+            const card = createElement('div', 'image-content-div');
+            card.innerHTML = `
+                <h1><b><u>PNG Image</u></b></h1>
+            `;
+            main_content_div.appendChild(card);
+            drive_png.forEach(pngFileInfo => {
+                const image_card = createElement('div', 'image-content-div');
+                url = 'https://lh3.googleusercontent.com/d/' + pngFileInfo['file_ID'];
+                image_card.innerHTML = `
+                    <img src="${url}" alt="${pngFileInfo['Name']}" class="product-image" />
+                `;
+                main_content_div.appendChild(image_card);
+            });
+        }
         // Social login
         function socialLogin(provider) {
             showAlert(`${provider} login initiated (Demo)`);

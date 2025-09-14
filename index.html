@@ -593,12 +593,12 @@
 			<a onclick="navigateToPage('aboutUs.html')" class="w3-bar-item w3-button w3-hide-small w3-hover-white">
 				About Us
 			</a>
-			<div class="w3-dropdown-hover w3-hide-small">
+			<div class="w3-dropdown-hover w3-hide-small w3-hide-medium">
 				<button onclick="navigateToIndex('#FeaturedServices')" class="w3-button" title="Notifications" style="margin-top: 3px;">
 					Featured Services&nbsp;<i class="fa fa-caret-down"></i>
 				</button>
 
-				<div class="w3-dropdown-content w3-card-4 w3-bar-block w3-center w3-theme-d1" style="width: 80%; z-index: 999">
+				<div class="w3-dropdown-content w3-card-4 w3-bar-block w3-center w3-theme-d1" style="width: 80%; z-index: 999; overflow-y: scroll;">
 					<div class="tab">
 						<button class="tablinks" onclick="openTabWithName(event, 'Consulting')" id="defaultOpen">Analytics & Consultation</button>
 						<button class="tablinks" onclick="openTabWithName(event, 'AI_and_ML')" id="defaultOpen">Artificial Intelligence and Machine Learning</button>
@@ -608,7 +608,7 @@
 						<button class="tablinks" onclick="openTabWithName(event, 'Robotics')">Robotics</button>
 						<button class="tablinks" onclick="openTabWithName(event, 'IndustrialAutomation')">Industrial Automation</button>
 					</div>
-					<div id="Consulting" class="tabcontent">
+					<div id="Consulting" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="IT_Consulting" onclick="navigateTo('BusinessAnalytics')">
 							<div class="service-card">
 								<h5>Business Analytics</h5>
@@ -652,7 +652,7 @@
 							</div>
 						</section>
 					</div>
-					<div id="AI_and_ML" class="tabcontent">
+					<div id="AI_and_ML" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="AI_and_ML_services" onclick="navigateTo('AI_and_ML')">
 							<div class="service-card">
 								<h5>Advanced Analytics</h5>
@@ -705,7 +705,7 @@
 
 						</section>
 					</div>
-					<div id="ITSolution" class="tabcontent">
+					<div id="ITSolution" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="ITSoln_services" onclick="navigateTo('ITConsultation')">
 							<div class="service-card">
 								<h5>Website design & deployment</h5>
@@ -741,7 +741,7 @@
 							</div>
 						</section>
 					</div>
-					<div id="GraphicDesigning" class="tabcontent">
+					<div id="GraphicDesigning" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="Designing_services" onclick="navigateTo('GraphicDesigning')">
 							<div class="service-card">
 								<h5>Logo Designing</h5>
@@ -794,7 +794,7 @@
 						</section>
 					</div>
 
-					<div id="ContentCreation" class="tabcontent">
+					<div id="ContentCreation" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="ContentCreationServices" onclick="navigateTo('ContentCreation')">
 							<div class="service-card">
 								<h5>Print Ads</h5>
@@ -847,7 +847,7 @@
 						</section>
 					</div>
 
-					<div id="Robotics" class="tabcontent">
+					<div id="Robotics" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="RoboticsServices" onclick="navigateTo('Robotics')">
 							<div class="service-card">
 								<h5>Feasibility Analysis</h5>
@@ -896,7 +896,7 @@
 						</section>
 					</div>
 
-					<div id="IndustrialAutomation" class="tabcontent">
+					<div id="IndustrialAutomation" class="tabcontent" style="overflow-y: scroll;">
 						<section class="services" id="IndustrialAutomationServices" onclick="navigateTo('IndustrialAutomation')">
 							<div class="service-card">
 								<h5>Digital Roadmaps</h5>
@@ -958,7 +958,7 @@
 		</div>
 
 		<!-- Navbar on small screens -->
-		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+		<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-medium w3-small">
 			<a onclick="navigateToPage('aboutUs.html')" class="w3-bar-item w3-button">About Us</a>
 			<a onclick="navigateToIndex('#FeaturedServices')" class="w3-bar-item w3-button">Featured Services&nbsp;</a>
 			<a target="_blank" class="w3-bar-item w3-button"
@@ -1328,10 +1328,10 @@
 			<div class="w3-third">
 				<div class="why_choose_us_article w3-card-4">
 					<h3>
-						🧩 Consulting That Aligns Strategy With Execution
+						⚙️ Automation for Efficiency & Scale
 					</h3>
 					<p>
-						Our consulting team works closely with you to understand your business challenges and align our solutions with your short- and long-term goals. Whether you're going digital for the first time or scaling existing systems, we guide your journey with clarity and confidence.
+						Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
 					</p>
 				</div>
 			</div>
@@ -1340,10 +1340,10 @@
 			<div class="w3-third">
 				<div class="why_choose_us_article w3-card-4">
 					<h3>
-						⚙️ Automation for Efficiency & Scale
+						🧩 Consulting That Aligns Strategy With Execution
 					</h3>
 					<p>
-						Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
+						Our consulting team works closely with you to understand your business challenges and align our solutions with your short- and long-term goals. Whether you're going digital for the first time or scaling existing systems, we guide your journey with clarity and confidence.
 					</p>
 				</div>
 			</div>
@@ -1840,15 +1840,15 @@
 		</div>
 	</div>
 	<!-- medium screen-->
-	<div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium" id="pricing">
+	<div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium w3-theme-index1" id="pricing">
 		<center>
 			<button onclick="document.getElementById('id01').style.display='block'"
 					class="w3-button w3-xlarge w3-theme w3-hover-teal" title="Go To W3.CSS" style="margin-top: 15px; border-radius: 25px;">
 				GET IN TOUCH
 			</button>
 		</center>
-		<div class="w3-third w3-margin-bottom">
-			<ul class="w3-ul w3-border w3-hover-shadow">
+		<div class="w3-third w3-margin-bottom w3-theme-index1">
+			<ul class="w3-ul w3-border w3-hover-shadow ">
 				<li class="w3-theme-l2">
 					<p class="w3-xlarge">Contact details</p>
 				</li>
@@ -1862,8 +1862,8 @@
 			</ul>
 		</div>
 
-		<div class="w3-third w3-margin-bottom">
-			<ul class="w3-ul w3-border w3-hover-shadow w3-row-padding">
+		<div class="w3-third w3-margin-bottom w3-theme-index1">
+			<ul class="w3-ul w3-border w3-hover-shadow">
 				<li class="w3-theme-l2">
 					<p class="w3-xlarge">Support</p>
 				</li>
@@ -1877,7 +1877,7 @@
 			</ul>
 		</div>
 
-		<div class="w3-third w3-margin-bottom">
+		<div class="w3-third w3-margin-bottom w3-theme-index1">
 			<ul class="w3-ul w3-border w3-hover-shadow">
 				<li class="w3-theme-l2">
 					<p class="w3-xlarge">Appointment</p>
@@ -1898,9 +1898,9 @@
 				</li>
 			</ul>
 		</div>
-		<div class="w3-row w3-border w3-center w3-theme-l1">
+		<div class="w3-row w3-border w3-center w3-theme-index1">
 
-			<div class="w3-half w3-container">
+			<div class="w3-half w3-container" style="border: 1px solid lightgray;">
 				<div class="w3-row w3-row-padding w3-padding-64" style="width: 100%; vertical-align: central;">
 					<div class="w3-row-padding" style="float:left">
 						<h4>How is your experience with this page?</h4>
@@ -1930,11 +1930,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="w3-half w3-container w3-border">
-				<div class="w3-row w3-center" style="height: 100%">
+			<div class="w3-half w3-container w3-border" style="border: 1px solid lightgray;">
+				<div class="w3-row w3-center" style="height: 100%;">
 					<section class="lead-form" id="contact">
 						<p>Fill out the form below and we’ll get back to you within 24 hours.</p>
-						<form onsubmit="form_submitted(this)" method="get" target="display-frame1">
+						<form onsubmit="form_submitted(this)" method="get" target="display-frame1" style="border: none;">
 							<input type="hidden" value="SAVE_LEADS" name="query">
 							<input type="hidden" value="message" name="module">
 
