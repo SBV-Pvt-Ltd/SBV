@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Human Body Parts - Interactive Anatomy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .mode-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .mode-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .mode-btn.learning {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .mode-btn.quiz {
+            background: #FF9800;
+            color: white;
+        }
+
+        .mode-btn.active {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .body-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+        }
+
+        .human-figure {
+            position: relative;
+            width: 450px;
+            height: 750px;
+        }
+
+        /* SVG Body */
+        .body-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Clickable Areas */
+        .body-part {
+            position: absolute;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .body-part:hover {
+            border-color: #FF6B6B;
+            background: rgba(255,107,107,0.3);
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .body-part.quiz-correct {
+            border-color: #4CAF50;
+            background: rgba(76,175,80,0.4);
+        }
+
+        .body-part.quiz-incorrect {
+            border-color: #F44336;
+            background: rgba(244,67,54,0.4);
+        }
+
+        /* Body part positions scaled up by 1.5x */
+        .head { top: 30px; left: 150px; width: 150px; height: 150px; }
+        .eye-left { top: 68px; left: 188px; width: 30px; height: 30px; }
+        .eye-right { top: 68px; left: 233px; width: 30px; height: 30px; }
+        .nose { top: 98px; left: 210px; width: 30px; height: 30px; }
+        .mouth { top: 128px; left: 203px; width: 45px; height: 30px; }
+        .ear-left { top: 75px; left: 143px; width: 38px; height: 45px; }
+        .ear-right { top: 75px; left: 270px; width: 38px; height: 45px; }
+        .neck { top: 180px; left: 203px; width: 45px; height: 60px; }
+        .shoulder-left { top: 235px; left: 140px; width: 50px; height: 36px; }
+        .shoulder-right { top: 235px; left: 260px; width: 50px; height: 36px; }
+        .chest { top: 240px; left: 165px; width: 120px; height: 105px; }
+        
+        /* T-shaped arms connecting from shoulders (adjusted positions) */
+        .upper-arm-left { top: 235px; left: 103px; width: 75px; height: 53px; }
+        .upper-arm-right { top: 235px; left: 273px; width: 75px; height: 53px; }
+        .elbow-left { top: 245px; left: 88px; width: 30px; height: 30px; }
+        .elbow-right { top: 245px; left: 333px; width: 30px; height: 30px; }
+        .lower-arm-left { top: 235px; left: 35px; width: 60px; height: 53px; }
+        .lower-arm-right { top: 235px; left: 355px; width: 60px; height: 53px; }
+        .hand-left { top: 230px; left: -2px; width: 60px; height: 60px; }
+        .hand-right { top: 230px; left: 393px; width: 60px; height: 60px; }
+        
+        .stomach { top: 345px; left: 188px; width: 75px; height: 90px; }
+        
+        /* Legs with knees (scaled up by 1.5x) */
+        .thigh-left { top: 435px; left: 188px; width: 53px; height: 90px; }
+        .thigh-right { top: 435px; left: 240px; width: 53px; height: 90px; }
+        .knee-left { top: 518px; left: 198px; width: 30px; height: 30px; }
+        .knee-right { top: 518px; left: 251px; width: 30px; height: 30px; }
+        .lower-leg-left { top: 540px; left: 188px; width: 53px; height: 75px; }
+        .lower-leg-right { top: 540px; left: 240px; width: 53px; height: 75px; }
+        .foot-left { top: 608px; left: 180px; width: 60px; height: 45px; }
+        .foot-right { top: 608px; left: 248px; width: 60px; height: 45px; }
+
+        .info-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 350px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .learning-content {
+            display: block;
+        }
+
+        .quiz-content {
+            display: none;
+        }
+
+        .part-info {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .part-info.active {
+            display: block;
+        }
+
+        .part-info h2 {
+            color: #FF6B6B;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .part-info p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        .fun-fact h3 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+        }
+
+        .default-info {
+            text-align: center;
+            color: #666;
+        }
+
+        .default-info h2 {
+            color: #FF6B6B;
+            margin-bottom: 15px;
+        }
+
+        .default-info .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        /* Quiz Styles */
+        .quiz-question {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .quiz-question h2 {
+            color: #FF9800;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+        }
+
+        .quiz-stats {
+            display: flex;
+            justify-content: space-between;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .quiz-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .quiz-btn.start {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .quiz-btn.next {
+            background: #2196F3;
+            color: white;
+        }
+
+        .quiz-btn.reset {
+            background: #FF5722;
+            color: white;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .quiz-feedback.correct {
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #FFCDD2;
+            color: #C62828;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .body-part.quiz-correct {
+            animation: pulse 0.6s ease-in-out;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .info-panel {
+                width: 100%;
+                max-width: 400px;
+                margin-top: 20px;
+            }
+
+            .human-figure {
+                width: 375px;
+                height: 600px;
+                transform: scale(0.8);
+            }
+
+            .mode-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧑‍⚕️ Learn Human Body Parts</h1>
+            <p>Hover over body parts to learn or take the quiz!</p>
+        </div>
+
+        <div class="mode-buttons">
+            <button class="mode-btn learning active" onclick="switchMode('learning')">
+                📚 Learning Mode
+            </button>
+            <button class="mode-btn quiz" onclick="switchMode('quiz')">
+                🧠 Quiz Mode
+            </button>
+        </div>
+
+        <div class="main-content">
+            <div class="body-section">
+                <div class="human-figure">
+                    <!-- Enhanced SVG Human Body with elbows and knees -->
+                    <svg class="body-svg" viewBox="0 0 450 750" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <!-- Gradients for more realistic shading -->
+                            <radialGradient id="skinGrad" cx="50%" cy="30%" r="70%">
+                                <stop offset="0%" style="stop-color:#FFE4C4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#DDBEA9;stop-opacity:1" />
+                            </radialGradient>
+                            <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#E84545;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="pantsGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#26A69A;stop-opacity:1" />
+                            </linearGradient>
+                            <radialGradient id="hairGrad" cx="50%" cy="30%" r="70%">
+                                <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#5D2F0A;stop-opacity:1" />
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Shadow -->
+                        <ellipse cx="225" cy="720" rx="90" ry="23" fill="rgba(0,0,0,0.2)" />
+
+                        <!-- Head (more rounded) -->
+                        <ellipse cx="225" cy="105" rx="68" ry="75" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Hair (more detailed) -->
+                        <path d="M 165 53 Q 195 23 225 27 Q 255 23 285 53 Q 278 30 255 33 Q 225 15 195 33 Q 173 30 165 53" fill="url(#hairGrad)" stroke="#654321" stroke-width="1.5"/>
+                        <!-- Hair strands -->
+                        <path d="M 188 38 Q 195 30 203 38" stroke="#654321" stroke-width="1.5" fill="none"/>
+                        <path d="M 218 30 Q 225 23 233 30" stroke="#654321" stroke-width="1.5" fill="none"/>
+                        <path d="M 248 38 Q 255 30 263 38" stroke="#654321" stroke-width="1.5" fill="none"/>
+                        
+                        <!-- Face features with better positioning -->
+                        <!-- Eyes (larger and more expressive) -->
+                        <ellipse cx="203" cy="90" rx="12" ry="9" fill="#FFF" stroke="#000" stroke-width="1.5"/>
+                        <ellipse cx="248" cy="90" rx="12" ry="9" fill="#FFF" stroke="#000" stroke-width="1.5"/>
+                        <circle cx="204" cy="90" r="6" fill="#4A90E2"/>
+                        <circle cx="246" cy="90" r="6" fill="#4A90E2"/>
+                        <circle cx="206" cy="89" r="3" fill="#000"/>
+                        <circle cx="248" cy="89" r="3" fill="#000"/>
+                        <circle cx="207" cy="87" r="1.5" fill="#FFF"/>
+                        <circle cx="249" cy="87" r="1.5" fill="#FFF"/>
+                        
+                        <!-- Eyebrows -->
+                        <path d="M 192 78 Q 203 72 213 78" stroke="#654321" stroke-width="3" fill="none"/>
+                        <path d="M 237 78 Q 248 72 258 78" stroke="#654321" stroke-width="3" fill="none"/>
+                        
+                        <!-- Nose (more defined) -->
+                        <path d="M 222 108 Q 225 117 228 108" stroke="#DEB887" stroke-width="3" fill="none"/>
+                        <ellipse cx="224" cy="114" rx="2.3" ry="1.5" fill="#DEB887"/>
+                        <ellipse cx="227" cy="114" rx="2.3" ry="1.5" fill="#DEB887"/>
+                        
+                        <!-- Mouth (friendlier smile) -->
+                        <path d="M 210 132 Q 225 143 240 132" stroke="#E74C3C" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+                        
+                        <!-- Ears (more realistic) -->
+                        <ellipse cx="158" cy="98" rx="18" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="293" cy="98" rx="18" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="161" cy="98" rx="9" ry="15" fill="#F4D3C7" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="290" cy="98" rx="9" ry="15" fill="#F4D3C7" stroke="#DEB887" stroke-width="1.5"/>
+                        
+                        <!-- Neck (more natural) -->
+                        <ellipse cx="225" cy="203" rx="27" ry="38" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Shirt/Chest area with integrated shoulders -->
+                        <ellipse cx="225" cy="300" rx="83" ry="98" fill="url(#shirtGrad)" stroke="#E84545" stroke-width="3"/>
+                        <!-- Shirt collar -->
+                        <path d="M 198 240 Q 225 255 252 240" stroke="#E84545" stroke-width="4.5" fill="none"/>
+                        
+                        <!-- Shoulders (integrated as part of chest/torso) -->
+                        <ellipse cx="165" cy="250" rx="25" ry="18" fill="url(#shirtGrad)" stroke="#E84545" stroke-width="3"/>
+                        <ellipse cx="285" cy="250" rx="25" ry="18" fill="url(#shirtGrad)" stroke="#E84545" stroke-width="3"/>
+                        
+                        <!-- Enhanced T-shaped arms connecting from shoulders -->
+                        <!-- Upper arms (starting from shoulders) -->
+                        <ellipse cx="140" cy="260" rx="38" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        <ellipse cx="310" cy="260" rx="38" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Elbows (visible joint points, adjusted for new arm position) -->
+                        <circle cx="103" cy="260" r="12" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        <circle cx="348" cy="260" r="12" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Lower arms (adjusted for new positioning) -->
+                        <ellipse cx="65" cy="260" rx="30" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        <ellipse cx="385" cy="260" rx="30" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Hands (adjusted for new arm flow) -->
+                        <ellipse cx="28" cy="260" rx="18" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        <ellipse cx="423" cy="260" rx="18" ry="27" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="3"/>
+                        
+                        <!-- Improved fingers for left hand (adjusted positions) -->
+                        <ellipse cx="13" cy="242" rx="3.8" ry="18" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="20" cy="238" rx="3.8" ry="23" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="28" cy="239" rx="3.8" ry="21" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="35" cy="244" rx="3.8" ry="17" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <!-- Thumb for left hand -->
+                        <ellipse cx="43" cy="257" rx="4.5" ry="12" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        
+                        <!-- Improved fingers for right hand (adjusted positions) -->
+                        <ellipse cx="438" cy="242" rx="3.8" ry="18" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="430" cy="238" rx="3.8" ry="23" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="423" cy="239" rx="3.8" ry="21" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <ellipse cx="415" cy="244" rx="3.8" ry="17" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+                        <!-- Thumb for right hand -->
+                        <ellipse cx="408" cy="257" rx="4.5" ry="12" fill="url(#skinGrad)" stroke="#DEB887" stroke-width="1.5"/>
+
+                        <!-- Stomach/Waist area -->
+                        <ellipse cx="225" cy="420" rx="68" ry="53" fill="url(#shirtGrad)" stroke="#E84545" stroke-width="3"/>
+                        
+                        <!-- Enhanced Legs with visible knees (scaled up) -->
+                        <!-- Thighs -->
+                        <ellipse cx="203" cy="480" rx="30" ry="53" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        <ellipse cx="248" cy="480" rx="30" ry="53" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        
+                        <!-- Knees (visible joint points) -->
+                        <circle cx="203" cy="533" r="18" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        <circle cx="248" cy="533" r="18" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        
+                        <!-- Lower legs (calves/shins) -->
+                        <ellipse cx="203" cy="578" rx="24" ry="38" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        <ellipse cx="248" cy="578" rx="24" ry="38" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+
+                        <!-- Improved Feet (more realistic shoe shape, scaled up) -->
+                        <ellipse cx="195" cy="638" rx="45" ry="23" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+                        <ellipse cx="255" cy="638" rx="45" ry="23" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+                        
+                        <!-- Shoe soles -->
+                        <ellipse cx="195" cy="645" rx="48" ry="12" fill="#1A252F" stroke="#0F1419" stroke-width="1.5"/>
+                        <ellipse cx="255" cy="645" rx="48" ry="12" fill="#1A252F" stroke="#0F1419" stroke-width="1.5"/>
+                        
+                        <!-- Shoe tops -->
+                        <ellipse cx="195" cy="630" rx="38" ry="15" fill="#34495E" stroke="#2C3E50" stroke-width="1.5"/>
+                        <ellipse cx="255" cy="630" rx="38" ry="15" fill="#34495E" stroke="#2C3E50" stroke-width="1.5"/>
+                        
+                        <!-- Shoelaces and details -->
+                        <circle cx="195" cy="623" r="3" fill="#FFF"/>
+                        <circle cx="255" cy="623" r="3" fill="#FFF"/>
+                        <line x1="188" y1="627" x2="203" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="203" y1="627" x2="188" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="248" y1="627" x2="263" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="263" y1="627" x2="248" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        
+                        <!-- Clothing details -->
+                        <!-- Shirt buttons -->
+                        <circle cx="225" cy="285" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        <circle cx="225" cy="315" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        <circle cx="225" cy="345" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        
+                        <!-- Belt -->
+                        <rect x="165" y="473" width="120" height="12" fill="#8B4513" stroke="#654321" stroke-width="1.5" rx="6"/>
+                        <rect x="218" y="468" width="15" height="21" fill="#FFD700" stroke="#FFA000" stroke-width="1.5" rx="3"/>
+                        
+                        <!-- Pocket on shirt -->
+                        <rect x="188" y="263" width="23" height="27" fill="none" stroke="#E84545" stroke-width="2.3" rx="3"/>"                         <!-- Lower legs (calves/shins) -->
+                        <ellipse cx="203" cy="578" rx="24" ry="38" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+                        <ellipse cx="248" cy="578" rx="24" ry="38" fill="url(#pantsGrad)" stroke="#26A69A" stroke-width="3"/>
+
+                        <!-- Improved Feet (more realistic shoe shape, scaled up) -->
+                        <ellipse cx="195" cy="638" rx="45" ry="23" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+                        <ellipse cx="255" cy="638" rx="45" ry="23" fill="#2C3E50" stroke="#1A252F" stroke-width="3"/>
+                        
+                        <!-- Shoe soles -->
+                        <ellipse cx="195" cy="645" rx="48" ry="12" fill="#1A252F" stroke="#0F1419" stroke-width="1.5"/>
+                        <ellipse cx="255" cy="645" rx="48" ry="12" fill="#1A252F" stroke="#0F1419" stroke-width="1.5"/>
+                        
+                        <!-- Shoe tops -->
+                        <ellipse cx="195" cy="630" rx="38" ry="15" fill="#34495E" stroke="#2C3E50" stroke-width="1.5"/>
+                        <ellipse cx="255" cy="630" rx="38" ry="15" fill="#34495E" stroke="#2C3E50" stroke-width="1.5"/>
+                        
+                        <!-- Shoelaces and details -->
+                        <circle cx="195" cy="623" r="3" fill="#FFF"/>
+                        <circle cx="255" cy="623" r="3" fill="#FFF"/>
+                        <line x1="188" y1="627" x2="203" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="203" y1="627" x2="188" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="248" y1="627" x2="263" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        <line x1="263" y1="627" x2="248" y2="618" stroke="#FFF" stroke-width="1.5"/>
+                        
+                        <!-- Clothing details -->
+                        <!-- Shirt buttons -->
+                        <circle cx="225" cy="285" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        <circle cx="225" cy="315" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        <circle cx="225" cy="345" r="3" fill="#FFF" stroke="#E84545" stroke-width="1.5"/>
+                        
+                        <!-- Belt -->
+                        <rect x="165" y="473" width="120" height="12" fill="#8B4513" stroke="#654321" stroke-width="1.5" rx="6"/>
+                        <rect x="218" y="468" width="15" height="21" fill="#FFD700" stroke="#FFA000" stroke-width="1.5" rx="3"/>
+                        
+                        <!-- Pocket on shirt -->
+                        <rect x="188" y="263" width="23" height="27" fill="none" stroke="#E84545" stroke-width="2.3" rx="3"/>
+                    </svg>
+
+                    <!-- Enhanced Interactive Body Parts with elbows and knees -->
+                    <div class="body-part head" data-part="head" data-name="Head"></div>
+                    <div class="body-part eye-left" data-part="eye" data-name="Eye"></div>
+                    <div class="body-part eye-right" data-part="eye" data-name="Eye"></div>
+                    <div class="body-part nose" data-part="nose" data-name="Nose"></div>
+                    <div class="body-part mouth" data-part="mouth" data-name="Mouth"></div>
+                    <div class="body-part ear-left" data-part="ear" data-name="Ear"></div>
+                    <div class="body-part ear-right" data-part="ear" data-name="Ear"></div>
+                    <div class="body-part neck" data-part="neck" data-name="Neck"></div>
+                    <div class="body-part shoulder-left" data-part="shoulder" data-name="Shoulder"></div>
+                    <div class="body-part shoulder-right" data-part="shoulder" data-name="Shoulder"></div>
+                    <div class="body-part chest" data-part="chest" data-name="Chest"></div>
+                    
+                    <!-- T-shaped arms with elbows -->
+                    <div class="body-part upper-arm-left" data-part="upper-arm" data-name="Upper Arm"></div>
+                    <div class="body-part upper-arm-right" data-part="upper-arm" data-name="Upper Arm"></div>
+                    <div class="body-part elbow-left" data-part="elbow" data-name="Elbow"></div>
+                    <div class="body-part elbow-right" data-part="elbow" data-name="Elbow"></div>
+                    <div class="body-part lower-arm-left" data-part="lower-arm" data-name="Lower Arm"></div>
+                    <div class="body-part lower-arm-right" data-part="lower-arm" data-name="Lower Arm"></div>
+                    <div class="body-part hand-left" data-part="hand" data-name="Hand"></div>
+                    <div class="body-part hand-right" data-part="hand" data-name="Hand"></div>
+                    
+                    <div class="body-part stomach" data-part="stomach" data-name="Stomach"></div>
+                    
+                    <!-- Legs with knees -->
+                    <div class="body-part thigh-left" data-part="thigh" data-name="Thigh"></div>
+                    <div class="body-part thigh-right" data-part="thigh" data-name="Thigh"></div>
+                    <div class="body-part knee-left" data-part="knee" data-name="Knee"></div>
+                    <div class="body-part knee-right" data-part="knee" data-name="Knee"></div>
+                    <div class="body-part lower-leg-left" data-part="lower-leg" data-name="Lower Leg"></div>
+                    <div class="body-part lower-leg-right" data-part="lower-leg" data-name="Lower Leg"></div>
+                    <div class="body-part foot-left" data-part="foot" data-name="Foot"></div>
+                    <div class="body-part foot-right" data-part="foot" data-name="Foot"></div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <!-- Learning Mode Content -->
+                <div class="learning-content">
+                    <div class="default-info">
+                        <h2>Welcome to Body Learning!</h2>
+                        <div class="emoji">👋</div>
+                        <p>Hover over any body part to learn about it!</p>
+                        <p>Switch to Quiz Mode to test your knowledge.</p>
+                    </div>
+
+                    <!-- Head Info -->
+                    <div class="part-info" data-info="head">
+                        <h2>🧠 Head</h2>
+                        <p>The head contains your brain, which controls your entire body! It's protected by your skull bone.</p>
+                        <div class="fun-fact">
+                            <h3>🤔 Fun Fact!</h3>
+                            <p>Your brain weighs about 3 pounds and uses 20% of your body's energy!</p>
+                        </div>
+                    </div>
+
+                    <!-- Eye Info -->
+                    <div class="part-info" data-info="eye">
+                        <h2>👁️ Eyes</h2>
+                        <p>Your eyes help you see the world around you! They can detect millions of colors and work like cameras.</p>
+                        <div class="fun-fact">
+                            <h3>✨ Fun Fact!</h3>
+                            <p>You blink about 15-20 times per minute to keep your eyes moist!</p>
+                        </div>
+                    </div>
+
+                    <!-- Nose Info -->
+                    <div class="part-info" data-info="nose">
+                        <h2>👃 Nose</h2>
+                        <p>Your nose helps you smell and breathe. It can detect over 1 trillion different scents!</p>
+                        <div class="fun-fact">
+                            <h3>🌸 Fun Fact!</h3>
+                            <p>Your nose also helps you taste food - that's why food tastes different when you have a cold!</p>
+                        </div>
+                    </div>
+
+                    <!-- Mouth Info -->
+                    <div class="part-info" data-info="mouth">
+                        <h2>👄 Mouth</h2>
+                        <p>Your mouth is used for eating, speaking, and breathing. It contains your teeth and tongue!</p>
+                        <div class="fun-fact">
+                            <h3>🦷 Fun Fact!</h3>
+                            <p>Adults have 32 teeth, and your mouth produces about 1 liter of saliva every day!</p>
+                        </div>
+                    </div>
+
+                    <!-- Ear Info -->
+                    <div class="part-info" data-info="ear">
+                        <h2>👂 Ears</h2>
+                        <p>Your ears help you hear sounds and also help you keep your balance!</p>
+                        <div class="fun-fact">
+                            <h3>🎵 Fun Fact!</h3>
+                            <p>Your ears never stop working - they even hear sounds while you sleep!</p>
+                        </div>
+                    </div>
+
+                    <!-- Neck Info -->
+                    <div class="part-info" data-info="neck">
+                        <h2>🦒 Neck</h2>
+                        <p>Your neck supports your head and allows you to turn it in different directions.</p>
+                        <div class="fun-fact">
+                            <h3>💪 Fun Fact!</h3>
+                            <p>Your neck has 7 vertebrae (neck bones) - the same number as a giraffe!</p>
+                        </div>
+                    </div>
+
+                    <!-- Shoulder Info -->
+                    <div class="part-info" data-info="shoulder">
+                        <h2>🤷 Shoulders</h2>
+                        <p>Your shoulders connect your arms to your torso and allow you to move your arms in many directions - up, down, forward, backward, and in circles!</p>
+                        <div class="fun-fact">
+                            <h3>🔄 Fun Fact!</h3>
+                            <p>Your shoulder is a ball-and-socket joint that can move in more directions than almost any other joint in your body!</p>
+                        </div>
+                    </div>
+
+                    <!-- Chest Info -->
+                    <div class="part-info" data-info="chest">
+                        <h2>🫁 Chest</h2>
+                        <p>Your chest contains your heart and lungs. Your heart pumps blood and your lungs help you breathe!</p>
+                        <div class="fun-fact">
+                            <h3>💓 Fun Fact!</h3>
+                            <p>Your heart beats about 100,000 times per day!</p>
+                        </div>
+                    </div>
+
+                    <!-- Upper Arm Info -->
+                    <div class="part-info" data-info="upper-arm">
+                        <h2>💪 Upper Arm</h2>
+                        <p>The upper arm connects your shoulder to your elbow. It contains strong muscles like the biceps and triceps that help you lift and move things!</p>
+                        <div class="fun-fact">
+                            <h3>🦴 Fun Fact!</h3>
+                            <p>The upper arm bone (humerus) is the longest bone in your arm!</p>
+                        </div>
+                    </div>
+
+                    <!-- Elbow Info -->
+                    <div class="part-info" data-info="elbow">
+                        <h2>🤲 Elbow</h2>
+                        <p>Your elbow is a joint that lets you bend and straighten your arm. It connects your upper arm to your lower arm!</p>
+                        <div class="fun-fact">
+                            <h3>⚡ Fun Fact!</h3>
+                            <p>When you hit your "funny bone," you're actually hitting a nerve that runs near your elbow!</p>
+                        </div>
+                    </div>
+
+                    <!-- Lower Arm Info -->
+                    <div class="part-info" data-info="lower-arm">
+                        <h2>🦾 Lower Arm</h2>
+                        <p>Your lower arm goes from your elbow to your wrist. It has two bones that help you twist your arm and move your hand!</p>
+                        <div class="fun-fact">
+                            <h3>🔄 Fun Fact!</h3>
+                            <p>The two bones in your lower arm can rotate around each other to let you turn your palm up and down!</p>
+                        </div>
+                    </div>
+
+                    <!-- Hand Info -->
+                    <div class="part-info" data-info="hand">
+                        <h2>✋ Hands</h2>
+                        <p>Your hands are amazing tools! They can write, draw, play instruments, and feel textures.</p>
+                        <div class="fun-fact">
+                            <h3>👆 Fun Fact!</h3>
+                            <p>Each hand has 27 bones and over 30 muscles!</p>
+                        </div>
+                    </div>
+
+                    <!-- Stomach Info -->
+                    <div class="part-info" data-info="stomach">
+                        <h2>🫄 Stomach</h2>
+                        <p>Your stomach digests the food you eat, breaking it down so your body can use it for energy!</p>
+                        <div class="fun-fact">
+                            <h3>🍎 Fun Fact!</h3>
+                            <p>Your stomach can stretch to hold about 1.5 liters of food!</p>
+                        </div>
+                    </div>
+
+                    <!-- Thigh Info -->
+                    <div class="part-info" data-info="thigh">
+                        <h2>🦵 Thigh</h2>
+                        <p>Your thigh is the upper part of your leg, from your hip to your knee. It contains the strongest muscle in your body - the quadriceps!</p>
+                        <div class="fun-fact">
+                            <h3>💪 Fun Fact!</h3>
+                            <p>Your thigh bone (femur) is the longest and strongest bone in your entire body!</p>
+                        </div>
+                    </div>
+
+                    <!-- Knee Info -->
+                    <div class="part-info" data-info="knee">
+                        <h2>🦵 Knee</h2>
+                        <p>Your knee is a hinge joint that lets you bend and straighten your leg. It helps you walk, run, jump, and sit down!</p>
+                        <div class="fun-fact">
+                            <h3>🦴 Fun Fact!</h3>
+                            <p>Your kneecap (patella) is actually a bone that sits in front of your knee joint to protect it!</p>
+                        </div>
+                    </div>
+
+                    <!-- Lower Leg Info -->
+                    <div class="part-info" data-info="lower-leg">
+                        <h2>🦵 Lower Leg</h2>
+                        <p>Your lower leg goes from your knee to your ankle. It has two bones that help support your weight and let you move your foot!</p>
+                        <div class="fun-fact">
+                            <h3>🏃 Fun Fact!</h3>
+                            <p>Your calf muscles in your lower leg help you push off the ground when you walk or run!</p>
+                        </div>
+                    </div>
+
+                    <!-- Foot Info -->
+                    <div class="part-info" data-info="foot">
+                        <h2>🦶 Feet</h2>
+                        <p>Your feet help you balance and move around. They have many small bones and muscles working together!</p>
+                        <div class="fun-fact">
+                            <h3>👣 Fun Fact!</h3>
+                            <p>Each foot has 26 bones and 33 joints!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Mode Content -->
+                <div class="quiz-content">
+                    <div class="quiz-question">
+                        <h2>🎯 Body Parts Quiz</h2>
+                        <p id="quiz-instruction">Click "Start Quiz" to begin!</p>
+                        <p id="current-question"></p>
+                    </div>
+
+                    <div class="quiz-stats">
+                        <div class="stat">
+                            <div class="stat-number" id="score">0</div>
+                            <div class="stat-label">Score</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="questions">0</div>
+                            <div class="stat-label">Questions</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number" id="accuracy">0%</div>
+                            <div class="stat-label">Accuracy</div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-controls">
+                        <button class="quiz-btn start" onclick="startQuiz()">Start Quiz</button>
+                        <button class="quiz-btn next" onclick="nextQuestion()" style="display: none;">Next</button>
+                        <button class="quiz-btn reset" onclick="resetQuiz()">Reset</button>
+                    </div>
+
+                    <div class="quiz-feedback" id="feedback"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentMode = 'learning';
+        let quizActive = false;
+        let currentQuestion = null;
+        let score = 0;
+        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let usedQuestions = [];
+
+        const bodyParts = {
+            head: { name: 'Head', emoji: '🧠' },
+            eye: { name: 'Eye', emoji: '👁️' },
+            nose: { name: 'Nose', emoji: '👃' },
+            mouth: { name: 'Mouth', emoji: '👄' },
+            ear: { name: 'Ear', emoji: '👂' },
+            neck: { name: 'Neck', emoji: '🦒' },
+            shoulder: { name: 'Shoulder', emoji: '🤷' },
+            chest: { name: 'Chest', emoji: '🫁' },
+            'upper-arm': { name: 'Upper Arm', emoji: '💪' },
+            elbow: { name: 'Elbow', emoji: '🤲' },
+            'lower-arm': { name: 'Lower Arm', emoji: '🦾' },
+            hand: { name: 'Hand', emoji: '✋' },
+            stomach: { name: 'Stomach', emoji: '🫄' },
+            thigh: { name: 'Thigh', emoji: '🦵' },
+            knee: { name: 'Knee', emoji: '🦵' },
+            'lower-leg': { name: 'Lower Leg', emoji: '🦵' },
+            foot: { name: 'Foot', emoji: '🦶' }
+        };
+
+        // Initialize the page
+        function init() {
+            setupEventListeners();
+            switchMode('learning');
+        }
+
+        function setupEventListeners() {
+            const bodyPartElements = document.querySelectorAll('.body-part');
+            
+            bodyPartElements.forEach(part => {
+                part.addEventListener('mouseenter', function() {
+                    if (currentMode === 'learning') {
+                        showPartInfo(this.dataset.part);
+                    }
+                });
+
+                part.addEventListener('mouseleave', function() {
+                    if (currentMode === 'learning') {
+                        showDefaultInfo();
+                    }
+                });
+
+                part.addEventListener('click', function() {
+                    if (currentMode === 'quiz' && quizActive) {
+                        checkAnswer(this.dataset.part);
+                    }
+                });
+            });
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            const learningBtn = document.querySelector('.mode-btn.learning');
+            const quizBtn = document.querySelector('.mode-btn.quiz');
+            const learningContent = document.querySelector('.learning-content');
+            const quizContent = document.querySelector('.quiz-content');
+
+            if (mode === 'learning') {
+                learningBtn.classList.add('active');
+                quizBtn.classList.remove('active');
+                learningContent.style.display = 'block';
+                quizContent.style.display = 'none';
+                showDefaultInfo();
+                clearBodyPartStyles();
+            } else {
+                learningBtn.classList.remove('active');
+                quizBtn.classList.add('active');
+                learningContent.style.display = 'none';
+                quizContent.style.display = 'block';
+                clearBodyPartStyles();
+            }
+        }
+
+        function showPartInfo(partType) {
+            // Hide all info panels
+            document.querySelectorAll('.part-info').forEach(info => {
+                info.classList.remove('active');
+            });
+            document.querySelector('.default-info').style.display = 'none';
+            
+            // Show specific part info
+            const partInfo = document.querySelector(`[data-info="${partType}"]`);
+            if (partInfo) {
+                partInfo.classList.add('active');
+            }
+        }
+
+        function showDefaultInfo() {
+            document.querySelectorAll('.part-info').forEach(info => {
+                info.classList.remove('active');
+            });
+            document.querySelector('.default-info').style.display = 'block';
+        }
+
+        function startQuiz() {
+            quizActive = true;
+            score = 0;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            usedQuestions = [];
+            
+            document.querySelector('.quiz-btn.start').style.display = 'none';
+            document.getElementById('feedback').innerHTML = '';
+            
+            updateStats();
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            if (usedQuestions.length >= Object.keys(bodyParts).length) {
+                endQuiz();
+                return;
+            }
+
+            clearBodyPartStyles();
+            document.querySelector('.quiz-btn.next').style.display = 'none';
+            document.getElementById('feedback').innerHTML = '';
+
+            // Get unused question
+            const availableQuestions = Object.keys(bodyParts).filter(part => !usedQuestions.includes(part));
+            currentQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+            
+            const partData = bodyParts[currentQuestion];
+            document.getElementById('current-question').innerHTML = 
+                `Click on the: <strong>${partData.emoji} ${partData.name}</strong>`;
+            document.getElementById('quiz-instruction').textContent = 'Click on the correct body part!';
+        }
+
+        function checkAnswer(selectedPart) {
+            if (!currentQuestion) return;
+            
+            totalQuestions++;
+            usedQuestions.push(currentQuestion);
+            
+            const selectedElements = document.querySelectorAll(`[data-part="${selectedPart}"]`);
+            const correctElements = document.querySelectorAll(`[data-part="${currentQuestion}"]`);
+            
+            if (selectedPart === currentQuestion) {
+                // Correct answer
+                correctAnswers++;
+                score += 10;
+                
+                correctElements.forEach(el => {
+                    el.classList.add('quiz-correct');
+                });
+                
+                playSound('correct');
+                
+                document.getElementById('feedback').innerHTML = 
+                    `<div class="quiz-feedback correct">🎉 Correct! That's the ${bodyParts[currentQuestion].name}!</div>`;
+            } else {
+                // Wrong answer
+                selectedElements.forEach(el => {
+                    el.classList.add('quiz-incorrect');
+                });
+                
+                playSound('incorrect');
+                
+                setTimeout(() => {
+                    correctElements.forEach(el => {
+                        el.classList.add('quiz-correct');
+                    });
+                }, 500);
+                
+                document.getElementById('feedback').innerHTML = 
+                    `<div class="quiz-feedback incorrect">❌ Oops! That's the ${bodyParts[selectedPart].name}. The correct answer was ${bodyParts[currentQuestion].name}.</div>`;
+            }
+            
+            updateStats();
+            
+            // Show next button or end quiz
+            if (usedQuestions.length < Object.keys(bodyParts).length) {
+                setTimeout(() => {
+                    document.querySelector('.quiz-btn.next').style.display = 'inline-block';
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    endQuiz();
+                }, 2000);
+            }
+        }
+
+        function endQuiz() {
+            quizActive = false;
+            const percentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+            
+            let message = '';
+            let emoji = '';
+            
+            if (percentage >= 90) {
+                message = 'Outstanding! You know the human body very well!';
+                emoji = '🌟';
+                setTimeout(celebrate, 500);
+            } else if (percentage >= 70) {
+                message = 'Great job! You have good knowledge of body parts!';
+                emoji = '👏';
+            } else if (percentage >= 50) {
+                message = 'Good effort! Keep learning to improve!';
+                emoji = '👍';
+            } else {
+                message = 'Nice try! Practice more to get better!';
+                emoji = '💪';
+            }
+            
+            document.getElementById('feedback').innerHTML = `
+                <div class="quiz-feedback correct">
+                    <h3>${emoji} Quiz Complete!</h3>
+                    <p>${message}</p>
+                    <p>Final Score: ${score} points (${percentage}% accuracy)</p>
+                </div>
+            `;
+            
+            document.getElementById('current-question').textContent = '';
+            document.getElementById('quiz-instruction').textContent = 'Quiz finished! Start a new one when ready.';
+            document.querySelector('.quiz-btn.start').style.display = 'inline-block';
+            document.querySelector('.quiz-btn.next').style.display = 'none';
+        }
+
+        function resetQuiz() {
+            quizActive = false;
+            currentQuestion = null;
+            score = 0;
+            totalQuestions = 0;
+            correctAnswers = 0;
+            usedQuestions = [];
+            
+            document.querySelector('.quiz-btn.start').style.display = 'inline-block';
+            document.querySelector('.quiz-btn.next').style.display = 'none';
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('current-question').textContent = '';
+            document.getElementById('quiz-instruction').textContent = 'Click "Start Quiz" to begin!';
+            
+            clearBodyPartStyles();
+            updateStats();
+        }
+
+        function clearBodyPartStyles() {
+            document.querySelectorAll('.body-part').forEach(part => {
+                part.classList.remove('quiz-correct', 'quiz-incorrect');
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('questions').textContent = totalQuestions;
+            
+            const accuracy = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+        }
+
+        // Add some fun sound effects (simple beeps)
+        function playSound(type) {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                if (type === 'correct') {
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                } else if (type === 'incorrect') {
+                    oscillator.frequency.setValueAtTime(220, audioContext.currentTime); // A3
+                }
+                
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.3);
+            } catch (e) {
+                // Ignore audio errors
+            }
+        }
+
+        // Add celebration for perfect scores
+        function celebrate() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        top: -10px;
+                        left: ${Math.random() * 100}vw;
+                        width: 8px;
+                        height: 8px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 10000;
+                        animation: confettiFall 3s linear forwards;
+                    `;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        if (document.body.contains(confetti)) {
+                            document.body.removeChild(confetti);
+                        }
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (currentMode === 'quiz') {
+                if (e.key.toLowerCase() === 's' && !quizActive) {
+                    startQuiz();
+                } else if (e.key.toLowerCase() === 'n' && quizActive && document.querySelector('.quiz-btn.next').style.display !== 'none') {
+                    nextQuestion();
+                } else if (e.key.toLowerCase() === 'r') {
+                    resetQuiz();
+                }
+            }
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+
+        console.log('🧑‍⚕️ Human Body Learning Tool Ready!');
+        console.log('Learning Mode: Hover over body parts');
+        console.log('Quiz Mode: Click on body parts');
+        console.log('Keyboard shortcuts: S (start), N (next), R (reset)');
+    </script>
+</body>
+</html>
