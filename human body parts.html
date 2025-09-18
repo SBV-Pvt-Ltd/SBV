@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Human Body — Learn (Stacked Fix)</title>
+    <meta name="description" content="Interactive stacked layout to learn human body parts (fixed arms & legs)" />
+    <style>
+        :root {
+            --bg: #f6fbff;
+            --card: #ffffff;
+            --accent: #2b9edb;
+            --muted: #5b6872;
+            --shadow: 0 10px 30px rgba(17,24,39,0.06);
+            --radius: 12px;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html, body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(180deg,var(--bg),#eef6fb);
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 780px
+        }
+
+        header {
+            margin-bottom: 12px
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: linear-gradient(180deg,var(--accent),#1976b8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px
+        }
+
+        h1 {
+            font-size: 1.25rem;
+            margin: 0
+        }
+
+        p.lead {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        main.card {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 14px;
+            box-shadow: var(--shadow);
+            margin-bottom: 14px
+        }
+
+        .svg-wrap {
+            display: flex;
+            justify-content: center;
+            padding: 6px
+        }
+
+        svg#body-svg {
+            width: 320px;
+            height: auto;
+            display: block;
+            max-width: 100%
+        }
+
+        .parts {
+            margin-top: 12px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+            gap: 8px
+        }
+
+        .part-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(15,23,42,0.06);
+            background: linear-gradient(180deg,#fff,#fbfdff);
+            cursor: pointer;
+            transition: transform .12s ease,box-shadow .12s ease
+        }
+
+            .part-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 6px 18px rgba(12,20,30,0.06)
+            }
+
+        .swatch {
+            width: 12px;
+            height: 32px;
+            border-radius: 6px;
+            flex-shrink: 0
+        }
+
+        .part-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start
+        }
+
+        .part-name {
+            font-weight: 600;
+            font-size: .95rem
+        }
+
+        .part-sub {
+            font-size: .82rem;
+            color: var(--muted)
+        }
+
+        .hint {
+            font-size: .88rem;
+            color: var(--muted);
+            margin-top: 8px
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px
+        }
+
+        .ctrl {
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(15,23,42,0.06);
+            background: #fff;
+            cursor: pointer
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2,6,23,0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            z-index: 40
+        }
+
+        .modal {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(17,24,39,0.15)
+        }
+
+            .modal h3 {
+                margin: 0 0 6px
+            }
+
+            .modal p {
+                margin: 6px 0 0;
+                color: var(--muted)
+            }
+
+        .close {
+            border: 0;
+            background: none;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--muted);
+            cursor: pointer
+        }
+
+        @media (max-width:520px) {
+            svg#body-svg {
+                width: 260px
+            }
+
+            .part-btn {
+                padding: 8px
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <div class="brand">
+                <div class="logo">HB</div>
+                <div>
+                    <h1>Human Body — Learn</h1>
+                    <p class="lead">Tap a body part to open a short description. (Fixed arms & legs — no crossing.)</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="card" aria-labelledby="mainTitle">
+            <div id="mainTitle" style="display:none">Interactive Human Body</div>
+
+            <div class="svg-wrap" aria-hidden="false">
+                <!-- Clean, non-crossing realistic cartoon-style SVG -->
+                <svg id="body-svg" viewBox="0 0 360 900" role="img" aria-labelledby="svgTitle svgDesc">
+                    <title id="svgTitle">Human body diagram</title>
+                    <desc id="svgDesc">Clickable regions: head, neck, chest, abdomen, pelvis, shoulders, upper arms, elbows, lower arms, hands, thighs, knees, lower legs, feet.</desc>
+
+                    <!-- Head & torso -->
+                    <ellipse cx="180" cy="85" rx="40" ry="48" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="170" y="130" width="20" height="18" rx="6" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="130" y="150" width="100" height="140" rx="32" fill="#cfefff" stroke="#bdeeff" />
+                    <rect x="140" y="300" width="80" height="70" rx="16" fill="#eaf7ff" stroke="#d5eefc" />
+                    <rect x="145" y="370" width="70" height="48" rx="12" fill="#eaf7ff" stroke="#d5eefc" />
+
+                    <!-- LEFT ARM (shoulder -> upper -> elbow -> lower -> hand) -->
+                    <ellipse cx="110" cy="165" rx="18" ry="14" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="86" y="180" width="48" height="110" rx="24" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <ellipse cx="110" cy="300" rx="12" ry="10" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="76" y="310" width="48" height="110" rx="24" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <ellipse cx="100" cy="430" rx="18" ry="16" fill="#f3d7c5" stroke="#d4b4a1" />
+
+                    <!-- RIGHT ARM -->
+                    <ellipse cx="250" cy="165" rx="18" ry="14" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="236" y="180" width="48" height="110" rx="24" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <ellipse cx="260" cy="300" rx="12" ry="10" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="236" y="310" width="48" height="110" rx="24" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <ellipse cx="276" cy="430" rx="18" ry="16" fill="#f3d7c5" stroke="#d4b4a1" />
+
+                    <!-- LEFT THIGH -->
+                    <rect x="130" y="420" width="44" height="140" rx="20" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <!-- RIGHT THIGH -->
+                    <rect x="186" y="420" width="44" height="140" rx="20" fill="#f3d7c5" stroke="#d4b4a1" />
+
+                    <!-- KNEES -->
+                    <rect x="130" y="560" width="44" height="26" rx="8" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="186" y="560" width="44" height="26" rx="8" fill="#f3d7c5" stroke="#d4b4a1" />
+
+                    <!-- LOWER LEGS -->
+                    <rect x="130" y="586" width="44" height="160" rx="20" fill="#f3d7c5" stroke="#d4b4a1" />
+                    <rect x="186" y="586" width="44" height="160" rx="20" fill="#f3d7c5" stroke="#d4b4a1" />
+
+                    <!-- FEET -->
+                    <ellipse cx="152" cy="770" rx="36" ry="14" fill="#bfc7d1" />
+                    <ellipse cx="208" cy="770" rx="36" ry="14" fill="#bfc7d1" />
+
+                    <!-- face -->
+                    <circle cx="168" cy="78" r="4" fill="#2b2b2b" />
+                    <circle cx="192" cy="78" r="4" fill="#2b2b2b" />
+                    <path d="M168 95 Q180 107 192 95" stroke="#2b2b2b" stroke-width="2" fill="transparent" stroke-linecap="round" />
+
+                    <!-- hotspots on top for interaction (transparent shapes) -->
+                    <g id="hotspots" fill="transparent" stroke="rgba(43,158,219,0.16)" stroke-width="1.2">
+                        <ellipse class="hotspot" data-part="head" cx="180" cy="85" rx="40" ry="48" />
+                        <rect class="hotspot" data-part="neck" x="170" y="130" width="20" height="18" rx="6" />
+                        <rect class="hotspot" data-part="chest" x="130" y="150" width="100" height="140" rx="32" />
+                        <rect class="hotspot" data-part="abdomen" x="140" y="300" width="80" height="70" rx="16" />
+                        <rect class="hotspot" data-part="pelvis" x="145" y="370" width="70" height="48" rx="12" />
+
+                        <ellipse class="hotspot" data-part="left_shoulder" cx="110" cy="165" rx="18" ry="14" />
+                        <rect class="hotspot" data-part="left_upper_arm" x="86" y="180" width="48" height="110" rx="24" />
+                        <ellipse class="hotspot" data-part="left_elbow" cx="110" cy="300" rx="12" ry="10" />
+                        <rect class="hotspot" data-part="left_lower_arm" x="76" y="310" width="48" height="110" rx="24" />
+                        <ellipse class="hotspot" data-part="left_hand" cx="100" cy="430" rx="18" ry="16" />
+
+                        <ellipse class="hotspot" data-part="right_shoulder" cx="250" cy="165" rx="18" ry="14" />
+                        <rect class="hotspot" data-part="right_upper_arm" x="236" y="180" width="48" height="110" rx="24" />
+                        <ellipse class="hotspot" data-part="right_elbow" cx="260" cy="300" rx="12" ry="10" />
+                        <rect class="hotspot" data-part="right_lower_arm" x="236" y="310" width="48" height="110" rx="24" />
+                        <ellipse class="hotspot" data-part="right_hand" cx="276" cy="430" rx="18" ry="16" />
+
+                        <rect class="hotspot" data-part="left_thigh" x="130" y="420" width="44" height="140" rx="20" />
+                        <rect class="hotspot" data-part="right_thigh" x="186" y="420" width="44" height="140" rx="20" />
+                        <rect class="hotspot" data-part="left_knee" x="130" y="560" width="44" height="26" rx="8" />
+                        <rect class="hotspot" data-part="right_knee" x="186" y="560" width="44" height="26" rx="8" />
+                        <rect class="hotspot" data-part="left_lower_leg" x="130" y="586" width="44" height="160" rx="20" />
+                        <rect class="hotspot" data-part="right_lower_leg" x="186" y="586" width="44" height="160" rx="20" />
+                        <ellipse class="hotspot" data-part="left_foot" cx="152" cy="770" rx="36" ry="14" />
+                        <ellipse class="hotspot" data-part="right_foot" cx="208" cy="770" rx="36" ry="14" />
+                    </g>
+
+                    <!-- highlight group for selection ring -->
+                    <g id="highlight" stroke="var(--accent)" fill="none" stroke-width="3" visibility="hidden"></g>
+                </svg>
+            </div>
+
+            <div class="hint">Tap a region on the diagram or a button below to see details.</div>
+
+            <div class="parts" id="partsContainer" aria-label="Body parts list"></div>
+
+            <div class="controls">
+                <button id="showAll" class="ctrl">Highlight all</button>
+                <button id="clearAll" class="ctrl">Clear highlights</button>
+            </div>
+        </main>
+
+        <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+            <div class="modal" role="document">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <h3 id="modalTitle">Part</h3>
+                    <button id="closeBtn" class="close" aria-label="Close">✕</button>
+                </div>
+                <p id="modalBody" style="margin-top:8px;color:var(--muted)"></p>
+            </div>
+        </div>
+
+        <footer style="text-align:center;padding:12px;color:var(--muted)">Interactive Human Body — stacked layout (arms & legs fixed)</footer>
+    </div>
+
+    <script>
+        const PARTS = {
+            head: { name: 'Head', subtitle: 'Brain & senses', color: '#ffd166', info: 'Contains the brain and primary sensory organs (eyes, ears, nose, mouth).' },
+            neck: { name: 'Neck', subtitle: 'Supports head', color: '#f4a261', info: 'Connects the head to the torso; contains airway and major blood vessels.' },
+            chest: { name: 'Chest', subtitle: 'Heart & lungs', color: '#2b9edb', info: 'Chest (thorax) houses the heart and lungs.' },
+            abdomen: { name: 'Abdomen', subtitle: 'Digestive organs', color: '#90e0ef', info: 'Contains the stomach, liver, and intestines.' },
+            pelvis: { name: 'Pelvis', subtitle: 'Lower trunk', color: '#bde0fe', info: 'Supports the lower abdomen and anchors the legs.' },
+
+            left_shoulder: { name: 'Left Shoulder', subtitle: 'Shoulder joint', color: '#ffafcc', info: 'Connects left arm to the torso and allows rotation.' },
+            right_shoulder: { name: 'Right Shoulder', subtitle: 'Shoulder joint', color: '#ffafcc', info: 'Connects right arm to the torso and allows rotation.' },
+
+            left_upper_arm: { name: 'Left Upper Arm', subtitle: 'Humerus & muscle', color: '#caffbf', info: 'Contains the humerus; muscles move the elbow and shoulder.' },
+            right_upper_arm: { name: 'Right Upper Arm', subtitle: 'Humerus & muscle', color: '#caffbf', info: 'Contains the humerus; muscles move the elbow and shoulder.' },
+
+            left_elbow: { name: 'Left Elbow', subtitle: 'Elbow joint', color: '#ffd6a5', info: 'Joint between the upper arm and lower arm.' },
+            right_elbow: { name: 'Right Elbow', subtitle: 'Elbow joint', color: '#ffd6a5', info: 'Joint between the upper arm and lower arm.' },
+
+            left_lower_arm: { name: 'Left Lower Arm', subtitle: 'Radius & ulna', color: '#a0e7e5', info: 'Includes radius and ulna; helps with wrist movement.' },
+            right_lower_arm: { name: 'Right Lower Arm', subtitle: 'Radius & ulna', color: '#a0e7e5', info: 'Includes radius and ulna; helps with wrist movement.' },
+
+            left_hand: { name: 'Left Hand', subtitle: 'Fingers & palm', color: '#8ecae6', info: 'Used for grasping and sensing touch.' },
+            right_hand: { name: 'Right Hand', subtitle: 'Fingers & palm', color: '#8ecae6', info: 'Used for grasping and sensing touch.' },
+
+            left_thigh: { name: 'Left Thigh', subtitle: 'Femur & muscles', color: '#ffd6a5', info: 'Contains the femur and major leg muscles.' },
+            right_thigh: { name: 'Right Thigh', subtitle: 'Femur & muscles', color: '#ffd6a5', info: 'Contains the femur and major leg muscles.' },
+
+            left_knee: { name: 'Left Knee', subtitle: 'Knee joint', color: '#ffb4a2', info: 'Connects the thigh to the lower leg and supports weight.' },
+            right_knee: { name: 'Right Knee', subtitle: 'Knee joint', color: '#ffb4a2', info: 'Connects the thigh to the lower leg and supports weight.' },
+
+            left_lower_leg: { name: 'Left Lower Leg', subtitle: 'Tibia & fibula', color: '#cddafd', info: 'Contains tibia and fibula; supports standing and walking.' },
+            right_lower_leg: { name: 'Right Lower Leg', subtitle: 'Tibia & fibula', color: '#cddafd', info: 'Contains tibia and fibula; supports standing and walking.' },
+
+            left_foot: { name: 'Left Foot', subtitle: 'Ankle & toes', color: '#d4f1be', info: 'Supports balance and walking.' },
+            right_foot: { name: 'Right Foot', subtitle: 'Ankle & toes', color: '#d4f1be', info: 'Supports balance and walking.' }
+        };
+
+        // populate parts list (stacked)
+        const partsContainer = document.getElementById('partsContainer');
+        for (const key of Object.keys(PARTS)) {
+            const meta = PARTS[key];
+            const btn = document.createElement('button');
+            btn.className = 'part-btn';
+            btn.dataset.part = key;
+            btn.innerHTML = `<div class="swatch" style="background:${meta.color}"></div><div class="part-meta"><div class="part-name">${meta.name}</div><div class="part-sub">${meta.subtitle}</div></div>`;
+            btn.addEventListener('click', () => showPart(key));
+            partsContainer.appendChild(btn);
+        }
+
+        // modal & highlight helpers
+        const modal = document.getElementById('modalBackdrop');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.getElementById('closeBtn');
+        const highlightGroup = document.getElementById('highlight');
+
+        function clearHighlights() {
+            document.querySelectorAll('#hotspots .hotspot').forEach(el => {
+                el.setAttribute('fill', 'transparent');
+                el.setAttribute('stroke', 'rgba(43,158,219,0.16)');
+                el.setAttribute('stroke-width', '1.2');
+            });
+            highlightGroup.innerHTML = '';
+            highlightGroup.setAttribute('visibility', 'hidden');
+        }
+
+        function highlightPart(key) {
+            clearHighlights();
+            const target = document.querySelector(`#hotspots [data-part="${key}"]`);
+            if (!target) return;
+            target.setAttribute('fill', 'rgba(43,158,219,0.14)');
+            target.setAttribute('stroke', '#2b9edb');
+            target.setAttribute('stroke-width', '2');
+            try {
+                const clone = target.cloneNode(true);
+                clone.setAttribute('fill', 'none');
+                clone.setAttribute('stroke', '#2b9edb');
+                clone.setAttribute('stroke-width', '3');
+                clone.setAttribute('opacity', '0.95');
+                highlightGroup.appendChild(clone);
+                highlightGroup.setAttribute('visibility', 'visible');
+            } catch (e) {/* ignore */ }
+        }
+
+        function showPart(key) {
+            const meta = PARTS[key];
+            if (!meta) return;
+            modalTitle.textContent = meta.name;
+            modalBody.textContent = meta.info;
+            modal.style.display = 'flex';
+            modal.setAttribute('aria-hidden', 'false');
+            highlightPart(key);
+            closeBtn.focus();
+        }
+
+        function closeModal() { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); clearHighlights(); }
+        closeBtn.addEventListener('click', closeModal);
+        window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        // wire hotspots
+        document.querySelectorAll('#hotspots .hotspot').forEach(h => {
+            h.addEventListener('click', () => {
+                const p = h.dataset.part;
+                showPart(p);
+            });
+            h.addEventListener('mouseenter', () => h.setAttribute('stroke', 'rgba(43,158,219,0.45)'));
+            h.addEventListener('mouseleave', () => h.setAttribute('stroke', 'rgba(43,158,219,0.16)'));
+        });
+
+        // controls
+        document.getElementById('showAll').addEventListener('click', () => {
+            clearHighlights();
+            document.querySelectorAll('#hotspots .hotspot').forEach(h => {
+                const c = h.cloneNode(true);
+                c.setAttribute('fill', 'none');
+                c.setAttribute('stroke', 'rgba(43,158,219,0.28)');
+                c.setAttribute('stroke-width', '1.25');
+                highlightGroup.appendChild(c);
+            });
+            highlightGroup.setAttribute('visibility', 'visible');
+            setTimeout(() => clearHighlights(), 4500);
+        });
+        document.getElementById('clearAll').addEventListener('click', clearHighlights);
+
+        // small hint
+        setTimeout(() => { highlightPart('head'); setTimeout(clearHighlights, 900); }, 700);
+
+        // debug
+        window._HB = { highlightPart, clearHighlights, PARTS };
+    </script>
+</body>
+</html>
