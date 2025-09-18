@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healex - Pain and Lifestyle Clinic</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #63b3ed;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+            .nav-menu a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s ease;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+            }
+
+                .nav-menu a:hover {
+                    background: rgba(255,255,255,0.1);
+                    color: #63b3ed;
+                }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(44,82,130,0.9), rgba(49,130,206,0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23f7fafc;stop-opacity:1" /><stop offset="100%" style="stop-color:%23edf2f7;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="600" fill="url(%23bg)"/><path d="M0,300 Q300,200 600,300 T1200,250 L1200,600 L0,600 Z" fill="%23e2e8f0" opacity="0.3"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #48bb78;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                background: #38a169;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(72,187,120,0.3);
+            }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+            .btn-secondary:hover {
+                background: white;
+                color: #2c5282;
+            }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: #f7fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5282;
+            font-weight: 700;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+            .about-text h3 {
+                color: #2c5282;
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+
+        .doctor-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .doctor-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #63b3ed, #3182ce);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        /* Comprehensive Exercise Section */
+        .comprehensive-exercise {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .comprehensive-exercise-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .comprehensive-exercise-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c5282;
+            font-weight: 700;
+        }
+
+        .comprehensive-exercise-section-title-description {
+            text-align: center;
+        }
+
+        .heading-human-view {
+            font-weight: 700;
+        }
+
+        .comprehensive-exercise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .comprehensive-exercise-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+            .comprehensive-exercise-text h3 {
+                color: #2c5282;
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+
+        .comprehensive-exercise-display {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: #f7fafc;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #48bb78;
+        }
+
+            .service-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            color: #2c5282;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Units Section */
+        .units {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .unit-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .unit-card:hover {
+                transform: translateY(-5px);
+            }
+
+        .unit-header {
+            background: linear-gradient(135deg, #2c5282, #3182ce);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .unit-content {
+            padding: 2rem;
+        }
+
+        .unit-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+            .unit-features li {
+                padding: 0.5rem 0;
+                border-bottom: 1px solid #e2e8f0;
+                position: relative;
+                padding-left: 1.5rem;
+            }
+
+                .unit-features li:before {
+                    content: "✓";
+                    color: #48bb78;
+                    font-weight: bold;
+                    position: absolute;
+                    left: 0;
+                }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2c5282, #3182ce);
+            color: #f7fafc;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 1rem;
+                border: none;
+                border-radius: 8px;
+                font-size: 1rem;
+                background: rgba(255,255,255,0.9);
+            }
+
+            .form-group textarea {
+                height: 120px;
+                resize: vertical;
+            }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #48bb78;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+            .footer-links a {
+                color: #63b3ed;
+                text-decoration: none;
+            }
+
+                .footer-links a:hover {
+                    color: white;
+                }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #2c5282;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+                .nav-menu.active {
+                    display: flex;
+                }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .comprehensive-exercise-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 0 1rem;
+            }
+
+                .hero h1 {
+                    font-size: 2rem;
+                }
+
+                .hero p {
+                    font-size: 1.1rem;
+                }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .units-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <style type="text/css">
+        .human-view-with-headings-controls {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f8ff;
+            text-align: center;
+            max-height: 100vh;
+        }
+
+        .heading-human-view {
+            margin-bottom: 10px;
+        }
+
+        .human-view-toggle-btn {
+            margin: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background: #2b9edb;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .view-svg {
+            max-width: 300px;
+            max-height: 100vh;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .hotspot {
+            cursor: pointer;
+            fill: transparent;
+            stroke: rgba(0,0,0,0.15);
+            stroke-width: 1;
+        }
+
+            .hotspot:hover {
+                fill: rgba(0,128,255,0.2);
+            }
+
+        .body-color {
+            fill: #f9d7b5;
+            stroke: #333;
+        }
+
+        #infoModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            overflow-y: scroll;
+        }
+
+            #infoModal .modal-content {
+                background: #fff;
+                margin: 12% auto;
+                padding: 20px;
+                border-radius: 10px;
+                width: 80%;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                overflow-y: scroll;
+            }
+
+            #infoModal .close {
+                float: right;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: #555;
+            }
+    </style>
+    <style type="text/css">
+        :root {
+            --bg: #f7fbff;
+            --card: #ffffff;
+            --accent: #0b6efd;
+            --muted: #6b7280;
+            --success: #10b981;
+            --danger: #ef4444;
+            --glass: rgba(255,255,255,0.6);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        .modal-all {
+            box-sizing: border-box;
+        }
+
+        .modal-body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg,var(--bg),#eef6ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        .modal-wrap {
+            width: 100%;
+            max-width: 960px
+        }
+
+        .modal-header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 18px
+        }
+
+            .modal-header h1 {
+                font-size: 20px;
+                margin: 0
+            }
+
+            .modal-header p {
+                margin: 0;
+                color: var(--muted)
+            }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 20px
+        }
+
+        @media (max-width:900px) {
+            .modal-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .modal-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 20px rgba(11,110,253,0.06)
+        }
+
+        .modal-form .row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .modal-label {
+            display: block;
+            font-size: 14px;
+            color: #111827;
+            margin-bottom: 6px
+        }
+
+        .modal-muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .modal-seg {
+            display: flex;
+            gap: 8px
+        }
+
+            .modal-seg button {
+                flex: 1;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #e6eefc;
+                background: transparent;
+                cursor: pointer
+            }
+
+                .modal-seg button.active {
+                    background: var(--accent);
+                    color: #fff;
+                    border-color: transparent;
+                    box-shadow: 0 6px 18px rgba(11,110,253,0.12)
+                }
+
+        select, input[type=checkbox] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6eefc;
+            background: #fbfdff
+        }
+
+        .modal-areas-class {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .modal-area {
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid #e9f2ff;
+            background: #fbfdff;
+            cursor: pointer;
+            font-size: 13px
+        }
+
+            .modal-area.selected {
+                background: var(--accent);
+                color: #fff;
+                border-color: transparent
+            }
+
+        .modalBtn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            border: 0;
+            cursor: pointer
+        }
+
+            .modalBtn.ghost {
+                background: transparent;
+                color: var(--accent);
+                border: 1px solid var(--accent)
+            }
+
+        .modal-result {
+            min-height: 180px
+        }
+
+        .modal-exercise {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #eef5ff;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg,#fff,#fbfdff)
+        }
+
+            .modal-exercise h4 {
+                margin: 0 0 6px 0
+            }
+
+            .modal-exercise p {
+                margin: 0;
+                color: var(--muted);
+                font-size: 14px
+            }
+
+        .modal-note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 12px
+        }
+
+        .modal-disclaimer {
+            font-size: 13px;
+            color: var(--danger);
+            background: rgba(239,68,68,0.06);
+            padding: 10px;
+            border-radius: 8px
+        }
+
+        .modal-footer {
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 13px
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">Healex</div>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#comprehensive-exercise">Find Excercise</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#units">Our Units</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle" id="mobileToggle">☰</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Healex Pain & Lifestyle Clinic, Salt Lake, Kolkata</h1>
+            <p>Comprehensive pain management and lifestyle medicine under the expert care of renowned specialists. Your journey to wellness starts here.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Book Appointment</a>
+                <a href="#comprehensive-exercise" class="btn btn-primary">Find Excercise</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Healex</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>Excellence in Pain Management & Lifestyle Medicine</h3>
+                    <p>At Healex, we believe that a healthy life is built on the foundation of proper nutrition and mindful movement. Our Pain & Lifestyle Clinic is dedicated to helping you overcome pain and enhance your well-being through a balanced combination of wholesome food and personalized exercise programs.</p>
+                    <p>Founded on the principle that every patient deserves personalized care, we offer evidence-based treatments delivered with compassion and expertise. Our multidisciplinary team works collaboratively to develop customized treatment plans that address the root causes of pain and promote overall wellness.</p>
+                    <p>We focus on addressing the root causes of pain rather than just managing symptoms. By integrating nutritional guidance with targeted physical activity, we help you regain strength, flexibility, and vitality. Our holistic approach empowers you to make sustainable lifestyle choices that prevent discomfort, boost energy, and improve overall quality of life.</p>
+                    <p>At Healex, we guide you on a journey towards a pain-free, active, and vibrant life—nourishing your body with the right fuel and keeping it strong through effective movement.</p>
+                </div>
+                <div class="doctor-card">
+                    <div class="doctor-img">👨‍⚕️</div>
+                    <p>Replace with image - preferably light shirt</p>
+                    <h3>Dr. Rajeev K Bhadani</h3>
+                    <p><strong>Pain and Lifstyle Therapist</strong></p>
+                    <p>Board-certified Pain Management Specialist with over 20 years of experience in treating chronic pain conditions and lifestyle-related disorders.</p>
+                    <p><b>Qualification</b></p>
+                    <p><b>Past employment (if desired)</b></p>
+                    <p><b>Awards (if desired)</b></p>
+                    <p></p>
+                    <p><em>"Our mission is to restore hope and improve lives through comprehensive, compassionate care."</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comprehensive Exercise Section -->
+    <section class="comprehensive-exercise" id="comprehensive-exercise">
+        <div class="comprehensive-exercise-container">
+            <h2 class="comprehensive-exercise-section-title">Find the Right Exercise for You</h2>
+            <div class="comprehensive-exercise-grid">
+                <div class="comprehensive-exercise-display">
+                    <div class="human-view-with-headings-controls">
+                        <p class="comprehensive-exercise-section-title-description">
+                            <b><u>Choose your pain area in the image below, and we’ll help you with caring exercises to support your recovery.</b></u>
+                        </p>
+                        <h3 class="heading-human-view">Human Body — <span id="selected-human-view">Front</span></h3>
+                        <button class="human-view-toggle-btn" onclick="showView('front')">Front View</button>
+                        <button class="human-view-toggle-btn" onclick="showView('back')">Back View</button>
+
+                        <div id="front-view">
+                            <svg viewBox="0 0 300 700" xmlns="http://www.w3.org/2000/svg" class="view-svg">
+                                <!-- Front Head -->
+                                <circle class="body-color hotspot" data-part="Head" cx="150" cy="70" r="50" />
+                                <circle cx="135" cy="60" r="6" />
+                                <circle cx="165" cy="60" r="6" />
+                                <path d="M130 80 Q150 100 170 80" stroke="#333" stroke-width="3" fill="transparent" />
+                                <!-- Neck & Torso -->
+                                <rect class="body-color hotspot" data-part="Neck" x="140" y="120" width="20" height="25" rx="5" />
+                                <rect x="110" y="145" width="80" height="140" rx="40" fill="#87cefa" stroke="#333" />
+                                <rect class="hotspot" data-part="Chest" x="115" y="150" width="70" height="50" rx="10" />
+                                <rect class="hotspot" data-part="Abdomen" x="115" y="200" width="70" height="50" rx="10" />
+                                <rect class="hotspot" data-part="Pelvis" x="115" y="250" width="70" height="35" rx="10" />
+                                <!-- Arms -->
+                                <circle class="body-color hotspot" data-part="Left Shoulder" cx="110" cy="160" r="18" />
+                                <rect class="body-color hotspot" data-part="Left Upper Arm" x="90" y="178" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Left Elbow" cx="100" cy="238" r="12" />
+                                <rect class="body-color hotspot" data-part="Left Lower Arm" x="90" y="250" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Left Hand" cx="100" cy="310" r="15" />
+                                <circle class="body-color hotspot" data-part="Right Shoulder" cx="190" cy="160" r="18" />
+                                <rect class="body-color hotspot" data-part="Right Upper Arm" x="190" y="178" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Right Elbow" cx="200" cy="238" r="12" />
+                                <rect class="body-color hotspot" data-part="Right Lower Arm" x="190" y="250" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Right Hand" cx="200" cy="310" r="15" />
+                                <!-- Legs -->
+                                <rect class="body-color hotspot" data-part="Left Thigh" x="125" y="285" width="25" height="70" rx="12" />
+                                <circle class="body-color hotspot" data-part="Left Knee" cx="138" cy="365" r="13" />
+                                <rect class="body-color hotspot" data-part="Left Lower Leg" x="125" y="378" width="25" height="70" rx="12" />
+                                <ellipse class="body-color hotspot" data-part="Left Foot" cx="138" cy="460" rx="25" ry="12" />
+                                <rect class="body-color hotspot" data-part="Right Thigh" x="150" y="285" width="25" height="70" rx="12" />
+                                <circle class="body-color hotspot" data-part="Right Knee" cx="163" cy="365" r="13" />
+                                <rect class="body-color hotspot" data-part="Right Lower Leg" x="150" y="378" width="25" height="70" rx="12" />
+                                <ellipse class="body-color hotspot" data-part="Right Foot" cx="163" cy="460" rx="25" ry="12" />
+                            </svg>
+                        </div>
+
+                        <div id="back-view" style="display:none">
+                            <svg viewBox="0 0 300 700" xmlns="http://www.w3.org/2000/svg" class="view-svg">
+                                <!-- Back Head -->
+                                <circle class="body-color hotspot" data-part="Back Head" cx="150" cy="70" r="50" />
+                                <!-- Neck & Back Torso -->
+                                <rect class="body-color hotspot" data-part="Back Neck" x="140" y="120" width="20" height="25" rx="5" />
+                                <rect x="110" y="145" width="80" height="140" rx="40" fill="#87cefa" stroke="#333" />
+                                <rect class="hotspot" data-part="Back Shoulder Blade" x="115" y="150" width="70" height="50" rx="10" />
+                                <!-- Spine (wider) -->
+                                <rect class="hotspot" data-part="Back Spine" x="140" y="200" width="20" height="80" rx="5" />
+                                <!-- Back Left/Right Sides aligned -->
+                                <rect class="body-color hotspot" data-part="Back Left Side" x="120" y="200" width="20" height="80" rx="5" />
+                                <rect class="body-color hotspot" data-part="Back Right Side" x="160" y="200" width="20" height="80" rx="5" />
+                                <!-- Arms -->
+                                <circle class="body-color hotspot" data-part="Back Left Shoulder" cx="110" cy="160" r="18" />
+                                <rect class="body-color hotspot" data-part="Back Left Upper Arm" x="90" y="178" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Back Left Elbow" cx="100" cy="238" r="12" />
+                                <rect class="body-color hotspot" data-part="Back Left Lower Arm" x="90" y="250" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Back Left Hand" cx="100" cy="310" r="15" />
+                                <circle class="body-color hotspot" data-part="Back Right Shoulder" cx="190" cy="160" r="18" />
+                                <rect class="body-color hotspot" data-part="Back Right Upper Arm" x="190" y="178" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Back Right Elbow" cx="200" cy="238" r="12" />
+                                <rect class="body-color hotspot" data-part="Back Right Lower Arm" x="190" y="250" width="20" height="50" rx="10" />
+                                <circle class="body-color hotspot" data-part="Back Right Hand" cx="200" cy="310" r="15" />
+                                <!-- Legs -->
+                                <rect class="body-color hotspot" data-part="Back Left Thigh" x="125" y="285" width="25" height="70" rx="12" />
+                                <circle class="body-color hotspot" data-part="Back Left Knee" cx="138" cy="365" r="13" />
+                                <rect class="body-color hotspot" data-part="Back Left Lower Leg" x="125" y="378" width="25" height="70" rx="12" />
+                                <ellipse class="body-color hotspot" data-part="Back Left Foot" cx="138" cy="460" rx="25" ry="12" />
+                                <rect class="body-color hotspot" data-part="Back Right Thigh" x="150" y="285" width="25" height="70" rx="12" />
+                                <circle class="body-color hotspot" data-part="Back Right Knee" cx="163" cy="365" r="13" />
+                                <rect class="body-color hotspot" data-part="Back Right Lower Leg" x="150" y="378" width="25" height="70" rx="12" />
+                                <ellipse class="body-color hotspot" data-part="Back Right Foot" cx="163" cy="460" rx="25" ry="12" />
+                            </svg>
+                        </div>
+                        <!-- Modal -->
+                        <div id="infoModal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <center>
+                                    <h1>Pain → Exercise Suggestion</h1>
+                                    <p class="modal-muted">Quickly tell pain severity, age group and area — get exercise suggestions.</p>
+                                </center>
+
+                                <div class="modal-body">
+                                    <div class="modal-all">
+                                        <div class="modal-wrap">
+                                            <div class="modal-grid">
+                                                <div class="modal-card">
+                                                    <form id="modal-suggForm" onsubmit="return false" class="modal-form">
+                                                        <div style="margin-top:12px">
+                                                            <label class="modal-label"><u>Area of pain</u></label>
+                                                            <p><span id="modalTitle"></span> - <span id="modalDesc"></span></p>
+                                                            <br />
+                                                        </div>
+
+                                                        <div>
+                                                            <label class="modal-label"><u>Type of pain</u></label>
+                                                            <div class="modal-seg" role="tablist" id="severitySeg">
+                                                                <button type="button" data-value="mild" class="active">Mild</button>
+                                                                <button type="button" data-value="moderate">Moderate</button>
+                                                                <button type="button" data-value="severe">Severe</button>
+                                                            </div>
+                                                            <div class="modal-note">Choose how intense the pain feels right now. Mild if once or twice a week. Moderate if more frequent. Severe if always.<br /></div>
+                                                        </div>
+
+                                                        <div style="margin-top:12px">
+                                                            <label for="age" class="modal-label"><u>Age group</u></label>
+                                                            <select id="age" aria-label="Age group">
+                                                                <option value="child">Child (0–12)</option>
+                                                                <option value="teen">Teen (13–17)</option>
+                                                                <option value="adult" selected>Adult (18–64)</option>
+                                                                <option value="senior">Senior (65+)</option>
+                                                            </select>
+                                                        </div>
+
+
+
+                                                        <div>
+                                                            <center>
+                                                                <button class="modalBtn" id="showModalBtn">Show Exercises</button>
+                                                                <button class="modalBtn ghost" id="clearModalBtn" type="button">Reset</button>
+                                                            </center>
+                                                        </div>
+
+                                                        <div style="margin-top:12px" class="modal-muted">Tip: For severe pain, suggestions emphasize gentle movement and recommend medical review.</div>
+                                                    </form>
+                                                </div>
+
+                                                <aside class="modal-card">
+                                                    <h3 style="margin-top:0">Recommendations</h3>
+                                                    <div class="modal-result" id="id-modal-result">
+                                                        <p class="modal-muted">Choose options and click <strong>Show Exercises</strong> to see targeted suggestions.</p>
+                                                    </div>
+
+                                                    <div style="margin-top:12px" class="modal-disclaimer">
+                                                        This tool provides general exercise ideas only. It is not a medical diagnosis. If pain is severe, worsening, or accompanied by numbness, fever or weakness, consult a healthcare professional.
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <div>
+
+                                                        </div>
+                                                    </div>
+                                                </aside>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comprehensive-exercise-text">
+                    <p>
+                        <b>Not sure which exercise is right for you?</b> Simply select the area where you feel pain, and our <b>interactive guide</b> will show you safe and effective exercise recommended by our doctor. It’s a simple way to get the right exercise, tailored to your needs—helping you move better and feel better, every day.
+                    </p>
+                    <p>
+                        Our clinic understands that every individual’s pain and healing journey is unique. That’s why we’ve created an easy-to-use interactive tool that helps you find the right exercise based on the area where you feel discomfort. Simply select the part of your body that hurts, and our system will guide you with safe, doctor-recommended exercises tailored to your needs.
+                    </p>
+                    <p>
+                        To make your care even more personal, the suggestions adapt to your age and other important details, ensuring that every movement is gentle, effective, and suited just for you. Whether you’re looking for relief from daily aches or support in long-term recovery, this tool is here to help you move with comfort and confidence.
+                    </p>
+                    <p>
+                        <b>
+                            Disclaimer:<br />
+                            The exercises shown in this tool are designed to offer gentle guidance and support for mild pain, but they may not be right for everyone. Each person’s body, health history, and level of fitness are unique, so it’s always best to check with our doctor before starting any new exercise routine. If you feel increased pain, dizziness, or discomfort while trying these movements, please stop right away and seek medical advice. Remember, this tool is here to assist you—but your doctor knows your health best.
+                        </b>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Chronic Pain Management</h3>
+                    <p>Comprehensive treatment for persistent pain conditions using advanced techniques including nerve blocks, spinal injections, and minimally invasive procedures.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏃‍♀️</div>
+                    <h3>Lifestyle Medicine</h3>
+                    <p>Evidence-based lifestyle interventions focusing on nutrition, exercise, stress management, and behavioral modifications for optimal health.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧘‍♀️</div>
+                    <h3>Integrative Therapies</h3>
+                    <p>Combining traditional medical treatments with complementary approaches like acupuncture, mindfulness, and physical therapy.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3>Diagnostic Services</h3>
+                    <p>Advanced imaging and diagnostic testing to accurately identify the source of pain and develop targeted treatment strategies.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💊</div>
+                    <h3>Medication Management</h3>
+                    <p>Expert guidance on pain medications, including safe prescribing practices and alternatives to traditional opioid therapy.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏥</div>
+                    <h3>Rehabilitation Programs</h3>
+                    <p>Customized rehabilitation and recovery programs designed to restore function and prevent future pain episodes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Units Section -->
+    <section class="units" id="units">
+        <div class="container">
+            <h2 class="section-title">Our Specialized Units</h2>
+            <div class="units-grid">
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>Spine & Orthopedic Center</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>Specialized care for back pain, neck pain, and musculoskeletal disorders.</p>
+                        <ul class="unit-features">
+                            <li>Advanced spinal injections</li>
+                            <li>Minimally invasive procedures</li>
+                            <li>Physical therapy integration</li>
+                            <li>Orthopedic consultations</li>
+                            <li>Post-surgical pain management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>Headache & Migraine Clinic</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>Comprehensive treatment for all types of headaches and neurological pain.</p>
+                        <ul class="unit-features">
+                            <li>Migraine prevention programs</li>
+                            <li>Botox therapy for chronic migraines</li>
+                            <li>Cluster headache treatment</li>
+                            <li>Neurological assessments</li>
+                            <li>Lifestyle trigger identification</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>Fibromyalgia & Autoimmune Center</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>Specialized care for fibromyalgia, autoimmune conditions, and chronic fatigue.</p>
+                        <ul class="unit-features">
+                            <li>Fibromyalgia management programs</li>
+                            <li>Autoimmune disorder treatment</li>
+                            <li>Chronic fatigue syndrome care</li>
+                            <li>Sleep disorder evaluation</li>
+                            <li>Nutritional counseling</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>Wellness & Prevention Hub</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>Proactive health management and lifestyle optimization programs.</p>
+                        <ul class="unit-features">
+                            <li>Executive health programs</li>
+                            <li>Stress management training</li>
+                            <li>Nutritional therapy</li>
+                            <li>Exercise prescription</li>
+                            <li>Mental health support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>ENT Clinic</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>For you ENT Needs.</p>
+                        <ul class="unit-features">
+                            <li>Need to write about this</li>
+                            <li>Ear</li>
+                            <li>Nose</li>
+                            <li>Throat</li>
+                            <li>Some details</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="unit-card">
+                    <div class="unit-header">
+                        <h3>Dental Clinic</h3>
+                    </div>
+                    <div class="unit-content">
+                        <p>For you dental Needs.</p>
+                        <ul class="unit-features">
+                            <li>Need to write about this</li>
+                            <li>RCT</li>
+                            <li>Scalling</li>
+                            <li>Crowns</li>
+                            <li>Some details</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3>Book Appointments on WhatsApp</h3>
+                    <p>image of healex showing all units will come here. On tapping/clicking on the desired unit the user will be re-directed to whats of that unit.</p>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Needed</label>
+                            <input type="text" id="service" name="service" placeholder="e.g., Chronic Pain Consultation">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your condition or questions..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa fa-map-marker" style="font-size:24px;color:red"></i>
+                        </div>
+                        <div>
+                            <strong>Location</strong><br>
+                            GD -126, GD Block, Sector 3, Salt Lake, <br>
+                            Bidhannagar, Kolkata, West Bengal 700106
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +91 1234567890<br>
+                            Alternate: +91 9876543210
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa fa-envelope" style="font-size:24px;color:red"></i>
+                        </div>
+                        <div>
+                            <strong>Email</strong><br>
+                            info@gmail.com<br>
+                            appointments@some-mail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fa fa-clock-o" style="font-size:24px;color:red"></i>
+                        </div>
+                        <div>
+                            <strong>Hours</strong><br>
+                            Mon-Sat: 8:00 AM - 8:00 PM<br>
+                            Sun: 8:00 AM - 6:00 PM
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#careers">Careers</a>
+            </div>
+            <p>&copy; 2024 Healex Pain & Lifestyle Clinic. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80; // Account for fixed header
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Contact Form Handling
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+
+            // Simple validation
+            if (!data.name || !data.email || !data.phone) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // In a real application, you would send this data to a server
+            alert('Thank you for your message! We will contact you within 24 hours to schedule your appointment.');
+            contactForm.reset();
+        });
+
+        // Scroll Animation for Cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.service-card, .unit-card, .about-text, .doctor-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header Background Change on Scroll
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(44, 82, 130, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #2c5282 0%, #3182ce 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Typing Animation for Hero Text
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.textContent;
+
+        function typeWriter(text, element, speed = 100) {
+            element.textContent = '';
+            let i = 0;
+
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Start typing animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                typeWriter(originalText, heroTitle, 80);
+            }, 500);
+        });
+
+        // Add loading animation for better UX
+        window.addEventListener('load', function () {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Interactive service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.borderTop = '4px solid #3182ce';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.borderTop = '4px solid #48bb78';
+            });
+        });
+
+        // Add click-to-expand functionality for unit cards
+        document.querySelectorAll('.unit-card').forEach(card => {
+            card.addEventListener('click', function () {
+                const content = this.querySelector('.unit-content');
+                const isExpanded = this.classList.contains('expanded');
+
+                // Remove expanded class from all cards
+                document.querySelectorAll('.unit-card').forEach(c => {
+                    c.classList.remove('expanded');
+                    c.querySelector('.unit-content').style.maxHeight = 'none';
+                });
+
+                if (!isExpanded) {
+                    this.classList.add('expanded');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        console.log('Healex Pain & Lifestyle Clinic website loaded successfully!');
+        console.log('Features: Responsive design, smooth scrolling, form validation, animations');
+    </script>
+    <script type="text/javascript">
+        const front = document.getElementById('front-view');
+        const back = document.getElementById('back-view');
+        const humanViewLabel = document.getElementById('selected-human-view');
+
+        function showView(view) {
+            front.style.display = view === 'front' ? 'block' : 'none';
+            humanViewLabel.textContent = view === 'front' ? 'Front' : 'Back';
+            back.style.display = view === 'back' ? 'block' : 'none';
+            humanViewLabel.textContent = view === 'back' ? 'Back' : 'Front';
+        }
+
+        // Hotspot modal
+        const hotspots = document.querySelectorAll('.hotspot');
+        const modal = document.getElementById('infoModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const closeBtn = document.querySelector('.close');
+
+        const PARTS = {
+            "Head": "Front view of the head",
+            "Back Head": "Back view of the head",
+            "Neck": "Neck connects head to torso",
+            "Back Neck": "Back view of the neck",
+            "Chest": "Chest contains heart and lungs",
+            "Abdomen": "Abdomen contains digestive organs",
+            "Pelvis": "Pelvis connects torso to legs",
+            "Back Shoulder Blade": "Shoulder blade at back",
+            "Back Spine": "Spine along back",
+            "Back Left Side": "Left side of spine",
+            "Back Right Side": "Right side of spine",
+            "Left Shoulder": "Left shoulder",
+            "Right Shoulder": "Right shoulder",
+            "Left Upper Arm": "Left upper arm",
+            "Right Upper Arm": "Right upper arm",
+            "Left Elbow": "Left elbow joint",
+            "Right Elbow": "Right elbow joint",
+            "Left Lower Arm": "Left lower arm",
+            "Right Lower Arm": "Right lower arm",
+            "Left Hand": "Left hand",
+            "Right Hand": "Right hand",
+            "Left Thigh": "Left thigh",
+            "Right Thigh": "Right thigh",
+            "Left Knee": "Left knee",
+            "Right Knee": "Right knee",
+            "Left Lower Leg": "Left lower leg",
+            "Right Lower Leg": "Right lower leg",
+            "Left Foot": "Left foot",
+            "Right Foot": "Right foot",
+            "Back Left Shoulder": "Back left shoulder",
+            "Back Right Shoulder": "Back right shoulder",
+            "Back Left Upper Arm": "Back left upper arm",
+            "Back Right Upper Arm": "Back right upper arm",
+            "Back Left Elbow": "Back left elbow",
+            "Back Right Elbow": "Back right elbow",
+            "Back Left Lower Arm": "Back left lower arm",
+            "Back Right Lower Arm": "Back right lower arm",
+            "Back Left Hand": "Back left hand",
+            "Back Right Hand": "Back right hand",
+            "Back Left Thigh": "Back left thigh",
+            "Back Right Thigh": "Back right thigh",
+            "Back Left Knee": "Back left knee",
+            "Back Right Knee": "Back right knee",
+            "Back Left Lower Leg": "Back left lower leg",
+            "Back Right Lower Leg": "Back right lower leg",
+            "Back Left Foot": "Back left foot",
+            "Back Right Foot": "Back right foot"
+        };
+
+        hotspots.forEach(hs => {
+            hs.addEventListener('click', () => {
+                const part = hs.dataset.part;
+                modalTitle.textContent = part;
+                modalDesc.textContent = PARTS[part] || "Body part info";
+                modal.style.display = 'block';
+            });
+        });
+
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
+    </script>
+    <script type="text/javascript">
+        // UI hookups
+        const severityButtons = document.querySelectorAll('#severitySeg button');
+        let severity = 'mild';
+        severityButtons.forEach(modalBtn => modalBtn.addEventListener('click', () => {
+            severityButtons.forEach(b => b.classList.remove('active'));
+            modalBtn.classList.add('active');
+            severity = modalBtn.dataset.value;
+        }));
+
+        const areasWrap = document.getElementById('modal-areas');
+        const areaButtons = document.querySelectorAll('.modal-area');
+        const selectedAreas = new Set();
+        areaButtons.forEach(a => a.addEventListener('click', () => {
+            const v = a.dataset.value;
+            if (selectedAreas.has(v)) { selectedAreas.delete(v); a.classList.remove('selected'); }
+            else { selectedAreas.add(v); a.classList.add('selected'); }
+        }));
+
+        document.getElementById('clearModalBtn').addEventListener('click', () => {
+            // reset
+            severityButtons.forEach(b => b.classList.remove('active'));
+            severityButtons[0].classList.add('active'); severity = 'mild';
+            document.getElementById('age').value = 'adult';
+            selectedAreas.clear(); areaButtons.forEach(a => a.classList.remove('selected'));
+            document.getElementById('id-modal-result').innerHTML = '<p class="modal-muted">Choose options and click <strong>Show Exercises</strong> to see targeted suggestions.</p>';
+        });
+
+        document.getElementById('showModalBtn').addEventListener('click', () => {
+            const age = document.getElementById('age').value;
+            const areas = Array.from(selectedAreas);
+            const container = document.getElementById('id-modal-result');
+            container.innerHTML = '';
+            if (areas.length === 0) { container.innerHTML = '<p class="modal-muted">Please select at least one area of pain.</p>'; return; }
+
+            // If severe pain — strong caution
+            if (severity === 'severe') {
+                const warn = document.createElement('div');
+                warn.className = 'modal-exercise';
+                warn.innerHTML = `<h4 style="color:var(--danger)">Severe pain — see a clinician first</h4>
+              <p>When pain is severe, do not perform strenuous exercises. Try gentle mobility and seek medical review.</p>`;
+                container.appendChild(warn);
+            }
+
+            // For each area, pick suitable exercises
+            areas.forEach(area => {
+                const block = document.createElement('div'); block.className = 'modal-exercise';
+                const workouts = suggest(area, age, severity);
+                block.innerHTML = `<h4>${workouts.title}</h4><p>${workouts.desc}</p>`;
+                container.appendChild(block);
+            });
+        });
+
+        // Core suggestion logic — expandable and easy to update
+        function suggest(area, age, severity) {
+            // baseline intensity adjustments
+            const repText = (severity === 'mild') ? '2–3 sets of 8–15 reps' : (severity === 'moderate') ? '2–3 sets of 8–12 reps' : 'Perform gently for mobility — 5–10 slow reps or as tolerated';
+
+            const common = {
+                neck: {
+                    title: 'Neck — gentle mobility & posture',
+                    desc: `Try chin tucks, side-to-side neck stretches and gentle shoulder rolls. ${repText}. Keep movements slow and stop if pain increases.`
+                },
+                shoulder: {
+                    title: 'Shoulder — mobility & scapular control',
+                    desc: `Pendulum swings, scapular squeezes and wall slides are helpful. ${repText}. Focus on control and breathing.`
+                },
+                upper_back: {
+                    title: 'Upper back — thoracic mobility',
+                    desc: `Thoracic rotations (seated or on all fours), cat-cow and shoulder blade squeezes. ${repText}. Breathe deeply with each rep.`
+                },
+                lower_back: {
+                    title: 'Lower back — core & control',
+                    desc: `Pelvic tilts, bird-dog, and gentle bridges. ${repText}. Avoid heavy loading if pain is sharp; prioritize control.`
+                },
+                hip: {
+                    title: 'Hip — mobility & glute activation',
+                    desc: `Glute bridges, seated hip marches and standing hip abduction. ${repText}. Start with bodyweight only.`
+                },
+                knee: {
+                    title: 'Knee — quads & range',
+                    desc: `Straight leg raises, quad sets and heel slides are effective. ${repText}. Avoid deep squats if painful.`
+                },
+                ankle: {
+                    title: 'Ankle — mobility & strength',
+                    desc: `Ankle pumps, toe raises and ankle circles. ${repText}. Progress slowly to loaded practice when comfortable.`
+                },
+                wrist: {
+                    title: 'Wrist — mobility & strengthening',
+                    desc: `Wrist bends, finger/wrist stretches and gentle grip exercises. ${repText}. Modify intensity for arthritic joints.`
+                },
+                elbow: {
+                    title: 'Elbow — mobility & tendon-friendly loading',
+                    desc: `Wrist curls with light resistance, gentle stretching, and eccentric fingertip loading. ${repText}. Stop if sharp pain occurs.`
+                }
+            };
+
+            // Age-specific adjustments (simple examples)
+            if (age === 'child') {
+                // simpler wording and lower reps
+                const base = common[area] || { title: 'General movement', desc: 'Gentle active movement and play-based mobility.' };
+                base.desc = base.desc.replace(/\d+–\d+ sets of \d+–\d+ reps|Perform gently for mobility — 5–10 slow reps or as tolerated/, '1–2 sets of 6–10 slow reps').replace('Start with bodyweight only.', 'Use play-friendly movements and supervision.');
+                return base;
+            }
+
+            if (age === 'senior') {
+                const base = common[area] || { title: 'General movement', desc: 'Gentle mobility and balance work.' };
+                base.desc = base.desc.replace(/\d+–\d+ sets of \d+–\d+ reps|Perform gently for mobility — 5–10 slow reps or as tolerated/, '1–2 sets of 6–12 slow reps, focus on balance and control');
+                base.desc += ' Use supports (chair/wall) for balance when needed.';
+                return base;
+            }
+
+            // Default adult/teen return
+            return common[area] || { title: 'General movement', desc: 'Gentle active movement and progressive strengthening as tolerated.' };
+        }
+
+    </script>
+</body>
+</html>
