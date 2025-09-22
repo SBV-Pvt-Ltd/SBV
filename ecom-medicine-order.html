@@ -78,7 +78,7 @@
             width: 50;
             height: 50px;
             border-radius: 5px;
-            background: linear-gradient(135deg, var(--accent), #0284c7);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -88,6 +88,7 @@
         }
 
         .logo_img {
+            margin-top: -5px;
             width: 50px;
             height: 50px;
             border-radius: 5px;
@@ -95,6 +96,10 @@
             align-items: center;
             justify-content: center;
             color: white;
+        }
+
+        .hamburger_push_down {
+            height: 50px;
         }
     </style>
 
@@ -661,7 +666,7 @@
          id="mySidebar"
          role="navigation"
          aria-label="Main navigation">
-        <button onclick="closeSidebar()" class="w3-bar-item w3-button">
+        <button onclick="closeSidebar()" class="w3-bar-item w3-button hamburger_push_down">
             <i class="fas fa-times" aria-hidden="true"></i> Close Menu
         </button>
         <a href="#product-catalog" onclick="closeSidebar()" class="w3-bar-item w3-button">Products</a>
