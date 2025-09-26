@@ -1,0 +1,1016 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dabla Biotech — Bill Generator</title>
+    <link rel="icon" type="image/x-icon" href="https://lh3.googleusercontent.com/d/1_AVpqGIwPTzquIeQWNSkn5NelBtnd1my">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --accent: #2563eb;
+            --muted: #6b7280;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --whatsapp: #25d366;
+            --radius: 10px;
+            --shadow: 0 6px 22px rgba(15,23,42,0.08);
+            --pad: 14px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            font-size: 20px;
+            background: var(--bg);
+            color: #0f172a;
+            padding: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            max-width: 100%;
+            margin: 16px auto;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+            header h1 {
+                margin: 0;
+                font-size: 1.25rem;
+                color: var(--accent);
+            }
+
+        .store-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-input {
+            border: 1px solid #e6eef8;
+            padding: 8px 10px;
+            border-radius: 8px;
+            min-width: 120px;
+            background: white;
+        }
+
+        .controls {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Product rows */
+        .product-list {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .product-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: #fbfdff;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid gray;
+            flex-wrap: wrap;
+        }
+
+            .product-row > * {
+                min-width: 0;
+            }
+
+        .prod-select {
+            flex: 2;
+            min-width: 160px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #dbeafe;
+            background: white;
+        }
+
+        .prod-rate {
+            width: 90px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #e6eef8;
+        }
+
+        .prod-qty, .prod-tax {
+            width: 100px;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #e6eef8;
+            text-align: center;
+        }
+
+        .remove-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            margin-top: 8px;
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 160px;
+        }
+
+        /* Bill area */
+        #billSection {
+            margin-top: 22px;
+            width: 1250px;
+        }
+
+        .logo-company-details-invoice {
+            display: flex; /* Makes the container a flex container */
+            max-height: 170px;
+        }
+
+        .top-item {
+            /* Styles for individual div items */
+            float: left;
+            padding: 20px;
+        }
+
+        .company-logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .logo_img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .parent-contact {
+            display: flex;
+            width: 650px;
+        }
+
+        .bottom-parent {
+            display: flex;
+            border: 1px solid black;
+        }
+
+        .child-contact {
+            float: left;
+            padding: 16px;
+        }
+
+        .bottom-child {
+            float: left;
+            padding: 16px;
+            border: 1px solid black;
+            width: 33.33%;
+        }
+
+        .invoice-gst {
+            margin-left: -75px;
+        }
+
+        .bill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+            .bill-header .left {
+                font-weight: 600;
+                margin-left: 20px;
+            }
+
+        .table-wrapper {
+            margin-top: 12px;
+            overflow: auto;
+            border-radius: 8px;
+            border: 1px solid #eef2f7;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 720px;
+            background: white;
+            font-size: 20px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            text-align: center;
+            font-size: 1px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: var(--muted);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tfoot td {
+            font-weight: 700;
+            background: #fff;
+        }
+
+        .right {
+            text-align: right;
+            padding-right: 18px;
+        }
+
+        .actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button.action {
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            min-width: 160px;
+            box-shadow: 0 4px 14px rgba(2,6,23,0.06);
+        }
+
+        .btn-download {
+            background: var(--accent);
+        }
+
+        .btn-share {
+            background: var(--whatsapp);
+        }
+
+        .btn-generate {
+            margin-top: 8px;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #0ea5b7;
+        }
+
+        /* small screens adjustments */
+        @media (max-width:720px) {
+            .prod-rate {
+                width: 84px;
+            }
+
+            .prod-qty, .prod-tax {
+                width: 84px;
+            }
+
+            .meta-input {
+                min-width: 120px;
+            }
+
+            table {
+                min-width: 640px;
+            }
+        }
+
+        .date-input {
+            min-width: 200px;
+            max-width: 350px; /* responsive cap */
+            font-size: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Bigger touch target on small screens */
+        @media (max-width: 600px) {
+            .date-input {
+                width: 100%;
+            }
+        }
+
+
+        /* Style for odd rows */
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2; /* Light gray */
+        }
+
+        /* Style for even rows */
+        tbody tr:nth-child(even) {
+            background-color: #ffffff; /* White */
+        }
+
+        #billTable th, #billTable td {
+            font-size: 20px; /* Adjust the value as needed */
+        }
+
+        td, th {
+            word-wrap: break-word; /* Older browsers */
+            overflow-wrap: break-word; /* Modern browsers */
+        }
+
+        .div-bottom {
+            display: flex; /* Makes the div a flex container */
+            flex-direction: column; /* Arranges items vertically */
+            justify-content: flex-end; /* Aligns content to the bottom of the container */
+        }
+
+        .qr-payments {
+            height: 250px;
+            width: 250px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <header>
+            <h1>Dabla Biotech — Bill Generator</h1>
+            <br />
+            <div class="store-meta">
+                <h3>Customer details :</h3>
+                <input id="storeName" class="meta-input" placeholder="Customer/Store name" />
+                <input id="storeAddr" class="meta-input" placeholder="Address (Location or City, State)" />
+                <input id="custGST" class="meta-input" placeholder="GST of Customer" value="" />
+                <input id="billNo" class="meta-input" placeholder="Bill Number (auto or enter)" />
+                <input type="date" id="billDate" class="meta-input date-input" placeholder="Billing Date" />
+            </div>
+        </header>
+        <h3>Product details:</h3>
+        <section id="productList" class="product-list" aria-live="polite"></section>
+
+        <section class="controls" aria-label="controls">
+            <button id="addProduct" class="add-btn">+ Add product</button>
+            <button id="regenBill" class="action btn-generate">Update Bill Preview</button>
+            <div style="flex:1"></div>
+        </section>
+        <!--Don't make it responsive-->
+        <div style="overflow-x: scroll; padding: 16px;">
+            <section id="billSection" style="display:block; border: 1px solid black; background-color: white">
+                <div class="logo-company-details-invoice">
+                    <div class="top-item company-logo">
+                        <img src="https://lh3.googleusercontent.com/d/1_AVpqGIwPTzquIeQWNSkn5NelBtnd1my" alt="DB" class="logo_img" />
+                    </div>
+                    <div class="top-item">
+                        <div style="margin-top: -50px; font-weight:1000; text-align: center;">
+                            <h1 style="font-size: 50px; color: #0ea5b7">
+                                Dabla Biotech
+                            </h1>
+                        </div>
+                        <div style="margin-top: -70px;" class="parent-contact">
+                            <p class="child-contact">
+                                <u>Address of our Stockist</u>:<br />
+                                TRADE PHARMACIA, <br />
+                                Shop no. 106, 1st floor, <br />
+                                Govinda complex, GM RD, <br />
+                                Patna
+                            </p>
+                            <p class="child-contact">
+                                <u>Contact us</u> <br />
+                                Phone number: +91 1134567890 <br />
+                                Customer care:  +91 1234567890
+                            </p>
+                        </div>
+                    </div>
+                    <div class="top-item">
+                        <div class="invoice-gst">
+                            <h1 style="font-size: 75px; margin-top: -10px; color: blue;">Invoice</h1> <br />
+                            <p style="margin-top: -70px">
+                                GSTIN:
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="bill-header">
+                    <div class="left">
+                        <p>Customer Name: <span id="billStoreName" style="font-size:1.5rem;font-weight:700;"></span></p>
+                        <p>Address: <span id="billStoreAddr" style="font-size:1.5rem;"></span></p>
+                        <p>GST: <span id="billStoreGST" style="font-size:1.5rem;"></span></p>
+
+                    </div>
+                    <div class="right">
+                        <div style="font-size:1.5rem">Bill #: <span id="billPreviewNo"></span></div>
+                        <div style="font-size:1.5rem;color:var(--muted)">Date: <span id="billPreviewDate"></span></div>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="table-wrapper">
+                    <table id="billTable" role="table" aria-label="Generated bill">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left">Product</th>
+                                <th>Rate (₹)</th>
+                                <th>Qty</th>
+                                <th>Subtotal (₹)</th>
+                                <th>Tax (₹)</th>
+                                <th>Total (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="left">Grand Total (₹)</td>
+                                <td id="grandTotalTax">0.00</td>
+                                <td id="grandTotal">0.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <hr />
+                <div style="width: 100%; padding: 10px;">
+                    <p><b>Total amount in words: </b><span id="totalAmtWords"></span></p>
+                </div>
+                <hr />
+                <div style="width: 100%; padding: 10px;">
+                    <p><b>Total tax amount in words: </b><span id="totalTaxWords"></span></p>
+                </div>
+                <hr />
+                <div class="bottom-parent">
+                    <div class="bottom-child">
+                        Terms and conditions
+                        <ol>
+                            <li>Subject to Bihar jurisdiction.</li>
+                            <li>Orders will be fulfilled only after complete payment is received.</li>
+                            <li>Our responsibilities cease once goods leave our premises.</li>
+                            <li>Goods once sold will not be taken back.</li>
+                        </ol>
+                    </div>
+                    <div class="bottom-child">
+                        <center>
+                            <u>Scan to pay using UPI</u>
+                            <img class="qr-payments" src="https://lh3.googleusercontent.com/d/1ViQO4v5F02YIiRGzmTg3yHQsuvzisCmT" alt="QR code for UPI payments" />
+                        </center>
+                    </div>
+                    <div class="bottom-child div-bottom">
+                        This is a computer generated invoice and does not require any signature.
+                    </div>
+                </div>
+                <hr />
+                <center>
+                    <p>
+                        Thank you for your order. We look forward to serving you again.
+                    </p>
+                </center>
+
+            </section>
+        </div>
+
+
+        <div class="actions">
+            <button id="downloadBtn" class="action btn-download" disabled>Download PDF</button>
+            <button id="shareBtn" class="action btn-share" disabled>Send via WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- External script -->
+    <script src="ecom-medicine-order.js"></script>
+
+    <script>
+        
+        (async function () {
+            const { jsPDF } = window.jspdf;
+
+            async function fetchProducts() {
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.range}?key=${CONFIG.apiKey}`;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error('Failed to fetch products');
+
+                    const data = await response.json();
+                    return parseProducts(data.values || []);
+                } catch (error) {
+                    console.error('Error fetching products:', error);
+                    throw error;
+                }
+            }
+
+            function parseProducts(rawData) {
+                return rawData.map((row, index) => {
+                    const fields = row.join(',').split(',');
+                    return {
+                        id: index + 1,
+                        name: fields[1] || '',
+                        price: parseFloat(fields[8]) || 0,
+                        desc: [fields[2], fields[3], fields[4], fields[5]].filter(Boolean).join(' - '),
+                        img: (fields[9] || '').replace('https://drive.google.com/open?id=', 'https://lh3.googleusercontent.com/d/'),
+                        qty: 0
+                    };
+                }).filter(product => product.name && product.price > 0);
+            }
+            const products = await fetchProducts();
+
+            const productListEl = document.getElementById('productList');
+            const addProductBtn = document.getElementById('addProduct');
+            const regenBtn = document.getElementById('regenBill');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            const billSection = document.getElementById('billSection');
+            const billTableBody = document.querySelector('#billTable tbody');
+            const grandTotalEl = document.getElementById('grandTotal');
+            const grandTotalTaxEl = document.getElementById('grandTotalTax');
+
+            const storeNameInput = document.getElementById('storeName');
+            const storeAddrInput = document.getElementById('storeAddr');
+            const billNoInput = document.getElementById('billNo');
+            const custGSTInput = document.getElementById('custGST');
+
+            const billDateEl = document.getElementById('billDate');
+            const billPreviewNo = document.getElementById('billPreviewNo');
+            const billPreviewDate = document.getElementById('billPreviewDate');
+            const billStoreName = document.getElementById('billStoreName');
+            const billStoreAddr = document.getElementById('billStoreAddr');
+            const billStoreGST = document.getElementById('billStoreGST');
+
+            const totalAmtWords = document.getElementById('totalAmtWords');
+            const totalTaxWords = document.getElementById('totalTaxWords');
+
+            // set current date
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+
+                // Array of short month names
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+                const day = date.getDate();
+                const month = monthNames[date.getMonth()]; // Get short month name from array
+                const year = date.getFullYear();
+
+                // Pad day with a leading zero if it's a single digit
+                const formattedDay = String(day).padStart(2, '0');
+
+                return `${formattedDay} ${month} ${year}`;
+            }
+
+            function getTodayDate() {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            // Set default date = today
+            billDateEl.value = getTodayDate();
+            billPreviewDate.textContent = formatDate(billDateEl.value.toString());
+
+            // utility
+            function fmt(n) {
+                return Number(n).toFixed(2);
+            }
+            function createLabelWithText(text) {
+                const label = document.createElement('label');
+                label.textContent = text;
+                return label;
+            }
+
+
+
+            // create a product input row
+            function createProductRow(selectedIndex = 0, qty = 1, tax = 5) {
+                const row = document.createElement('div');
+                row.className = 'product-row';
+                // select
+                const sel = document.createElement('select');
+                sel.className = 'prod-select';
+                products.forEach((p, i) => {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.textContent = `${p.name} (₹${fmt(p.price)})`;
+                    sel.appendChild(opt);
+                });
+                sel.selectedIndex = selectedIndex;
+
+                // rate display
+                const rate = document.createElement('div');
+                rate.className = 'prod-rate';
+                rate.textContent = '₹' + fmt(products[selectedIndex].price);
+
+                // qty
+                const qtyIn = document.createElement('input');
+                qtyIn.type = 'number';
+                qtyIn.className = 'prod-qty';
+                qtyIn.min = 1;
+                qtyIn.value = qty;
+
+                // tax
+                const taxIn = document.createElement('input');
+                taxIn.type = 'number';
+                taxIn.className = 'prod-tax';
+                taxIn.min = 0;
+                taxIn.value = tax;
+
+                // remove
+                const remove = document.createElement('button');
+                remove.type = 'button';
+                remove.className = 'remove-btn';
+                remove.textContent = 'Remove';
+
+                // event listeners
+                sel.addEventListener('change', () => {
+                    const idx = Number(sel.value);
+                    rate.textContent = '₹' + fmt(products[idx].price);
+                    updateBillPreviewDebounced();
+                });
+                qtyIn.addEventListener('input', () => {
+                    if (qtyIn.value < 1) qtyIn.value = 1;
+                    updateBillPreviewDebounced();
+                });
+                taxIn.addEventListener('input', () => {
+                    if (taxIn.value < 0) taxIn.value = 0;
+                    updateBillPreviewDebounced();
+                });
+                remove.addEventListener('click', () => {
+                    row.remove();
+                    updateBillPreview();
+                });
+
+                row.appendChild(createLabelWithText("Product Name:"));
+                row.appendChild(sel);
+                row.appendChild(createLabelWithText("Product cost:"));
+                row.appendChild(rate);
+                row.appendChild(createLabelWithText("Quantity:"));
+                row.appendChild(qtyIn);
+                row.appendChild(createLabelWithText("GST (tax percent):"));
+                row.appendChild(taxIn);
+                row.appendChild(remove);
+
+                productListEl.appendChild(row);
+                return row;
+            }
+
+            // debounce small updates
+            let updateTimeout = null;
+            function updateBillPreviewDebounced() {
+                clearTimeout(updateTimeout);
+                updateTimeout = setTimeout(updateBillPreview, 180);
+            }
+
+            //convert Amount To Indian Words
+            function convertAmountToIndianWords(amount) {
+                const ones = ["", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "];
+                const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+
+                function convertChunkToWords(num) {
+                    let result = "";
+                    if (num >= 100) {
+                        result += ones[Math.floor(num / 100)] + "Hundred ";
+                        num %= 100;
+                    }
+                    if (num >= 20) {
+                        result += tens[Math.floor(num / 10)] + " ";
+                        num %= 10;
+                    }
+                    if (num > 0) {
+                        result += ones[num];
+                    }
+                    return result;
+                }
+
+                let [integerPart, decimalPart] = String(amount).split('.');
+                integerPart = parseInt(integerPart, 10);
+                decimalPart = decimalPart ? parseInt(decimalPart, 10) : 0;
+                if (decimalPart < 10) decimalPart *= 10;
+                if (integerPart === 0 && decimalPart === 0) {
+                    return "Zero Rupees Only";
+                }
+
+                let words = "";
+
+                // Handle Crores
+                if (integerPart >= 10000000) {
+                    words += convertChunkToWords(Math.floor(integerPart / 10000000)) + "Crore ";
+                    integerPart %= 10000000;
+                }
+
+                // Handle Lakhs
+                if (integerPart >= 100000) {
+                    words += convertChunkToWords(Math.floor(integerPart / 100000)) + "Lakh ";
+                    integerPart %= 100000;
+                }
+
+                // Handle Thousands
+                if (integerPart >= 1000) {
+                    words += convertChunkToWords(Math.floor(integerPart / 1000)) + "Thousand ";
+                    integerPart %= 1000;
+                }
+
+                // Handle Hundreds and Tens/Ones
+                if (integerPart > 0) {
+                    words += convertChunkToWords(integerPart);
+                }
+
+                let finalString = words.trim() + " Rupees";
+
+                if (integerPart === 0 && decimalPart > 0) {
+                    finalString = convertChunkToWords(decimalPart).trim() + " Paise";
+                }
+                if (integerPart > 0 && decimalPart > 0) {
+                    finalString += " And " + convertChunkToWords(decimalPart).trim() + " Paise";
+                }
+
+                finalString += " Only";
+
+                return finalString;
+            }
+
+            // build bill table from current product rows
+            function updateBillPreview() {
+                billTableBody.innerHTML = '';
+                const min_rows = 10;
+                var rows_in_table = 0;
+                let grand = 0;
+                let total_tax = 0;
+                const rows = productListEl.querySelectorAll('.product-row');
+                if (rows.length === 0) {
+                    billSection.style.display = 'none';
+                    downloadBtn.disabled = true;
+                    shareBtn.disabled = true;
+                    return;
+                }
+
+                rows.forEach(r => {
+                    rows_in_table += 1;
+                    const sel = r.querySelector('.prod-select');
+                    const idx = Number(sel.value);
+                    const product = products[idx];
+                    const rate = product.price;
+                    const qty = Math.max(1, Number(r.querySelector('.prod-qty').value) || 1);
+                    const taxPerc = Math.max(0, Number(r.querySelector('.prod-tax').value) || 0);
+
+                    const subtotal = rate * qty;
+                    const tax = (subtotal * taxPerc) / 100;
+                    total_tax += tax;
+                    const total = subtotal + tax;
+                    grand += total;
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                            <td style="text-align:left">${product.name}</td>
+                            <td>₹${fmt(rate)}</td>
+                            <td>${qty}</td>
+                            <td>₹${fmt(subtotal)}</td>
+                            <td>₹${fmt(tax)}</td>
+                            <td>₹${fmt(total)}</td>
+                          `;
+                    billTableBody.appendChild(tr);
+                });
+                //add min rows
+                var additional_rows_required = min_rows - rows_in_table;
+
+                for (let counter = 0; counter < additional_rows_required; counter++) {
+                    const tr_add = document.createElement('tr');
+                    tr_add.innerHTML = `
+                            <td>&nbsp;</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            `;
+                    billTableBody.appendChild(tr_add);
+                }
+
+                totalAmtWords.textContent = convertAmountToIndianWords(grand);
+                totalTaxWords.textContent = convertAmountToIndianWords(total_tax);
+                grandTotalTaxEl.textContent = fmt(total_tax);
+                grandTotalEl.textContent = fmt(grand);
+                //billSection.style.display = 'block';
+                downloadBtn.disabled = false;
+                shareBtn.disabled = false;
+
+                // update preview header info
+                billStoreName.textContent = storeNameInput.value || '—';
+                billStoreAddr.textContent = storeAddrInput.value || '';
+                billStoreGST.textContent = custGSTInput.value || '';
+                date_now = Date.now().toString();
+                billNoInput.value = date_now;
+                billPreviewNo.textContent = billNoInput.value;
+                billPreviewDate.textContent = formatDate(billDateEl.value.toString());
+            }
+
+            // initial row
+            createProductRow();
+
+            // add product handler
+            addProductBtn.addEventListener('click', () => {
+                createProductRow();
+                updateBillPreviewDebounced();
+            });
+
+            regenBtn.addEventListener('click', updateBillPreview);
+
+            function generateBillPDF1() {
+                updateBillPreview();
+                //const element = document.getElementById('content-to-print');
+                try {
+                    html2pdf(billSection, {
+                        localUrlAccess: true,
+                        margin: 0,
+                        filename: 'document.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2, useCORS: true }, // Scale for better resolution, useCORS for images
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    });
+                } finally {
+
+                }
+
+            }
+
+            // PDF generation - simple fit-to-page; for long bills it'll scale to fit width
+            async function generateBillPDF() {
+                updateBillPreview();
+                // render the bill section (including header) as image
+                const el = billSection;
+                // temporarily add a white background and padding for nicer PDF
+                const wrapper = el.cloneNode(true);
+                wrapper.style.background = 'white';
+                wrapper.style.padding = '16px';
+                // create a container so html2canvas captures computed styles
+                const container = document.createElement('div');
+                container.style.padding = '16px';
+                container.style.background = 'white';
+                container.appendChild(wrapper);
+                document.body.appendChild(container);
+
+                try {
+                    const canvas = await html2canvas(container, { scale: 1, useCORS: true, backgroundColor: '#ffffff', width: 1300 });
+                    const imgData = canvas.toDataURL('image/png');
+
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const pageWidth = pdf.internal.pageSize.getWidth();
+                    const pageHeight = pdf.internal.pageSize.getHeight();
+
+                    // compute image size to fit width with small margins
+                    const margin = 10;
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pageWidth - margin * 2;
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                    // If image taller than page, scale to width and add pages by slicing canvas vertically (simple approach)
+                    if (pdfHeight <= pageHeight - margin * 2) {
+                        pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth, pdfHeight);
+                    } else {
+                        // slice the canvas into multiple pages
+                        const canvasW = canvas.width;
+                        const canvasH = canvas.height;
+                        const pxPerMm = canvasW / (pdfWidth * (96 / 25.4)); // approx conversion (not exact) — but we'll do pixel slicing based on ratio
+                        // Instead of exact calculation complexity, do a simpler method: scale image to pageWidth and then add pages by shifting Y
+                        // Create an offscreen canvas to draw slices
+                        const ratio = pdfWidth / canvas.width;
+                        const scaledH = canvas.height * ratio;
+                        const sliceHeightPx = Math.floor((pageHeight - margin * 2) / ratio);
+                        let y = 0;
+                        const offCanvas = document.createElement('canvas');
+                        const offCtx = offCanvas.getContext('2d');
+
+                        while (y < canvas.height) {
+                            const h = Math.min(sliceHeightPx, canvas.height - y);
+                            offCanvas.width = canvas.width;
+                            offCanvas.height = h;
+                            offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
+                            offCtx.drawImage(canvas, 0, y, canvas.width, h, 0, 0, offCanvas.width, offCanvas.height);
+                            const sliceData = offCanvas.toDataURL('image/png');
+                            const slicePdfHeight = (h * ratio);
+                            pdf.addImage(sliceData, 'PNG', margin, margin, pdfWidth, slicePdfHeight);
+                            y += h;
+                            if (y < canvas.height) pdf.addPage();
+                        }
+                    }
+
+                    return pdf;
+                } finally {
+                    document.body.removeChild(container);
+                }
+            }
+
+            // Listen to value changes
+            billDateEl.addEventListener("input", () => {
+                if (billDateEl.value) {
+                    billPreviewDate.textContent = formatDate(billDateEl.value.toString());
+                }
+            });
+
+            // Download handler
+            downloadBtn.addEventListener('click', async () => {
+                try {
+                    downloadBtn.disabled = true;
+                    downloadBtn.textContent = 'Preparing…';
+                    const pdf = await generateBillPDF();
+                    pdf.save((storeNameInput.value || 'medicine-bill').replace(/\s+/g, '-').toLowerCase() + '.pdf');
+                } catch (e) {
+                    alert('Error generating PDF: ' + (e.message || e));
+                } finally {
+                    downloadBtn.disabled = false;
+                    downloadBtn.textContent = 'Download PDF';
+                }
+            });
+
+            // Share handler - uses Web Share API with files if possible
+            shareBtn.addEventListener('click', async () => {
+                try {
+                    shareBtn.disabled = true;
+                    shareBtn.textContent = 'Preparing…';
+                    const pdf = await generateBillPDF();
+                    const blob = pdf.output('blob');
+                    const file = new File([blob], (storeNameInput.value || 'medicine-bill').replace(/\s+/g, '-').toLowerCase() + '.pdf', { type: 'application/pdf' });
+
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            files: [file],
+                            title: 'Medicine Bill',
+                            text: `Bill from ${storeNameInput.value || 'Medicine Store'} — ${billPreviewDate.textContent}`
+                        });
+                    } else {
+                        // fallback: download then open WhatsApp with instruction
+                        const url = URL.createObjectURL(blob);
+                        // Trigger a download in case user wants to attach manually
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = file.name;
+                        document.body.appendChild(a); a.click(); a.remove();
+                        URL.revokeObjectURL(url);
+
+                        const msg = encodeURIComponent('Your medicine bill is ready. I have downloaded it locally — please attach the PDF in WhatsApp to send.');
+                        window.open(`https://wa.me/?text=${msg}`, '_blank');
+                    }
+                } catch (e) {
+                    alert('Sharing failed: ' + (e.message || e));
+                } finally {
+                    shareBtn.disabled = false;
+                    shareBtn.textContent = 'Send via WhatsApp';
+                }
+            });
+
+            // Enable update when meta fields change
+            [storeNameInput, storeAddrInput, billNoInput, custGSTInput].forEach(el => el.addEventListener('input', updateBillPreviewDebounced));
+
+            // initial preview
+            updateBillPreview();
+
+            // Expose a simple API for debugging in console if needed
+            window._billApp = {
+                addRow: createProductRow,
+                update: updateBillPreview
+            };
+        })();
+    </script>
+</body>
+</html>
