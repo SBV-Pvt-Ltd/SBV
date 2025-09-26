@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Export Page as PDF & Share via WhatsApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #downloadBtn {
+            background: #16a34a;
+        }
+
+        #shareBtn {
+            background: #25D366;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="pageContent">
+        <h1>My Web Page</h1>
+        <p>
+            This is a demo page. When you click the button, this entire page will be
+            exported into a PDF file using JavaScript.
+        </p>
+        <p>
+            You can then download the PDF or share it manually on WhatsApp.
+        </p>
+    </div>
+
+    <div class="buttons">
+        <button id="downloadBtn">Download PDF</button>
+        <button id="shareBtn">Share on WhatsApp</button>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+        let lastGeneratedPDF = null;
+
+        async function generatePDF() {
+            const element = document.getElementById("pageContent");
+            const canvas = await html2canvas(element, { scale: 2 });
+            const imgData = canvas.toDataURL("image/png");
+
+            const pdf = new jsPDF("p", "mm", "a4");
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pageWidth;
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            let position = 0;
+            pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+
+            lastGeneratedPDF = pdf;
+            return pdf;
+        }
+
+        document.getElementById("downloadBtn").addEventListener("click", async () => {
+            const pdf = await generatePDF();
+            pdf.save("page.pdf");
+        });
+
+        document.getElementById("shareBtn").addEventListener("click", async () => {
+            const pdf = await generatePDF();
+            const pdfBlob = pdf.output("blob");
+
+            // Check if Web Share API with files is supported
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([pdfBlob], "page.pdf", { type: "application/pdf" })] })) {
+                const file = new File([pdfBlob], "page.pdf", { type: "application/pdf" });
+                try {
+                    await navigator.share({
+                        files: [file],
+                        title: "Shared PDF",
+                        text: "Here is the PDF exported from the webpage."
+                    });
+                } catch (err) {
+                    alert("Sharing cancelled or failed: " + err);
+                }
+            } else {
+                // Fallback: open WhatsApp with a text message (user will attach PDF manually)
+                const message = encodeURIComponent("I generated this PDF, please find it attached.");
+                window.open(`https://wa.me/?text=${message}`, "_blank");
+            }
+        });
+    </script>
+</body>
+</html>

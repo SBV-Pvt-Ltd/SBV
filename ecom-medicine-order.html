@@ -471,6 +471,24 @@
             font-size: 18px;
             font-weight: 700;
         }
+        .pre-total-taxes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0;
+            padding: 12px 0;
+            border-top: 2px solid #e5e7eb;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .cart-total-taxes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
+        }
 
         .cart-actions {
             display: flex;
@@ -811,8 +829,16 @@
             </button>
         </div>
         <div id="cartItems"></div>
+        <div class="pre-total-taxes">
+            <span>Total before taxes:</span>
+            <span id="preTaxesTotal">₹0</span>
+        </div>
+        <div class="cart-total-taxes">
+            <span id="gstApplicableNow">GST applicable:</span>
+            <span id="cartTotalTaxes">₹0</span>
+        </div>
         <div class="cart-total">
-            <span>Total:</span>
+            <span>Total payable:</span>
             <span id="cartTotal">₹0</span>
         </div>
         <div class="cart-actions">
@@ -830,6 +856,7 @@
     <!-- JavaScript -->
     <script type="text/javascript">
         // Application state
+        const gst_applicable = 5;
         const state = {
             products: [],
             cart: {},
@@ -845,6 +872,9 @@
             cartItems: document.getElementById('cartItems'),
             cartCount: document.getElementById('cartCount'),
             cartTotal: document.getElementById('cartTotal'),
+            preTaxesTotal: document.getElementById('preTaxesTotal'),
+            cartTotalTaxes: document.getElementById('cartTotalTaxes'),
+            gstApplicableNow: document.getElementById('gstApplicableNow'),
             resultCount: document.getElementById('resultCount'),
             searchInput: document.getElementById('searchInput'),
             sortSelect: document.getElementById('sortSelect'),
@@ -922,7 +952,7 @@
                 elements.productGrid.innerHTML = '';
 
                 if (productList.length === 0) {
-                    elements.productGrid.innerHTML = '<div class="empty-state"><h3>No products found</h3><p>Try adjusting your search terms.</p></div>';
+                    elements.productGrid.innerHTML = '<div class="empty-state"><h3>No products found</h3><p>Try another search terms.</p></div>';
                     return;
                 }
 
@@ -938,7 +968,7 @@
                                     </div>
                                     <div class="product-price">
                                         <p class="price-amount">${utils.formatCurrency(product.price)}</p>
-                                        <p class="price-note">Incl. taxes</p>
+                                        <p class="price-note">Pre taxes <br />(+${gst_applicable}% <br />GST)</p>
                                     </div>
                                 </div>
                                 <div class="qty-controls">
@@ -1019,7 +1049,11 @@
                         `;
                     elements.cartItems.appendChild(cartItem);
                 });
-
+                elements.gstApplicableNow.textContent = "GST (+"+gst_applicable+"%):";
+                elements.preTaxesTotal.textContent = utils.formatCurrency(totalAmount);
+                totalTaxAmount = totalAmount * (gst_applicable / 100);
+                elements.cartTotalTaxes.textContent = utils.formatCurrency(totalTaxAmount);
+                totalAmount += totalTaxAmount;
                 elements.cartTotal.textContent = utils.formatCurrency(totalAmount);
 
                 if (totalItems > 0) {
