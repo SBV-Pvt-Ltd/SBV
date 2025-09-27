@@ -340,7 +340,6 @@
             }
         }
 
-
         /* Style for odd rows */
         tbody tr:nth-child(odd) {
             background-color: #f2f2f2; /* Light gray */
@@ -523,10 +522,11 @@
     <script src="ecom-medicine-order.js"></script>
 
     <script>
-        
+
         (async function () {
             const { jsPDF } = window.jspdf;
 
+            // Fetch products from Google Sheets
             async function fetchProducts() {
                 const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.spreadsheetId}/values/${CONFIG.range}?key=${CONFIG.apiKey}`;
 
@@ -538,7 +538,11 @@
                     return parseProducts(data.values || []);
                 } catch (error) {
                     console.error('Error fetching products:', error);
-                    throw error;
+                    // Return fallback products if API fails
+                    return [
+                        { id: 1, name: 'Sample Medicine 1', price: 100, desc: 'Sample description', img: '', qty: 0 },
+                        { id: 2, name: 'Sample Medicine 2', price: 200, desc: 'Another sample', img: '', qty: 0 }
+                    ];
                 }
             }
 
@@ -555,8 +559,11 @@
                     };
                 }).filter(product => product.name && product.price > 0);
             }
+
+            // Load products
             const products = await fetchProducts();
 
+            // DOM elements
             const productListEl = document.getElementById('productList');
             const addProductBtn = document.getElementById('addProduct');
             const regenBtn = document.getElementById('regenBill');
@@ -582,20 +589,14 @@
             const totalAmtWords = document.getElementById('totalAmtWords');
             const totalTaxWords = document.getElementById('totalTaxWords');
 
-            // set current date
+            // Utility functions
             function formatDate(dateString) {
                 const date = new Date(dateString);
-
-                // Array of short month names
                 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
                 const day = date.getDate();
-                const month = monthNames[date.getMonth()]; // Get short month name from array
+                const month = monthNames[date.getMonth()];
                 const year = date.getFullYear();
-
-                // Pad day with a leading zero if it's a single digit
                 const formattedDay = String(day).padStart(2, '0');
-
                 return `${formattedDay} ${month} ${year}`;
             }
 
@@ -607,27 +608,26 @@
                 return `${year}-${month}-${day}`;
             }
 
-            // Set default date = today
-            billDateEl.value = getTodayDate();
-            billPreviewDate.textContent = formatDate(billDateEl.value.toString());
-
-            // utility
             function fmt(n) {
                 return Number(n).toFixed(2);
             }
+
             function createLabelWithText(text) {
                 const label = document.createElement('label');
                 label.textContent = text;
                 return label;
             }
 
+            // Set default date to today
+            billDateEl.value = getTodayDate();
+            billPreviewDate.textContent = formatDate(billDateEl.value.toString());
 
-
-            // create a product input row
+            // Create a product input row
             function createProductRow(selectedIndex = 0, qty = 1, tax = 5) {
                 const row = document.createElement('div');
                 row.className = 'product-row';
-                // select
+
+                // Product select dropdown
                 const sel = document.createElement('select');
                 sel.className = 'prod-select';
                 products.forEach((p, i) => {
@@ -638,50 +638,54 @@
                 });
                 sel.selectedIndex = selectedIndex;
 
-                // rate display
+                // Rate display
                 const rate = document.createElement('div');
                 rate.className = 'prod-rate';
                 rate.textContent = '₹' + fmt(products[selectedIndex].price);
 
-                // qty
+                // Quantity input
                 const qtyIn = document.createElement('input');
                 qtyIn.type = 'number';
                 qtyIn.className = 'prod-qty';
                 qtyIn.min = 1;
                 qtyIn.value = qty;
 
-                // tax
+                // Tax input
                 const taxIn = document.createElement('input');
                 taxIn.type = 'number';
                 taxIn.className = 'prod-tax';
                 taxIn.min = 0;
                 taxIn.value = tax;
 
-                // remove
+                // Remove button
                 const remove = document.createElement('button');
                 remove.type = 'button';
                 remove.className = 'remove-btn';
                 remove.textContent = 'Remove';
 
-                // event listeners
+                // Event listeners
                 sel.addEventListener('change', () => {
                     const idx = Number(sel.value);
                     rate.textContent = '₹' + fmt(products[idx].price);
                     updateBillPreviewDebounced();
                 });
+
                 qtyIn.addEventListener('input', () => {
                     if (qtyIn.value < 1) qtyIn.value = 1;
                     updateBillPreviewDebounced();
                 });
+
                 taxIn.addEventListener('input', () => {
                     if (taxIn.value < 0) taxIn.value = 0;
                     updateBillPreviewDebounced();
                 });
+
                 remove.addEventListener('click', () => {
                     row.remove();
                     updateBillPreview();
                 });
 
+                // Append elements to row
                 row.appendChild(sel);
                 row.appendChild(createLabelWithText(" Price: "));
                 row.appendChild(rate);
@@ -695,14 +699,14 @@
                 return row;
             }
 
-            // debounce small updates
+            // Debounce updates for better performance
             let updateTimeout = null;
             function updateBillPreviewDebounced() {
                 clearTimeout(updateTimeout);
                 updateTimeout = setTimeout(updateBillPreview, 180);
             }
 
-            //convert Amount To Indian Words
+            // Convert amount to Indian words
             function convertAmountToIndianWords(amount) {
                 const ones = ["", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "];
                 const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
@@ -727,6 +731,7 @@
                 integerPart = parseInt(integerPart, 10);
                 decimalPart = decimalPart ? parseInt(decimalPart, 10) : 0;
                 if (decimalPart < 10) decimalPart *= 10;
+
                 if (integerPart === 0 && decimalPart === 0) {
                     return "Zero Rupees Only";
                 }
@@ -751,7 +756,7 @@
                     integerPart %= 1000;
                 }
 
-                // Handle Hundreds and Tens/Ones
+                // Handle Hundreds and remaining
                 if (integerPart > 0) {
                     words += convertChunkToWords(integerPart);
                 }
@@ -766,18 +771,18 @@
                 }
 
                 finalString += " Only";
-
                 return finalString;
             }
 
-            // build bill table from current product rows
+            // Build bill table from current product rows
             function updateBillPreview() {
                 billTableBody.innerHTML = '';
-                const min_rows = 10;
-                var rows_in_table = 0;
+                const minRows = 10;
+                let rowsInTable = 0;
                 let grand = 0;
-                let total_tax = 0;
+                let totalTax = 0;
                 const rows = productListEl.querySelectorAll('.product-row');
+
                 if (rows.length === 0) {
                     billSection.style.display = 'none';
                     downloadBtn.disabled = true;
@@ -786,7 +791,7 @@
                 }
 
                 rows.forEach(r => {
-                    rows_in_table += 1;
+                    rowsInTable += 1;
                     const sel = r.querySelector('.prod-select');
                     const idx = Number(sel.value);
                     const product = products[idx];
@@ -796,94 +801,68 @@
 
                     const subtotal = rate * qty;
                     const tax = (subtotal * taxPerc) / 100;
-                    total_tax += tax;
+                    totalTax += tax;
                     const total = subtotal + tax;
                     grand += total;
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                            <td style="text-align:left">${product.name}</td>
-                            <td>₹${fmt(rate)}</td>
-                            <td>${qty}</td>
-                            <td>₹${fmt(subtotal)}</td>
-                            <td>₹${fmt(tax)}</td>
-                            <td>₹${fmt(total)}</td>
-                          `;
+                                <td style="text-align:left">${product.name}</td>
+                                <td>₹${fmt(rate)}</td>
+                                <td>${qty}</td>
+                                <td>₹${fmt(subtotal)}</td>
+                                <td>₹${fmt(tax)}</td>
+                                <td>₹${fmt(total)}</td>
+                              `;
                     billTableBody.appendChild(tr);
                 });
-                //add min rows
-                var additional_rows_required = min_rows - rows_in_table;
 
-                for (let counter = 0; counter < additional_rows_required; counter++) {
-                    const tr_add = document.createElement('tr');
-                    tr_add.innerHTML = `
-                            <td>&nbsp;</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            `;
-                    billTableBody.appendChild(tr_add);
+                // Add minimum rows for consistent layout
+                const additionalRowsRequired = minRows - rowsInTable;
+                for (let counter = 0; counter < additionalRowsRequired; counter++) {
+                    const trAdd = document.createElement('tr');
+                    trAdd.innerHTML = `
+                                <td>&nbsp;</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                `;
+                    billTableBody.appendChild(trAdd);
                 }
 
+                // Update totals and words
                 totalAmtWords.textContent = convertAmountToIndianWords(grand);
-                totalTaxWords.textContent = convertAmountToIndianWords(total_tax);
-                grandTotalTaxEl.textContent = fmt(total_tax);
+                totalTaxWords.textContent = convertAmountToIndianWords(totalTax);
+                grandTotalTaxEl.textContent = fmt(totalTax);
                 grandTotalEl.textContent = fmt(grand);
-                //billSection.style.display = 'block';
+
+                // Show bill and enable buttons
+                billSection.style.display = 'block';
                 downloadBtn.disabled = false;
                 shareBtn.disabled = false;
 
-                // update preview header info
+                // Update preview header info
                 billStoreName.textContent = storeNameInput.value || '—';
                 billStoreAddr.textContent = storeAddrInput.value || '';
                 billStoreGST.textContent = custGSTInput.value || '';
-                date_now = Date.now().toString();
-                billNoInput.value = date_now;
+                const dateNow = Date.now().toString();
+                billNoInput.value = billNoInput.value || dateNow;
                 billPreviewNo.textContent = billNoInput.value;
                 billPreviewDate.textContent = formatDate(billDateEl.value.toString());
             }
 
-            // initial row
-            createProductRow();
-
-            // add product handler
-            addProductBtn.addEventListener('click', () => {
-                createProductRow();
-                updateBillPreviewDebounced();
-            });
-
-            regenBtn.addEventListener('click', updateBillPreview);
-
-            function generateBillPDF1() {
-                updateBillPreview();
-                //const element = document.getElementById('content-to-print');
-                try {
-                    html2pdf(billSection, {
-                        localUrlAccess: true,
-                        margin: 0,
-                        filename: 'document.pdf',
-                        image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: { scale: 2, useCORS: true }, // Scale for better resolution, useCORS for images
-                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                    });
-                } finally {
-
-                }
-
-            }
-
-            // PDF generation - simple fit-to-page; for long bills it'll scale to fit width
+            // PDF generation with multi-page support
             async function generateBillPDF() {
                 updateBillPreview();
-                // render the bill section (including header) as image
                 const el = billSection;
-                // temporarily add a white background and padding for nicer PDF
+
+                // Create wrapper for better PDF rendering
                 const wrapper = el.cloneNode(true);
                 wrapper.style.background = 'white';
                 wrapper.style.padding = '16px';
-                // create a container so html2canvas captures computed styles
+
                 const container = document.createElement('div');
                 container.style.padding = '16px';
                 container.style.background = 'white';
@@ -891,31 +870,30 @@
                 document.body.appendChild(container);
 
                 try {
-                    const canvas = await html2canvas(container, { scale: 1, useCORS: true, backgroundColor: '#ffffff', width: 1300 });
+                    const canvas = await html2canvas(container, {
+                        scale: 1,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        width: 1300
+                    });
                     const imgData = canvas.toDataURL('image/png');
 
                     const pdf = new jsPDF('p', 'mm', 'a4');
                     const pageWidth = pdf.internal.pageSize.getWidth();
                     const pageHeight = pdf.internal.pageSize.getHeight();
 
-                    // compute image size to fit width with small margins
+                    // Compute image size to fit width with margins
                     const margin = 10;
                     const imgProps = pdf.getImageProperties(imgData);
                     const pdfWidth = pageWidth - margin * 2;
                     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-                    // If image taller than page, scale to width and add pages by slicing canvas vertically (simple approach)
+                    // Single page or multi-page handling
                     if (pdfHeight <= pageHeight - margin * 2) {
                         pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth, pdfHeight);
                     } else {
-                        // slice the canvas into multiple pages
-                        const canvasW = canvas.width;
-                        const canvasH = canvas.height;
-                        const pxPerMm = canvasW / (pdfWidth * (96 / 25.4)); // approx conversion (not exact) — but we'll do pixel slicing based on ratio
-                        // Instead of exact calculation complexity, do a simpler method: scale image to pageWidth and then add pages by shifting Y
-                        // Create an offscreen canvas to draw slices
+                        // Multi-page PDF by slicing canvas
                         const ratio = pdfWidth / canvas.width;
-                        const scaledH = canvas.height * ratio;
                         const sliceHeightPx = Math.floor((pageHeight - margin * 2) / ratio);
                         let y = 0;
                         const offCanvas = document.createElement('canvas');
@@ -927,9 +905,11 @@
                             offCanvas.height = h;
                             offCtx.clearRect(0, 0, offCanvas.width, offCanvas.height);
                             offCtx.drawImage(canvas, 0, y, canvas.width, h, 0, 0, offCanvas.width, offCanvas.height);
+
                             const sliceData = offCanvas.toDataURL('image/png');
-                            const slicePdfHeight = (h * ratio);
+                            const slicePdfHeight = h * ratio;
                             pdf.addImage(sliceData, 'PNG', margin, margin, pdfWidth, slicePdfHeight);
+
                             y += h;
                             if (y < canvas.height) pdf.addPage();
                         }
@@ -941,20 +921,42 @@
                 }
             }
 
-            // Listen to value changes
+            // Event listeners
+
+            // Add initial product row
+            createProductRow();
+
+            // Add product button
+            addProductBtn.addEventListener('click', () => {
+                createProductRow();
+                updateBillPreviewDebounced();
+            });
+
+            // Regenerate bill button
+            regenBtn.addEventListener('click', updateBillPreview);
+
+            // Date change listener
             billDateEl.addEventListener("input", () => {
                 if (billDateEl.value) {
                     billPreviewDate.textContent = formatDate(billDateEl.value.toString());
                 }
             });
 
-            // Download handler
+            // Form field changes
+            [storeNameInput, storeAddrInput, billNoInput, custGSTInput].forEach(el => {
+                el.addEventListener('input', updateBillPreviewDebounced);
+            });
+
+            // Download PDF handler
             downloadBtn.addEventListener('click', async () => {
                 try {
                     downloadBtn.disabled = true;
                     downloadBtn.textContent = 'Preparing…';
                     const pdf = await generateBillPDF();
-                    pdf.save((storeNameInput.value || 'medicine-bill').replace(/\s+/g, '-').toLowerCase() + '.pdf');
+                    const filename = (storeNameInput.value || 'medicine-bill')
+                        .replace(/\s+/g, '-')
+                        .toLowerCase() + '.pdf';
+                    pdf.save(filename);
                 } catch (e) {
                     alert('Error generating PDF: ' + (e.message || e));
                 } finally {
@@ -963,14 +965,17 @@
                 }
             });
 
-            // Share handler - uses Web Share API with files if possible
+            // Share via WhatsApp handler
             shareBtn.addEventListener('click', async () => {
                 try {
                     shareBtn.disabled = true;
                     shareBtn.textContent = 'Preparing…';
                     const pdf = await generateBillPDF();
                     const blob = pdf.output('blob');
-                    const file = new File([blob], (storeNameInput.value || 'medicine-bill').replace(/\s+/g, '-').toLowerCase() + '.pdf', { type: 'application/pdf' });
+                    const filename = (storeNameInput.value || 'medicine-bill')
+                        .replace(/\s+/g, '-')
+                        .toLowerCase() + '.pdf';
+                    const file = new File([blob], filename, { type: 'application/pdf' });
 
                     if (navigator.canShare && navigator.canShare({ files: [file] })) {
                         await navigator.share({
@@ -979,13 +984,14 @@
                             text: `Bill from ${storeNameInput.value || 'Medicine Store'} — ${billPreviewDate.textContent}`
                         });
                     } else {
-                        // fallback: download then open WhatsApp with instruction
+                        // Fallback: download and open WhatsApp
                         const url = URL.createObjectURL(blob);
-                        // Trigger a download in case user wants to attach manually
                         const a = document.createElement('a');
                         a.href = url;
-                        a.download = file.name;
-                        document.body.appendChild(a); a.click(); a.remove();
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
                         URL.revokeObjectURL(url);
 
                         const msg = encodeURIComponent('Your medicine bill is ready. I have downloaded it locally — please attach the PDF in WhatsApp to send.');
@@ -999,17 +1005,17 @@
                 }
             });
 
-            // Enable update when meta fields change
-            [storeNameInput, storeAddrInput, billNoInput, custGSTInput].forEach(el => el.addEventListener('input', updateBillPreviewDebounced));
-
-            // initial preview
+            // Initial preview
             updateBillPreview();
 
-            // Expose a simple API for debugging in console if needed
+            // Expose API for debugging
             window._billApp = {
                 addRow: createProductRow,
-                update: updateBillPreview
+                update: updateBillPreview,
+                products: products,
+                generatePDF: generateBillPDF
             };
+
         })();
     </script>
 </body>
