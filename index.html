@@ -24,6 +24,9 @@
 
 	</script>
 	<style type="text/css">
+        .phone_number:link, .phone_number:visited, .phone_number:hover, .phone_number:active {
+            text-decoration: none; /* Optional: also removes the underline */
+        }
 		.loader {
 			position: fixed;
 			top: 0;
@@ -975,6 +978,11 @@
 		 style="background-image: url('./w3images/home_screen_display.gif'); width: 100%; height: 600px; min-height: 300px; max-height: 600px; background-size: 100% 100%; background-color: black; background-position: center; background-repeat: no-repeat; padding: 50px; ">
 		<!--Add play and pause button. Saharsh-->
 		<!-- use only 3 fonts for heading, sub heading and text-->
+		<div class="w3-container w3-display-topright w3-margin-top">
+			<button class="w3-xlarge w3-theme w3-hover-teal button_color_red" title="Submit Form" style="border-radius:25px;">
+				<a href="tel:+918910441949" class="phone_number" style="text-decoration: none;">&nbsp;<i class="fa fa-phone" style="font-size:20px;color:white"></i>&nbsp;8910441949&nbsp;</a>
+			</button>
+		</div>
 	</div>
 	<div class="w3-large w3-display-container w3-animate-opacity" style="width: 100%; height: 60px; background-color: #009688;">
 		<div class="w3-container w3-display-bottomleft w3-margin-bottom">
