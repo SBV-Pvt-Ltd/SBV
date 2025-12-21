@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>App & Web Development Cost Estimator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Export libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #0f3d91;
+            --secondary: #4b79a1;
+            --bg: #f4f6f9;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: Segoe UI,Arial
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg)
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1)
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary)
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555
+        }
+
+        /* platforms */
+        .platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0
+        }
+
+            .platforms label {
+                background: #eef2f7;
+                padding: 10px 18px;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer
+            }
+
+        /* layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 25px
+        }
+
+        /* left */
+        .features {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px
+        }
+
+        .feature-group {
+            margin-bottom: 25px
+        }
+
+            .feature-group h3 {
+                margin-bottom: 10px
+            }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px
+        }
+
+            .feature-list label {
+                font-size: 13px;
+                cursor: pointer
+            }
+
+        /* right */
+        .selected {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column
+        }
+
+        .table-wrapper {
+            flex: 1;
+            overflow: auto;
+            border: 1px solid #ccc;
+            border-radius: 6px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: #eef2f7;
+            z-index: 2
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            font-size: 13px;
+            text-align: center
+        }
+
+        .total {
+            margin: 15px 0;
+            padding: 15px;
+            color: #fff;
+            border-radius: 8px;
+            background: linear-gradient(135deg,var(--primary),var(--secondary));
+            text-align: center
+        }
+
+            .total div {
+                font-size: 26px;
+                font-weight: bold
+            }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+            .action-buttons button {
+                padding: 10px 16px;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                color: #fff;
+                background: linear-gradient(135deg,var(--primary),var(--secondary));
+                cursor: pointer
+            }
+
+        /* responsive */
+        @media(max-width:1100px) {
+            .main-grid {
+                grid-template-columns: 1fr
+            }
+
+            .feature-list {
+                grid-template-columns: repeat(2,1fr)
+            }
+        }
+
+        @media(max-width:600px) {
+            .feature-list {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Mobile & Web Application Cost Estimator</h1>
+        <p class="subtitle">Feature-wise & platform-wise estimate</p>
+
+        <!-- Platforms -->
+        <div class="platforms">
+            <label><input type="checkbox" class="platform" data-name="Android App" data-cost="90000"> Android</label>
+            <label><input type="checkbox" class="platform" data-name="iOS App" data-cost="100000"> iOS</label>
+            <label><input type="checkbox" class="platform" data-name="Web Application" data-cost="80000"> Web</label>
+            <label><input type="checkbox" class="platform" data-name="Cross Platform App" data-cost="140000"> Cross-Platform</label>
+        </div>
+
+        <div class="main-grid">
+
+            <!-- LEFT: FEATURE LIST UNCHANGED -->
+            <div class="features">
+
+                <div class="feature-group">
+                    <h3>Design & UI</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="Logo Design" data-cost="15000"> Logo Design</label>
+                        <label><input type="checkbox" class="feature" data-name="UI/UX Design" data-cost="60000"> UI/UX Design</label>
+                        <label><input type="checkbox" class="feature" data-name="Dark Mode" data-cost="20000"> Dark Mode</label>
+                        <label><input type="checkbox" class="feature" data-name="Accessibility" data-cost="30000"> Accessibility</label>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <h3>User & Admin</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="User Login" data-cost="25000"> User Login</label>
+                        <label><input type="checkbox" class="feature" data-name="Admin Panel" data-cost="60000"> Admin Panel</label>
+                        <label><input type="checkbox" class="feature" data-name="Role Based Access" data-cost="35000"> Role Based Access</label>
+                        <label><input type="checkbox" class="feature" data-name="User Management" data-cost="30000"> User Management</label>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <h3>E-Commerce & Monetization</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="Payment Gateway" data-cost="45000"> Payment Gateway</label>
+                        <label><input type="checkbox" class="feature" data-name="Shopping Cart" data-cost="40000"> Shopping Cart</label>
+                        <label><input type="checkbox" class="feature" data-name="Subscriptions" data-cost="50000"> Subscriptions</label>
+                        <label><input type="checkbox" class="feature" data-name="Coupons & Discounts" data-cost="25000"> Coupons & Discounts</label>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <h3>Communication & Engagement</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="Push Notifications" data-cost="30000"> Push Notifications</label>
+                        <label><input type="checkbox" class="feature" data-name="Live Chat" data-cost="35000"> Live Chat</label>
+                        <label><input type="checkbox" class="feature" data-name="SMS Integration" data-cost="20000"> SMS Integration</label>
+                        <label><input type="checkbox" class="feature" data-name="Email Integration" data-cost="15000"> Email Integration</label>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <h3>Location & Media</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="Geo Location" data-cost="35000"> Geo Location</label>
+                        <label><input type="checkbox" class="feature" data-name="Maps Integration" data-cost="30000"> Maps Integration</label>
+                        <label><input type="checkbox" class="feature" data-name="Barcode / QR" data-cost="30000"> Barcode / QR</label>
+                        <label><input type="checkbox" class="feature" data-name="Media Uploads" data-cost="25000"> Media Uploads</label>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <h3>Security, Analytics & DevOps</h3>
+                    <div class="feature-list">
+                        <label><input type="checkbox" class="feature" data-name="Data Encryption" data-cost="30000"> Data Encryption</label>
+                        <label><input type="checkbox" class="feature" data-name="Two-Factor Authentication" data-cost="25000"> Two-Factor Authentication</label>
+                        <label><input type="checkbox" class="feature" data-name="Analytics Dashboard" data-cost="35000"> Analytics Dashboard</label>
+                        <label><input type="checkbox" class="feature" data-name="Server Hosting" data-cost="30000"> Server Hosting</label>
+                        <label><input type="checkbox" class="feature" data-name="CI/CD Pipeline" data-cost="40000"> CI/CD Pipeline</label>
+                        <label><input type="checkbox" class="feature" data-name="App Monitoring" data-cost="30000"> App Monitoring</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div class="selected">
+                <div class="total">
+                    <h3>Total (All Platforms)</h3>
+                    <div id="grandTotal">₹ 0</div>
+                </div>
+                <h2>Cost Breakdown</h2>
+
+                <div class="table-wrapper">
+                    <table id="estimateTable">
+                        <thead id="thead"></thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+
+
+
+                <div class="action-buttons">
+                    <button onclick="downloadExcel()">Download Excel</button>
+                    <button onclick="downloadPDF()">Download PDF</button>
+                    <button onclick="copyText()">Copy as Text</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            var inputs = document.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == 'checkbox') {
+                    inputs[i].checked = false;
+                }
+            }
+        }
+        const platforms = document.querySelectorAll(".platform");
+        const features = document.querySelectorAll(".feature");
+
+        function update() {
+            const thead = document.getElementById("thead");
+            const tbody = document.getElementById("tbody");
+            const totalEl = document.getElementById("grandTotal");
+
+            const pSel = [...platforms].filter(p => p.checked);
+            const fSel = [...features].filter(f => f.checked);
+
+            if (!pSel.length) {
+                thead.innerHTML = "<tr><th>Feature</th></tr>";
+                tbody.innerHTML = "<tr><td>Select a platform</td></tr>";
+                totalEl.innerText = "₹ 0";
+                return;
+            }
+
+            thead.innerHTML = "<tr><th>Feature</th>" + pSel.map(p => `<th>${p.dataset.name}</th>`).join("") + "</tr>";
+            tbody.innerHTML = "";
+
+            let totals = Array(pSel.length).fill(0);
+
+            // Platform base
+            let base = "<tr><td><strong>Platform Base</strong></td>";
+            pSel.forEach((p, i) => {
+                const c = +p.dataset.cost;
+                totals[i] += c;
+                base += `<td>₹ ${c.toLocaleString("en-IN")}</td>`;
+            });
+            base += "</tr>";
+            tbody.innerHTML += base;
+
+            // Features
+            fSel.forEach(f => {
+                let row = `<tr><td>${f.dataset.name}</td>`;
+                pSel.forEach((_, i) => {
+                    const c = +f.dataset.cost;
+                    totals[i] += c;
+                    row += `<td>₹ ${c.toLocaleString("en-IN")}</td>`;
+                });
+                row += "</tr>";
+                tbody.innerHTML += row;
+            });
+
+            // Totals
+            let totalRow = "<tr><td><strong>TOTAL</strong></td>";
+            let grand = 0;
+            totals.forEach(t => {
+                grand += t;
+                totalRow += `<td><strong>₹ ${t.toLocaleString("en-IN")}</strong></td>`;
+            });
+            totalRow += "</tr>";
+            tbody.innerHTML += totalRow;
+
+            totalEl.innerText = "₹ " + grand.toLocaleString("en-IN");
+        }
+
+        [...platforms, ...features].forEach(i => i.addEventListener("change", update));
+
+        function downloadExcel() {
+            const wb = XLSX.utils.table_to_book(document.getElementById("estimateTable"));
+            const timestampInMilliseconds = Date.now();
+            console.log(timestampInMilliseconds);
+            XLSX.writeFile(wb, "SaharshBhadaniVenturePrivateLimited_Estimate_" + timestampInMilliseconds + ".xlsx");
+        }
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF("l");
+            doc.text("App Development Estimate", 14, 15);
+            doc.autoTable({ html: "#estimateTable", startY: 20 });
+            const timestampInMilliseconds = Date.now();
+            console.log(timestampInMilliseconds);
+            doc.save("SaharshBhadaniVenturePrivateLimited_Estimate_" + timestampInMilliseconds+".pdf");
+        }
+        function copyText() {
+            navigator.clipboard.writeText(document.getElementById("estimateTable").innerText);
+            alert("Copied to clipboard");
+        }
+    </script>
+
+</body>
+</html>
