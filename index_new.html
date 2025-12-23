@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Official Homepage of Saharsh Bhadani Venture Private Limited.">
+    <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
+    <meta name="author" content="Saharsh Bhadani Venture Private Limited">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/w3-theme-black.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <script src="Constant.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .hero-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a1628 0%, #1a2947 50%, #0f3460 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .hero-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(100, 200, 255, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .hero-data-viz {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-chart-bar {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to top, #ff6b35, #f7931e);
+            bottom: 0;
+            border-radius: 2px 2px 0 0;
+            animation: barGrow 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes barGrow {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(1.3);
+            }
+        }
+
+        .hero-circuit-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64b5f6, transparent);
+            animation: circuitFlow 4s linear infinite;
+        }
+
+        @keyframes circuitFlow {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            border-radius: 30px;
+            color: #ff6b35;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            background: linear-gradient(135deg, #ffffff 0%, #64b5f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #b0bec5;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-cta-buttons {
+            margin-top: -20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .hero-btn {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .hero-btn-primary {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+            .hero-btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+            }
+
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+            .hero-btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-2px);
+            }
+
+        .hero-stats {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .hero-stat-item {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #64b5f6;
+            display: block;
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: #b0bec5;
+            margin-top: 5px;
+        }
+
+        .hero-code-snippet {
+            position: absolute;
+            background: rgba(10, 22, 40, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #64b5f6;
+            line-height: 1.4;
+            animation: floatCard 7s ease-in-out infinite;
+        }
+
+        .hero-code-1 {
+            top: 20%;
+            right: 50%;
+            width: 220px;
+        }
+
+        .hero-code-2 {
+            bottom: 15%;
+            right: 8%;
+            width: 200px;
+            animation-delay: -2s;
+        }
+
+        position: absolute;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-floating-card {
+            top: 15%;
+            left: 8%;
+            width: 180px;
+        }
+
+        .hero-card-2 {
+            top: 25%;
+            right: 10%;
+            width: 200px;
+            animation-delay: -3s;
+        }
+
+        .hero-card-3 {
+            bottom: 30%;
+            left: 5%;
+            width: 160px;
+            animation-delay: -1.5s;
+        }
+
+        .hero-card-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #64b5f6, #42a5f5);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(100, 181, 246, 0.7);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px 10px rgba(100, 181, 246, 0);
+            }
+        }
+
+        .hero-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .hero-card-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 80px 0 100px;
+            }
+
+            .hero-content {
+                padding: 0 15px 0 15px;
+                text-align: left;
+                max-width: 55%;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .hero-badge {
+                font-size: 10px;
+                padding: 6px 12px;
+                margin-bottom: 20px;
+            }
+
+            .hero-stats {
+                position: absolute;
+                left: 5px;
+                margin-top: 100px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: flex-start;
+            }
+
+            .hero-stat-item {
+                margin-top: 50px;
+                flex: 0 0 calc(50% - 15px);
+            }
+
+            .hero-stat-number {
+                color: white;
+                font-size: 24px;
+            }
+
+            .hero-stat-label {
+                font-size: 11px;
+            }
+
+            .hero-cta-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .hero-floating-card {
+                padding: 10px;
+                right: 8px;
+            }
+
+            .hero-card-1 {
+                top: 115px;
+                width: 120px;
+            }
+
+            .hero-card-2 {
+                top: 190px;
+                width: 125px;
+            }
+
+            .hero-card-3 {
+                top: 265px;
+                width: 125px;
+            }
+
+            .hero-card-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 15px;
+                margin-bottom: 5px;
+            }
+
+            .hero-card-title {
+                font-size: 10px;
+                margin-bottom: 3px;
+            }
+
+            .hero-card-value {
+                font-size: 15px;
+            }
+
+            .hero-code-1 {
+                top: 20%;
+                left: 5%;
+                width: 220px;
+            }
+
+            .hero-code-2 {
+                bottom: 10px;
+                right: 5px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-stat-item {
+                margin-left: -10px;
+            }
+
+            .hero-stat-number {
+                color: white;
+                font-size: 16px;
+            }
+
+            .hero-stat-label {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero">
+                <div class="hero-grid-background"></div>
+
+                <div class="hero-particles" id="hero-particles"></div>
+
+                <div class="hero-data-viz" id="hero-dataViz"></div>
+
+                <div class="hero-floating-card hero-card-1">
+                    <div class="hero-card-icon">💻</div>
+                    <div class="hero-card-title">Custom Software</div>
+                    <div class="hero-card-value" id="custom-software-number">500+</div>
+                </div>
+
+                <div class="hero-floating-card hero-card-2">
+                    <div class="hero-card-icon">📊</div>
+                    <div class="hero-card-title">Analytics Solutions</div>
+                    <div class="hero-card-value">99.9%</div>
+                </div>
+
+                <div class="hero-floating-card hero-card-3">
+                    <div class="hero-card-icon">⚡</div>
+                    <div class="hero-card-title">Deployment Speed</div>
+                    <div class="hero-card-value">2x Fast</div>
+                </div>
+
+                <div class="hero-code-snippet hero-code-1">
+                    <span style="color: #ff6b35;">function</span> <span style="color: #fff;">analyzeData</span>() {<br>
+                    &nbsp;&nbsp;<span style="color: #90caf9;">const</span> insights = <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;processMetrics();<br>
+                    &nbsp;&nbsp;<span style="color: #ff6b35;">return</span> insights;<br>
+                    }
+                </div>
+
+                <div class="hero-code-snippet hero-code-2">
+                    <span style="color: #90caf9;">class</span> <span style="color: #fff;">Solution</span> {<br>
+                    &nbsp;&nbsp;deploy() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #4caf50;">// Enterprise ready</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;scale.<span style="color: #fff;">up</span>();<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+
+                <div class="hero-content">
+                    <div class="hero-badge">🇮🇳 BUSINESS ANALYTICS • SOFTWARE DEVELOPMENT</div>
+                    <h1>Transform Ideas Into<br>Intelligent Solutions</h1>
+                    <p class="hero-subtitle">
+                        From custom software development to advanced business analytics – we build scalable applications
+                        and turn complex data into actionable insights that drive your business forward.
+                    </p>
+                    <div class="hero-cta-buttons">
+                        <button class="hero-btn hero-btn-primary">Get Started</button>
+                        <button class="hero-btn hero-btn-secondary">View Our Work</button>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-number" id="apps-developed-number">500+</span>
+                        <span class="hero-stat-label">Apps Developed</span>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-number" id="analytics-projects-number">200+</span>
+                        <span class="hero-stat-label">Analytics Projects</span>
+                    </div>
+                    <div class="hero-stat-item">
+                        <span class="hero-stat-number" id="client-satistaction-number">98%</span>
+                        <span class="hero-stat-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        // Generate particles
+        const particlesContainer = document.getElementById('hero-particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'hero-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Generate chart bars
+        const dataViz = document.getElementById('hero-dataViz');
+        for (let i = 0; i < 15; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'hero-chart-bar';
+            bar.style.left = (i * 6 + 10) + '%';
+            bar.style.height = (Math.random() * 30 + 10) + '%';
+            bar.style.animationDelay = (i * 0.2) + 's';
+            dataViz.appendChild(bar);
+        }
+
+        // Generate circuit lines
+        for (let i = 0; i < 8; i++) {
+            const line = document.createElement('div');
+            line.className = 'hero-circuit-line';
+            line.style.top = (Math.random() * 100) + '%';
+            line.style.width = (Math.random() * 30 + 20) + '%';
+            line.style.left = (Math.random() * 100) + '%';
+            line.style.animationDelay = (Math.random() * 4) + 's';
+            dataViz.appendChild(line);
+        }
+    </script>
+    <script type="text/javascript">
+        async function fetchCustomSoftwareNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "custom-software!A2:A2";
+            document.getElementById("custom-software-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +"; 
+        }
+
+        async function fetchAppsDeployedNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "apps-developed!A2:A2";
+            document.getElementById("apps-developed-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
+        }
+
+        async function fetchAnalyticsProjectsNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "analytics-project!A2:A2";
+            document.getElementById("analytics-projects-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
+        }
+
+        async function fetchClientSatisfactionNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "client-satisfaction!A2:A2";
+            document.getElementById("client-satistaction-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + "%";
+        }
+
+        async function fetchSpreadsheetData(spreadsheetId, range) {
+            const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch products');
+
+                const data = await response.json();
+                const detailsFetched = await data.values;
+                return detailsFetched;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                throw error;
+            }
+        }
+
+        window.onload = () => {
+            fetchCustomSoftwareNumber();
+            fetchAppsDeployedNumber();
+            fetchAnalyticsProjectsNumber();
+            fetchClientSatisfactionNumber();
+        };
+
+    </script>
+
+</body>
+</html>
