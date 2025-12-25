@@ -197,8 +197,8 @@
         .stats {
             display: flex;
             justify-content: center;
-            gap: 4rem;
-            margin-top: 5rem;
+            gap: 1rem;
+            margin-top: 0.5rem;
             flex-wrap: wrap;
             animation: fadeIn 1s ease-out 0.8s both;
         }
@@ -259,7 +259,7 @@
 
         .tech-stack {
             position: absolute;
-            bottom: 2rem;
+            bottom: 1rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -305,6 +305,14 @@
                 width: 35px;
                 height: 35px;
                 font-size: 1rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .stats {
+                gap: 1rem;
+            }
+            .tech-stack {
+                bottom: 0rem;
             }
         }
     </style>
