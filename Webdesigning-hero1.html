@@ -498,11 +498,11 @@
 
         .design-card {
             width: 320px;
-            height: 220px;
+            height: 200px;
             background: rgba(240, 147, 251, 0.1);
             border: 2px solid rgba(240, 147, 251, 0.3);
             border-radius: 20px;
-            bottom: 40%;
+            bottom: 34%;
             left: 35%;
             backdrop-filter: blur(10px);
             padding: 30px;
@@ -740,7 +740,7 @@
             background: linear-gradient(180deg, transparent 30%, #43e97b 30%);
             border-radius: 0 0 30px 30px;
             bottom: 50%;
-            left: 17%;
+            left: 15%;
             animation-delay: 2.5s;
         }
 
@@ -790,7 +790,7 @@
         .stats-bar {
             position: absolute;
             bottom: 2rem;
-            left: 50%;
+            left: 75%;
             transform: translateX(-50%);
             display: flex;
             gap: 3rem;
@@ -808,6 +808,7 @@
                 gap: 2rem;
                 padding: 1.2rem 2rem;
             }
+
         }
 
         .stat {
@@ -858,8 +859,8 @@
             }
 
             .design-card {
-                width: 120px;
-                height: 85px;
+                width: 370px;
+                height: 185px;
                 left: 8%;
             }
 
@@ -910,12 +911,12 @@
             }
 
             .subtitle {
-                font-size: 0.9rem;
+                font-size: 1.2rem;
                 line-height: 1.5;
             }
 
             .badge {
-                font-size: 0.75rem;
+                font-size: 1rem;
                 padding: 0.4rem 0.9rem;
                 margin-bottom: 1rem;
             }
@@ -935,13 +936,13 @@
             }
 
             .feature-item {
-                font-size: 0.8rem;
+                font-size: 1rem;
             }
 
             .feature-icon {
                 width: 20px;
                 height: 20px;
-                font-size: 0.8rem;
+                font-size: 1.2rem;
             }
 
             .isometric-scene {
@@ -1003,22 +1004,24 @@
             .coffee-cup {
                 width: 38px;
                 height: 47px;
-                right: 8%;
+                right: 18%;
             }
 
             .plant {
                 width: 47px;
                 height: 65px;
-                left: 28%;
+                left: 15%;
+                z-index: 50;
+                transform: translateZ(70px);
             }
 
             .stats-bar {
                 position: fixed;
                 bottom: 1rem;
-                left: 50%;
+                left: 70%;
                 transform: translateX(-50%);
                 width: calc(100% - 2rem);
-                max-width: 600px;
+                max-width: 400px;
                 justify-content: center;
                 gap: 1.5rem;
                 padding: 1rem 1.5rem;
@@ -1029,7 +1032,7 @@
             }
 
             .stat-label {
-                font-size: 0.75rem;
+                font-size: 1rem;
             }
         }
 
@@ -1058,13 +1061,14 @@
             }
 
             .subtitle {
-                font-size: 0.75rem;
+                font-size: 1.2rem;
                 margin-bottom: 1rem;
                 line-height: 1.4;
+                max-width: 90%;
             }
 
             .badge {
-                font-size: 0.65rem;
+                font-size: 1rem;
                 padding: 0.3rem 0.7rem;
                 margin-bottom: 0.8rem;
             }
@@ -1087,7 +1091,7 @@
             }
 
             .feature-item {
-                font-size: 0.7rem;
+                font-size: 1rem;
                 gap: 0.4rem;
             }
 
@@ -1198,10 +1202,12 @@
                 }
 
             .plant {
-                width: 60px;
-                height: 70px;
-                left: 12%;
+                width: 40px;
+                height: 50px;
+                left: 15%;
                 bottom: 49.5%;
+                z-index: 50;
+                transform: translateZ(70px);
             }
 
                 .plant::before {
@@ -1212,10 +1218,11 @@
             .stats-bar {
                 position: fixed;
                 bottom: 0.8rem;
-                gap: 1rem;
+                gap: 0.5rem;
                 padding: 0.9rem 1.2rem;
-                max-width: 500px;
+                max-width: 350px;
                 flex-wrap: wrap;
+                left:50%;
             }
 
             .stat {
@@ -1228,7 +1235,7 @@
             }
 
             .stat-label {
-                font-size: 0.68rem;
+                font-size: 1rem;
             }
         }
 
@@ -1247,13 +1254,13 @@
             }
 
             h1 {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-bottom: 0.8rem;
             }
 
             .subtitle {
                 max-width: 80%;
-                font-size: 0.75rem;
+                font-size: 1rem;
                 margin-bottom: 1rem;
                 line-height: 1.5;
             }
@@ -1355,7 +1362,7 @@
             .coffee-cup {
                 width: 35px;
                 height: 38px;
-                right: 0%;
+                right: 10%;
                 bottom: 38.5%;
             }
 
@@ -1368,8 +1375,8 @@
                 }
 
             .plant {
-                width: 50px;
-                height: 65px;
+                width: 40px;
+                height: 55px;
                 left: 0%;
                 bottom: 50%;
                 z-index: 50;
@@ -1382,9 +1389,13 @@
                 }
 
             .stats-bar {
+                position: absolute;
+                left: 75%;
+                bottom: 1%;
                 gap: 0.8rem;
                 padding: 0.8rem 1rem;
                 margin: 1rem 0.5rem 0;
+                max-width: 25%;
             }
 
             .stat {
@@ -1406,11 +1417,12 @@
             }
 
             h1 {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
 
             .subtitle {
-                font-size: 0.65rem;
+                font-size: 0.75rem;
+                max-width: 90%;
             }
 
             .btn {
@@ -1448,8 +1460,8 @@
             }
 
             .design-card {
-                width: 72px;
-                height: 54px;
+                width: 172px;
+                height: 120px;
             }
 
             .ui-elements {
