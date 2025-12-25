@@ -207,6 +207,10 @@
                 animation: float 3s ease-in-out infinite;
             }
 
+        .coffee-cup,
+        .plant {
+            animation: none !important;
+        }
         .laptop {
             width: 200px;
             height: 130px;
@@ -711,9 +715,11 @@
             height: 60px;
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
             border-radius: 8px 8px 12px 12px;
-            bottom: 30%;
-            right: 5%;
+            bottom: 44%;
+            right: 25%;
             animation-delay: 2s;
+            z-index: 20;
+            transform: translateZ(60px);
         }
 
             .coffee-cup::after {
@@ -729,12 +735,12 @@
             }
 
         .plant {
-            width: 60px;
-            height: 80px;
+            width: 80px;
+            height: 100px;
             background: linear-gradient(180deg, transparent 30%, #43e97b 30%);
             border-radius: 0 0 30px 30px;
-            bottom: 15%;
-            left: 25%;
+            bottom: 50%;
+            left: 17%;
             animation-delay: 2.5s;
         }
 
@@ -1179,8 +1185,8 @@
             .coffee-cup {
                 width: 32px;
                 height: 40px;
-                right: 6%;
-                bottom: 28%;
+                right: 15%;
+                bottom: 44%;
             }
 
                 .coffee-cup::after {
@@ -1192,10 +1198,10 @@
                 }
 
             .plant {
-                width: 40px;
-                height: 55px;
-                left: 26%;
-                bottom: 18%;
+                width: 60px;
+                height: 70px;
+                left: 12%;
+                bottom: 49.5%;
             }
 
                 .plant::before {
@@ -1347,10 +1353,10 @@
             }
 
             .coffee-cup {
-                width: 30px;
+                width: 35px;
                 height: 38px;
                 right: 0%;
-                bottom: 10%;
+                bottom: 38.5%;
             }
 
                 .coffee-cup::after {
@@ -1362,10 +1368,12 @@
                 }
 
             .plant {
-                width: 38px;
-                height: 52px;
-                left: 24%;
-                bottom: 16%;
+                width: 50px;
+                height: 65px;
+                left: 0%;
+                bottom: 50%;
+                z-index: 50;
+                transform: translateZ(70px);
             }
 
                 .plant::before {
