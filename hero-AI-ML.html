@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Cities Neural Network - AI/ML India</title>
+
+    <style>
+        /* Theme variables (do NOT replace original colors) */
+        :root {
+            --theme-bg: transparent;
+            --theme-text: inherit;
+        }
+
+        [data-theme="light"] {
+            --theme-bg: #f8fafc;
+            --theme-text: #0f172a;
+        }
+
+        [data-theme="dark"] {
+            --theme-bg: #000000;
+            --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
+            --theme-text: #ffffff;
+        }
+
+        
+
+        /* Toggle button */
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 9999;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,0,0,0.4);
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(8px);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(255,255,255,0.7);
+            color: #000;
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        /* ================= RESET ================= */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Non-destructive overrides */
+        body {
+            background-color: var(--theme-bg);
+            background-image: var(--theme-bg-img);
+            color: var(--theme-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            position: relative;
+            min-height: 100svh;
+            overflow: hidden;
+        }
+
+        /* ================= BACKGROUND ================= */
+        .stars,
+        .network-canvas {
+            position: absolute;
+            inset: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%,100% {
+                opacity: .3;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5)
+            }
+        }
+
+        .network-canvas {
+            opacity: .6
+        }
+
+        /* ================= CONTENT ================= */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 40px 220px;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media(max-width:768px) {
+            .hero-content {
+                padding: 0 20px 160px;
+            }
+        }
+
+        /* ================= BADGE ================= */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border-radius: 50px;
+            background: rgba(0,212,255,.1);
+            border: 1px solid rgba(0,212,255,.3);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .india-flag {
+            font-size: 20px
+        }
+
+        /* ================= HEADINGS ================= */
+        h1 {
+            font-size: clamp(40px,8vw,90px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+            animation: fadeInUp 1s ease-out .2s both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg,#00d4ff,#00ff88,#a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ================= TEXT ================= */
+        .subtitle {
+            font-size: clamp(16px,3vw,22px);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out .4s both;
+        }
+
+        /* ================= CTA ================= */
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+            animation: fadeInUp 1s ease-out .6s both;
+        }
+
+        @media(max-width:480px) {
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform .3s ease,box-shadow .3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg,#00d4ff,#00ff88);
+            color: #000;
+            box-shadow: 0 10px 40px rgba(0,212,255,.4);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 50px rgba(0,212,255,.6);
+            }
+
+        .btn-secondary {
+            background: rgba(255,255,255,.05);
+            color: #00d4ff;
+            border: 2px solid rgba(0,212,255,.5);
+            backdrop-filter: blur(10px);
+        }
+
+            .btn-secondary:hover {
+                background: rgba(255,255,255,.1);
+                border-color: #00d4ff;
+                transform: translateY(-3px);
+            }
+
+        /* ================= FEATURES ================= */
+        .features-row {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out .8s both;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-icon {
+            font-size: 32px
+        }
+
+        .feature-value {
+            font-size: clamp(28px,5vw,42px);
+            font-weight: 900;
+            background: linear-gradient(135deg,#00d4ff,#00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature-label {
+            font-size: 13px;
+            font-weight: bolder;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ================= CITY ================= */
+        .city-container {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+
+        @media(max-height:700px) {
+            .city-container {
+                height: 40%
+            }
+        }
+
+        .building {
+            position: relative;
+            margin: 0 5px;
+            background: linear-gradient(180deg,rgba(10,25,70,.8),rgba(5,15,45,.9));
+            border: 1px solid rgba(0,200,255,.3);
+            animation: buildingFloat 6s ease-in-out infinite;
+        }
+
+            .building::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                height: 3px;
+                background: linear-gradient(90deg,transparent,#00d4ff,transparent);
+                animation: scanLine 2s linear infinite;
+            }
+
+        @keyframes buildingFloat {
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        @keyframes scanLine {
+            to {
+                transform: translateY(200px)
+            }
+        }
+
+        .building-1 {
+            width: 60px;
+            height: 200px
+        }
+
+        .building-2 {
+            width: 80px;
+            height: 280px
+        }
+
+        .building-3 {
+            width: 70px;
+            height: 320px
+        }
+
+        .building-4 {
+            width: 90px;
+            height: 250px
+        }
+
+        .building-5 {
+            width: 65px;
+            height: 220px
+        }
+
+        .building-6 {
+            width: 75px;
+            height: 290px
+        }
+
+        .building-7 {
+            width: 55px;
+            height: 180px
+        }
+
+        /* ================= WINDOWS ================= */
+        .window {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(0,200,255,.6);
+            box-shadow: 0 0 8px rgba(0,200,255,.8);
+            animation: windowBlink 3s ease-in-out infinite;
+        }
+
+        @keyframes windowBlink {
+            0%,100% {
+                opacity: .3
+            }
+
+            50% {
+                opacity: 1
+            }
+        }
+
+        /* ================= ANTENNA ================= */
+        .antenna {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(#00d4ff,transparent);
+        }
+
+            .antenna::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 8px;
+                height: 8px;
+                background: #00d4ff;
+                border-radius: 50%;
+                box-shadow: 0 0 16px #00d4ff;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+        @keyframes pulse {
+            50% {
+                transform: translateX(-50%) scale(1.5);
+                opacity: .5
+            }
+        }
+
+        /* ================= PARTICLES ================= */
+        .data-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #00ff88;
+            animation: floatUp 8s ease-in-out infinite;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0
+            }
+
+            10%,90% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0
+            }
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* ================= GLOW ================= */
+        .content-glow {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle,rgba(0,212,255,.15),transparent);
+            filter: blur(100px);
+            animation: glowPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            50% {
+                opacity: .6;
+                transform: translateX(-50%) scale(1.2)
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ================= THEME TOGGLE (ADDED) ================= -->
+    <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+
+    <div class="hero">
+        <div class="stars" id="stars"></div>
+        <canvas class="network-canvas" id="networkCanvas"></canvas>
+        <div class="content-glow"></div>
+
+        <div class="hero-content">
+            <div class="badge"><span class="india-flag">🇮🇳</span><span>India-powered AI transforming businesses and cities</span></div>
+            <h1>Where <span class="gradient-text">Intelligence</span><br>Meets <span class="gradient-text">Innovation</span></h1>
+            <p class="subtitle ">Building India's smart cities with cutting-edge AI and Machine Learning. Transforming urban infrastructure through neural networks and intelligent systems.</p>
+
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Explore Solutions</button>
+                <button class="btn btn-secondary">View Our Work</button>
+            </div>
+
+            <div class="features-row">
+                <div class="feature"><div class="feature-icon">🏙️</div><div class="feature-value">50+</div><div class="feature-label">Smart Cities</div></div>
+                <div class="feature"><div class="feature-icon">🤖</div><div class="feature-value">500+</div><div class="feature-label">AI Models</div></div>
+                <div class="feature"><div class="feature-icon">⚡</div><div class="feature-value">99.8%</div><div class="feature-label">Uptime</div></div>
+            </div>
+        </div>
+
+        <div class="city-container">
+            <div class="building building-1"><div class="antenna"></div></div>
+            <div class="building building-2"><div class="antenna"></div></div>
+            <div class="building building-3"><div class="antenna"></div></div>
+            <div class="building building-4"><div class="antenna"></div></div>
+            <div class="building building-5"><div class="antenna"></div></div>
+            <div class="building building-6"><div class="antenna"></div></div>
+            <div class="building building-7"><div class="antenna"></div></div>
+        </div>
+    </div>
+
+    <script>
+        /* ================= STARS ================= */
+        const stars = document.getElementById('stars');
+        const starFrag = document.createDocumentFragment();
+        for (let i = 0; i < 200; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+            s.style.left = Math.random() * 100 + '%';
+            s.style.top = Math.random() * 100 + '%';
+            s.style.animationDelay = Math.random() * 3 + 's';
+            starFrag.appendChild(s);
+        }
+        stars.appendChild(starFrag);
+
+        /* ================= WINDOWS ================= */
+        document.querySelectorAll('.building').forEach(b => {
+            const { height, width } = b.getBoundingClientRect();
+            const rows = Math.floor(height / 20);
+            const cols = Math.floor(width / 15);
+            const frag = document.createDocumentFragment();
+            for (let r = 1; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const w = document.createElement('div');
+                    w.className = 'window';
+                    w.style.left = c * 15 + 4 + 'px';
+                    w.style.top = r * 20 + 5 + 'px';
+                    w.style.animationDelay = Math.random() * 3 + 's';
+                    frag.appendChild(w);
+                }
+            }
+            b.appendChild(frag);
+        });
+
+        /* ================= PARTICLES ================= */
+        const hero = document.querySelector('.hero');
+        const pFrag = document.createDocumentFragment();
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'data-particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 8 + 's';
+            p.style.animationDuration = Math.random() * 4 + 6 + 's';
+            pFrag.appendChild(p);
+        }
+        hero.appendChild(pFrag);
+
+        /* ================= CANVAS ================= */
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let dpr = window.devicePixelRatio || 1;
+
+        function resize() {
+            canvas.width = innerWidth * dpr;
+            canvas.height = innerHeight * dpr;
+            canvas.style.width = innerWidth + 'px';
+            canvas.style.height = innerHeight + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resize();
+        window.addEventListener('resize', () => requestAnimationFrame(resize));
+
+        const nodes = Array.from({ length: 60 }, () => ({
+            x: Math.random() * innerWidth,
+            y: Math.random() * innerHeight,
+            vx: (Math.random() - .5) * .5,
+            vy: (Math.random() - .5) * .5
+        }));
+
+        (function animate() {
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (const n of nodes) {
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0 || n.x > innerWidth) n.vx *= -1;
+                if (n.y < 0 || n.y > innerHeight) n.vy *= -1;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0,212,255,.8)';
+                ctx.fill();
+            }
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const d = Math.hypot(dx, dy);
+                    if (d < 150) {
+                        ctx.strokeStyle = `rgba(0,212,255,${1 - d / 150})`;
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        })();
+    </script>
+    <!-- ================= THEME SCRIPT (ADDITIVE ONLY) ================= -->
+    <script>
+        (function () {
+            const root = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+
+            const storedTheme = localStorage.getItem('theme');
+            const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+            function applyTheme(theme) {
+                root.setAttribute('data-theme', theme);
+                toggle.textContent = theme === 'light' ? '🌙 Dark' : '☀️ Light';
+                localStorage.setItem('theme', theme);
+            }
+
+            // Initial theme
+            applyTheme(storedTheme || (systemPrefersLight ? 'light' : 'dark'));
+
+            // Toggle
+            toggle.addEventListener('click', () => {
+                const current = root.getAttribute('data-theme');
+                applyTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        })();
+    </script>
+</body>
+</html>
