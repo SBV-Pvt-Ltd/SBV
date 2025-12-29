@@ -13,382 +13,918 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="Constant.js"></script>
 
     <style>
+        /* =========================
+                    THEME VARIABLES
+                ========================= */
+        :root {
+            --bg-main: #0a0a0a;
+            --bg-hero1: #0f0f23;
+            --bg-hero2: #1a1a2e;
+            --overlay1: rgba(10,10,35,.95);
+            --overlay2: rgba(26,26,46,.9);
+            --overlay3: rgba(15,15,35,.95);
+            --text-main: #FFFFFF;
+            --text-muted: #F8F8FF;
+            --card-bg: rgba(255,255,255,.05);
+            --card-border: rgba(255,255,255,.1);
+            --accent1: #6366f1;
+            --accent2: #8b5cf6;
+            --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
+            --logo-url: "./Logo/Logo_inverted.png";
+            --company-name-text: White;
+            --services-card-bg: #1e293b;
+            --primary-services-heading: #38bdf8;
+            --services-card-border: #334155;
+            --services-section-card-height: 500px;
+            --services-section-collapsed-width: 5%;
+            --services-section-expanded-width: 70%;
+            --services-section-transition: 0.45s ease;
+            --process-surface: #111827;
+        }
+
+        body[data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-hero1: #ffffff;
+            --bg-hero2: #eef2ff;
+            --overlay1: rgba(255,255,255,.9);
+            --overlay2: rgba(245,247,255,.9);
+            --overlay3: rgba(255,255,255,.95);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --card-bg: rgba(0,0,0,.04);
+            --card-border: rgba(0,0,0,.08);
+            --accent1: #667eea;
+            --accent2: #764ba2;
+            --logo-url: "./Logo/Logo.png";
+            --company-name-text: black;
+            --services-card-bg: #f1f5f9;
+            --primary-services-heading: #2563eb;
+            --services-card-border: #e2e8f0;
+            --process-surface: #f8f9fa;
+        }
+
+        /* =========================
+                        BASE
+            ========================= */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: font-size 0.3s ease, background 0.3s ease !important;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .hero-container {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        body {
+            font-family: 'Inter',sans-serif;
             overflow-x: hidden;
+            background: var(--bg-main);
+            color: var(--text-main);
+            transition: background .3s,color .3s;
+            background-image: var(--theme-bg-img);
         }
 
-        .hero {
+        /* =========================
+                        HERO
+                    ========================= */
+        .hero-container {
             position: relative;
-            width: 100%;
-            height: 100vh;
-            background: linear-gradient(135deg, #0a1628 0%, #1a2947 50%, #0f3460 100%);
+            min-height: 100vh;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg,var(--bg-hero1),var(--bg-hero2));
         }
 
-        .hero-grid-background {
+        .hero-bg, .hero-overlay {
             position: absolute;
+            inset: 0
+        }
+
+        .hero-bg {
+            opacity: .15;
+            background: radial-gradient(circle at 30% 50%,rgba(99,102,241,.15),transparent 50%), radial-gradient(circle at 70% 50%,rgba(139,92,246,.15),transparent 50%);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(135deg, var(--overlay1), var(--overlay2), var(--overlay3));
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle,rgba(99,102,241,.6),transparent);
+            animation: float 15s infinite ease-in-out;
+        }
+
+            .particle:nth-child(1) {
+                width: 80px;
+                height: 80px;
+                top: 20%;
+                left: 10%
+            }
+
+            .particle:nth-child(2) {
+                width: 60px;
+                height: 60px;
+                top: 60%;
+                left: 80%
+            }
+
+            .particle:nth-child(3) {
+                width: 100px;
+                height: 100px;
+                top: 40%;
+                left: 60%
+            }
+
+            .particle:nth-child(4) {
+                width: 70px;
+                height: 70px;
+                top: 70%;
+                left: 20%
+            }
+
+        @keyframes float {
+            0%,100% {
+                transform: translate(0) scale(1);
+                opacity: .6
+            }
+
+            33% {
+                transform: translate(30px,-50px) scale(1.1);
+                opacity: .8
+            }
+
+            66% {
+                transform: translate(-20px,-30px) scale(.9);
+                opacity: .5
+            }
+        }
+
+        /* =========================
+                        CONTENT
+                    ========================= */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            padding: .5rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(99,102,241,.1);
+            border: 1px solid rgba(99,102,241,.3);
+            color: currentColor;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem,8vw,5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg,var(--text-main),var(--accent1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem,3vw,1.5rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg,var(--accent1),var(--accent2));
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: var(--text-main);
+            border: 2px solid rgba(255,255,255,.2);
+        }
+
+        body[data-theme="light"] .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border: 2px solid rgba(0,0,0,.15);
+        }
+
+        /* =========================
+                        STATS
+                    ========================= */
+        .hero-stats {
+            position: absolute;
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4rem;
+            z-index: 1;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg,var(--accent1),var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: .875rem;
+            color: var(--text-muted);
+        }
+
+        /* =========================
+                        TOGGLE
+                ========================= */
+        .theme-toggle {
+            padding: .6rem 1.2rem;
+            border-radius: 30px;
+            background: var(--card-bg);
+            border: 1px solid black;
+            color: var(--text-main);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            font-size: 16px;
+        }
+
+        /* ========================= */
+        #neural-canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            pointer-events: none;
+        }
+
+        .mouse-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle,rgba(99,102,241,.6),transparent);
+            pointer-events: none;
+            z-index: 10;
+            filter: blur(10px);
+        }
+
+        .mouse-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.6), transparent);
+            pointer-events: none;
+            z-index: 10;
+            transition: transform 0.15s ease;
+            filter: blur(10px);
+        }
+
+        .top-navbar {
+            z-index: 11;
+        }
+        .add-background {
+            background: var(--bg-main);
+        }
+
+        .side-navbar {
+            background: var(--bg-main);
+        }
+
+        .side-navbar-items {
+            font-size: 1em;
+            color: var(--text-main);
+            background: var(--bg-main);
+            cursor: pointer;
+        }
+
+        /* Settings */
+        .settings-button {
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+            .settings-button:hover {
+                transform: scale(1.1) rotate(90deg);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .settings-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        @keyframes gridMove {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(50px, 50px);
-            }
-        }
-
-        .hero-particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(100, 200, 255, 0.6);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
+            .settings-overlay.active {
                 opacity: 1;
+                visibility: visible;
             }
 
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0;
-            }
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--bg-main);
+            color: var(--text-main);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            z-index: 100;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .hero-data-viz {
+            .settings-panel.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+        .settings-close {
             position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero-chart-bar {
-            position: absolute;
-            width: 4px;
-            background: linear-gradient(to top, #ff6b35, #f7931e);
-            bottom: 0;
-            border-radius: 2px 2px 0 0;
-            animation: barGrow 3s ease-in-out infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes barGrow {
-            0%, 100% {
-                transform: scaleY(1);
-            }
-
-            50% {
-                transform: scaleY(1.3);
-            }
-        }
-
-        .hero-circuit-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #64b5f6, transparent);
-            animation: circuitFlow 4s linear infinite;
-        }
-
-        @keyframes circuitFlow {
-            0% {
-                opacity: 0;
-                transform: translateX(-100%);
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateX(100%);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            max-width: 1200px;
-            padding: 0 20px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(255, 107, 53, 0.2);
-            border: 1px solid rgba(255, 107, 53, 0.5);
-            border-radius: 30px;
-            color: #ff6b35;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            animation: fadeInUp 1s ease-out 0.3s both;
-            background: linear-gradient(135deg, #ffffff 0%, #64b5f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
-            color: #b0bec5;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .hero-cta-buttons {
-            margin-top: -20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.9s both;
-        }
-
-        .hero-btn {
-            padding: 16px 40px;
-            font-size: 16px;
-            font-weight: 600;
+            top: 15px;
+            right: 20px;
+            background: none;
             border: none;
-            border-radius: 8px;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+            .settings-close:hover {
+                color: #667eea;
+                transform: rotate(90deg);
+            }
+
+        .settings-title {
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+        }
+
+        .setting-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+            select:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+        input[type="range"] {
+            height: 40px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                border: none;
+            }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 100%;
+            height: 40px;
+            border: 3px solid transparent;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            position: relative;
         }
 
-        .hero-btn-primary {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            color: white;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-            .hero-btn-primary:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+            .color-option:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             }
 
-        .hero-btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-            .hero-btn-secondary:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-                transform: translateY(-2px);
+            .color-option.active {
+                border-color: #333;
+                transform: scale(1.1);
             }
 
-        .hero-stats {
-            position: absolute;
-            bottom: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 60px;
-            animation: fadeInUp 1s ease-out 1.2s both;
-        }
+            .color-option::after {
+                content: '✓';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 16px;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
 
-        .hero-stat-item {
+            .color-option.active::after {
+                opacity: 1;
+            }
+
+
+
+        .text-size-display {
+            margin-top: 5px;
+            font-size: 0.9em;
             text-align: center;
         }
 
-        .hero-stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: #64b5f6;
+        .company-name {
+            font-family: Brush Script MT, cursive;
+            margin-top: -5px;
+            margin-left: 5px;
+            font-size: 23px;
+            color: var(--company-name-text);
+            overflow-x: clip;
+        }
+
+        .phone_number:link, .phone_number:visited, .phone_number:hover, .phone_number:active {
+            cursor: pointer;
+            text-decoration: none; /* Optional: also removes the underline */
+        }
+        /* Style the tab */
+        .services-tab {
+            flex: 1;
+            margin-top: 15px;
+            float: left;
+            border: 1px solid #ccc;
+            width: 30%;
+        }
+
+            /* Style the buttons inside the tab */
+            .services-tab button {
+                display: block;
+                color: var(--text-muted);
+                padding: 22px 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                /* Change background color of buttons on hover */
+                .services-tab button:hover {
+                    color: var(--text-main);
+                }
+
+                /* Create an active/current "tab button" class */
+                .services-tab button.active {
+                    color: var(--text-main);
+                }
+
+        /* Style the tab content */
+        .services-tabcontent {
+            background: var(--bg-main);
+            flex: 1;
+            width: 70%;
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            border-left: none;
+            overflow-y: scroll;
+        }
+
+        /* =====================
+            Service section
+        ====================== */
+        #Services-section {
+            background: var(--bg-main);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .services-cards-container-large-screen {
+            margin: 5px auto;
+            padding: 12px;
+            display: flex;
+            width: 100%;
+            height: var(--services-section-card-height);
+            overflow: hidden;
+        }
+
+        /* Card base */
+        .services-card-large-screen {
+            display: flex;
+            height: 100%;
+            background: var(--services-card-bg);
+            border: 1px solid var(--services-card-border);
+            border-radius: 12px;
+            padding: 1px;
+            flex: 0 0 auto;
+            transition: width var(--services-section-transition);
+            overflow: hidden;
+        }
+
+            /* States */
+            .services-card-large-screen.active {
+                width: var(--services-section-expanded-width);
+                cursor: default;
+            }
+
+            .services-card-large-screen.collapsed {
+                width: var(--services-section-collapsed-width);
+                cursor: pointer;
+            }
+
+
+            .services-card-large-screen h2 {
+                margin-top: 0;
+                color: var(--primary-services-heading);
+            }
+
+            .services-card-large-screen p {
+                line-height: 1.6;
+            }
+
+
+        /* Name strip */
+        .services-card-name-large-screen {
+            width: var(--services-section-collapsed-width);
+            min-width: 48px;
+            background: var(--bg-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* allow full card click */
+            margin-left: -10px;
+        }
+
+            .services-card-name-large-screen span {
+                writing-mode: vertical-rl;
+                transform: rotate(180deg);
+                letter-spacing: 2px;
+                font-weight: bold;
+                color: #38bdf8;
+            }
+
+        /* Content */
+        .services-card-content-large-screen {
+            flex: 1;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .services-card-large-screen.active .services-card-content-large-screen {
+            opacity: 1;
+        }
+
+        .services-card-large-screen.collapsed .services-card-content-large-screen {
+            width: 0%;
+        }
+
+        #services-medium-scall-screen {
+            display: none;
+        }
+
+        #services-large-screen {
             display: block;
         }
 
-        .hero-stat-label {
-            font-size: 14px;
-            color: #b0bec5;
+        /* =====================
+            Hire us section
+        ====================== */
+        #Hire-us-section {
+            background: var(--bg-main);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row-eq-height {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
+        .why_choose_us_article {
+            margin-bottom: 10px;
+            height: 100%;
+            padding: 16px;
+            box-sizing: border-box;
+            border-radius: 1rem;
+            border: 6px solid #009688;
+            background: transparent;
+        }
+
+            .why_choose_us_article h3 {
+                line-height: 1.1;
+                margin: 0;
+            }
+
+            .why_choose_us_article p {
+                margin: 0.75rem 0 0;
+            }
+
+        .toggle_additional_feature_button {
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .toggle_additional_feature_button:hover {
+                background-color: #246b45;
+            }
+
+        .watch_featured_videos_button {
+            margin-top: 5px;
+            background-color: #FF0000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            color: white;
+            font-size: 16px;
+        }
+
+            .watch_featured_videos_button:hover {
+                background-color: #8B0000;
+            }
+
+        .take_interactive_tour_button {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
             margin-top: 5px;
         }
 
-        .hero-code-snippet {
-            position: absolute;
-            background: rgba(10, 22, 40, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 181, 246, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: #64b5f6;
-            line-height: 1.4;
-            animation: floatCard 7s ease-in-out infinite;
+            .take_interactive_tour_button:hover {
+                background-color: #00008B;
+            }
+        /* Modal Overlay */
+        .process-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: var(--bg-main);
+            z-index: 9999999;
+            animation: fadeIn 0.3s ease;
         }
 
-        .hero-code-1 {
-            top: 20%;
-            right: 50%;
-            width: 220px;
+            .process-modal-overlay.active {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
-        .hero-code-2 {
-            bottom: 0%;
-            right: 8%;
-            width: 200px;
-            animation-delay: -2s;
+        /* Tour Modal */
+        .process-tour-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.4s ease;
         }
 
-        position: absolute;
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 20px;
-        animation: floatCard 6s ease-in-out infinite;
-        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
 
-        @keyframes floatCard {
-            0%, 100% {
+            to {
+                opacity: 1;
                 transform: translateY(0);
             }
-
-            50% {
-                transform: translateY(-20px);
-            }
         }
 
-        .hero-floating-card {
-            top: 15%;
-            left: 8%;
-            width: 180px;
+        .process-tour-header {
+            position: relative;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #fff;
+            padding: 30px;
+            text-align: center;
         }
 
-        .hero-card-2 {
-            top: 25%;
-            right: 10%;
-            width: 200px;
-            animation-delay: -3s;
-        }
-
-        .hero-card-3 {
-            bottom: 30%;
-            left: 5%;
-            width: 160px;
-            animation-delay: -1.5s;
-        }
-
-        .hero-card-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #64b5f6, #42a5f5);
-            border-radius: 8px;
+        .process-close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+            .process-close-button:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: rotate(90deg);
+            }
+
+        .process-tour-header h1 {
+            font-size: 28px;
             margin-bottom: 10px;
-            font-size: 20px;
-            animation: pulse 2s ease-in-out infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(100, 181, 246, 0.7);
+        .process-tour-header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+
+        .process-progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 6px;
+            margin-top: 20px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .process-progress-fill {
+            background: white;
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .process-step-indicator {
+            display: flex;
+            justify-content: space-between;
+            padding: 50px 30px;
+            background: #f8f9fa;
+            overflow-x: auto;
+            gap: 10px;
+        }
+
+        .process-step-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+            .process-step-dot.active {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                transform: scale(1.1);
             }
 
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px 10px rgba(100, 181, 246, 0);
+            .process-step-dot.completed {
+                background: #10b981;
+                color: white;
             }
+
+        .process-content-area {
+            padding: 40px;
+            color: var(--text-main);
+            overflow-y: auto;
+            flex: 1;
         }
 
-        .hero-card-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 5px;
+
+        .process-step-content {
+            display: none;
+            animation: fadeInContent 0.5s ease;
         }
 
-        .hero-card-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ff6b35;
-            animation: countUp 2s ease-out;
-        }
+            .process-step-content.active {
+                display: block;
+            }
 
-        @keyframes countUp {
+        @keyframes fadeInContent {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -400,297 +936,1941 @@
             }
         }
 
-        @media (max-width: 992px) {
-            .hero {
-                height: auto;
-                min-height: 100vh;
-                padding: 80px 0 100px;
+        .process-step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .process-step-title {
+            font-size: 24px;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        /* DETAILS */
+
+        .process-step-description {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .process-step-details {
+            padding: 20px;
+            border-radius: 10px;
+            background: var(--process-surface);
+            border-left: 4px solid var(--accent1);
+        }
+
+            .process-step-details h3 {
+                color: var(--accent1);
+                margin-bottom: 10px;
+                font-size: 18px;
             }
 
-            .hero-content {
-                padding: 0 15px 0 15px;
-                text-align: left;
-                max-width: 55%;
+            .process-step-details ul {
+                list-style: none;
+                padding-left: 0;
             }
 
-            h1 {
-                font-size: 28px;
-                margin-bottom: 20px;
+            .process-step-details li {
+                color: var(--text-muted);
+                padding: 8px 0;
+                position: relative;
+                padding-left: 25px;
             }
 
-            .hero-subtitle {
-                font-size: 14px;
-                margin-bottom: 30px;
+                .process-step-details li:before {
+                    content: "✓";
+                    position: absolute;
+                    left: 0;
+                    color: #10b981;
+                    font-weight: bold;
+                }
+
+        .process-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .process-step-indicator,
+        .process-navigation {
+            background: var(--process-surface);
+        }
+
+        .process-nav-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .process-nav-button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
             }
 
-            .hero-badge {
-                font-size: 10px;
-                padding: 6px 12px;
-                margin-bottom: 20px;
-            }
+        .process-btn-prev {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
 
-            .hero-stats {
-                position: absolute;
-                left: 5px;
-                margin-top: 100px;
-                margin-left: 10px;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 20px;
-                justify-content: flex-start;
-            }
-
-            .hero-stat-item {
-                margin-top: 50px;
-                flex: 0 0 calc(50% - 15px);
-            }
-
-            .hero-stat-number {
+            .process-btn-prev:hover:not(:disabled) {
+                background: #667eea;
                 color: white;
-                font-size: 24px;
             }
 
-            .hero-stat-label {
-                font-size: 11px;
+        .process-btn-next {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+            .process-btn-next:hover:not(:disabled) {
+                transform: translateX(5px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
             }
 
-            .hero-cta-buttons {
+        .process-step-counter {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+
+        /* ========================
+
+        ======================== */
+        @media (max-width: 1024px) {
+            #neural-canvas {
+                left: 50%;
+                top: 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 1rem;
+                bottom: 2%;
             }
 
-            .hero-btn {
+            .hero-buttons {
+                flex-direction: column;
                 width: 100%;
-                max-width: 250px;
             }
 
-            .hero-floating-card {
-                padding: 10px;
-                right: 8px;
+            .btn {
+                align-self: center;
+                width: 100%;
+                max-width: 180px;
             }
 
-            .hero-card-1 {
-                top: 115px;
-                width: 120px;
-            }
-
-            .hero-card-2 {
-                top: 190px;
-                width: 125px;
-            }
-
-            .hero-card-3 {
-                top: 265px;
-                width: 125px;
-            }
-
-            .hero-card-icon {
-                width: 30px;
-                height: 30px;
-                font-size: 15px;
-                margin-bottom: 5px;
-            }
-
-            .hero-card-title {
-                font-size: 10px;
-                margin-bottom: 3px;
-            }
-
-            .hero-card-value {
-                font-size: 15px;
-            }
-
-            .hero-code-1 {
+            #neural-canvas {
+                left: 50%;
                 top: 20%;
-                left: 5%;
-                width: 220px;
             }
 
-            .hero-code-2 {
-                bottom: 10px;
-                right: 5px;
+            #services-large-screen {
+                display: none;
+            }
+
+            #services-medium-scall-screen {
+                display: block;
+            }
+            /* =====================
+                    THEME VARIABLES
+                ====================== */
+            :root {
+                --services-section-collapsed-height: 60px;
+                --services-section-expanded-height: 260px;
+            }
+
+            /* =====================
+                    CONTAINER
+                ====================== */
+            .services-cards-container-medium-small-screen {
+                width: 100%;
+                max-width: 1fr;
+                margin: 20px auto;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            /* =====================
+                    CARD
+                ====================== */
+            .services-card-medium-small-screen {
+                width: 100%;
+                background: var(--services-card-bg);
+                border: 1px solid var(--services-card-border);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: height var(--services-section-transition);
+                cursor: pointer;
+            }
+
+                .services-card-medium-small-screen.active {
+                    height: var(--services-section-expanded-height);
+                    cursor: default;
+                }
+
+                .services-card-medium-small-screen.collapsed {
+                    height: var(--services-section-collapsed-height);
+                }
+
+            /* =====================
+                    CARD HEADER (TITLE STRIP)
+                ====================== */
+            .services-card-name-medium-small-screen {
+                width: 100%;
+                height: var(--services-section-collapsed-height);
+                display: flex;
+                align-items: center;
+                padding: 0 20px;
+                background: var(--bg-main);
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+
+            /* =====================
+                    CONTENT
+                ====================== */
+            .services-card-content-medium-small-screen {
+                padding: 20px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .services-card-medium-small-screen.active .services-card-content-medium-small-screen {
+                opacity: 1;
+            }
+
+            .services-card-medium-small-screen h2 {
+                color: var(--primary-services-heading);
+                margin-bottom: 10px;
+            }
+
+            .services-card-medium-small-screen p {
+                line-height: 1.6;
+                color: var(--text-main);
+            }
+
+            .process-tour-container {
+                max-height: 95vh;
+            }
+
+            .process-content-area {
+                padding: 20px;
+            }
+
+            .process-tour-header {
+                padding: 20px;
+            }
+
+            .process-step-indicator {
+                padding: 15px 20px;
+            }
+
+            .process-navigation {
+                padding: 20px;
             }
         }
 
         @media (max-width: 600px) {
-            .hero-stat-item {
-                margin-left: -10px;
+            .row-eq-height {
+                display: block;
+                width: 100%;
             }
+        }
 
-            .hero-stat-number {
-                color: white;
-                font-size: 16px;
-            }
-
-            .hero-stat-label {
-                font-size: 11px;
-            }
-            .hero-btn-secondary {
-                font-size: 18px;
-                backdrop-filter: blur(0px);
-                background: transparent;
+        @media (max-width: 360px) {
+            .company-name {
+                font-size: 12px;
             }
         }
     </style>
+    <script type="text/javascript">
+
+    </script>
 </head>
-<body>
-    <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero">
-                <div class="hero-grid-background"></div>
+<body data-theme="dark">
+    <header>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top top-navbar">
+            <div class="w3-bar" id="myNavbar">
+                <a class="w3-margin-left w3-xlarge w3-buttons w3-left">
+                    <i class="fa fa-bars side-navbar-items" onclick="w3_open()"></i>
+                </a>
+                <a onclick="navigateToIndex('#')" class="company-name">
+                    Saharsh Bhadani Venture Pvt Ltd
+                </a>
 
-                <div class="hero-particles" id="hero-particles"></div>
+                <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" title="Settings">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
 
-                <div class="hero-data-viz" id="hero-dataViz"></div>
+                <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red" href="javascript:void(0);">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
+                <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+            <!-- Sidebar (hidden by default) -->
+            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:10;width:40%;min-width:300px" id="mySidebar">
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
+                    Close Menu
+                    <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
+                </a>
+                <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">HOME</a>
+                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-user"></i> ABOUT</a>
+                <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-th"></i> PORTFOLIO</a>
+                <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-envelope"></i> CONTACT</a>
+                <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">Food</a>
+                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">About</a>
+            </nav>
 
-                <div class="hero-floating-card hero-card-1">
-                    <div class="hero-card-icon">💻</div>
-                    <div class="hero-card-title">Custom Software</div>
-                    <div class="hero-card-value" id="custom-software-number">500+</div>
+
+            <!-- Navbar on small screens -->
+            <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+                <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">HOME</a>
+                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-user"></i> ABOUT</a>
+                <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-th"></i> PORTFOLIO</a>
+                <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-envelope"></i> CONTACT</a>
+                <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">Food</a>
+                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">About</a>
+            </div>
+        </div>
+
+        <div class="hero-container" id="home">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+
+            <canvas id="neural-canvas"></canvas>
+
+            <div class="hero-content">
+                <div class="hero-badge">🇮🇳 Made in India • AI-Powered Solutions</div>
+
+                <h1 class="hero-title" id="main-title">
+                    Human-AI Collaboration
+                </h1>
+
+                <p class="hero-subtitle" id="subtitle">
+                    Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions.
+                    Experience the future of intelligent automation and data-driven insights.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">Get Started</button>
+                    <button class="btn btn-secondary">View Demo</button>
                 </div>
+            </div>
 
-                <div class="hero-floating-card hero-card-2">
-                    <div class="hero-card-icon">📊</div>
-                    <div class="hero-card-title">Analytics Solutions</div>
-                    <div class="hero-card-value">99.9%</div>
+        </div>
+
+        <!-- Settings Overlay -->
+        <div class="settings-overlay" id="settingsOverlay"></div>
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <button class="settings-close" id="settingsClose">×</button>
+            <h3 class="settings-title" id="settings-title">Settings</h3>
+
+            <div class="setting-group">
+                <label for="language" class="setting-label" id="lang-label">Language</label>
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label class="setting-label" id="bg-label">Toggle Background Color</label>
+                <div class="color-options">
+                    <div>
+                        <button class="theme-toggle">☀️ Light</button>
+                    </div>
                 </div>
+            </div>
 
-                <div class="hero-floating-card hero-card-3">
-                    <div class="hero-card-icon">⚡</div>
-                    <div class="hero-card-title">Deployment Speed</div>
-                    <div class="hero-card-value">2x Fast</div>
-                </div>
+            <div class="setting-group">
+                <label for="textSize" class="setting-label" id="text-label">Text Size</label>
+                <input type="range" id="textSize" min="12" max="24" value="16">
+                <div class="text-size-display" id="size-display">16px</div>
+            </div>
+        </div>
+        <div class="mouse-follower"></div>
 
-                <div class="hero-code-snippet hero-code-1">
-                    <span style="color: #ff6b35;">function</span> <span style="color: #fff;">analyzeData</span>() {<br>
-                    &nbsp;&nbsp;<span style="color: #90caf9;">const</span> insights = <br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;processMetrics();<br>
-                    &nbsp;&nbsp;<span style="color: #ff6b35;">return</span> insights;<br>
-                    }
-                </div>
 
-                <div class="hero-code-snippet hero-code-2">
-                    <span style="color: #90caf9;">class</span> <span style="color: #fff;">Solution</span> {<br>
-                    &nbsp;&nbsp;deploy() {<br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #4caf50;">// Enterprise ready</span><br>
-                    &nbsp;&nbsp;&nbsp;&nbsp;scale.<span style="color: #fff;">up</span>();<br>
-                    &nbsp;&nbsp;}<br>
-                    }
-                </div>
+    </header>
 
-                <div class="hero-content">
-                    <div class="hero-badge">🇮🇳 BUSINESS ANALYTICS & SOFTWARE DEVELOPMENT FIRM</div>
-                    <h1>Transform Ideas Into<br>Intelligent Solutions</h1>
-                    <p class="hero-subtitle">
-                        From phenomenal websites to custom software development to advanced business analytics – we build scalable applications
-                        and turn complex data into actionable insights that drive your business forward.
-                    </p>
-                    <div class="hero-cta-buttons">
-                        <button class="hero-btn hero-btn-primary">Get Started</button>
-                        <button class="hero-btn hero-btn-secondary">View Our Work</button>
+
+
+
+
+    <div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+
+    <!-- Services -->
+    <section id="Services-section" class="w3-row-padding w3-container w3-padding-64">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h1 class="w3-wide"><u>FEATURED SERVICES</u></h1><br />
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h3 class="w3-opacity w3-center"><i>Highlighting Our Top Offerings Designed to Deliver Exceptional Value and Results.</i></h3><br>
+        </div>
+        <div class="w3-padding-16 w3-xlarge">
+            <div class="services-cards-container-medium-small-screen" id="services-medium-scall-screen">
+
+                <div class="services-card-medium-small-screen active" data-index="0">
+                    <div class="services-card-name-medium-small-screen">BUSINESS ANALYTICS</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 1</h2>
+                        <p>This is the fully visible content of Card 1.</p>
                     </div>
                 </div>
 
-                <div class="hero-stats">
-                    <div class="hero-stat-item">
-                        <span class="hero-stat-number" id="apps-developed-number">500+</span>
-                        <span class="hero-stat-label">Apps <br />Developed</span>
+                <div class="services-card-medium-small-screen collapsed" data-index="1">
+                    <div class="services-card-name-medium-small-screen">AI & MACHINE LEARNING</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 2</h2>
+                        <p>This is the fully visible content of Card 2.</p>
                     </div>
-                    <div class="hero-stat-item">
-                        <span class="hero-stat-number" id="analytics-projects-number">200+</span>
-                        <span class="hero-stat-label">Analytics <br />Projects</span>
+                </div>
+
+                <div class="services-card-medium-small-screen collapsed" data-index="2">
+                    <div class="services-card-name-medium-small-screen">IT CONSULTATION</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 3</h2>
+                        <p>This is the fully visible content of Card 3.</p>
                     </div>
-                    <div class="hero-stat-item">
-                        <span class="hero-stat-number" id="client-satistaction-number">98%</span>
-                        <span class="hero-stat-label">Client <br />Satisfaction</span>
+                </div>
+
+                <div class="services-card-medium-small-screen collapsed" data-index="3">
+                    <div class="services-card-name-medium-small-screen">GRAPHICS DESIGNING</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 4</h2>
+                        <p>This is the fully visible content of Card 4.</p>
+                    </div>
+                </div>
+
+                <div class="services-card-medium-small-screen collapsed" data-index="4">
+                    <div class="services-card-name-medium-small-screen">WEBSITE DESIGNING</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 5</h2>
+                        <p>This is the fully visible content of Card 5.</p>
+                    </div>
+                </div>
+
+                <div class="services-card-medium-small-screen collapsed" data-index="5">
+                    <div class="services-card-name-medium-small-screen">APP DEVELOPMENT</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 6</h2>
+                        <p>This is the fully visible content of Card 6.</p>
+                    </div>
+                </div>
+                <div class="services-card-medium-small-screen collapsed" data-index="6">
+                    <div class="services-card-name-medium-small-screen">SOFTWARE DEVELOPMENT</div>
+                    <div class="services-card-content-medium-small-screen">
+                        <h2>Card 7</h2>
+                        <p>This is the fully visible content of Card 7.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="width: 100%;" id="services-large-screen">
+                <div class="services-cards-container-large-screen">
+
+
+                    <div class="services-card-large-screen active" data-index="0">
+                        <div class="services-card-name-large-screen"><span>BUSINESS ANALYTICS</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 1</h2>
+                            <p>This is the fully visible content of Card 1.</p>
+                        </div>
+                    </div>
+
+                    <div class="services-card-large-screen collapsed" data-index="1">
+                        <div class="services-card-name-large-screen"><span>AI AND MACHINE LEARNING</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 2</h2>
+                            <p>This is the fully visible content of Card 2.</p>
+                        </div>
+                    </div>
+
+                    <div class="services-card-large-screen collapsed" data-index="2">
+                        <div class="services-card-name-large-screen"><span>IT CONSULTATION</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 3</h2>
+                            <p>This is the fully visible content of Card 3.</p>
+                        </div>
+                    </div>
+
+                    <div class="services-card-large-screen collapsed" data-index="3">
+                        <div class="services-card-name-large-screen"><span>GRAPHICS DESIGNING</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 4</h2>
+                            <p>This is the fully visible content of Card 4.</p>
+                        </div>
+                    </div>
+
+                    <div class="services-card-large-screen collapsed" data-index="4">
+                        <div class="services-card-name-large-screen"><span>WEBSITE DESIGNING</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 5</h2>
+                            <p>This is the fully visible content of Card 5.</p>
+                        </div>
+                    </div>
+
+                    <div class="services-card-large-screen collapsed" data-index="5">
+                        <div class="services-card-name-large-screen"><span>APP DEVELOPMENT</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 6</h2>
+                            <p>This is the fully visible content of Card 6.</p>
+                        </div>
+                    </div>
+                    <div class="services-card-large-screen collapsed" data-index="6">
+                        <div class="services-card-name-large-screen"><span>SOFTWARE DEVELOPMENT</span></div>
+                        <div class="services-card-content-large-screen">
+                            <h2>Card 7</h2>
+                            <p>This is the fully visible content of Card 7.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
+    <div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <section id="Hire-us-section" class="w3-row-padding w3-container w3-padding-64">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h1 class="w3-wide"><u>WHY HIRE US?</u></h1><br />
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <h3 class="w3-opacity w3-center"><i>Discover what makes us unique!</i></h3><br>
+        </div>
+        <div class="w3-padding-16 w3-xlarge">
+            <p style="text-align: justify;">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation</p>
+        </div>
+        <div class="w3-large w3-medium w3-hide-small">
+            <h2 style="margin-bottom: 15px;">🤝 Why Businesses Trust Us</h2>
+            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            ✅ Client-Centric Mindset
+                        </h3>
+                        <p>
+                            We listen, understand, and deliver. Every project starts with your goals in mind and ends with a solution that brings those goals to life.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🔄 End-to-End Service
+                        </h3>
+                        <p>
+                            From planning and development to execution and post-launch support, we offer full-cycle solutions under one roof — reducing complexity and ensuring consistency.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            ⏱️ On-Time, Every Time
+                        </h3>
+                        <p>
+                            We respect your timelines and deliver projects on schedule with a keen eye on quality, ensuring a smooth and predictable project experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🔐 Secure, Scalable, and Future-Ready
+                        </h3>
+                        <p>
+                            Our solutions are built for longevity, with security and scalability at the core — so your business is ready for tomorrow’s challenges.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🌐 Global Mindset, Local Approach
+                        </h3>
+                        <p>
+                            We serve businesses across industries and geographies, combining a global outlook with a local understanding of markets, culture, and user behavior.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w3-hide-large w3-hide-medium w3-small">
+            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; ">
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            ✅ Client-Centric Mindset
+                        </h3>
+                        <p>
+                            We listen, understand, and deliver. Every project starts with your goals in mind and ends with a solution that brings those goals to life.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🔄 End-to-End Service
+                        </h3>
+                        <p>
+                            From planning and development to execution and post-launch support, we offer full-cycle solutions under one roof — reducing complexity and ensuring consistency.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            ⏱️ On-Time, Every Time
+                        </h3>
+                        <p>
+                            We respect your timelines and deliver projects on schedule with a keen eye on quality, ensuring a smooth and predictable project experience.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; margin-top: -15px;">
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🔐 Secure, Scalable, and Future-Ready
+                        </h3>
+                        <p>
+                            Our solutions are built for longevity, with security and scalability at the core — so your business is ready for tomorrow’s challenges.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article">
+                        <h3>
+                            🌐 Global Mindset, Local Approach
+                        </h3>
+                        <p>
+                            We serve businesses across industries and geographies, combining a global outlook with a local understanding of markets, culture, and user behavior.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Read More-->
+        <div id="toggle_additinal_features_div_1" class="w3-center" style="margin-top:10px">
+            <button class="toggle_additional_feature_button" onclick="toggle_additional_features_content()">
+                Read More&nbsp;↓
+            </button>
+            <button class="watch_featured_videos_button">
+                ▶&nbsp;Watch features video on YouTube
+            </button>
+            <button class="take_interactive_tour_button" onclick="openProcessTour()">
+                🚀&nbsp;Take an Interactive Process Tour
+            </button>
+        </div>
+        <div id="additional_featured_content">
+            <h2 style="margin-bottom: 15px;">🌟 Our Strengths</h2><br />
 
-    <script type="text/javascript">
-        // Generate particles
-        const particlesContainer = document.getElementById('hero-particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'hero-particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particlesContainer.appendChild(particle);
+            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            🧠 Intelligent Solutions with AI & ML
+                        </h3>
+                        <p>
+                            We build smart, self-learning systems that empower businesses to automate processes, predict trends, and make data-driven decisions. From predictive models to AI-powered customer engagement, our solutions are designed to deliver long-term value and measurable ROI.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            📈 Powerful Data Analytics
+                        </h3>
+                        <p>
+                            Data is only as good as the insights it provides. Our analytics solutions turn raw data into actionable intelligence, enabling businesses to optimize operations, identify opportunities, and gain a competitive edge.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            ⚙️ Automation for Efficiency & Scale
+                        </h3>
+                        <p>
+                            Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row w3-row-padding row-eq-height w3-large w3-medium w3-hide-small" style="margin-bottom: 15px; ">
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            🧩 Consulting That Aligns Strategy With Execution
+                        </h3>
+                        <p>
+                            Our consulting team works closely with you to understand your business challenges and align our solutions with your short- and long-term goals. Whether you're going digital for the first time or scaling existing systems, we guide your journey with clarity and confidence.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            🎨 Creativity That Captivates
+                        </h3>
+                        <p>
+                            Great design and compelling visuals are essential in today’s digital landscape. Our graphic designers craft intuitive, visually stunning designs that not only look great but also communicate your brand’s story effectively across platforms.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            ✍️ Content That Converts
+                        </h3>
+                        <p>
+                            Whether it’s web content, branding material, or marketing copy, our content creators craft powerful messaging tailored to your audience. We focus on clarity, creativity, and consistency to ensure your voice stands out in a crowded market.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-row w3-row-padding row-eq-height w3-hide-large w3-hide-medium w3-small" style="margin-bottom: 15px; margin-top: -15px">
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            ⚙️ Automation for Efficiency & Scale
+                        </h3>
+                        <p>
+                            Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            🎨 Creativity That Captivates
+                        </h3>
+                        <p>
+                            Great design and compelling visuals are essential in today’s digital landscape. Our graphic designers craft intuitive, visually stunning designs that not only look great but also communicate your brand’s story effectively across platforms.
+                        </p>
+                    </div>
+                </div>
+                <div class="w3-third">
+                    <div class="why_choose_us_article w3-card-4">
+                        <h3>
+                            ✍️ Content That Converts
+                        </h3>
+                        <p>
+                            Whether it’s web content, branding material, or marketing copy, our content creators craft powerful messaging tailored to your audience. We focus on clarity, creativity, and consistency to ensure your voice stands out in a crowded market.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="toggle_additinal_features_div_2" class="w3-center" style="margin-top:10px">
+            <button class="toggle_additional_feature_button" onclick="toggle_additional_features_content()">
+                Hide additional features&nbsp;<b>↑</b>
+            </button>
+            <button class="watch_featured_videos_button">
+                ▶&nbsp;Watch features video on YouTube
+            </button>
+            <button class="take_interactive_tour_button" onclick="openProcessTour()">
+                🚀&nbsp;Take an Interactive Process Tour
+            </button>
+        </div>
+        <!-- Process Modal Overlay -->
+        <div class="process-modal-overlay" id="processModalOverlay" onclick="closeOnProcessOverlay(event)">
+            <div class="process-tour-container" onclick="event.stopPropagation()">
+                <div class="process-tour-header">
+                    <button class="process-close-button" onclick="closeProcessTour()" title="Close Tour">✕</button>
+                    <h1>Customer Journey Process</h1>
+                    <p>Follow our seamless 8-step process to bring your project to life</p>
+                    <div class="process-progress-bar">
+                        <div class="process-progress-fill" id="processProgressFill"></div>
+                    </div>
+                </div>
+
+                <div class="process-step-indicator" id="processStepIndicator"></div>
+
+                <div class="process-content-area">
+                    <div class="process-step-content active" data-step="0">
+                        <div class="process-step-icon">📝</div>
+                        <h2 class="process-step-title">Request for Quote</h2>
+                        <p class="process-step-description">Begin your journey by sharing your vision with us. We make it easy for you to describe what you need.</p>
+                        <div class="process-step-details">
+                            <h3>How to Get Started:</h3>
+                            <ul>
+                                <li>Call us directly to discuss your project</li>
+                                <li>Fill out our online form with project details</li>
+                                <li>Send us an email describing the nature of your work</li>
+                                <li>Share any relevant documents or specifications</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="1">
+                        <div class="process-step-icon">👔</div>
+                        <h2 class="process-step-title">Business Analyst Consultation</h2>
+                        <p class="process-step-description">Our dedicated Business Analyst will reach out to understand your complete requirements in detail.</p>
+                        <div class="process-step-details">
+                            <h3>What to Expect:</h3>
+                            <ul>
+                                <li>Personalized consultation session</li>
+                                <li>In-depth requirement gathering</li>
+                                <li>Understanding your business objectives</li>
+                                <li>Clarification of project scope and goals</li>
+                                <li>Documentation of all specifications</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="2">
+                        <div class="process-step-icon">🔧</div>
+                        <h2 class="process-step-title">Technical Feasibility Analysis</h2>
+                        <p class="process-step-description">Our technical team evaluates every aspect of your project to ensure successful delivery.</p>
+                        <div class="process-step-details">
+                            <h3>Comprehensive Evaluation:</h3>
+                            <ul>
+                                <li>Technical feasibility assessment</li>
+                                <li>Detailed cost estimation</li>
+                                <li>Risk analysis and mitigation strategies</li>
+                                <li>Project timeline and milestones</li>
+                                <li>Resource allocation planning</li>
+                                <li>Technology stack recommendations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="3">
+                        <div class="process-step-icon">🤝</div>
+                        <h2 class="process-step-title">Client Interaction & Agreement</h2>
+                        <p class="process-step-description">We present our comprehensive proposal and formalize our partnership to begin the work.</p>
+                        <div class="process-step-details">
+                            <h3>Next Steps:</h3>
+                            <ul>
+                                <li>Present detailed quotation and proposal</li>
+                                <li>Answer all your questions and concerns</li>
+                                <li>Review and sign service agreements</li>
+                                <li>Establish communication channels</li>
+                                <li>Set up project management tools</li>
+                                <li>Kickoff meeting to commence work</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="4">
+                        <div class="process-step-icon">📊</div>
+                        <h2 class="process-step-title">Timely Updates & Progress</h2>
+                        <p class="process-step-description">Stay informed every step of the way with regular progress updates and transparent communication.</p>
+                        <div class="process-step-details">
+                            <h3>Continuous Communication:</h3>
+                            <ul>
+                                <li>Regular status reports and updates</li>
+                                <li>Milestone completion notifications</li>
+                                <li>Demo sessions at key stages</li>
+                                <li>Feedback collection and implementation</li>
+                                <li>Issue resolution and support</li>
+                                <li>Transparent project tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="5">
+                        <div class="process-step-icon">🎁</div>
+                        <h2 class="process-step-title">Work Handover & Delivery</h2>
+                        <p class="process-step-description">Receive your completed project with comprehensive documentation and training.</p>
+                        <div class="process-step-details">
+                            <h3>Delivery Includes:</h3>
+                            <ul>
+                                <li>Complete project deliverables</li>
+                                <li>Comprehensive documentation</li>
+                                <li>User training and knowledge transfer</li>
+                                <li>Source code and assets (if applicable)</li>
+                                <li>Deployment assistance</li>
+                                <li>Final review and sign-off</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="6">
+                        <div class="process-step-icon">🛡️</div>
+                        <h2 class="process-step-title">Warranty Support</h2>
+                        <p class="process-step-description">Your success is our priority. We provide extended warranty support to ensure everything runs smoothly.</p>
+                        <div class="process-step-details">
+                            <h3>Support Coverage:</h3>
+                            <ul>
+                                <li>6 months to 1 year warranty period</li>
+                                <li>Bug fixes and issue resolution</li>
+                                <li>Technical support and consultation</li>
+                                <li>Performance optimization</li>
+                                <li>Minor updates and enhancements</li>
+                                <li>Dedicated support channel</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="process-step-content" data-step="7">
+                        <div class="process-step-icon">📞</div>
+                        <h2 class="process-step-title">Get In Touch With Us</h2>
+                        <p class="process-step-description">Ready to start your project? We're here to help! Reach out to us through any of these convenient channels.</p>
+                        <div class="process-step-details">
+                            <h3>Contact Options:</h3>
+                            <ul>
+                                <li>📧 Email: <a href="mailto:SaharshBhadaniVenture@gmail.com" target="_blank">SaharshBhadaniVenture@gmail.com</a></li>
+                                <li>📱 Phone: <a href="tel:+918910441949" target="_blank">+91 8910441949</a></li>
+                                <li>💬 Live Chat: <a href="https://wa.me/918910441949?text=hi" target="_blank">Chat with us on WhatsApp @+91 8910441949</a></li>
+                                <li>🌐 Website: <a href="https://www.saharshbhadani.com" target="_blank">www.saharshbhadani.com</a></li>
+                                <li>📍 Office: 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025</li>
+                                <li>🕒 Business Hours: Mon-Fri, 9:00 AM - 9:00 PM</li>
+                            </ul>
+                        </div>
+                        <div class="process-step-counter">🎉 Thank you for choosing us for your project!</div>
+                    </div>
+                </div>
+
+                <div class="process-navigation">
+                    <button class="process-nav-button btn-prev" id="processPrevBtn" onclick="changeProcessStep(-1)">
+                        ← Previous
+                    </button>
+                    <button class="process-nav-button btn-next" id="processNextBtn" onclick="changeProcessStep(1)">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+
+    <!-- Footer
+    <footer class="w3-center w3-black w3-padding-64 w3-opacity">
+        <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+        <div class="w3-xlarge w3-section">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+    </footer>
+        -->
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
         }
 
-        // Generate chart bars
-        const dataViz = document.getElementById('hero-dataViz');
-        for (let i = 0; i < 15; i++) {
-            const bar = document.createElement('div');
-            bar.className = 'hero-chart-bar';
-            bar.style.left = (i * 6 + 10) + '%';
-            bar.style.height = (Math.random() * 30 + 10) + '%';
-            bar.style.animationDelay = (i * 0.2) + 's';
-            dataViz.appendChild(bar);
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
         }
 
-        // Generate circuit lines
-        for (let i = 0; i < 8; i++) {
-            const line = document.createElement('div');
-            line.className = 'hero-circuit-line';
-            line.style.top = (Math.random() * 100) + '%';
-            line.style.width = (Math.random() * 30 + 20) + '%';
-            line.style.left = (Math.random() * 100) + '%';
-            line.style.animationDelay = (Math.random() * 4) + 's';
-            dataViz.appendChild(line);
-        }
-    </script>
-    <script type="text/javascript">
-        async function fetchCustomSoftwareNumber(spreadsheetId, range) {
-            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "custom-software!A2:A2";
-            document.getElementById("custom-software-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +"; 
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
         }
 
-        async function fetchAppsDeployedNumber(spreadsheetId, range) {
-            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "apps-developed!A2:A2";
-            document.getElementById("apps-developed-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
-        }
-
-        async function fetchAnalyticsProjectsNumber(spreadsheetId, range) {
-            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "analytics-project!A2:A2";
-            document.getElementById("analytics-projects-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
-        }
-
-        async function fetchClientSatisfactionNumber(spreadsheetId, range) {
-            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "client-satisfaction!A2:A2";
-            document.getElementById("client-satistaction-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + "%";
-        }
-
-        async function fetchSpreadsheetData(spreadsheetId, range) {
-            const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch products');
-
-                const data = await response.json();
-                const detailsFetched = await data.values;
-                return detailsFetched;
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                throw error;
+        // Change style of navbar on scroll
+        window.onscroll = function () { myFunction() };
+        function myFunction() {
+            var navbar = document.getElementById("myNavbar");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.className += "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white" + "w3-black" + "w3-opacity";
+            } else {
+                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "w3-opacity");
             }
         }
 
-        window.onload = () => {
-            fetchCustomSoftwareNumber();
-            fetchAppsDeployedNumber();
-            fetchAnalyticsProjectsNumber();
-            fetchClientSatisfactionNumber();
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        /* ======================
+        THEME TOGGLE
+        ====================== */
+        /* ======================
+        THEME: AUTO + PERSIST
+        ====================== */
+        const body = document.body;
+        const toggle = document.querySelector('.theme-toggle');
+        const STORAGE_KEY = 'ui-theme';
+
+        /* Apply theme */
+        function applyTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            // toggle.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            if (theme === 'dark') {
+                toggle.textContent = '☀️ Light';
+                toggle.style.backgroundColor = "#FFFFFF";
+                toggle.style.color = "#000000";
+
+            } else if (theme === 'light') {
+                toggle.textContent = '🌙 Dark';
+                toggle.style.backgroundColor = "#000000";
+                toggle.style.color = "#FFFFFF";
+            }
+        }
+
+        /* Detect system theme */
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+        }
+
+        /* Init theme */
+        (function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEY);
+            const theme = savedTheme || getSystemTheme();
+            applyTheme(theme);
+        })();
+
+        /* Toggle handler */
+        toggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(STORAGE_KEY, next);
+            applyTheme(next);
+        });
+
+        /* React to system theme change (only if user hasn't chosen manually) */
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+        let scene, camera, renderer, neuralSphere, nodes = [], edges = [];
+
+        function init() {
+            const canvas = document.getElementById('neural-canvas');
+            scene = new THREE.Scene();
+
+            const width = window.innerWidth < 768 ? 480 : 840;
+            const height = window.innerWidth < 768 ? 480 : 840;
+
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera.position.set(0, 0, 10);
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+
+            const ambientLight = new THREE.AmbientLight(0x6366f1, 0.6);
+            scene.add(ambientLight);
+
+            const pointLight1 = new THREE.PointLight(0x8b5cf6, 1.5, 50);
+            pointLight1.position.set(5, 5, 5);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0x6366f1, 1.2, 50);
+            pointLight2.position.set(-5, -5, 5);
+            scene.add(pointLight2);
+
+            const pointLight3 = new THREE.PointLight(0xa78bfa, 1.0, 50);
+            pointLight3.position.set(0, 0, 10);
+            scene.add(pointLight3);
+
+            createNeuralSphere();
+            animate();
+        }
+
+        function createNeuralSphere() {
+            neuralSphere = new THREE.Group();
+
+            const nodeCount = 360;
+            const radius = 4;
+
+            const nodeGeometry = new THREE.SphereGeometry(0.1, 16, 16);
+            /*
+            const nodeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x8b5cf6,
+                emissive: 0x6366f1,
+                emissiveIntensity: 0.6,
+                shininess: 100,
+                transparent: true,
+                opacity: 0.95
+            });
+
+            const nodeMaterial = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                emissive: 0xffffff,
+                emissiveIntensity: 0.9,
+                shininess: 200,
+                specular: 0xffffff,
+                transparent: true,
+                opacity: 0.98
+            });
+            */
+            const nodeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x60a5fa,          // blue-400
+                emissive: 0x3b82f6,       // blue-500
+                emissiveIntensity: 1.1,
+                shininess: 220,
+                specular: 0x93c5fd,       // soft highlight
+                transparent: true,
+                opacity: 0.97
+            });
+
+            const glowGeometry = new THREE.SphereGeometry(0.18, 16, 16);
+            /*
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0xa78bfa,
+                transparent: true,
+                opacity: 0.3
+            });
+            */
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.35
+            });
+            /*
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0x60a5fa,
+                transparent: true,
+                opacity: 0.45
+            });
+            */
+
+            for (let i = 0; i < nodeCount; i++) {
+                const phi = Math.acos(-1 + (2 * i) / nodeCount);
+                const theta = Math.sqrt(nodeCount * Math.PI) * phi;
+
+                let x = radius * Math.cos(theta) * Math.sin(phi);
+                let y = radius * Math.sin(theta) * Math.sin(phi);
+                let z = radius * Math.cos(phi);
+
+                // More pronounced human skull shaping
+                const normalizedY = y / radius;
+                const normalizedX = x / radius;
+                const normalizedZ = z / radius;
+
+                // ASYMMETRIC DEFORMATION: Collapse one side
+                const sideDeform = x > 0 ? 1.0 : 0.75; // Right side compressed
+                x *= sideDeform;
+
+                // CRANIUM: Expand and round the top (brain case)
+                if (normalizedY > 0.2) {
+                    const craniumExpansion = 1 + (normalizedY * 0.5);
+                    x *= craniumExpansion;
+                    z *= craniumExpansion;
+                    y *= 1.3; // Elongate upward
+
+                    // Additional side deformation on cranium
+                    if (x < 0) {
+                        x *= 0.85;
+                        z *= 0.9;
+                    }
+                }
+
+                // FACE AREA: Flatten the front
+                if (z > 1) {
+                    z *= 1.1; // Push face forward
+                    if (normalizedY < 0.3 && normalizedY > -0.5) {
+                        x *= 0.85; // Narrow face width
+                    }
+                }
+
+                // JAW: Wider and longer
+                if (normalizedY < -0.2) {
+                    const jawWidth = Math.max(0.6, 1 - Math.abs(normalizedY + 0.2) * 1.2); // Wider
+                    x *= jawWidth * 1.3; // Extra width
+                    z *= Math.max(0.7, jawWidth * 1.1); // More depth
+                    y -= 0.8; // Drop jaw much lower for length
+
+                    // Side asymmetry on jaw
+                    if (x < 0) {
+                        x *= 0.8;
+                    }
+                }
+
+                // CHIN: Wider base
+                if (normalizedY < -0.8) {
+                    const chinFactor = Math.max(0.4, 1 - Math.abs(normalizedY + 0.8) * 2.5);
+                    x *= chinFactor * 1.2; // Wider chin
+                    z *= chinFactor * 1.0;
+                }
+
+                // EYE SOCKETS: Larger, deeper depressions with gradient depth
+                const leftEyeX = 1.5;
+                const rightEyeX = -1.5;
+                const eyeY = 0.8;
+                const eyeZ = 2.5;
+
+                const leftEyeDistance = Math.sqrt(
+                    Math.pow(x - leftEyeX, 2) +
+                    Math.pow(y - eyeY, 2) +
+                    Math.pow(z - eyeZ, 2)
+                );
+                const rightEyeDistance = Math.sqrt(
+                    Math.pow(x - rightEyeX, 2) +
+                    Math.pow(y - eyeY, 2) +
+                    Math.pow(z - eyeZ, 2)
+                );
+
+                // Create deep eye socket depressions
+                if (leftEyeDistance < 1.2 || rightEyeDistance < 1.2) {
+                    continue; // Skip nodes in eye sockets
+                }
+
+                // NASAL CAVITY: Larger triangular nose opening
+                if (Math.abs(x) < 0.8 && y > -0.5 && y < 0.7 && z > 2.0 && z < 3.8) {
+                    const nasalTaper = Math.abs(y - (-0.5)) / 1.2;
+                    if (Math.abs(x) < (0.8 * (1 - nasalTaper * 0.8))) {
+                        continue; // Skip nodes in nasal cavity
+                    }
+                }
+
+                // MOUTH/JAW OPENING: Create open mouth cavity
+                if (y < -1.2 && y > -2.5 && z > 1.5 && Math.abs(x) < 1.2) {
+                    const mouthDepth = (y + 2.5) / 1.3;
+                    const mouthWidth = 1.2 * mouthDepth;
+                    if (Math.abs(x) < mouthWidth && z > 1.5 + (1 - mouthDepth) * 0.5) {
+                        continue; // Skip nodes in mouth opening
+                    }
+                }
+
+                // TEETH REGION: Keep some nodes for teeth appearance
+                if (y < -1.0 && y > -1.4 && z > 2.2 && z < 2.8 && Math.abs(x) < 1.0) {
+                    // This area represents upper teeth row
+                    const toothSpacing = Math.abs(Math.sin(x * 8)) > 0.3;
+                    if (!toothSpacing) {
+                        continue; // Create gaps between teeth
+                    }
+                }
+
+                // CHEEKBONE: Slight outward curve
+                if (normalizedY > 0 && normalizedY < 0.4 && Math.abs(normalizedX) > 0.5 && z > 0) {
+                    x *= 1.1;
+                }
+
+                // TEMPLE: Narrow temple area
+                if (normalizedY > 0.5 && Math.abs(normalizedX) > 0.6) {
+                    x *= 0.9;
+                }
+
+                // EAR DEPRESSIONS: Create hollow areas on both sides
+                const leftEarX = -2.2;
+                const rightEarX = 2.2;
+                const earY = 0.3;
+                const earZ = 0;
+
+                const leftEarDistance = Math.sqrt(
+                    Math.pow(x - leftEarX, 2) +
+                    Math.pow(y - earY, 2) +
+                    Math.pow(z - earZ, 2)
+                );
+                const rightEarDistance = Math.sqrt(
+                    Math.pow(x - rightEarX, 2) +
+                    Math.pow(y - earY, 2) +
+                    Math.pow(z - earZ, 2)
+                );
+
+                // Remove nodes in ear regions to create depressions
+                if (leftEarDistance < 0.9 || rightEarDistance < 0.9) {
+                    continue; // Skip nodes in ear areas
+                }
+
+                const node = new THREE.Mesh(nodeGeometry, nodeMaterial.clone());
+                node.position.set(x, y, z);
+
+                // Depth-based scaling: larger nodes in front (higher z), smaller in back
+                const depthFactor = (z + radius) / (radius * 2); // 0 to 1 range
+                const scale = 0.4 + (depthFactor * 1.2); // Range from 0.4x to 1.6x
+                node.scale.set(scale, scale, scale);
+
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial.clone());
+                glow.position.copy(node.position);
+                glow.scale.set(scale, scale, scale);
+
+                neuralSphere.add(node);
+                neuralSphere.add(glow);
+
+                nodes.push({
+                    mesh: node,
+                    glow: glow,
+                    position: new THREE.Vector3(x, y, z),
+                    phase: Math.random() * Math.PI * 2
+                });
+            }
+
+            const edgeMaterial = new THREE.LineBasicMaterial({
+                color: 0x7dd3fc,
+                transparent: true,
+                opacity: 0.35,
+                linewidth: 2
+            });
+
+            for (let i = 0; i < nodes.length; i++) {
+                const connectionCount = Math.floor(Math.random() * 6) + 3;
+
+                for (let j = 0; j < connectionCount; j++) {
+                    const targetIndex = Math.floor(Math.random() * nodes.length);
+                    if (targetIndex !== i) {
+                        const distance = nodes[i].position.distanceTo(nodes[targetIndex].position);
+
+                        if (distance < radius * 1.5) {
+                            const points = [
+                                nodes[i].position.clone(),
+                                nodes[targetIndex].position.clone()
+                            ];
+                            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                            const line = new THREE.Line(geometry, edgeMaterial.clone());
+
+                            neuralSphere.add(line);
+                            edges.push({
+                                line: line,
+                                material: line.material,
+                                phase: Math.random() * Math.PI * 2
+                            });
+                        }
+                    }
+                }
+            }
+
+            const wireframeGeometry = new THREE.SphereGeometry(radius * 1.05, 32, 32);
+            const wireframeMaterial = new THREE.MeshBasicMaterial({
+                color: 0x6366f1,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.05
+            });
+            const wireframe = new THREE.Mesh(wireframeGeometry, wireframeMaterial);
+
+            // Apply realistic face deformation to wireframe
+            const positions = wireframe.geometry.attributes.position;
+            for (let i = 0; i < positions.count; i++) {
+                let x = positions.getX(i);
+                let y = positions.getY(i);
+                let z = positions.getZ(i);
+
+                const normalizedY = y / radius;
+                const normalizedX = x / radius;
+
+                // Forehead
+                if (normalizedY > 0.7) {
+                    const foreheadCurve = 1 + (normalizedY - 0.7) * 0.5;
+                    x *= foreheadCurve * 0.98;
+                    z *= foreheadCurve * 1.02;
+                    y *= 1.12;
+                }
+
+                // Upper head
+                if (normalizedY > 0.4 && normalizedY <= 0.7) {
+                    const headExpansion = 1 + (normalizedY * 0.3);
+                    x *= headExpansion * 1.05;
+                    z *= headExpansion * 0.95;
+                    y *= 1.15;
+                }
+
+                // Temples
+                if (normalizedY > 0.3 && normalizedY <= 0.5 && Math.abs(normalizedX) > 0.6) {
+                    x *= 0.93;
+                }
+
+                // Upper face
+                if (normalizedY > 0.1 && normalizedY <= 0.4) {
+                    z *= 1.08;
+                    x *= 0.96;
+                }
+
+                // Cheekbones
+                if (normalizedY > -0.05 && normalizedY < 0.25 && Math.abs(normalizedX) > 0.35 && z > 1.5) {
+                    x *= 1.12;
+                    z *= 1.06;
+                }
+
+                // Mid-face
+                if (normalizedY > -0.2 && normalizedY <= 0.1 && z > 1.5) {
+                    z *= 1.05;
+                    x *= 0.94;
+                }
+
+                // Jaw
+                if (normalizedY < -0.1 && normalizedY > -0.5) {
+                    const jawTaper = 1 - (Math.abs(normalizedY + 0.1) * 0.5);
+                    x *= jawTaper * 0.92;
+                    z *= jawTaper * 0.96;
+                    y -= 0.05;
+                }
+
+                // Chin
+                if (normalizedY < -0.5 && normalizedY > -0.75) {
+                    const chinRound = Math.max(0.45, 1 - Math.abs(normalizedY + 0.5) * 2);
+                    x *= chinRound * 0.68;
+                    z *= chinRound * 0.88;
+                    y -= 0.15;
+                }
+
+                // Neck
+                if (normalizedY < -0.75) {
+                    const neckNarrow = Math.max(0.35, 1 - Math.abs(normalizedY + 0.75) * 2.5);
+                    x *= neckNarrow * 0.75;
+                    z *= neckNarrow * 0.7;
+                }
+
+                positions.setXYZ(i, x, y, z);
+            }
+            positions.needsUpdate = true;
+
+            neuralSphere.add(wireframe);
+
+            scene.add(neuralSphere);
+        }
+
+        let time = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            time += 0.01;
+
+            neuralSphere.rotation.y += 0.003;
+            neuralSphere.rotation.x = Math.sin(time * 0.3) * 0.05;
+
+            nodes.forEach((node, i) => {
+                const scale = 1 + Math.sin(time * 2 + node.phase) * 0.3;
+                node.mesh.scale.set(scale, scale, scale);
+
+                const glowScale = 1 + Math.sin(time * 2 + node.phase + 0.5) * 0.5;
+                node.glow.scale.set(glowScale, glowScale, glowScale);
+
+                const intensity = 0.3 + Math.sin(time * 3 + node.phase) * 0.4;
+                node.mesh.material.emissiveIntensity = intensity;
+            });
+
+            edges.forEach((edge, i) => {
+                const opacity = 0.1 + Math.sin(time * 2 + edge.phase) * 0.15;
+                // edge.material.opacity = Math.max(0.05, opacity);
+                edge.material.opacity = 0.15 + Math.abs(Math.sin(time + edge.phase)) * 0.25;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('load', init);
+
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth < 768 ? 480 : 840;
+            const height = window.innerWidth < 768 ? 480 : 840;
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        });
+
+        const mouseFollower = document.querySelector('.mouse-follower');
+        document.addEventListener('mousemove', (e) => {
+            mouseFollower.style.left = e.clientX + 'px';
+            mouseFollower.style.top = e.clientY + 'px';
+        });
+
+        const heroContent = document.querySelector('.hero-content');
+        const particles = document.querySelectorAll('.particle');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+
+            heroContent.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+
+            particles.forEach((particle, index) => {
+                const speed = (index + 1) * 10;
+                particle.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+
+            if (neuralSphere) {
+                const rotationX = -y * 0.5;
+                const rotationY = x * 0.5;
+                neuralSphere.rotation.x += (rotationX - neuralSphere.rotation.x) * 0.05;
+                neuralSphere.rotation.y += (rotationY - neuralSphere.rotation.y) * 0.05;
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
         };
 
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.hero-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isPercentage = finalValue.includes('%');
+                const isTime = finalValue.includes('/');
+                let numValue = parseInt(finalValue);
+
+                if (isNaN(numValue)) return;
+
+                let currentValue = 0;
+                const increment = numValue / 50;
+                const duration = 2000;
+                const stepTime = duration / 50;
+
+                const counter = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= numValue) {
+                        stat.textContent = finalValue;
+                        clearInterval(counter);
+                    } else {
+                        if (isPercentage) {
+                            stat.textContent = Math.floor(currentValue) + '%';
+                        } else if (isTime) {
+                            stat.textContent = '24/7';
+                        } else {
+                            stat.textContent = Math.floor(currentValue) + '+';
+                        }
+                    }
+                }, stepTime);
+            });
+        }
+
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.left = e.offsetX + 'px';
+                ripple.style.top = e.offsetY + 'px';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+                                                                                                        @keyframes ripple {
+                                                                                                            to {
+                                                                                                                transform: scale(20);
+                                                                                                                opacity: 0;
+                                                                                                            }
+                                                                                                        }
+                                                                                                    `;
+        document.head.appendChild(style);
+
+        document.querySelectorAll('.btn-secondary').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Demo section coming soon! 🚀');
+            });
+        });
+
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Contact us at: contact@aimlservices.in 📧');
+            });
+        });
+        /* Settings */
+        // Settings state stored in memory
+        let currentSettings = {
+            language: 'en',
+            background: 'dark',
+            textSize: '16'
+        };
+        // Language settings
+        const translations = {
+            en: {
+                'main-title': 'Human-AI Collaboration',
+                'subtitle': 'Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions. Experience the future of intelligent automation and data-driven insights.'
+            },
+            es: {
+                'main-title': 'Colaboración entre humanos e IA',
+                'subtitle': 'Impulsamos a las empresas con soluciones de vanguardia de Inteligencia Artificial y Aprendizaje Automático. Experimente el futuro de la automatización inteligente y la información basada en datos.'
+            },
+            fr: {
+                'main-title': 'Collaboration homme-IA',
+                'subtitle': "Nous donnons aux entreprises les moyens d'exploiter des solutions de pointe en intelligence artificielle et en apprentissage automatique.Découvrez le futur de l'automatisation intelligente et des analyses de données."
+            },
+            de: {
+                'main-title': 'Samenwerking tussen mens en AI',
+                'subtitle': 'Bedrijven versterken met geavanceerde oplossingen op het gebied van kunstmatige intelligentie en machine learning. Ervaar de toekomst van intelligente automatisering en datagedreven inzichten.'
+            },
+            it: {
+                'main-title': 'Collaborazione uomo-intelligenza artificiale',
+                'subtitle': "Forniamo alle aziende soluzioni all'avanguardia di Intelligenza Artificiale e Machine Learning.Scopri il futuro dell'automazione intelligente e degli insight basati sui dati."
+            }
+        };
+        // DOM elements
+        const languageSelect = document.getElementById('language');
+        const textSizeSlider = document.getElementById('textSize');
+        const sizeDisplay = document.getElementById('size-display');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsOverlay = document.getElementById('settingsOverlay');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsClose = document.getElementById('settingsClose');
+
+        // Settings popup functions
+        function openSettings() {
+            settingsOverlay.classList.add('active');
+            settingsPanel.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSettings() {
+            settingsOverlay.classList.remove('active');
+            settingsPanel.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Update language function
+        function updateLanguage(lang) {
+            currentSettings.language = lang;
+            const translation = translations[lang];
+
+            // Add fade effect
+            document.body.classList.add('fade-transition');
+
+            setTimeout(() => {
+                Object.keys(translation).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = translation[key];
+                    }
+                });
+                document.body.classList.add('show');
+            }, 150);
+
+            setTimeout(() => {
+                document.body.classList.remove('fade-transition', 'show');
+            }, 450);
+        }
+
+        // Update text size function
+        function updateTextSize(size) {
+            currentSettings.textSize = size;
+            document.documentElement.style.fontSize = size + 'px';
+            sizeDisplay.textContent = size + 'px';
+        }
+
+        // Event listeners
+        languageSelect.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        textSizeSlider.addEventListener('input', (e) => {
+            updateTextSize(e.target.value);
+        });
+
+        // Settings popup event listeners
+        settingsBtn.addEventListener('click', openSettings);
+        settingsClose.addEventListener('click', closeSettings);
+        settingsOverlay.addEventListener('click', closeSettings);
+
+        // Prevent panel from closing when clicking inside it
+        settingsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close settings with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                closeSettings();
+            }
+        });
+
+        // Initialize settings
+        function initializeSettings() {
+            updateLanguage(currentSettings.language);
+            updateTextSize(currentSettings.textSize);
+
+            // Set initial values
+            languageSelect.value = currentSettings.language;
+            textSizeSlider.value = currentSettings.textSize;
+        }
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize when page loads
+        window.onload = function () {
+            initializeSettings();
+            _waEmbed(wa_btnSetting);
+            showAlert("Click on Settings to personalize this webpage the way you like.")
+        }
+
+        // Services
+        /* =====================
+           CARD LOGIC - Medium Small Screen
+        ====================== */
+        const cards_ms = document.querySelectorAll(".services-card-medium-small-screen");
+
+        cards_ms.forEach(card => {
+            card.addEventListener("click", () => {
+                if (card.classList.contains("active")) return;
+
+                const index = Number(card.dataset.index);
+
+                cards_ms.forEach((c, i) => {
+                    c.classList.toggle("active", i === index);
+                    c.classList.toggle("collapsed", i !== index);
+                });
+            });
+        });
+
+        /* =====================
+           CARD LOGIC - Large Screen
+        ====================== */
+        const cards = document.querySelectorAll(".services-card-large-screen");
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => {
+                if (card.classList.contains("active")) return;
+
+                const index = Number(card.dataset.index);
+
+                cards.forEach((c, i) => {
+                    c.classList.toggle("active", i === index);
+                    c.classList.toggle("collapsed", i !== index);
+                });
+            });
+        });
+
+        // Alert function - utility function
+        function showAlert(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                                                                        position: fixed;
+                                                                        top: 20px;
+                                                                        right: 20px;
+                                                                        background: rgba(99, 102, 241, 0.9);
+                                                                        color: white;
+                                                                        padding: 16px 24px;
+                                                                        border-radius: 12px;
+                                                                        font-weight: 500;
+                                                                        z-index: 999;
+                                                                        backdrop-filter: blur(20px);
+                                                                        animation: slideInAlert 0.5s ease-out;
+                                                                    `;
+            alertDiv.textContent = message;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOutAlert 0.5s ease-out forwards';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
+        //hire us
+        var additional_featured_content_hidden = true;
+        document.getElementById('additional_featured_content').hidden = true;
+        document.getElementById('toggle_additinal_features_div_2').hidden = true;
+
+        function toggle_additional_features_content() {
+            if (additional_featured_content_hidden == true) {
+                alert("here");
+                document.getElementById('toggle_additinal_features_div_1').hidden = true;
+                document.getElementById('additional_featured_content').hidden = false;
+                document.getElementById('toggle_additinal_features_div_2').hidden = false;
+                additional_featured_content_hidden = false;
+                alert("here 2");
+            } else if (additional_featured_content_hidden == false) {
+                document.getElementById('toggle_additinal_features_div_1').hidden = false;
+                document.getElementById('additional_featured_content').hidden = true;
+                document.getElementById('toggle_additinal_features_div_2').hidden = true;
+                additional_featured_content_hidden = true;
+            }
+        }
+        let currentStep = 0;
+        const totalSteps = 8;
+
+        function initializeProcessTour() {
+            const stepIndicator = document.getElementById('processStepIndicator');
+            stepIndicator.innerHTML = '';
+            for (let i = 0; i < totalSteps; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'process-step-dot';
+                dot.textContent = i + 1;
+                dot.onclick = () => goToProcessStep(i);
+                stepIndicator.appendChild(dot);
+            }
+            updateProcessTour();
+        }
+
+        function openProcessTour() {
+            document.getElementById('processModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            currentStep = 0;
+            initializeProcessTour();
+        }
+
+        function closeProcessTour() {
+            document.getElementById('processModalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeOnProcessOverlay(event) {
+            if (event.target === document.getElementById('processModalOverlay')) {
+                closeTour();
+            }
+        }
+
+        function changeProcessStep(direction) {
+            const newStep = currentStep + direction;
+            if (newStep >= 0 && newStep < totalSteps) {
+                currentStep = newStep;
+                updateProcessTour();
+            }
+        }
+
+        function goToProcessStep(step) {
+            currentStep = step;
+            updateProcessTour();
+        }
+
+        function updateProcessTour() {
+            const contents = document.querySelectorAll('.process-step-content');
+            contents.forEach((content, index) => {
+                content.classList.toggle('active', index === currentStep);
+            });
+
+            const dots = document.querySelectorAll('.process-step-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index === currentStep) {
+                    dot.classList.add('active');
+                } else if (index < currentStep) {
+                    dot.classList.add('completed');
+                }
+            });
+
+            document.getElementById('processPrevBtn').disabled = currentStep === 0;
+            document.getElementById('processNextBtn').disabled = currentStep === totalSteps - 1;
+
+            const progressPercent = ((currentStep + 1) / totalSteps) * 100;
+            document.getElementById('processProgressFill').style.width = progressPercent + '%';
+
+            if (currentStep === totalSteps - 1) {
+                document.getElementById('processNextBtn').textContent = 'Finish ✓';
+            } else {
+                document.getElementById('processNextBtn').textContent = 'Next →';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modalOpen = document.getElementById('processModalOverlay').classList.contains('active');
+            if (modalOpen) {
+                if (e.key === 'ArrowLeft') changeProcessStep(-1);
+                if (e.key === 'ArrowRight') changeProcessStep(1);
+                if (e.key === 'Escape') closeProcessTour();
+            }
+        });
+
+    </script>
+    <!--Code for WhatsApp-->
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_btnSetting = {
+            "btnColor": "#16BE45",
+            "ctaText": "",
+            "cornerRadius": 40,
+            "marginBottom": 20,
+            "marginLeft": 20,
+            "marginRight": 20,
+            "btnPosition": "right",
+            "whatsAppNumber": "918910441949",
+            "welcomeMessage": "Hello",
+            "zIndex": 999999,
+            "btnColorScheme": "light"
+        };
     </script>
 
 </body>
