@@ -24,7 +24,7 @@ save_data_db_url="https://django-hello-world-pink-ten.vercel.app";
 working_local = true;
 
 
-last_updated_on = "December 16, 2025";
+last_updated_on = "January 03, 2026";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
     "https://www.youtube.com/embed/O9cf_yC0pGo",
