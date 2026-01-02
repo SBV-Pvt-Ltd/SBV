@@ -16,4 +16,5 @@ const CONFIG = {
     range: 'Form responses 1!A2:J'
 };
 
-last_updated_on = "August 12, 2025"; 
+last_updated_on = "January 03, 2026"; 
+year_to_display_along_with_copyright = 2026;

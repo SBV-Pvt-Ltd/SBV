@@ -295,7 +295,7 @@
     </section>
 
     <footer>
-        <p>© 2025 Saharsh Bhadani Venture Private Limited. All rights reserved.</p>
+        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
     </footer>
     <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
     <script type="text/javascript">
@@ -316,6 +316,7 @@
     <script type="text/javascript">
         window.onload = () => {
             document.addEventListener('contextmenu', event => event.preventDefault());
+            document.getElementById('year_to_display_along_with_copyright').textContent = 2026;
 
             const loader = document.querySelector(".loader");
             loader.classList.add("loader-hidden");

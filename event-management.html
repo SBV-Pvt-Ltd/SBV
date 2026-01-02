@@ -309,7 +309,8 @@
         <i class="fa fa-pinterest-p w3-hover-opacity"></i>
         <i class="fa fa-twitter w3-hover-opacity"></i>
         <i class="fa fa-linkedin w3-hover-opacity"></i>
-        <p class="w3-medium">&#169; 2025 by Olivia & Ava PrimePlanners</p>
+        <p class="w3-medium">&#169; <span id="year_to_display_along_with_copyright">2026</span> by Olivia & Ava PrimePlanners.</p>
+
     </footer>
 
     <script>
@@ -367,6 +368,7 @@
         window.onload = () => {
             _waEmbed(wa_btnSetting);
             document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = "2026";
 
         };
     </script>

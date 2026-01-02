@@ -102,7 +102,7 @@
 				</td>
 				<td style="width: 50%; vertical-align: bottom;">
 					<p>Last updated on : <span id="last_updated_on"></span></p>
-					<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+					<p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 				</td>
 			</tr>
 		</table>
@@ -127,6 +127,8 @@
 		window.onload = () => {
 			_waEmbed(wa_btnSetting);
 			document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+
 		};
 	</script>
 	<!--2nd type

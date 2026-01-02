@@ -1442,7 +1442,7 @@
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
            onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
         <p>Last updated on : <span id="last_updated_on"></span></p>
-        <p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 
         <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
             <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
@@ -1492,6 +1492,7 @@
         window.onload = () => {
             _waEmbed(wa_btnSetting);
             document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
             document.getElementById('testimonial_read_content_1').hidden = false;
             document.getElementById('testimonial_read_content_p_1').hidden = true;
             document.getElementById('testimonial_read_content_span_1').hidden = true;

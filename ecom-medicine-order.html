@@ -808,7 +808,8 @@
             </div>
         </footer>
 
-        <p class="site-footer">&copy; 2025 Dabla Biotech. All rights reserved.</p>
+        <p class="site-footer">&#169; <span id="year_to_display_along_with_copyright">2025</span> by Dabla Biotech. All Rights Reserved.</p>
+
     </main>
 
     <!-- Image modal -->
@@ -1329,5 +1330,8 @@
 
     <!-- External script -->
     <script src="ecom-medicine-order.js"></script>
+    <script type="text/javascript">
+        document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+    </script>
 </body>
 </html>

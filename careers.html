@@ -334,23 +334,31 @@
 	<!-- Footer -->
 	<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
 		<h4>Follow Us</h4>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook"><i
-				class="fa fa-facebook"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter"><i
-				class="fa fa-twitter"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
-				class="fa fa-google-plus"></i></a>
-		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i
-				class="fa fa-instagram"></i></a>
-		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i
-				class="fa fa-linkedin"></i></a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Facebook">
+			<i class="fa fa-facebook"></i>
+		</a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Twitter">
+			<i class="fa fa-twitter"></i>
+		</a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +">
+			<i class="fa fa-google-plus"></i>
+		</a>
+		<a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +">
+			<i class="fa fa-instagram"></i>
+		</a>
+		<a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin">
+			<i class="fa fa-linkedin"></i>
+		</a>
 		<p>Last updated on : <span id="last_updated_on"></span></p>
-		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+		<p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 
 		<div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
 			<span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
-			<a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
-					<i class="fa fa-chevron-circle-up"></i></span></a>
+			<a class="w3-button w3-theme" href="#myPage">
+				<span class="w3-xlarge">
+					<i class="fa fa-chevron-circle-up"></i>
+				</span>
+			</a>
 		</div>
 	</footer>
 	<!--Code for WhatsApp-->
@@ -372,6 +380,7 @@
 		window.onload = () => {
 			_waEmbed(wa_btnSetting);
 			document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
 
 		};
 	</script>

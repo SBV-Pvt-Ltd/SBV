@@ -1121,9 +1121,9 @@
 			<div class="w3-card outer_container">
 				<center>
 					<div class="w3-white w3-hover-teal inner_div geeks">
-						<img src="./w3images/IT_consulting.jpg" alt="IT Consultation" style="width:100%; border-bottom: 1px solid black;">
+						<img src="./w3images/IT_consulting.png" alt="IT Consultation" style="width:100%; border-bottom: 1px solid black;">
 						<div class="w3-container">
-							<h3>IT Solutions</h3>
+							<h3>IT Consultation</h3>
 						</div>
 					</div>
 				</center>
@@ -1134,7 +1134,7 @@
 			<div class="w3-card outer_container">
 				<center>
 					<div class="w3-white w3-hover-teal inner_div geeks">
-						<img src="./w3images/graphic-design-company.jpg" alt="Graphic Designing" style="width:100%">
+						<img src="./w3images/graphic-design-company.png" alt="Graphic Designing" style="width:100%">
 						<div class="w3-container">
 							<h3>Graphic Designing</h3>
 						</div>
@@ -1146,25 +1146,25 @@
 	</div>
 
 	<div class="w3-row-padding w3-theme-index1 w3-hide-medium" id="FeaturedServices" style="margin-top: -50px;">
-		<div class="w3-quarter" style="cursor: pointer; margin-bottom: 15px" onclick="navigateTo('ContentCreation')">
+		<div class="w3-quarter" style="cursor: pointer; margin-bottom: 14px" onclick="navigateTo('ContentCreation')">
 			<div class="w3-card outer_container">
 				<center>
 					<div class="w3-white w3-hover-teal inner_div geeks">
-						<img src="./w3images/content-creation.jpg" alt="Content Creation" style="width:100%">
+						<img src="./w3images/software-development.png" alt="Content Creation" style="width: 100%; border-bottom: 1px solid black;">
 						<div class="w3-container">
-							<h3>Content Creation</h3>
+							<h3>Software Development</h3>
 						</div>
 					</div>
 				</center>
 			</div>
 		</div>
-		<div class="w3-quarter" style="cursor: pointer; margin-bottom: 15px" onclick="navigateTo('Robotics')">
+		<div class="w3-quarter" style="cursor: pointer; margin-bottom: 14px" onclick="navigateTo('Robotics')">
 			<div class="w3-card outer_container">
 				<center>
 					<div class="w3-white w3-hover-teal inner_div geeks">
-						<img src="./w3images/industrial-automation.jpg" alt="Robotics" style="width:100%">
+						<img src="./w3images/industrial-automation.jpg" alt="Robotics" style="width: 100%; border-bottom: 1px solid black;">
 						<div class="w3-container">
-							<h3>Robotics & Automation</h3>
+							<h3>Mobile App Development</h3>
 						</div>
 					</div>
 				</center>
@@ -1989,7 +1989,7 @@
 		<a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
 		   onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
 		<p>Last updated on : <span id="last_updated_on"></span></p>
-		<p>&#169; 2025 by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+		<p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
 
 		<div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
 			<span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
@@ -2039,6 +2039,8 @@
 		window.onload = () => {
 			_waEmbed(wa_btnSetting);
 			document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+
 			document.getElementById('testimonial_read_content_1').hidden = false;
 			document.getElementById('testimonial_read_content_p_1').hidden = true;
 			document.getElementById('testimonial_read_content_span_1').hidden = true;
