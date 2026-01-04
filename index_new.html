@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="Constant.js"></script>
-
+    <script src="Constant.js" defer></script>
     <style>
         /* =========================
                     THEME VARIABLES
@@ -75,8 +74,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: font-size 0.3s ease, background 0.3s ease !important;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            font-size: 1rem;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body, button, .btn, .services-card-large-screen {
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body {
@@ -87,6 +95,29 @@
             transition: background .3s,color .3s;
             background-image: var(--theme-bg-img);
         }
+
+            body.scrolling .particle {
+                animation-play-state: paused;
+            }
+
+            body.scrolling .mouse-follower {
+                display: none;
+            }
+
+            body.scrolling .mouse-follower,
+            body.scrolling .settings-overlay {
+                filter: none;
+                backdrop-filter: none;
+            }
+
+
+        .hero-bg,
+        .hero-overlay,
+        .particles,
+        .mouse-follower {
+            will-change: transform, opacity;
+        }
+
 
         /* =========================
                         HERO
@@ -231,6 +262,10 @@
             color: #fff;
         }
 
+        .get-in-touch-button-settings {
+            max-width: 175px;
+        }
+
         .btn-secondary {
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
             color: var(--text-main);
@@ -242,6 +277,12 @@
             border: 2px solid rgba(0,0,0,.15);
         }
 
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: orange;
+            border: none;
+        }
         /* =========================
                         STATS
                     ========================= */
@@ -286,8 +327,8 @@
             border: 1px solid black;
             color: var(--text-main);
             cursor: pointer;
-            backdrop-filter: blur(10px);
-            font-size: 16px;
+            backdrop-filter: blur(4px);
+            font-size: 1rem;
         }
 
         /* ========================= */
@@ -304,27 +345,17 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: radial-gradient(circle,rgba(99,102,241,.6),transparent);
+            background: radial-gradient(circle, rgba(99,102,241,.6), transparent);
             pointer-events: none;
             z-index: 10;
-            filter: blur(10px);
-        }
-
-        .mouse-follower {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.6), transparent);
-            pointer-events: none;
-            z-index: 10;
+            filter: blur(4px);
             transition: transform 0.15s ease;
-            filter: blur(10px);
         }
 
         .top-navbar {
             z-index: 11;
         }
+
         .add-background {
             background: var(--bg-main);
         }
@@ -358,7 +389,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(4px);
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
@@ -387,7 +418,7 @@
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
         }
 
             .settings-panel.active {
@@ -511,7 +542,7 @@
                 transform: translate(-50%, -50%);
                 color: white;
                 font-weight: bold;
-                font-size: 16px;
+                font-size: 1rem;
                 text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                 opacity: 0;
                 transition: opacity 0.3s ease;
@@ -533,7 +564,7 @@
             font-family: Brush Script MT, cursive;
             margin-top: -5px;
             margin-left: 5px;
-            font-size: 23px;
+            font-size: 1.4rem;
             color: var(--company-name-text);
             overflow-x: clip;
         }
@@ -541,6 +572,44 @@
         .phone_number:link, .phone_number:visited, .phone_number:hover, .phone_number:active {
             cursor: pointer;
             text-decoration: none; /* Optional: also removes the underline */
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            transition: opacity 0.75s, visibility 0.75s;
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 15px solid #dddddd;
+            border-top-color: #009688;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
         }
         /* Style the tab */
         .services-tab {
@@ -562,7 +631,7 @@
                 text-align: left;
                 cursor: pointer;
                 transition: 0.3s;
-                font-size: 17px;
+                font-size: 1rem;
             }
 
                 /* Change background color of buttons on hover */
@@ -727,9 +796,11 @@
             border: none;
             padding: 12px 24px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
             .toggle_additional_feature_button:hover {
@@ -743,7 +814,9 @@
             border-radius: 8px;
             padding: 12px 24px;
             color: white;
-            font-size: 16px;
+            font-size: 1rem;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
 
             .watch_featured_videos_button:hover {
@@ -754,11 +827,12 @@
             background-color: #2563eb;
             color: white;
             padding: 12px 24px;
-            font-size: 16px;
+            font-size: 1rem;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             margin-top: 5px;
+            margin-bottom: 5px;
         }
 
             .take_interactive_tour_button:hover {
@@ -834,7 +908,7 @@
             width: 35px;
             height: 35px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 1.25rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -848,13 +922,13 @@
             }
 
         .process-tour-header h1 {
-            font-size: 28px;
+            font-size: 1.75rem;
             margin-bottom: 10px;
         }
 
         .process-tour-header p {
             opacity: 0.9;
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         .process-progress-bar {
@@ -945,11 +1019,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 2.25rem;
         }
 
         .process-step-title {
-            font-size: 24px;
+            font-size: 1.5rem;
             color: var(--text-main);
             margin-bottom: 15px;
             text-align: center;
@@ -959,7 +1033,7 @@
         .process-step-description {
             color: var(--text-muted);
             line-height: 1.8;
-            font-size: 16px;
+            font-size: 1rem;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -974,7 +1048,7 @@
             .process-step-details h3 {
                 color: var(--accent1);
                 margin-bottom: 10px;
-                font-size: 18px;
+                font-size: 1.125rem;
             }
 
             .process-step-details ul {
@@ -1014,7 +1088,7 @@
             padding: 12px 30px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -1052,18 +1126,49 @@
         .process-step-counter {
             text-align: center;
             color: #999;
-            font-size: 14px;
+            font-size: 0.875rem;
             margin-top: 10px;
         }
 
+        .modal-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+            .modal-settings h2 {
+                color: var(--text-main);
+            }
+
+        .contact-us-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        .get-in-touch-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        .goto-top-button {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        #footer {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
 
         /* ========================
 
         ======================== */
         @media (max-width: 1024px) {
+            .hero-container {
+            }
+
             #neural-canvas {
-                left: 50%;
-                top: 50%;
+                top: 45%;
+                transform: translate(-50%, -40%);
             }
         }
 
@@ -1083,11 +1188,6 @@
                 align-self: center;
                 width: 100%;
                 max-width: 180px;
-            }
-
-            #neural-canvas {
-                left: 50%;
-                top: 20%;
             }
 
             #services-large-screen {
@@ -1203,16 +1303,74 @@
                 display: block;
                 width: 100%;
             }
+
+            .get-in-touch-button-settings {
+                margin-bottom: 5px;
+            }
         }
 
         @media (max-width: 360px) {
             .company-name {
-                font-size: 12px;
+                font-size: 0.75rem;
             }
         }
     </style>
     <script type="text/javascript">
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
+        async function navigateTo(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + features_service_page_name;
+            new_url_section = new_url + "#" + pageName;
+            window.location.href = new_url_section;
+            //window.open(new_url_section, "_blank");
+        }
+
+        function navigateToIndex(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + index_page_name;
+            new_url_section = new_url;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = new_url + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPage(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.open(new_url_section);
+        }
+
+        function navigateToExplorePageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined + pageName;
+            window.open(new_url_section);
+        }
     </script>
 </head>
 <body data-theme="dark">
@@ -1223,14 +1381,12 @@
                 <a class="w3-margin-left w3-xlarge w3-buttons w3-left">
                     <i class="fa fa-bars side-navbar-items" onclick="w3_open()"></i>
                 </a>
-                <a onclick="navigateToIndex('#')" class="company-name">
+                <a onclick="navigateToIndex('#home')" class="company-name">
                     Saharsh Bhadani Venture Pvt Ltd
                 </a>
-
                 <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" title="Settings">
                     <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
                 </a>
-
                 <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red" href="javascript:void(0);">
                     <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
                 </a>
@@ -1244,57 +1400,63 @@
                     Close Menu
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">HOME</a>
-                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-user"></i> ABOUT</a>
-                <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-th"></i> PORTFOLIO</a>
-                <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-envelope"></i> CONTACT</a>
-                <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">Food</a>
-                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">About</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> HOME</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ Featured Service</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 Business Analytics</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 AI & Machine Learning</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 IT Consultation</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 Graphics Designing</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 Website Designing</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 App Development</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 Software Development</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 WHY HIRE US?</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> CONTACT</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> About Us</a>
             </nav>
-
-
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a href="#home" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">HOME</a>
-                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-user"></i> ABOUT</a>
-                <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-th"></i> PORTFOLIO</a>
-                <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hide-small side-navbar-items"><i class="fa fa-envelope"></i> CONTACT</a>
-                <a href="#food" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">Food</a>
-                <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button side-navbar-items">About</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> HOME</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ Featured Service</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 Business Analytics</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 AI & Machine Learning</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 IT Consultation</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 Graphics Designing</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 Website Designing</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 App Development</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 Software Development</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 WHY HIRE US?</a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> CONTACT</a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> About Us</a>
             </div>
         </div>
-
         <div class="hero-container" id="home">
             <div class="hero-bg"></div>
             <div class="hero-overlay"></div>
-
             <div class="particles">
                 <div class="particle"></div>
                 <div class="particle"></div>
                 <div class="particle"></div>
                 <div class="particle"></div>
             </div>
-
             <canvas id="neural-canvas"></canvas>
-
             <div class="hero-content">
                 <div class="hero-badge">🇮🇳 Made in India • AI-Powered Solutions</div>
-
                 <h1 class="hero-title" id="main-title">
                     Human-AI Collaboration
                 </h1>
-
                 <p class="hero-subtitle" id="subtitle">
                     Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions.
                     Experience the future of intelligent automation and data-driven insights.
                 </p>
 
                 <div class="hero-buttons">
-                    <button class="btn btn-primary">Get Started</button>
+                    <button class="w3-theme w3-hover-teal btn" title="Submit Form" style="border-radius:25px; font-size: 0.9375rem;">
+                        <a href="tel:+918910441949" class="phone_number" style="text-decoration: none;">&nbsp;<i class="fa fa-phone" style="color:white"></i>&nbsp;8910441949</a>
+                    </button>
+                    <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
                     <button class="btn btn-secondary">View Demo</button>
                 </div>
             </div>
-
         </div>
 
         <!-- Settings Overlay -->
@@ -1331,15 +1493,68 @@
             </div>
         </div>
         <div class="mouse-follower"></div>
+        <div class="loader"></div>
 
 
     </header>
 
-
-
-
-
-    <div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+    <!-- Get in Touch Modal -->
+    <div id="id03" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal w3-display-container">
+                <span onclick="document.getElementById('id03').style.display='none'"
+                      class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                <h2>Please provide your details and we will contact you soon.</h2>
+            </header>
+            <div class="w3-container get-in-touch-settings">
+                <div class="w3-col m7 get-in-touch-settings" style="width: 100%;">
+                    <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
+                          onsubmit="close_modal(this)" method="get"
+                          target="display-frame">
+                        <input type="hidden" value="SAVE_LEADS" name="query">
+                        <input type="hidden" value="leads_form" name="module">
+                        <div class="w3-section">
+                            <label>Name</label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Email</label>
+                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Country</label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Phone number</label>
+                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Company Name</label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Product or services interested in</label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required>
+                        </div>
+                        <div class="w3-section">
+                            <label>Remarks (if any)</label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Message">
+                        </div>
+                        <div class="w3-row">
+                            <button type="reset" class="w3-red w3-button w3-right">Clear</button>
+                            <button type="submit" class="w3-button w3-left-align w3-teal">Submit</button>
+                        </div>
+                    </form>
+                    <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
+                </div>
+            </div>
+            <footer class="w3-container w3-teal">
+                <p id="modal_footer_message">&nbsp;</p>
+            </footer>
+        </div>
+    </div>
+    <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
@@ -1347,27 +1562,30 @@
 
     <!-- Services -->
     <section id="Services-section" class="w3-row-padding w3-container w3-padding-64">
+
         <div style="display: flex; justify-content: center; align-items: center;">
             <h1 class="w3-wide"><u>FEATURED SERVICES</u></h1><br />
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
             <h3 class="w3-opacity w3-center"><i>Highlighting Our Top Offerings Designed to Deliver Exceptional Value and Results.</i></h3><br>
         </div>
+
         <div class="w3-padding-16 w3-xlarge">
             <div class="services-cards-container-medium-small-screen" id="services-medium-scall-screen">
 
                 <div class="services-card-medium-small-screen active" data-index="0">
                     <div class="services-card-name-medium-small-screen">BUSINESS ANALYTICS</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 1</h2>
+                        <h2>BUSINESS ANALYTICS</h2>
                         <p>This is the fully visible content of Card 1.</p>
+
                     </div>
                 </div>
 
                 <div class="services-card-medium-small-screen collapsed" data-index="1">
                     <div class="services-card-name-medium-small-screen">AI & MACHINE LEARNING</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 2</h2>
+                        <h2>AI & MACHINE LEARNING</h2>
                         <p>This is the fully visible content of Card 2.</p>
                     </div>
                 </div>
@@ -1375,7 +1593,7 @@
                 <div class="services-card-medium-small-screen collapsed" data-index="2">
                     <div class="services-card-name-medium-small-screen">IT CONSULTATION</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 3</h2>
+                        <h2>IT CONSULTATION</h2>
                         <p>This is the fully visible content of Card 3.</p>
                     </div>
                 </div>
@@ -1383,7 +1601,7 @@
                 <div class="services-card-medium-small-screen collapsed" data-index="3">
                     <div class="services-card-name-medium-small-screen">GRAPHICS DESIGNING</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 4</h2>
+                        <h2>GRAPHICS DESIGNING</h2>
                         <p>This is the fully visible content of Card 4.</p>
                     </div>
                 </div>
@@ -1391,7 +1609,7 @@
                 <div class="services-card-medium-small-screen collapsed" data-index="4">
                     <div class="services-card-name-medium-small-screen">WEBSITE DESIGNING</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 5</h2>
+                        <h2>WEBSITE DESIGNING</h2>
                         <p>This is the fully visible content of Card 5.</p>
                     </div>
                 </div>
@@ -1399,14 +1617,14 @@
                 <div class="services-card-medium-small-screen collapsed" data-index="5">
                     <div class="services-card-name-medium-small-screen">APP DEVELOPMENT</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 6</h2>
+                        <h2>APP DEVELOPMENT</h2>
                         <p>This is the fully visible content of Card 6.</p>
                     </div>
                 </div>
                 <div class="services-card-medium-small-screen collapsed" data-index="6">
                     <div class="services-card-name-medium-small-screen">SOFTWARE DEVELOPMENT</div>
                     <div class="services-card-content-medium-small-screen">
-                        <h2>Card 7</h2>
+                        <h2>SOFTWARE DEVELOPMENT</h2>
                         <p>This is the fully visible content of Card 7.</p>
                     </div>
                 </div>
@@ -1420,7 +1638,7 @@
                     <div class="services-card-large-screen active" data-index="0">
                         <div class="services-card-name-large-screen"><span>BUSINESS ANALYTICS</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 1</h2>
+                            <h2>BUSINESS ANALYTICS</h2>
                             <p>This is the fully visible content of Card 1.</p>
                         </div>
                     </div>
@@ -1428,7 +1646,7 @@
                     <div class="services-card-large-screen collapsed" data-index="1">
                         <div class="services-card-name-large-screen"><span>AI AND MACHINE LEARNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 2</h2>
+                            <h2>AI AND MACHINE LEARNING</h2>
                             <p>This is the fully visible content of Card 2.</p>
                         </div>
                     </div>
@@ -1436,7 +1654,7 @@
                     <div class="services-card-large-screen collapsed" data-index="2">
                         <div class="services-card-name-large-screen"><span>IT CONSULTATION</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 3</h2>
+                            <h2>IT CONSULTATION</h2>
                             <p>This is the fully visible content of Card 3.</p>
                         </div>
                     </div>
@@ -1444,7 +1662,7 @@
                     <div class="services-card-large-screen collapsed" data-index="3">
                         <div class="services-card-name-large-screen"><span>GRAPHICS DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 4</h2>
+                            <h2>GRAPHICS DESIGNING</h2>
                             <p>This is the fully visible content of Card 4.</p>
                         </div>
                     </div>
@@ -1452,7 +1670,7 @@
                     <div class="services-card-large-screen collapsed" data-index="4">
                         <div class="services-card-name-large-screen"><span>WEBSITE DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 5</h2>
+                            <h2>WEBSITE DESIGNING</h2>
                             <p>This is the fully visible content of Card 5.</p>
                         </div>
                     </div>
@@ -1460,28 +1678,30 @@
                     <div class="services-card-large-screen collapsed" data-index="5">
                         <div class="services-card-name-large-screen"><span>APP DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 6</h2>
+                            <h2>APP DEVELOPMENT</h2>
                             <p>This is the fully visible content of Card 6.</p>
                         </div>
                     </div>
                     <div class="services-card-large-screen collapsed" data-index="6">
                         <div class="services-card-name-large-screen"><span>SOFTWARE DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2>Card 7</h2>
+                            <h2>SOFTWARE DEVELOPMENT</h2>
                             <p>This is the fully visible content of Card 7.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
 
     </section>
-    <div style="width: 100%; border-bottom: 2.5px solid orange;"></div>
+    <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
     </div>
     <section id="Hire-us-section" class="w3-row-padding w3-container w3-padding-64">
+        <!-- include all here: process, testimonials, strengths, portfolio -->
         <div style="display: flex; justify-content: center; align-items: center;">
             <h1 class="w3-wide"><u>WHY HIRE US?</u></h1><br />
         </div>
@@ -1491,243 +1711,262 @@
         <div class="w3-padding-16 w3-xlarge">
             <p style="text-align: justify;">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation</p>
         </div>
-        <div class="w3-large w3-medium w3-hide-small">
-            <h2 style="margin-bottom: 15px;">🤝 Why Businesses Trust Us</h2>
-            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            ✅ Client-Centric Mindset
-                        </h3>
-                        <p>
-                            We listen, understand, and deliver. Every project starts with your goals in mind and ends with a solution that brings those goals to life.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🔄 End-to-End Service
-                        </h3>
-                        <p>
-                            From planning and development to execution and post-launch support, we offer full-cycle solutions under one roof — reducing complexity and ensuring consistency.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            ⏱️ On-Time, Every Time
-                        </h3>
-                        <p>
-                            We respect your timelines and deliver projects on schedule with a keen eye on quality, ensuring a smooth and predictable project experience.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🔐 Secure, Scalable, and Future-Ready
-                        </h3>
-                        <p>
-                            Our solutions are built for longevity, with security and scalability at the core — so your business is ready for tomorrow’s challenges.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🌐 Global Mindset, Local Approach
-                        </h3>
-                        <p>
-                            We serve businesses across industries and geographies, combining a global outlook with a local understanding of markets, culture, and user behavior.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="w3-hide-large w3-hide-medium w3-small">
-            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; ">
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            ✅ Client-Centric Mindset
-                        </h3>
-                        <p>
-                            We listen, understand, and deliver. Every project starts with your goals in mind and ends with a solution that brings those goals to life.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🔄 End-to-End Service
-                        </h3>
-                        <p>
-                            From planning and development to execution and post-launch support, we offer full-cycle solutions under one roof — reducing complexity and ensuring consistency.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            ⏱️ On-Time, Every Time
-                        </h3>
-                        <p>
-                            We respect your timelines and deliver projects on schedule with a keen eye on quality, ensuring a smooth and predictable project experience.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; margin-top: -15px;">
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🔐 Secure, Scalable, and Future-Ready
-                        </h3>
-                        <p>
-                            Our solutions are built for longevity, with security and scalability at the core — so your business is ready for tomorrow’s challenges.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article">
-                        <h3>
-                            🌐 Global Mindset, Local Approach
-                        </h3>
-                        <p>
-                            We serve businesses across industries and geographies, combining a global outlook with a local understanding of markets, culture, and user behavior.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Read More-->
-        <div id="toggle_additinal_features_div_1" class="w3-center" style="margin-top:10px">
-            <button class="toggle_additional_feature_button" onclick="toggle_additional_features_content()">
-                Read More&nbsp;↓
-            </button>
-            <button class="watch_featured_videos_button">
-                ▶&nbsp;Watch features video on YouTube
-            </button>
-            <button class="take_interactive_tour_button" onclick="openProcessTour()">
-                🚀&nbsp;Take an Interactive Process Tour
-            </button>
-        </div>
-        <div id="additional_featured_content">
-            <h2 style="margin-bottom: 15px;">🌟 Our Strengths</h2><br />
 
-            <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+        <div class="w3-row w3-container w3-row-padding" style="margin:10px 0">
+            <div class="w3-half w3-container">
+                <div class="w3-topbar w3-border-amber">
+                    <img src="./w3images/client_centric_pricess.png" style="width:100%; cursor:pointer; border: 1px solid grey; border-top: none;" onclick="openProcessTour()">
+                    <h2>Hassle-free client process</h2>
+                    <button class="take_interactive_tour_button" onclick="openProcessTour()">
+                        🚀&nbsp;Take an Interactive Process Tour
+                    </button>
+                    <br />
+                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
 
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            🧠 Intelligent Solutions with AI & ML
-                        </h3>
-                        <p>
-                            We build smart, self-learning systems that empower businesses to automate processes, predict trends, and make data-driven decisions. From predictive models to AI-powered customer engagement, our solutions are designed to deliver long-term value and measurable ROI.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            📈 Powerful Data Analytics
-                        </h3>
-                        <p>
-                            Data is only as good as the insights it provides. Our analytics solutions turn raw data into actionable intelligence, enabling businesses to optimize operations, identify opportunities, and gain a competitive edge.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            ⚙️ Automation for Efficiency & Scale
-                        </h3>
-                        <p>
-                            Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
-                        </p>
-                    </div>
                 </div>
             </div>
-            <div class="w3-row w3-row-padding row-eq-height w3-large w3-medium w3-hide-small" style="margin-bottom: 15px; ">
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            🧩 Consulting That Aligns Strategy With Execution
-                        </h3>
-                        <p>
-                            Our consulting team works closely with you to understand your business challenges and align our solutions with your short- and long-term goals. Whether you're going digital for the first time or scaling existing systems, we guide your journey with clarity and confidence.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            🎨 Creativity That Captivates
-                        </h3>
-                        <p>
-                            Great design and compelling visuals are essential in today’s digital landscape. Our graphic designers craft intuitive, visually stunning designs that not only look great but also communicate your brand’s story effectively across platforms.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            ✍️ Content That Converts
-                        </h3>
-                        <p>
-                            Whether it’s web content, branding material, or marketing copy, our content creators craft powerful messaging tailored to your audience. We focus on clarity, creativity, and consistency to ensure your voice stands out in a crowded market.
-                        </p>
-                    </div>
+
+            <div class="w3-half w3-container">
+                <div class="w3-topbar w3-border-amber">
+                    <img src="./w3images/testimonials.png" style="width: 100%; cursor: pointer; border: 1px solid grey; border-top: none;" onclick="read_testimonials()">
+                    <h2>Testimonials</h2>
+                    <button class="toggle_additional_feature_button" onclick="read_testimonials()">
+                        🌟&nbsp;Read Testimonials
+                    </button>
+                    <br />
+                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
+
                 </div>
             </div>
-            <div class="w3-row w3-row-padding row-eq-height w3-hide-large w3-hide-medium w3-small" style="margin-bottom: 15px; margin-top: -15px">
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            ⚙️ Automation for Efficiency & Scale
-                        </h3>
-                        <p>
-                            Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
-                        </p>
+            <!-- Testimonials Modal -->
+            <div id="id02" class="w3-modal">
+                <div class="w3-modal-content w3-card-4 w3-animate-top">
+                    <header class="w3-container w3-teal w3-display-container">
+                        <span onclick="document.getElementById('id02').style.display='none'"
+                              class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                        <h2>What Clients Value Most About Us!</h2>
+                    </header>
+                    <div class="w3-container modal-settings">
+                        <div class="w3-row-padding w3-padding-16">
+                            <div class="w3-third w3-margin-bottom">
+                                <img src="./images/Testimonials-DrBhadanisDentalClinic.png" alt="Testimonials-DrBhadanisDentalClinic.png" style="width: 100%; border-bottom: 1px solid black; background-color: white;">
+                                <div class="w3-container w3-white">
+                                    <p><b>Dr. Bhadani's Dental Clinic, Kolkata, West Bengal, India</b></p>
+                                    <br />
+                                    <p class="w3-opacity">Wednesday July, 10, 2024</p>
+                                    <p style="font-size: 0.8125rem;">
+                                        I collaborated with Saharsh Bhadani Venture Private Limited for logo design, website development, Google My Business setup, and data-driven business consultation. Their work exceeded my expectations. The in-depth analytics report offered actionable insights that helped me improve my work-life balance, minimize <span id="testimonial_read_content_span_1">material waste, and optimize supply purchases based on usage patterns.</span>
+                                    <p>
+                                    <p id="testimonial_read_content_p_1" style="font-size: 0.8125rem;">
+                                        They also delivered customized Excel-based inventory management software and a reliable patient appointment system, both of which have significantly improved the efficiency of my clinic. Their exceptional IT support has made me feel more organized and in control of my operations. I highly recommend Saharsh Bhadani Venture Private Limited to anyone seeking practical and comprehensive business solutions."
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third w3-margin-bottom">
+                                <img src="./images/Testimonials-Olivia.png" alt="Olivia.png" style="width:100%; border-bottom: 1px solid black; background-color: white;">
+                                <div class="w3-container w3-white">
+                                    <p><b>Olivia (CEO - Olivia & Ava PrimePlanners, Hobart, Australia)</b><br /></p>
+                                    <p class="w3-opacity">Saturday March, 29, 2025</p>
+                                    <p style="font-size: 0.8125rem;">
+                                        I engaged Saharsh Bhadani Private Limited to design and develop a website for my event management company, Olivia & Ava PrimePlanners. I shared a clear vision and a strict one-month deadline—and they not only met it but delivered a website that surpassed my expectations in both design and functionality.
+                                    </p>
+                                    <p id="testimonial_read_content_p_2" style="font-size: 0.8125rem;">
+                                        The final product is visually striking, highly intuitive, and fully responsive across all devices, including smartphones, tablets, and desktops. What truly set them apart was their professionalism, transparent communication, and unwavering dedication to quality. Their commitment to excellence is exceptional, and I wholeheartedly recommend Saharsh Bhadani Private Limited to anyone in need of outstanding web development services.
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="w3-third w3-margin-bottom">
+                                <img src="./images/Testimonials-JavierRamos.jpg" alt="JavierRamos.jpg" style="width: 100%; border-bottom: 1px solid black; background-color: white;">
+                                <div class="w3-container w3-white">
+                                    <p><b>Javier Ramos</b></p>
+                                    <p><b>(Independent seller on Amazon)</b></p>
+                                    <p class="w3-opacity">Monday March, 17, 2025</p>
+                                    <p style="font-size: 0.8125rem;">
+                                        I had the opportunity to collaborate with Saharsh Bhadani Private Limited for my business analytics requirements, and I was genuinely impressed by their expertise. As an Amazon seller with over three years of experience, I was struggling with frequent order cancellations. After sharing two months of sales data, their team delivered <span id="testimonial_read_content_span_3">in-depth, insightful reports that uncovered key patterns—such as product performance, regional trends, and recurring order issues—that I hadn’t previously identified.</span>
+                                    </p>
+                                    <p id="testimonial_read_content_p_3" style="font-size: 0.8125rem;">
+                                        Their findings were not only precise but also actionable, helping me implement practical strategies that are already improving my business operations. I now feel more empowered to make informed, data-driven decisions and look forward to even better results. I highly recommend Saharsh Bhadani Private Limited to anyone seeking expert analytics and impactful business insights.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            🎨 Creativity That Captivates
-                        </h3>
-                        <p>
-                            Great design and compelling visuals are essential in today’s digital landscape. Our graphic designers craft intuitive, visually stunning designs that not only look great but also communicate your brand’s story effectively across platforms.
-                        </p>
-                    </div>
-                </div>
-                <div class="w3-third">
-                    <div class="why_choose_us_article w3-card-4">
-                        <h3>
-                            ✍️ Content That Converts
-                        </h3>
-                        <p>
-                            Whether it’s web content, branding material, or marketing copy, our content creators craft powerful messaging tailored to your audience. We focus on clarity, creativity, and consistency to ensure your voice stands out in a crowded market.
-                        </p>
-                    </div>
+                    <footer class="w3-container w3-teal">
+                        <p id="modal_footer_message">&nbsp;</p>
+                    </footer>
                 </div>
             </div>
         </div>
-        <div id="toggle_additinal_features_div_2" class="w3-center" style="margin-top:10px">
-            <button class="toggle_additional_feature_button" onclick="toggle_additional_features_content()">
-                Hide additional features&nbsp;<b>↑</b>
-            </button>
-            <button class="watch_featured_videos_button">
-                ▶&nbsp;Watch features video on YouTube
-            </button>
-            <button class="take_interactive_tour_button" onclick="openProcessTour()">
-                🚀&nbsp;Take an Interactive Process Tour
-            </button>
+
+
+        <div class="w3-row w3-container w3-row-padding" style="margin:10px 0">
+            <div class="w3-half w3-container">
+                <div class="w3-topbar w3-border-amber">
+                    <img src="./w3images/our_core_competencies.png" style="width:100%; cursor:pointer; border: 1px solid grey; border-top: none;" onclick="values_we_bring()">
+                    <h2>Values We Bring to You</h2>
+                    <button class="watch_featured_videos_button" onclick="values_we_bring()">
+                        &nbsp;Learn More
+                    </button>
+                    <br />
+                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
+
+                </div>
+            </div>
+            <!-- Strengths Modal -->
+            <div id="id01" class="w3-modal">
+                <div class="w3-modal-content w3-card-4 w3-animate-top">
+                    <header class="w3-container w3-teal w3-display-container">
+                        <span onclick="document.getElementById('id01').style.display='none'"
+                              class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                        <h2>Discover what makes us unique!</h2>
+                    </header>
+                    <div class="w3-container modal-settings">
+                        <h2 style="margin-bottom: 15px;">🤝 Why Businesses Trust Us</h2>
+                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                            <div class="w3-third">
+                                <div class="why_choose_us_article">
+                                    <h3>
+                                        ✅ Client-Centric Mindset
+                                    </h3>
+                                    <p>
+                                        We listen, understand, and deliver. Every project starts with your goals in mind and ends with a solution that brings those goals to life.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article">
+                                    <h3>
+                                        🔄 End-to-End Service
+                                    </h3>
+                                    <p>
+                                        From planning and development to execution and post-launch support, we offer full-cycle solutions under one roof — reducing complexity and ensuring consistency.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article">
+                                    <h3>
+                                        ⏱️ On-Time, Every Time
+                                    </h3>
+                                    <p>
+                                        We respect your timelines and deliver projects on schedule with a keen eye on quality, ensuring a smooth and predictable project experience.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                            <div class="w3-third">
+                                <div class="why_choose_us_article">
+                                    <h3>
+                                        🔐 Secure, Scalable, and Future-Ready
+                                    </h3>
+                                    <p>
+                                        Our solutions are built for longevity, with security and scalability at the core — so your business is ready for tomorrow’s challenges.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article">
+                                    <h3>
+                                        🌐 Global Mindset, Local Approach
+                                    </h3>
+                                    <p>
+                                        We serve businesses across industries and geographies, combining a global outlook with a local understanding of markets, culture, and user behavior.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 style="margin-bottom: 15px;">🌟 Our Core Competencies</h2><br />
+                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        🧠 Intelligent Solutions with AI & ML
+                                    </h3>
+                                    <p>
+                                        We build smart, self-learning systems that empower businesses to automate processes, predict trends, and make data-driven decisions. From predictive models to AI-powered customer engagement, our solutions are designed to deliver long-term value and measurable ROI.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        📈 Powerful Data Analytics
+                                    </h3>
+                                    <p>
+                                        Data is only as good as the insights it provides. Our analytics solutions turn raw data into actionable intelligence, enabling businesses to optimize operations, identify opportunities, and gain a competitive edge.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        ⚙️ Automation for Efficiency & Scale
+                                    </h3>
+                                    <p>
+                                        Our automation services help reduce manual effort, eliminate bottlenecks, and increase productivity. From streamlining workflows to building custom bots, we ensure your operations are faster, smoother, and more cost-effective.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; ">
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        🧩 Consulting That Aligns Strategy With Execution
+                                    </h3>
+                                    <p>
+                                        Our consulting team works closely with you to understand your business challenges and align our solutions with your short- and long-term goals. Whether you're going digital for the first time or scaling existing systems, we guide your journey with clarity and confidence.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        🎨 Creativity That Captivates
+                                    </h3>
+                                    <p>
+                                        Great design and compelling visuals are essential in today’s digital landscape. Our graphic designers craft intuitive, visually stunning designs that not only look great but also communicate your brand’s story effectively across platforms.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="w3-third">
+                                <div class="why_choose_us_article w3-card-4">
+                                    <h3>
+                                        ✍️ Content That Converts
+                                    </h3>
+                                    <p>
+                                        Whether it’s web content, branding material, or marketing copy, our content creators craft powerful messaging tailored to your audience. We focus on clarity, creativity, and consistency to ensure your voice stands out in a crowded market.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="w3-container w3-teal">
+                        <p id="modal_footer_message">&nbsp;</p>
+                    </footer>
+                </div>
+            </div>
+
+
+            <div class="w3-half w3-container">
+                <div class="w3-topbar w3-border-amber">
+                    <img src="./w3images/portfolio_project.png" style="width: 100%; cursor: pointer; border: 1px solid grey; border-top: none;" onclick="view_our_project()">
+                    <h2>Portfolio</h2>
+                    <button class="take_interactive_tour_button" onclick="view_our_project()">
+                        &nbsp;View our projects
+                    </button>
+                    <br />
+                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
+
+                </div>
+            </div>
         </div>
+
+
+
+
         <!-- Process Modal Overlay -->
         <div class="process-modal-overlay" id="processModalOverlay" onclick="closeOnProcessOverlay(event)">
             <div class="process-tour-container" onclick="event.stopPropagation()">
@@ -1893,6 +2132,213 @@
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <section id="contact-us" class="contact-us-settings">
+        <div>
+            <div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium" id="contactUs">
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Contact details</p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+                                Landmark: Near Lansdowne Market<br>
+                                WhatsApp & Phone no: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Site Information</p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(policy_page_name)"><u>Privacy Policy</u></a>
+                            <br>
+                            <a onclick="navigateToPage(tnc_page_name)"><u>Terms and Conditions</u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(cnr_page_name)"><u>Cancellation and Refund</u></a>
+                            <br>
+                            <a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(snd_page_name)"><u>Shipping and Delivery</u></a>
+                            <br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Quick Links</p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            Chat now: <a target="_blank" href="https://wa.me/918910441949?text=">WhatsApp chat</a><br>
+                            Call: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+                            Visit: <a target="_blank"
+                                      href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                Location
+                                in Map.
+                            </a><br>
+                            Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                Fill a Google
+                                form
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+                <div class="w3-row w3-border w3-center">
+                    <script>
+                        const form_submitted = async (form) => {
+                            try {
+                                const loader = document.querySelector(".loader");
+                                loader.classList.remove("loader-hidden");
+                                let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                                message_to_save = '$index$' + form.Message.value
+                                url = 'https://django-hello-world-pink-ten.vercel.app?query=SAVE_LEADS&module=message&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Message=' + message_to_save;
+                                let response = await fetch(url);
+                                clearTimeout(timeId);
+                                let responseJson = await response.json();
+                                if (responseJson[0].inserted_id != null) {
+                                    loader.classList.add("loader-hidden");
+                                    if (form.Email.value.localeCompare("system") == 0) {
+                                        alert("Thank you for submitting your feedback!");
+                                    }
+                                    else {
+                                        alert("We will contact you soon!");
+                                    }
+                                    form.reset();
+                                }
+                                else {
+                                    alert("Something went wrong");
+                                }
+                            } catch (error) {
+                                console.log(error);
+                            }
+                            return false;
+                        }
+                    </script>
+
+                </div>
+            </div>
+            <!-- medium screen-->
+            <div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium " id="contactUs">
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow ">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Contact details</p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
+                                WhatsApp & Phone: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                Email:&nbsp;<a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Support</p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u>Careers</u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u>Frequently asked questions</u></a><br>
+                            <a onclick="navigateToPage(policy_page_name)"><u>Policy</u></a><br>
+                            <a onclick="navigateToPage(payments_page_name)"><u>Payments</u></a><br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank">Provide a feedback</a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge">Appointment</p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            Chat now: <a target="_blank" href="https://wa.me/918910441949?text=">WhatsApp</a><br>
+                            Call: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            Email: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">Send email</a><br>
+                            Visit: <a target="_blank"
+                                      href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                Location
+                                in Map.
+                            </a><br>
+                            Get in touch: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                Fill a Google
+                                form
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+            <button style="margin-left: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'">Get In Touch</button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-32 w3-center" id="footer">
+        <a>Trending</a> | <a>About us</a> | <a>Pricing</a> | <a>Settings</a><br /><br />
+
+        <h4>Follow Us</h4>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
+           onclick="openLink('facebook')"><i class="fa fa-facebook"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')">
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')">
+            <i class="fa fa-google-plus"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Instagram"
+           onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
+           onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
+        <p>Last updated on : <span id="last_updated_on"></span></p>
+        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</p>
+
+        <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+            <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
+            <a class="w3-button goto-top-button" href="#home">
+                <span class="w3-xlarge">
+                    <i class="fa fa-chevron-circle-up"></i>
+                </span>
+            </a>
+        </div>
+        <script>
+            function openLink(pageName) {
+                url_to_visit = ""
+                if (pageName == "linkedIn")
+                    url_to_visit = linkedIn
+                else if (pageName == "facebook")
+                    url_to_visit = facebook
+                else if (pageName == "twitter")
+                    url_to_visit = twitter
+                else if (pageName == "instagram")
+                    url_to_visit = instagram
+                else if (pageName == "youtube")
+                    url_to_visit = youtube
+                else if (pageName == "google")
+                    url_to_visit = google_business
+                else
+                    url_to_visit = website
+                window.open(url_to_visit);
+            }
+        </script>
+    </footer>
+    <div>
+        <!-- captcha contact-->
     </div>
 
     <!-- Footer
@@ -2530,24 +2976,18 @@
 
         const style = document.createElement('style');
         style.textContent = `
-                                                                                                        @keyframes ripple {
-                                                                                                            to {
-                                                                                                                transform: scale(20);
-                                                                                                                opacity: 0;
-                                                                                                            }
-                                                                                                        }
-                                                                                                    `;
+                            @keyframes ripple {
+                                to {
+                                    transform: scale(20);
+                                    opacity: 0;
+                                }
+                            }
+                        `;
         document.head.appendChild(style);
 
         document.querySelectorAll('.btn-secondary').forEach(btn => {
             btn.addEventListener('click', () => {
-                alert('Demo section coming soon! 🚀');
-            });
-        });
-
-        document.querySelectorAll('.btn-primary').forEach(btn => {
-            btn.addEventListener('click', () => {
-                alert('Contact us at: contact@aimlservices.in 📧');
+                view_our_project();
             });
         });
         /* Settings */
@@ -2639,7 +3079,9 @@
         });
 
         textSizeSlider.addEventListener('input', (e) => {
-            updateTextSize(e.target.value);
+            const size = textSizeSlider.value;
+            document.documentElement.style.fontSize = size + "px";
+            sizeDisplay.textContent = size + "px";
         });
 
         // Settings popup event listeners
@@ -2682,64 +3124,32 @@
 
         // Initialize when page loads
         window.onload = function () {
+            document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+
             initializeSettings();
             _waEmbed(wa_btnSetting);
-            showAlert("Click on Settings to personalize this webpage the way you like.")
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader-hidden");
+            showAlert("Click on Settings to personalize this webpage the way you like.");
         }
-
-        // Services
-        /* =====================
-           CARD LOGIC - Medium Small Screen
-        ====================== */
-        const cards_ms = document.querySelectorAll(".services-card-medium-small-screen");
-
-        cards_ms.forEach(card => {
-            card.addEventListener("click", () => {
-                if (card.classList.contains("active")) return;
-
-                const index = Number(card.dataset.index);
-
-                cards_ms.forEach((c, i) => {
-                    c.classList.toggle("active", i === index);
-                    c.classList.toggle("collapsed", i !== index);
-                });
-            });
-        });
-
-        /* =====================
-           CARD LOGIC - Large Screen
-        ====================== */
-        const cards = document.querySelectorAll(".services-card-large-screen");
-
-        cards.forEach(card => {
-            card.addEventListener("click", () => {
-                if (card.classList.contains("active")) return;
-
-                const index = Number(card.dataset.index);
-
-                cards.forEach((c, i) => {
-                    c.classList.toggle("active", i === index);
-                    c.classList.toggle("collapsed", i !== index);
-                });
-            });
-        });
 
         // Alert function - utility function
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                                                        position: fixed;
-                                                                        top: 20px;
-                                                                        right: 20px;
-                                                                        background: rgba(99, 102, 241, 0.9);
-                                                                        color: white;
-                                                                        padding: 16px 24px;
-                                                                        border-radius: 12px;
-                                                                        font-weight: 500;
-                                                                        z-index: 999;
-                                                                        backdrop-filter: blur(20px);
-                                                                        animation: slideInAlert 0.5s ease-out;
-                                                                    `;
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(99, 102, 241, 0.9);
+                    color: white;
+                    padding: 16px 24px;
+                    border-radius: 12px;
+                    font-weight: 500;
+                    z-index: 999;
+                    backdrop-filter: blur(4px);
+                    animation: slideInAlert 0.5s ease-out;
+                `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -2756,12 +3166,10 @@
 
         function toggle_additional_features_content() {
             if (additional_featured_content_hidden == true) {
-                alert("here");
                 document.getElementById('toggle_additinal_features_div_1').hidden = true;
                 document.getElementById('additional_featured_content').hidden = false;
                 document.getElementById('toggle_additinal_features_div_2').hidden = false;
                 additional_featured_content_hidden = false;
-                alert("here 2");
             } else if (additional_featured_content_hidden == false) {
                 document.getElementById('toggle_additinal_features_div_1').hidden = false;
                 document.getElementById('additional_featured_content').hidden = true;
@@ -2853,8 +3261,81 @@
                 if (e.key === 'Escape') closeProcessTour();
             }
         });
-
+        //testimonials
+        function read_testimonials() {
+            document.getElementById('id02').style.display = 'block';
+        }
+        //our core competencies
+        function values_we_bring() {
+            document.getElementById('id01').style.display = 'block';
+        }
+        //sample projects
+        function view_our_project() {
+            navigateToExplorePageInAnotherTab(explore_page_name_project_section);
+        }
     </script>
+    <script defer>
+        // Services
+        document.addEventListener("click", e => {
+            const card = e.target.closest(
+                ".services-card-large-screen, .services-card-medium-small-screen"
+            );
+            if (!card) return;
+
+            const container = card.parentElement;
+            container.querySelectorAll(".active").forEach(c => {
+                c.classList.remove("active");
+                c.classList.add("collapsed");
+            });
+
+            card.classList.add("active");
+            card.classList.remove("collapsed");
+        });
+        //for smooth scrolling
+        let scrolling;
+        window.addEventListener('scroll', () => {
+            document.body.classList.add('scrolling');
+            clearTimeout(scrolling);
+            scrolling = setTimeout(() => {
+                document.body.classList.remove('scrolling');
+            }, 150);
+        });
+    </script>
+    <!--Get In Touch Modal-->
+    <script type="text/javascript">
+        const close_modal = async (form) => {
+            try {
+                const loader = document.querySelector(".loader");
+                loader.classList.remove("loader-hidden");
+                let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                let response = await fetch(url);
+                clearTimeout(timeId);
+
+                if (response.ok) {
+                    loader.classList.add("loader-hidden");
+                    if (form.Email.value.localeCompare("system") == 0) {
+                        alert("Thank you for submitting your feedback!");
+                    }
+                    else {
+                        alert("We will contact you soon!");
+                        loader.classList.add("loader-hidden");
+
+                    }
+                    form.reset();
+                    document.getElementById('id03').style.display = 'none';
+                }
+                else {
+                    alert("Something went wrong");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            return false;
+
+        }
+    </script>
+
     <!--Code for WhatsApp-->
     <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
     <script>
