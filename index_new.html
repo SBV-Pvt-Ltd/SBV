@@ -736,6 +736,7 @@
             padding: 20px;
             opacity: 0;
             transition: opacity 0.3s ease;
+            overflow-y: scroll
         }
 
         .services-card-large-screen.active .services-card-content-large-screen {
@@ -1158,7 +1159,10 @@
             background: var(--bg-main);
             color: var(--text-muted);
         }
-
+        .footer_link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
         /* ========================
 
         ======================== */
@@ -1202,7 +1206,7 @@
                 ====================== */
             :root {
                 --services-section-collapsed-height: 60px;
-                --services-section-expanded-height: 260px;
+                --services-section-expanded-height: 400px;
             }
 
             /* =====================
@@ -1258,6 +1262,7 @@
                     CONTENT
                 ====================== */
             .services-card-content-medium-small-screen {
+                overflow-y: scroll;
                 padding: 20px;
                 opacity: 0;
                 transition: opacity 0.3s ease;
@@ -1580,7 +1585,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="BUSINESS_ANALYTICS_CARD_HEADER">BUSINESS ANALYTICS</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT">BUSINESS ANALYTICS</span></h2>
-                        <p>This is the fully visible content of Card 1.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/9fFQA-JOXA0?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(business_analytics_page)"><u><span id="visit_business_analytics_text">Visit our Business Analytics section for more details.</span></u></a>
                     </div>
                 </div>
@@ -1589,7 +1597,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="AI_MACHINE_LEARNING_CARD_HEADER">AI & MACHINE LEARNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT">AI & MACHINE LEARNING</span></h2>
-                        <p>This is the fully visible content of Card 2.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/qYNweeDHiyU?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(ai_ml_page)"><u><span id="visit_ai_ml_page_text">Visit our AI & Machine Learning section for more details.</span></u></a>
 
                     </div>
@@ -1599,7 +1610,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="IT_CONSULTATION_CARD_HEADER">IT CONSULTATION</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="IT_CONSULTATION_CARD_HEADER_TEXT">IT CONSULTATION</span></h2>
-                        <p>This is the fully visible content of Card 3.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/Rp7Cx8ZH7Zs?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(it_consultation_page)"><u><span id="visit_it_consultation_page_text">Visit our IT Consultation section for more details.</span></u></a>
 
                     </div>
@@ -1609,7 +1623,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="GRAPHIC_DESIGNING_CARD_HEADER">GRAPHICS DESIGNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT">GRAPHICS DESIGNING</span></h2>
-                        <p>This is the fully visible content of Card 4.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/m0gAHqYqI1g?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_graphic_designing_page_text">Visit our Graphic Designing section for more details.</span></u></a>
 
                     </div>
@@ -1619,7 +1636,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="WEBSITE_DESIGNING_CARD_HEADER">WEBSITE DESIGNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="WEBSITE_DESIGNING_CARD_HEADER_TEXT">WEBSITE DESIGNING</span></h2>
-                        <p>This is the fully visible content of Card 5.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/wdjSAXXciMc?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_website_designing_page_text">Visit our Website Designing section for more details.</span></u></a>
 
                     </div>
@@ -1629,7 +1649,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="APP_DEVELOPMENT_CARD_HEADER">APP DEVELOPMENT</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="APP_DEVELOPMENT_CARD_HEADER_TEXT">APP DEVELOPMENT</span></h2>
-                        <p>This is the fully visible content of Card 6.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/Sfpcl4FX3TU?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(app_development_page)"><u><span id="visit_app_development_page_text">Visit our App Development section for more details.</span></u></a>
 
                     </div>
@@ -1638,7 +1661,10 @@
                     <div class="services-card-name-medium-small-screen"><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER">SOFTWARE DEVELOPMENT</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT">SOFTWARE DEVELOPMENT</span></h2>
-                        <p>This is the fully visible content of Card 7.</p>
+                        <iframe width="80%" height="80%"
+                                src="https://www.youtube.com/embed/pquPUX1EihM?autoplay=1&mute=1">
+                        </iframe>
+                        <br />
                         <a onclick="navigateToPage(software_development_page)"><u><span id="visit_software_development_page_text">Visit our Software Development section for more details.</span></u></a>
 
                     </div>
@@ -1654,7 +1680,10 @@
                         <div class="services-card-name-large-screen"><span id="BUSINESS_ANALYTICS_CARD_HEADER1">BUSINESS ANALYTICS</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT1">BUSINESS ANALYTICS</span></h2>
-                            <p>This is the fully visible content of Card 1.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/9fFQA-JOXA0?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(business_analytics_page)"><u><span id="visit_business_analytics_text1">Visit our Business Analytics section for more details.</span></u></a>
                         </div>
                     </div>
@@ -1663,7 +1692,10 @@
                         <div class="services-card-name-large-screen"><span id="AI_MACHINE_LEARNING_CARD_HEADER1">AI & MACHINE LEARNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT1">AI & MACHINE LEARNING</span></h2>
-                            <p>This is the fully visible content of Card 2.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/qYNweeDHiyU?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(ai_ml_page)"><u><span id="visit_ai_ml_page_text1">Visit our AI & Machine Learning section for more details.</span></u></a>
                         </div>
                     </div>
@@ -1672,7 +1704,10 @@
                         <div class="services-card-name-large-screen"><span id="IT_CONSULTATION_CARD_HEADER1">IT CONSULTATION</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="IT_CONSULTATION_CARD_HEADER_TEXT1">IT CONSULTATION</span></h2>
-                            <p>This is the fully visible content of Card 3.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/Rp7Cx8ZH7Zs?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(it_consultation_page)"><u><span id="visit_it_consultation_page_text1">Visit our IT Consultation section for more details.</span></u></a>
 
                         </div>
@@ -1682,7 +1717,10 @@
                         <div class="services-card-name-large-screen"><span id="GRAPHIC_DESIGNING_CARD_HEADER1">GRAPHICS DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT1">GRAPHICS DESIGNING</span></h2>
-                            <p>This is the fully visible content of Card 4.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/m0gAHqYqI1g?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_graphic_designing_page_text1">Visit our Graphic Designing section for more details.</span></u></a>
 
                         </div>
@@ -1692,7 +1730,10 @@
                         <div class="services-card-name-large-screen"><span id="WEBSITE_DESIGNING_CARD_HEADER1">WEBSITE DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="WEBSITE_DESIGNING_CARD_HEADER_TEXT1">WEBSITE DESIGNING</span></h2>
-                            <p>This is the fully visible content of Card 5.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/wdjSAXXciMc?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_website_designing_page_text1">Visit our Website Designing section for more details.</span></u></a>
 
                         </div>
@@ -1702,7 +1743,10 @@
                         <div class="services-card-name-large-screen"><span id="APP_DEVELOPMENT_CARD_HEADER1">APP DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="APP_DEVELOPMENT_CARD_HEADER_TEXT1">APP DEVELOPMENT</span></h2>
-                            <p>This is the fully visible content of Card 6.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/Sfpcl4FX3TU?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(app_development_page)"><u><span id="visit_app_development_page_text1">Visit our App Development section for more details.</span></u></a>
 
                         </div>
@@ -1711,7 +1755,10 @@
                         <div class="services-card-name-large-screen"><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER1">SOFTWARE DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT1">SOFTWARE DEVELOPMENT</span></h2>
-                            <p>This is the fully visible content of Card 7.</p>
+                            <iframe width="80%" height="80%"
+                                    src="https://www.youtube.com/embed/pquPUX1EihM?autoplay=1&mute=1">
+                            </iframe>
+                            <br />
                             <a onclick="navigateToPage(software_development_page)"><u><span id="visit_software_development_page_text1">Visit our Software Development section for more details.</span></u></a>
 
                         </div>
@@ -2181,7 +2228,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a><span id="trending_text_footer">Trending</span></a> | <a><span id="about_us_text_footer">About us</span></a> | <a><span id="pricing_text_footer">Pricing</span></a> | <a><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
