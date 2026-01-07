@@ -3137,7 +3137,7 @@
         //get spreadsheet data into map - key value pair
         async function getMapFromSpreadSheetData(spreadsheetData, valueIndex) {
             let lang = {};
-            for (var i = 0; i < 258; i++) {
+            for (var i = 0; i < spreadsheetData.length; i++) {
                 const arr = spreadsheetData[i];
                 lang[arr[0]] = arr[valueIndex];
             }
@@ -3146,35 +3146,35 @@
         //fetch Spanish language
         async function fetchSpanishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:B259";
+            range = "Translation_index!A:B";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 1);
         }
         //fetch French language
         async function fetchFrenchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:C259";
+            range = "Translation_index!A:C";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 2);
         }
         //fetch Dutch language
         async function fetchDutchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:D259";
+            range = "Translation_index!A:D";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 3);
         }
         //fetch Italiano language
         async function fetchItalianoLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:E259";
+            range = "Translation_index!A:E";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 4);
         }
         //fetch English language
         async function fetchEnglishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:F259";
+            range = "Translation_index!A:F";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
