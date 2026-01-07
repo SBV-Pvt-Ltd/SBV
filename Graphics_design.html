@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Graphics Designing section of Saharsh Bhadani Venture Private Limited.">
+    <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Graphics Designing,Graphics,Designing">
+    <meta name="author" content="Saharsh Bhadani Venture Private Limited">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphics Design - Saharsh Bhadani Venture Private Limited</title>
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/w3-theme-black.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="Constant.js" defer></script>
+
+    <style>
+        /* ===================== */
+        /* THEME VARIABLES */
+        /* ===================== */
+        :root {
+            --bg-body: #0a0a0a;
+            --hero-bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --overlay: radial-gradient(ellipse at center, transparent 0%, rgba(10,10,10,.7) 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #bbbbbb;
+            --card-bg: rgba(255,255,255,0.05);
+            --card-border: rgba(255,255,255,0.1);
+            --accent: #ff6b6b;
+            --accent-2: #f39c12;
+            --glass: blur(10px);
+            --text-main: #FFFFFF;
+            --text-muted: #F8F8FF;
+            --company-name-text: White;
+            --accent1: #6366f1;
+            --accent2: #8b5cf6;
+        }
+
+        [data-theme="light"] {
+            --bg-body: #f5f7fb;
+            --hero-bg: linear-gradient(135deg, #ffffff 0%, #eef1f7 50%, #e6ebf5 100%);
+            --overlay: radial-gradient(ellipse at center, transparent 0%, rgba(245,247,251,.9) 100%);
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --card-bg: rgba(255,255,255,0.05);
+            --card-border: rgba(0,0,0,0.9);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --company-name-text: black;
+            --accent1: #667eea;
+            --accent2: #764ba2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: #0a0a0a;
+        }
+
+        html {
+            font-size: 1rem;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            overflow: hidden;
+        }
+
+        /* Animated Geometric Background */
+        .geometric-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .circle {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+            top: 10%;
+            left: 5%;
+            animation: float 15s infinite ease-in-out, pulse 4s infinite ease-in-out;
+        }
+
+        .triangle {
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 260px solid #4ecdc4;
+            top: 60%;
+            right: 10%;
+            animation: float 18s infinite ease-in-out, rotate 20s linear infinite;
+        }
+
+        .square {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #f7b731, #f39c12);
+            top: 30%;
+            right: 20%;
+            transform: rotate(45deg);
+            animation: float 16s infinite ease-in-out, rotate 15s linear infinite;
+        }
+
+        .hexagon {
+            width: 180px;
+            height: 104px;
+            background: #9b59b6;
+            position: absolute;
+            bottom: 20%;
+            left: 15%;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            animation: float 17s infinite ease-in-out, pulse 5s infinite ease-in-out;
+        }
+
+        .pentagon {
+            width: 160px;
+            height: 160px;
+            background: #e74c3c;
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+            animation: float 19s infinite ease-in-out, rotate 18s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+
+            50% {
+                transform: scale(1.15);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Gradient Overlay */
+        .gradient-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.7) 100%);
+            z-index: 2;
+        }
+
+        /* Content */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .text-content {
+            animation: slideInUp 1s ease-out;
+            margin-bottom: 4rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(238, 90, 111, 0.2));
+            border: 2px solid rgba(255, 107, 107, 0.4);
+            border-radius: 50px;
+            color: #ff6b6b;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f39c12 50%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #bbb;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            max-width: 200px;
+            align-self: center;
+        }
+
+            .btn::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+
+            .btn:hover::before {
+                width: 300px;
+                height: 300px;
+            }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
+            }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 2px solid lightgrey;
+            backdrop-filter: blur(10px);
+        }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-5px);
+            }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .service-card {
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .service-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(247, 183, 49, 0.1));
+                opacity: 0;
+                transition: opacity 0.4s ease;
+            }
+
+            .service-card:hover::before {
+                opacity: 1;
+            }
+
+            .service-card:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 107, 107, 0.4);
+                transform: translateY(-15px) scale(1.03);
+                box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+            }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .service-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f39c12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-description {
+            font-size: 1rem;
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+            .service-features li {
+                color: var(--text-secondary);
+                font-size: 0.9rem;
+                padding: 0.5rem 0;
+                padding-left: 1.5rem;
+                position: relative;
+            }
+
+                .service-features li::before {
+                    content: '✓';
+                    position: absolute;
+                    left: 0;
+                    color: #ff6b6b;
+                    font-weight: bold;
+                }
+
+        /* Visual Content - Service Showcase */
+        .visual-content {
+            display: none;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            margin: 0 auto 50px;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .stat-item:hover {
+                background: rgba(255, 107, 107, 0.1);
+                border-color: rgba(255, 107, 107, 0.3);
+                transform: translateY(-10px);
+            }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b 0%, #f39c12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #bbb;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            transition: background .3s ease, color .3s ease;
+        }
+
+        /* ===================== */
+        /* THEME TOGGLE */
+        /* ===================== */
+        .theme-toggle {
+            padding: .6rem 1.2rem;
+            border-radius: 30px;
+            background: var(--card-bg);
+            border: 1px solid black;
+            color: var(--text-main);
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            font-size: 1rem;
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0,0,0,0.1);
+            color: #0f172a;
+        }
+
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--hero-bg);
+            overflow: hidden;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: var(--overlay);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            width: 100%;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-2), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 50px;
+        }
+
+        .stat-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            backdrop-filter: var(--glass);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: .875rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            transition: .3s ease;
+        }
+
+        .service-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: var(--text-secondary);
+        }
+
+        .get-in-touch-button-settings {
+            max-width: 175px;
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: orange;
+            border: none;
+        }
+
+        .top-navbar {
+            z-index: 11;
+        }
+        /* Settings */
+        .settings-button {
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+            .settings-button:hover {
+                transform: scale(1.1) rotate(90deg);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+            .settings-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--bg-body);
+            color: var(--text-main);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            z-index: 100;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+
+            .settings-panel.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+        .settings-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+            .settings-close:hover {
+                color: #667eea;
+                transform: rotate(90deg);
+            }
+
+        .settings-title {
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+        }
+
+        .setting-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+            select:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+        input[type="range"] {
+            height: 40px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                border: none;
+            }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 100%;
+            height: 40px;
+            border: 3px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .color-option:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .color-option.active {
+                border-color: #333;
+                transform: scale(1.1);
+            }
+
+            .color-option::after {
+                content: '✓';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 1rem;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .color-option.active::after {
+                opacity: 1;
+            }
+
+
+
+        .text-size-display {
+            margin-top: 5px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+
+
+        .company-name {
+            font-family: Brush Script MT, cursive;
+            margin-top: -5px;
+            margin-left: 5px;
+            font-size: 1.4rem;
+            color: var(--company-name-text);
+            overflow-x: clip;
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            transition: opacity 0.75s, visibility 0.75s;
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 15px solid #dddddd;
+            border-top-color: #009688;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
+        }
+
+        #footer {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        .footer_link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .get_in_touch_modal_settings{
+            background: var(--bg-body);
+            color: var(--text-main)
+        }
+        .get-in-touch-settings {
+            background: var(--bg-body);
+            color: var(--text-muted);
+        }
+        .contact-us-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .service-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .stats-bar {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .get-in-touch-button-settings {
+                margin-bottom: 5px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .company-name {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function navigateTo(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + features_service_page_name;
+            new_url_section = new_url + "#" + pageName;
+            window.location.href = new_url_section;
+            //window.open(new_url_section, "_blank");
+        }
+
+        function navigateToIndex(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + index_page_name;
+            new_url_section = new_url;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = new_url + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPage(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.open(new_url_section);
+        }
+
+        function navigateToExplorePageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined + pageName;
+            window.open(new_url_section);
+        }
+    </script>
+</head>
+<body data-theme="dark">
+    <header>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top top-navbar">
+            <div class="w3-bar" id="myNavbar">
+                <a class="w3-margin-left w3-xlarge w3-buttons w3-left">
+                    <i class="fa fa-bars side-navbar-items" onclick="w3_open()"></i>
+                </a>
+                <a onclick="navigateToIndex('#home')" class="company-name">
+                    Saharsh Bhadani Venture Pvt Ltd
+                </a>
+                <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" title="Settings">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red" href="javascript:void(0);">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
+                <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+            <!-- Sidebar (hidden by default) -->
+            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:10;width:40%;min-width:300px" id="mySidebar">
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
+                    <span id="close_menu_button">Close Menu</span>
+                    <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
+                </a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 <span id="Graphics_Designing_text">Graphics Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
+            </nav>
+            <!-- Navbar on small screens -->
+            <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 <span id="Graphics_Designing_text1">Graphics Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
+            </div>
+        </div>
+        <section class="hero">
+            <!-- Geometric Background -->
+            <div class="geometric-bg">
+                <div class="shape circle"></div>
+                <div class="shape triangle"></div>
+                <div class="shape square"></div>
+                <div class="shape hexagon"></div>
+                <div class="shape pentagon"></div>
+            </div>
+
+            <div class="gradient-overlay"></div>
+
+            <div class="hero-content">
+                <div class="text-content">
+                    <div class="badge">
+                        <span>🇮🇳</span>
+                        <span id="hero_text_1">India's Creative Studio</span>
+                    </div>
+
+                    <h1><span id="hero_text_2">Transform Your Vision Into Stunning Visuals</span></h1>
+
+                    <p class="subtitle">
+                        <span id="hero_text_3">
+                            Professional graphics design services for content creation, 2D graphics, video editing,
+                            and comprehensive digital solutions. Elevate your brand with our creative expertise.
+                        </span>
+                    </p>
+
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'">
+                            <span id="hero_text_4">Get In Touch</span>
+                        </button>
+                        <button class="btn btn-secondary">
+                            <span id="hero_text_5">View Portfolio</span>
+                        </button>
+                    </div>
+                    <div class="stats-bar">
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label"><span id="hero_text_6">Projects</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label"><span id="hero_text_7">Happy Clients</span></div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label"><span id="hero_text_8">Satisfaction</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Settings Overlay -->
+        <div class="settings-overlay" id="settingsOverlay"></div>
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <button class="settings-close" id="settingsClose">×</button>
+            <h3 class="settings-title" id="settings-title"><span id="settings_title_text">Settings</span></h3>
+
+            <div class="setting-group">
+                <label for="language" class="setting-label" id="lang-label"><span id="lang_label_text">Language</span></label>
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label class="setting-label" id="bg-label"><span id="bg_label_text">Toggle Background Color</span></label>
+                <div class="color-options">
+                    <div>
+                        <button class="theme-toggle">☀️ Light</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label for="textSize" class="setting-label"><span id="text_size_label">Text Size</span></label>
+                <input type="range" id="textSize" min="12" max="24" value="16">
+                <div class="text-size-display" id="size-display">16px</div>
+            </div>
+        </div>
+        <div class="loader"></div>
+    </header>
+    <!-- Get in Touch Modal -->
+    <div id="id03" class="w3-modal get_in_touch_modal_settings" style="z-index:999999;">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal w3-display-container">
+                <span onclick="document.getElementById('id03').style.display='none'"
+                      class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                <h2><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
+            </header>
+            <div class="w3-container get-in-touch-settings">
+                <div class="w3-col m7 get-in-touch-settings" style="width: 100%;">
+                    <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
+                          onsubmit="close_modal(this)" method="get"
+                          target="display-frame">
+                        <input type="hidden" value="SAVE_LEADS" name="query">
+                        <input type="hidden" value="leads_form" name="module">
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_name_label">Name</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_email_label">Email</span></label>
+                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_country_label">Country</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
+                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_remarks_label">Remarks (if any)</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Message">
+                        </div>
+                        <div class="w3-row">
+                            <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
+                            <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                        </div>
+                    </form>
+                    <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
+                </div>
+            </div>
+            <footer class="w3-container w3-teal">
+                <p id="modal_footer_message">&nbsp;</p>
+            </footer>
+        </div>
+    </div>
+
+
+
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px;z-index:999999;">+</a>
+    </div>
+    <section style="margin-top: 20px; margin-bottom: 20px;">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <div class="service-name"><span id="services_text_1">2D Graphics Design</span></div>
+                <p class="service-description">
+                    <span id="services_text_2">
+                        Stunning visual designs that capture attention and communicate your brand message effectively.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_3">Logo Design & Branding</span></li>
+                    <li><span id="services_text_4">Social Media Graphics</span></li>
+                    <li><span id="services_text_5">Marketing Materials</span></li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✏️</div>
+                <div class="service-name"><span id="services_text_6">Content Creation</span></div>
+                <p class="service-description">
+                    <span id="services_text_7">
+                        Engaging and compelling content that resonates with your audience and drives results.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_8">Creative Copywriting</span></li>
+                    <li><span id="services_text_9">Blog & Article Writing</span></li>
+                    <li><span id="services_text_10">Social Media Content</span></li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🖼️</div>
+                <div class="service-name"><span id="services_text_11">Image Editing</span></div>
+                <p class="service-description">
+                    <span id="services_text_12">
+                        Professional photo editing and retouching to make your images truly stand out.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_13">Photo Retouching</span></li>
+                    <li><span id="services_text_14">Background Removal</span></li>
+                    <li><span id="services_text_15">Color Correction</span></li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎬</div>
+                <div class="service-name"><span id="services_text_16">Video Editing</span></div>
+                <p class="service-description">
+                    <span id="services_text_17">
+                        Dynamic video content with professional editing that tells your story perfectly.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_18">Promotional Videos</span></li>
+                    <li><span id="services_text_19">Social Media Clips</span></li>
+                    <li><span id="services_text_20">Motion Graphics</span></li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <div class="service-name"><span id="services_text_21">Website Content</span></div>
+                <p class="service-description">
+                    <span id="services_text_22">
+                        Optimized web content that enhances user experience and boosts conversions.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_23">Landing Page Copy</span></li>
+                    <li><span id="services_text_24">Product Descriptions</span></li>
+                    <li><span id="services_text_25">About & Service Pages</span></li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📄</div>
+                <div class="service-name"><span id="services_text_26">Professional Brochures</span></div>
+                <p class="service-description">
+                    <span id="services_text_27">
+                        Print-ready brochures and documents that professionally represent your business.
+                    </span>
+                </p>
+                <ul class="service-features">
+                    <li><span id="services_text_28">Corporate Brochures</span></li>
+                    <li><span id="services_text_29">Flyers & Leaflets</span></li>
+                    <li><span id="services_text_30">Business Presentations</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <button style="margin-left: 10px;margin-bottom: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_services_section">Get In Touch</span></button>
+
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <section id="contact-us" class="contact-us-settings">
+        <div>
+            <div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium" id="contactUs">
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="contact_details_ls_1">Contact details</span></p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+                                <span id="contact_details_ls_2">Landmark</span>: Near Lansdowne Market<br>
+                                <span id="contact_details_ls_3">WhatsApp & Phone no</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="site_information_ls_1">Site Information</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_ls_2">Careers</span></u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_ls_3">Frequently asked questions</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_ls_4">Privacy Policy</span></u></a>
+                            <br>
+                            <a onclick="navigateToPage(tnc_page_name)"><u><span id="site_information_ls_5">Terms and Conditions</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(cnr_page_name)"><u><span id="site_information_ls_6">Cancellation and Refund</span></u></a>
+                            <br>
+                            <a onclick="navigateToPage(payments_page_name)"><u><span id="site_information_ls_7">Payments</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(snd_page_name)"><u><span id="site_information_ls_8">Shipping and Delivery</span></u></a>
+                            <br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank"><span id="site_information_ls_9">Provide a feedback</span></a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="quick_links_ls_1">Quick Links</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
+                            <span id="quick_links_ls_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br>
+                            <span id="quick_links_ls_7">Visit</span>: <a target="_blank"
+                                                                         href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                <span id="quick_links_ls_8">Location in Map.</span>
+                            </a><br>
+                            <span id="quick_links_ls_9">Get in touch</span>: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                <span id="quick_links_ls_10">Fill a Google form</span>
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- medium screen-->
+            <div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium " id="contactUs">
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow ">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="contact_details_m_1">Contact details</span></p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
+                                <span id="contact_details_m_2">WhatsApp & Phone</span> <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="site_information_m_1">Site Information</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_m_2">Careers</span></u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_m_3">Frequently asked questions</span></u></a><br>
+                            <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_m_4">Policy</span></u></a><br>
+                            <a onclick="navigateToPage(payments_page_name)"><u><span id="site_information_m_5">Payments</span></u></a><br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank"><span id="site_information_m_6">Provide a feedback</span></a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="quick_links_m_1">Quick Links</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_m_3">WhatsApp</span></a><br>
+                            <span id="quick_links_m_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
+                            <span id="quick_links_m_7">Visit</span>: <a target="_blank"
+                                                                        href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                <span id="quick_links_m_8">Location in Map.</span>
+                            </a><br>
+                            <span id="quick_links_m_9">Get in touch</span>: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                <span id="quick_links_m_10">Fill a Google form</span>
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+            <button style="margin-left: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-32 w3-center" id="footer">
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+
+        <h4><span id="Follow_us_footer">Follow Us</span></h4>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
+           onclick="openLink('facebook')"><i class="fa fa-facebook"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')">
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')">
+            <i class="fa fa-google-plus"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Instagram"
+           onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
+           onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
+        <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
+        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
+
+        <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+            <span class="w3-text w3-padding w3-teal w3-hide-small" id="go_to_top_text_footer">Go To Top</span>
+            <a class="w3-button goto-top-button" href="#home">
+                <span class="w3-xlarge">
+                    <i class="fa fa-chevron-circle-up"></i>
+                </span>
+            </a>
+        </div>
+        <script>
+            function openLink(pageName) {
+                url_to_visit = ""
+                if (pageName == "linkedIn")
+                    url_to_visit = linkedIn
+                else if (pageName == "facebook")
+                    url_to_visit = facebook
+                else if (pageName == "twitter")
+                    url_to_visit = twitter
+                else if (pageName == "instagram")
+                    url_to_visit = instagram
+                else if (pageName == "youtube")
+                    url_to_visit = youtube
+                else if (pageName == "google")
+                    url_to_visit = google_business
+                else
+                    url_to_visit = website
+                window.open(url_to_visit);
+            }
+        </script>
+    </footer>
+
+
+    <script>
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+        // Change style of navbar on scroll
+        window.onscroll = function () { myFunction() };
+        function myFunction() {
+            var navbar = document.getElementById("myNavbar");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.className += "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white" + "w3-black" + "w3-opacity";
+            } else {
+                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "w3-opacity");
+            }
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        /* ======================
+        THEME TOGGLE
+        ====================== */
+        /* ======================
+        THEME: AUTO + PERSIST
+        ====================== */
+        const body = document.body;
+        const toggle = document.querySelector('.theme-toggle');
+        const STORAGE_KEY = 'ui-theme';
+        const LANGUAGE_KEY = 'SBV_LANGUAGE';
+
+        /* Apply theme */
+        function applyTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            // toggle.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            if (theme === 'dark') {
+                toggle.textContent = '☀️ Light';
+                toggle.style.backgroundColor = "#FFFFFF";
+                toggle.style.color = "#000000";
+
+            } else if (theme === 'light') {
+                toggle.textContent = '🌙 Dark';
+                toggle.style.backgroundColor = "#000000";
+                toggle.style.color = "#FFFFFF";
+            }
+        }
+
+        /* Detect system theme */
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+        }
+
+        /* Init theme */
+        (function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEY);
+            const theme = savedTheme || getSystemTheme();
+            applyTheme(theme);
+        })();
+
+        /* Toggle handler */
+        toggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(STORAGE_KEY, next);
+            applyTheme(next);
+        });
+
+        /* React to system theme change (only if user hasn't chosen manually) */
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Button Click Effects
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.left = e.offsetX + 'px';
+                ripple.style.top = e.offsetY + 'px';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+                                            @keyframes ripple {
+                                                to {
+                                                    transform: scale(20);
+                                                    opacity: 0;
+                                                }
+                                            }
+                                        `;
+        document.head.appendChild(style);
+
+        // Parallax Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+
+            document.querySelectorAll('.shape').forEach((shape, index) => {
+                const speed = (index + 1) * 20;
+                shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+
+        // Service Card Hover Effect
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) {
+            observer.observe(statsBar);
+        }
+
+        function animateStats() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                const isPercentage = finalValue.includes('%');
+                let numValue = parseInt(finalValue);
+
+                if (isNaN(numValue)) return;
+
+                let currentValue = 0;
+                const increment = numValue / 50;
+                const duration = 2000;
+                const stepTime = duration / 50;
+
+                const counter = setInterval(() => {
+                    currentValue += increment;
+                    if (currentValue >= numValue) {
+                        stat.textContent = finalValue;
+                        clearInterval(counter);
+                    } else {
+                        if (isPercentage) {
+                            stat.textContent = Math.floor(currentValue) + '%';
+                        } else {
+                            stat.textContent = Math.floor(currentValue) + '+';
+                        }
+                    }
+                }, stepTime);
+            });
+        }
+
+        // Button Actions
+        
+
+        document.querySelector('.btn-secondary').addEventListener('click', () => {
+            navigateToExplorePageInAnotherTab("explore.html");
+        });
+
+        /* Settings */
+        // Settings state stored in memory
+        const primaryLanguage = navigator.language;
+        // Example output: "en-US"
+
+        const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
+        console.log("savedLanguage");
+        console.log(savedLanguage);
+
+        let currentSettings = {
+            language: savedLanguage || primaryLanguage,
+            background: 'dark',
+            textSize: '16'
+        };
+        // Language settings
+        const translations = {
+            en: {
+                'main-title': 'Human-AI Collaboration',
+                'subtitle': 'Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions. Experience the future of intelligent automation and data-driven insights.'
+            },
+            es: {
+                'main-title': 'Colaboración entre humanos e IA',
+                'subtitle': 'Impulsamos a las empresas con soluciones de vanguardia de Inteligencia Artificial y Aprendizaje Automático. Experimente el futuro de la automatización inteligente y la información basada en datos.'
+            },
+            fr: {
+                'main-title': 'Collaboration homme-IA',
+                'subtitle': "Nous donnons aux entreprises les moyens d'exploiter des solutions de pointe en intelligence artificielle et en apprentissage automatique.Découvrez le futur de l'automatisation intelligente et des analyses de données."
+            },
+            de: {
+                'main-title': 'Samenwerking tussen mens en AI',
+                'subtitle': 'Bedrijven versterken met geavanceerde oplossingen op het gebied van kunstmatige intelligentie en machine learning. Ervaar de toekomst van intelligente automatisering en datagedreven inzichten.'
+            },
+            it: {
+                'main-title': 'Collaborazione uomo-intelligenza artificiale',
+                'subtitle': "Forniamo alle aziende soluzioni all'avanguardia di Intelligenza Artificiale e Machine Learning.Scopri il futuro dell'automazione intelligente e degli insight basati sui dati."
+            }
+        };
+        // DOM elements
+        const languageSelect = document.getElementById('language');
+        const textSizeSlider = document.getElementById('textSize');
+        const sizeDisplay = document.getElementById('size-display');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsOverlay = document.getElementById('settingsOverlay');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsClose = document.getElementById('settingsClose');
+
+        // Settings popup functions
+        function openSettings() {
+            settingsOverlay.classList.add('active');
+            settingsPanel.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSettings() {
+            settingsOverlay.classList.remove('active');
+            settingsPanel.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        //get spreadsheet data into map - key value pair
+        async function getMapFromSpreadSheetData(spreadsheetData, valueIndex) {
+            let lang = {};
+            for (var i = 0; i < spreadsheetData.length; i++) {
+                const arr = spreadsheetData[i];
+                lang[arr[0]] = arr[valueIndex];
+            }
+            return lang;
+        }
+        //fetch Spanish language
+        async function fetchSpanishLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:B";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 1);
+        }
+        //fetch French language
+        async function fetchFrenchLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A2:C259";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 2);
+        }
+        //fetch Dutch language
+        async function fetchDutchLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A2:D259";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 3);
+        }
+        //fetch Italiano language
+        async function fetchItalianoLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A2:E259";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 4);
+        }
+        //fetch English language
+        async function fetchEnglishLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A2:F259";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 5);
+        }
+
+        // fetch translations from googlesheet
+        async function fetchSpreadsheetData(spreadsheetId, range) {
+            const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch products');
+
+                const data = await response.json();
+                const detailsFetched = await data.values;
+                return detailsFetched;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                throw error;
+            }
+        }
+        async function getAllOtherWords(lang) {
+            if (lang === "en") {
+                return await fetchEnglishLanguage();
+            } else if (lang === "es") {
+                return await fetchSpanishLanguage();
+            } else if (lang === "fr") {
+                return await fetchFrenchLanguage();
+            } else if (lang === "de") {
+                return await fetchDutchLanguage();
+            } else if (lang === "it") {
+                return await fetchItalianoLanguage();
+            }
+        }
+        // Update language function
+        async function updateLanguage(lang) {
+            currentSettings.language = lang;
+            const translation_here = translations[lang];
+            const translation_fetched = await getAllOtherWords(lang);
+            translation = { ...translation_here, ...translation_fetched }
+            //const translation = translations[lang];
+            // Add fade effect
+            document.body.classList.add('fade-transition');
+            try {
+                setTimeout(() => {
+                    Object.keys(translation).forEach(key => {
+                        const element = document.getElementById(key);
+                        if (element) {
+                            element.textContent = translation[key];
+                        }
+                    });
+                    document.body.classList.add('show');
+                }, 150);
+            }
+            finally {
+                setTimeout(() => {
+                    document.body.classList.remove('fade-transition', 'show');
+                }, 450);
+            }
+            localStorage.setItem(LANGUAGE_KEY, lang);
+
+        }
+
+        // Update text size function
+        function updateTextSize(size) {
+            currentSettings.textSize = size;
+            document.documentElement.style.fontSize = size + 'px';
+            sizeDisplay.textContent = size + 'px';
+        }
+
+        // Event listeners
+        languageSelect.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        textSizeSlider.addEventListener('input', (e) => {
+            const size = textSizeSlider.value;
+            document.documentElement.style.fontSize = size + "px";
+            sizeDisplay.textContent = size + "px";
+        });
+
+        // Settings popup event listeners
+        settingsBtn.addEventListener('click', openSettings);
+        settingsClose.addEventListener('click', closeSettings);
+        settingsOverlay.addEventListener('click', closeSettings);
+
+        // Prevent panel from closing when clicking inside it
+        settingsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close settings with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                closeSettings();
+            }
+        });
+
+        // Initialize settings
+        function initializeSettings() {
+            updateLanguage(currentSettings.language);
+            updateTextSize(currentSettings.textSize);
+            if (savedLanguage === null) {
+                currentSettings.language = "en";
+            }
+            else {
+                currentSettings.language = savedLanguage;
+            }
+            // Set initial values
+            languageSelect.value = currentSettings.language;
+            textSizeSlider.value = currentSettings.textSize;
+        }
+        // Initialize when page loads
+        window.onload = function () {
+            document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+
+            initializeSettings();
+            _waEmbed(wa_btnSetting);
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader-hidden");
+            showAlert("Click on Settings to personalize this webpage the way you like.");
+        }
+        // Alert function - utility function
+        function showAlert(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                                        position: fixed;
+                                        top: 20px;
+                                        right: 20px;
+                                        background: rgba(99, 102, 241, 0.9);
+                                        color: white;
+                                        padding: 16px 24px;
+                                        border-radius: 12px;
+                                        font-weight: 500;
+                                        z-index: 999;
+                                        backdrop-filter: blur(4px);
+                                        animation: slideInAlert 0.5s ease-out;
+                                    `;
+            alertDiv.textContent = message;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOutAlert 0.5s ease-out forwards';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
+
+    </script>
+    <!--Get In Touch Modal-->
+    <script type="text/javascript">
+        const close_modal = async (form) => {
+            try {
+                const loader = document.querySelector(".loader");
+                loader.classList.remove("loader-hidden");
+                let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                let response = await fetch(url);
+                clearTimeout(timeId);
+
+                if (response.ok) {
+                    loader.classList.add("loader-hidden");
+                    if (form.Email.value.localeCompare("system") == 0) {
+                        alert("Thank you for submitting your feedback!");
+                    }
+                    else {
+                        alert("We will contact you soon!");
+                        loader.classList.add("loader-hidden");
+
+                    }
+                    form.reset();
+                    document.getElementById('id03').style.display = 'none';
+                }
+                else {
+                    alert("Something went wrong");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            return false;
+
+        }
+    </script>
+    <!--Code for WhatsApp-->
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_btnSetting = {
+            "btnColor": "#16BE45",
+            "ctaText": "",
+            "cornerRadius": 40,
+            "marginBottom": 20,
+            "marginLeft": 20,
+            "marginRight": 20,
+            "btnPosition": "right",
+            "whatsAppNumber": "918910441949",
+            "welcomeMessage": "Hello",
+            "zIndex": 999999,
+            "btnColorScheme": "light"
+        };
+    </script>
+</body>
+</html>
