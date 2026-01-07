@@ -16,6 +16,15 @@ tnc_page_name = "TermsAndConditions.html";
 cnr_page_name = "CancellationAndRefund.html";
 snd_page_name = "ShippingAndDelivery.html";
 
+business_analytics_page = "business_analytics.html";
+ai_ml_page = "";
+it_consultation_page = "";
+graphics_designing_page = "";
+webdesigning_page = "";
+app_development_page = "";
+software_development_page = "";
+about_us_page = "";
+
 payments_page_name="payments.html";
 careers_page_name="careers.html";
 explore_page_name="explore.html";
