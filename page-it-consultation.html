@@ -93,6 +93,11 @@
             cursor: none;
         }
 
+        #mySidebar {
+            background: var(--bg-main);
+            color: var(--text);
+        }
+
         /* Custom Cursor */
         .custom-cursor {
             position: fixed;
@@ -677,6 +682,10 @@
             color: var(--text-secondary);
             line-height: 1.65
         }
+        .get-in-touch-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
 
         section {
             padding: 90px 10%
@@ -1117,6 +1126,7 @@
         }
 
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -1274,7 +1284,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -1284,7 +1294,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -1296,7 +1306,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1307,7 +1317,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1318,7 +1328,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -1328,6 +1338,8 @@
 </head>
 
 <body data-theme="dark">
+    <div class="loader"></div>
+
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -1354,8 +1366,7 @@
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
@@ -1363,14 +1374,12 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
             </nav>
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
@@ -1378,7 +1387,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
@@ -1403,8 +1411,7 @@
                         <span id="it_con_3">Explore our interactive services ecosystem - hover over tiles or watch them come alive automatically.</span>
                     </p>
                     <div class="cta-buttons">
-                        <button class="cta-btn cta-primary"><span id="it_con_4">Discover Solutions</span></button>
-                        <button class="cta-btn cta-secondary"><span id="it_con_5">Get Consultation</span></button>
+                        <button class="cta-btn cta-primary" onclick="document.getElementById('id03').style.display='block'"><span id="it_con_5">Get Consultation</span></button>
                     </div>
                 </div>
 
@@ -1727,13 +1734,13 @@
             // Add ripple animation
             const style = document.createElement('style');
             style.textContent = `
-                                                            @keyframes ripple {
-                                                                to {
-                                                                    transform: scale(2);
-                                                                    opacity: 0;
-                                                                }
-                                                            }
-                                                        `;
+                                                                    @keyframes ripple {
+                                                                        to {
+                                                                            transform: scale(2);
+                                                                            opacity: 0;
+                                                                        }
+                                                                    }
+                                                                `;
             document.head.appendChild(style);
 
             // Parallax effect on mouse move
@@ -1763,7 +1770,7 @@
         </script>
         <!-- Top hero image : End -->
         <!-- HERO -->
-        <section class="hero">
+        <section class="hero" id="solutions">
             <div>
                 <h1><span id="it_con_56">Engineering Intelligence for the Future</span></h1>
                 <p>
@@ -1779,13 +1786,48 @@
 
             <div class="lead-card">
                 <h3><span id="it_con_62">Talk to Our AI Experts</span></h3>
-                <form>
-                    <input placeholder="Your Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <input placeholder="Company / Industry">
-                    <textarea placeholder="Describe your AI or IT challenge"></textarea>
-                    <button><span id="it_con_63">Request Consultation</span></button>
+                <form method="get" target="display-frame2" onsubmit="close_modal2(this)">
+                    <input type="hidden" value="SAVE_LEADS" name="query" />
+                    <input type="hidden" value="leads_form" name="module" />
+                    <input placeholder="Your Name" name="Name" required>
+                    <input type="email" placeholder="Email" name="Email" required>
+                    <input placeholder="Phone / WhatsApp" name="PhoneNumber" />
+                    <textarea placeholder="Describe your AI or IT challenge" name="Message" required></textarea>
+                    <button type="submit"><span id="it_con_63">Request Consultation</span></button>
                 </form>
+                <script>
+                    const close_modal2 = async (form) => {
+                        try {
+                            const loader = document.querySelector(".loader");
+                            loader.classList.remove("loader-hidden");
+                            let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                            url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=ITConsultation&' + 'Message=' + form.Message.value;
+                            let response = await fetch(url);
+                            clearTimeout(timeId);
+
+                            if (response.ok) {
+                                loader.classList.add("loader-hidden");
+                                if (form.Email.value.localeCompare("system") == 0) {
+                                    alert("Thank you for submitting your feedback!");
+                                }
+                                else {
+                                    alert("We will contact you soon!");
+                                    loader.classList.add("loader-hidden");
+
+                                }
+                                form.reset();
+                            }
+                            else {
+                                alert("Something went wrong");
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                        return false;
+
+                    }
+                </script>
+                <iframe name="display-frame2" style="width:0px;height:0px;border:0px solid white"></iframe>
             </div>
         </section>
         <!-- Settings Overlay -->
@@ -1821,16 +1863,15 @@
                 <div class="text-size-display" id="size-display">16px</div>
             </div>
         </div>
-        <div class="loader"></div>
     </header>
     <!-- Get in Touch Modal -->
-    <div id="id03" class="w3-modal">
+    <div id="id03" class="w3-modal" style="z-index: 9999;">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
-            <header class="w3-container w3-teal w3-display-container">
+            <div class="w3-container w3-teal w3-display-container">
                 <span onclick="document.getElementById('id03').style.display='none'"
                       class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
                 <h2><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
-            </header>
+            </div>
             <div class="w3-container get-in-touch-settings">
                 <div class="w3-col m7 get-in-touch-settings" style="width: 100%;">
                     <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
@@ -1867,8 +1908,7 @@
                             <input class="w3-input get-in-touch-settings" type="text" name="Message">
                         </div>
                         <div class="w3-row">
-                            <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
-                            <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                            <button type="submit" class="w3-teal w3-button w3-right"><span id="clear_button_text_get_in_touch">Submit</span></button>
                         </div>
                     </form>
                     <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
@@ -2050,7 +2090,7 @@
     <section>
         <h2><span id="it_con_139">Engagement Models</span></h2>
         <p class="subtitle">
-            <span id="it_con_140">Flexible collaboration models designed to match your business needs.
+            <span id="it_con_140">Flexible collaboration models designed to match your business needs.</span>
         </p>
 
         <div class="grid">
@@ -2137,7 +2177,7 @@
     <section>
         <h2><span id="it_con_163">Frequently Asked Questions</span></h2>
         <p class="subtitle">
-            <span id="it_con_164">Common questions about AI & IT consulting engagements.
+            <span id="it_con_164">Common questions about AI & IT consulting engagements.</span>
         </p>
 
         <div class="grid">
@@ -2150,7 +2190,7 @@
             <div class="card">
                 <h3><span id="it_con_167">How long does an AI project take?</span></h3>
                 <p>
-                    <span id="it_con_168">PoCs can take weeks, while full-scale implementations may span several months.
+                    <span id="it_con_168">PoCs can take weeks, while full-scale implementations may span several months.</span>
                 </p>
             </div>
             <div class="card">
@@ -2249,7 +2289,7 @@
                     const loader = document.querySelector(".loader");
                     loader.classList.remove("loader-hidden");
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=ITConsultation&' + 'Message=' + form.Message.value;
                     let response = await fetch(url);
                     clearTimeout(timeId);
 
@@ -2402,7 +2442,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -2549,7 +2589,7 @@
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        
+
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
             background: 'dark',
@@ -2767,18 +2807,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                    position: fixed;
-                                    top: 20px;
-                                    right: 20px;
-                                    background: rgba(99, 102, 241, 0.9);
-                                    color: white;
-                                    padding: 16px 24px;
-                                    border-radius: 12px;
-                                    font-weight: 500;
-                                    z-index: 999;
-                                    backdrop-filter: blur(4px);
-                                    animation: slideInAlert 0.5s ease-out;
-                                `;
+                                        position: fixed;
+                                        top: 20px;
+                                        right: 20px;
+                                        background: rgba(99, 102, 241, 0.9);
+                                        color: white;
+                                        padding: 16px 24px;
+                                        border-radius: 12px;
+                                        font-weight: 500;
+                                        z-index: 999;
+                                        backdrop-filter: blur(4px);
+                                        animation: slideInAlert 0.5s ease-out;
+                                    `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -2797,7 +2837,7 @@
                 const loader = document.querySelector(".loader");
                 loader.classList.remove("loader-hidden");
                 let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=ITConsultation'  + '&Message=' + form.Message.value;
                 let response = await fetch(url);
                 clearTimeout(timeId);
 

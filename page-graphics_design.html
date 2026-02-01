@@ -1034,8 +1034,7 @@
             </nav>
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
@@ -1043,7 +1042,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
@@ -1148,35 +1146,35 @@
                     <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
                           onsubmit="close_modal(this)" method="get"
                           target="display-frame">
-                        <input type="hidden" value="SAVE_LEADS" name="query">
-                        <input type="hidden" value="leads_form" name="module">
+                        <input type="hidden" value="SAVE_LEADS" name="query"/>
+                        <input type="hidden" value="leads_form" name="module"/>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_name_label">Name</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required/>
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_email_label">Email</span></label>
-                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required>
+                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required/>
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_country_label">Country</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required/>
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
-                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required>
+                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required/>
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required>
+                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required/>
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required>
+                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required />
                         </div>
                         <div class="w3-section">
                             <label><span id="get_in_touch_modal_remarks_label">Remarks (if any)</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Message">
+                            <input class="w3-input get-in-touch-settings" type="text" name="Message"/>
                         </div>
                         <div class="w3-row">
                             <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
@@ -1932,7 +1930,7 @@
                 const loader = document.querySelector(".loader");
                 loader.classList.remove("loader-hidden");
                 let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=' + form.interestedIn.value + '&Message=' + form.Message.value;
                 let response = await fetch(url);
                 clearTimeout(timeId);
 
