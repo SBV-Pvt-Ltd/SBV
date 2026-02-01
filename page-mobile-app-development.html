@@ -67,6 +67,11 @@
             color: var(--text-main);
         }
 
+        #mySidebar {
+            background: var(--bg-main);
+            color: var(--text-main);
+        }
+
         .hero-container {
             position: static;
             width: 100%;
@@ -997,6 +1002,7 @@
         }
 
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -1045,6 +1051,11 @@
         }
 
         .contact-us-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        .get-in-touch-settings {
             background: var(--bg-main);
             color: var(--text-muted);
         }
@@ -1198,7 +1209,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -1208,7 +1219,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -1220,7 +1231,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1231,7 +1242,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1242,7 +1253,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -1251,6 +1262,8 @@
     </script>
 </head>
 <body data-theme="dark">
+    <div class="loader"></div>
+
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -1277,8 +1290,7 @@
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
@@ -1286,14 +1298,12 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
             </nav>
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
@@ -1301,7 +1311,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
@@ -1324,8 +1333,8 @@
                         <span id="mad_5">and delight users across India and beyond.</span>
                     </p>
                     <div class="cta-buttons">
-                        <button class="btn btn-primary"><span id="mad_6">Start Your Project</span></button>
-                        <button class="btn btn-secondary"><span id="mad_7">View Portfolio</span></button>
+                        <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"><span id="mad_6">Start Your Project</span></button>
+                        <button class="btn btn-secondary" onclick="navigateToExplorePageInAnotherTab('explore.html')"><span id="mad_7">View Portfolio</span></button>
                     </div>
                 </div>
 
@@ -1505,11 +1514,10 @@
                 <div class="text-size-display" id="size-display">16px</div>
             </div>
         </div>
-        <div class="loader"></div>
     </header>
 
     <!-- Get in Touch Modal -->
-    <div id="id03" class="w3-modal">
+    <div id="id03" class="w3-modal" style="z-index:10;">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
             <header class="w3-container w3-teal w3-display-container">
                 <span onclick="document.getElementById('id03').style.display='none'"
@@ -1859,7 +1867,7 @@
                     const loader = document.querySelector(".loader");
                     loader.classList.remove("loader-hidden");
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=MobileAppDevelopment&' + 'Message=' + form.Message.value;
                     let response = await fetch(url);
                     clearTimeout(timeId);
 
@@ -2012,7 +2020,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -2159,8 +2167,6 @@
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        console.log("savedLanguage");
-        console.log(savedLanguage);
 
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
@@ -2379,18 +2385,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                            position: fixed;
-                                            top: 20px;
-                                            right: 20px;
-                                            background: rgba(99, 102, 241, 0.9);
-                                            color: white;
-                                            padding: 16px 24px;
-                                            border-radius: 12px;
-                                            font-weight: 500;
-                                            z-index: 999;
-                                            backdrop-filter: blur(4px);
-                                            animation: slideInAlert 0.5s ease-out;
-                                        `;
+                                                position: fixed;
+                                                top: 20px;
+                                                right: 20px;
+                                                background: rgba(99, 102, 241, 0.9);
+                                                color: white;
+                                                padding: 16px 24px;
+                                                border-radius: 12px;
+                                                font-weight: 500;
+                                                z-index: 999;
+                                                backdrop-filter: blur(4px);
+                                                animation: slideInAlert 0.5s ease-out;
+                                            `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -2409,7 +2415,7 @@
                 const loader = document.querySelector(".loader");
                 loader.classList.remove("loader-hidden");
                 let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=' + form.interestedIn.value + '&Message=' + form.Message.value;
                 let response = await fetch(url);
                 clearTimeout(timeId);
 
