@@ -67,6 +67,11 @@
             background: #0a0a0a;
         }
 
+        #mySidebar {
+            background: var(--bg-body);
+            color: var(--text-main);
+        }
+
         html {
             font-size: 1rem;
             scroll-behavior: smooth;
@@ -822,6 +827,7 @@
         }
 
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -934,7 +940,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -944,7 +950,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -956,7 +962,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -967,7 +973,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -978,7 +984,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -987,6 +993,8 @@
     </script>
 </head>
 <body data-theme="dark">
+    <div class="loader"></div>
+
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -1013,8 +1021,7 @@
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
@@ -1022,7 +1029,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
             </nav>
@@ -1128,7 +1134,6 @@
                 <div class="text-size-display" id="size-display">16px</div>
             </div>
         </div>
-        <div class="loader"></div>
     </header>
     <!-- Get in Touch Modal -->
     <div id="id03" class="w3-modal get_in_touch_modal_settings" style="z-index:999999;">
@@ -1414,7 +1419,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -1582,13 +1587,13 @@
         // Add ripple animation
         const style = document.createElement('style');
         style.textContent = `
-                                            @keyframes ripple {
-                                                to {
-                                                    transform: scale(20);
-                                                    opacity: 0;
+                                                @keyframes ripple {
+                                                    to {
+                                                        transform: scale(20);
+                                                        opacity: 0;
+                                                    }
                                                 }
-                                            }
-                                        `;
+                                            `;
         document.head.appendChild(style);
 
         // Parallax Effect
@@ -1665,7 +1670,7 @@
         }
 
         // Button Actions
-        
+
 
         document.querySelector('.btn-secondary').addEventListener('click', () => {
             navigateToExplorePageInAnotherTab("explore.html");
@@ -1897,18 +1902,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                        position: fixed;
-                                        top: 20px;
-                                        right: 20px;
-                                        background: rgba(99, 102, 241, 0.9);
-                                        color: white;
-                                        padding: 16px 24px;
-                                        border-radius: 12px;
-                                        font-weight: 500;
-                                        z-index: 999;
-                                        backdrop-filter: blur(4px);
-                                        animation: slideInAlert 0.5s ease-out;
-                                    `;
+                                            position: fixed;
+                                            top: 20px;
+                                            right: 20px;
+                                            background: rgba(99, 102, 241, 0.9);
+                                            color: white;
+                                            padding: 16px 24px;
+                                            border-radius: 12px;
+                                            font-weight: 500;
+                                            z-index: 999;
+                                            backdrop-filter: blur(4px);
+                                            animation: slideInAlert 0.5s ease-out;
+                                        `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
