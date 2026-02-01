@@ -35,7 +35,7 @@ working_local = false;
 year_to_display_along_with_copyright = 2026;
 
 
-last_updated_on = "February 01, 2026";
+last_updated_on = "February 02, 2026";
 const youtube_videos = [
     "https://www.youtube.com/embed/Ag995qpzNlw", 
     "https://www.youtube.com/embed/O9cf_yC0pGo",

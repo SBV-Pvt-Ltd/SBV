@@ -58,11 +58,7 @@
             font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif
         }
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6
-        }
+        
 
         section {
             padding: 90px 10%
@@ -112,11 +108,11 @@
         }
 
         .primary {
-            background: var(--primary)
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         .secondary {
-            border: 1px solid var(--border)
+            border: 1px solid var(--border);
         }
 
         /* LEAD CARD */
@@ -275,6 +271,11 @@
             overflow-x: hidden;
             background: var(--bg-main);
             color: var(--text-primary);
+        }
+
+        #mySidebar {
+            background: var(--bg-main);
+            color: var(--text);
         }
 
 
@@ -487,7 +488,7 @@
             }
 
         .settings-close {
-            position: absolute;
+            position: fixed;
             top: 15px;
             right: 20px;
             background: none;
@@ -631,6 +632,7 @@
         }
 
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -681,6 +683,11 @@
         .contact-us-settings {
             background: var(--bg-main);
             color: var(--text-muted);
+        }
+
+        .get-in-touch-settings {
+            background: var(--bg-main);
+            color: var(--text-main);
         }
 
         .features {
@@ -2066,7 +2073,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -2076,7 +2083,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -2088,7 +2095,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -2099,7 +2106,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -2110,7 +2117,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -2119,6 +2126,7 @@
     </script>
 </head>
 <body data-theme="dark">
+    <div class="loader"></div>
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -2145,8 +2153,7 @@
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
@@ -2154,14 +2161,12 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
             </nav>
             <!-- Navbar on small screens -->
             <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
@@ -2169,7 +2174,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
@@ -2192,10 +2196,10 @@
                     </p>
 
                     <div class="cta-group">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'">
                             <span id="wd_7">Start Your Project</span> →
                         </button>
-                        <button class="btn btn-secondary">
+                        <button class="btn btn-secondary" onclick="navigateToExplorePageInAnotherTab('explore.html')">
                             <span id="wd_8">View Portfolio</span>
                         </button>
                     </div>
@@ -2306,7 +2310,6 @@
                 <div class="text-size-display" id="size-display">16px</div>
             </div>
         </div>
-        <div class="loader"></div>
     </header>
     <!-- Get in Touch Modal -->
     <div id="id03" class="w3-modal">
@@ -2352,8 +2355,7 @@
                             <input class="w3-input get-in-touch-settings" type="text" name="Message">
                         </div>
                         <div class="w3-row">
-                            <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
-                            <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                            <button type="submit" class="w3-teal w3-button w3-right"><span id="submit_button_text_get_in_touch">Submit</span></button>
                         </div>
                     </form>
                     <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
@@ -2385,13 +2387,48 @@
 
         <div class="lead-card">
             <h3><span id="wd_26">Request a Free Website Audit</span></h3>
-            <form>
-                <input placeholder="Your Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input placeholder="Website / Business Name">
-                <textarea placeholder="What do you need help with?"></textarea>
-                <button><span id="wd_27">Get Callback</span></button>
+            <form method="get" target="display-frame2" onsubmit="close_modal2(this)">
+                <input type="hidden" value="SAVE_LEADS" name="query" />
+                <input type="hidden" value="leads_form" name="module" />
+                <input placeholder="Your Name" name="Name" required />
+                <input type="email" placeholder="Email Address" name="Email" required />
+                <input type="text" name="PhoneNumber" placeholder="Work Phone Number preferred" required />
+                <textarea placeholder="What do you need help with?" name="Message" required></textarea>
+                <button type="submit"><span id="wd_27">Get Callback</span></button>
             </form>
+            <script>
+                const close_modal2 = async (form) => {
+                    try {
+                        const loader = document.querySelector(".loader");
+                        loader.classList.remove("loader-hidden");
+                        let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                        url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=WebsiteDevelopment&' + 'Message=' + form.Message.value;
+                        let response = await fetch(url);
+                        clearTimeout(timeId);
+
+                        if (response.ok) {
+                            loader.classList.add("loader-hidden");
+                            if (form.Email.value.localeCompare("system") == 0) {
+                                alert("Thank you for submitting your feedback!");
+                            }
+                            else {
+                                alert("We will contact you soon!");
+                                loader.classList.add("loader-hidden");
+
+                            }
+                            form.reset();
+                        }
+                        else {
+                            alert("Something went wrong");
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                    return false;
+
+                }
+            </script>
+            <iframe name="display-frame2" style="width:0px;height:0px;border:0px solid white"></iframe>
         </div>
     </section>
 
@@ -2491,10 +2528,10 @@
 
         <form class="lead-card" style="max-width:650px;margin:auto" method="get"
               target="display-frame1" onsubmit="close_modal1(this)">
-            <input type="hidden" value="SAVE_LEADS" name="query"/>
-            <input type="hidden" value="leads_form" name="module"/>
-            <input placeholder="Name" type="text" name="Name" required/>
-            <input type="email" name="Email" placeholder="Email" required/>
+            <input type="hidden" value="SAVE_LEADS" name="query" />
+            <input type="hidden" value="leads_form" name="module" />
+            <input placeholder="Name" type="text" name="Name" required />
+            <input type="email" name="Email" placeholder="Email" required />
             <input placeholder="Phone / WhatsApp" name="PhoneNumber" />
             <textarea name="Message" placeholder="Project details"></textarea>
             <button type="submit"><span id="wd_89">Submit Enquiry</span></button>
@@ -2659,7 +2696,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -3028,18 +3065,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                position: fixed;
-                                top: 20px;
-                                right: 20px;
-                                background: rgba(99, 102, 241, 0.9);
-                                color: white;
-                                padding: 16px 24px;
-                                border-radius: 12px;
-                                font-weight: 500;
-                                z-index: 999;
-                                backdrop-filter: blur(4px);
-                                animation: slideInAlert 0.5s ease-out;
-                            `;
+                                    position: fixed;
+                                    top: 20px;
+                                    right: 20px;
+                                    background: rgba(99, 102, 241, 0.9);
+                                    color: white;
+                                    padding: 16px 24px;
+                                    border-radius: 12px;
+                                    font-weight: 500;
+                                    z-index: 999;
+                                    backdrop-filter: blur(4px);
+                                    animation: slideInAlert 0.5s ease-out;
+                                `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);

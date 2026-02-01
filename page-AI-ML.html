@@ -1315,8 +1315,8 @@
                 <p class="subtitle "><span id="ai_ml_6">Building India's smart cities with cutting-edge AI and Machine Learning. Transforming urban infrastructure through neural networks and intelligent systems.</span></p>
 
                 <div class="cta-buttons">
-                    <button class="btn btn-primary"><span id="ai_ml_7">Explore Solutions</span></button>
-                    <button class="btn btn-secondary"><span id="ai_ml_8">View Our Work</span></button>
+                    <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"><span id="ai_ml_7">Explore Solutions</span></button>
+                    <button class="btn btn-secondary" onclick="navigateToExplorePageInAnotherTab('explore.html')"><span id="ai_ml_8">View Our Work</span></button>
                 </div>
 
                 <div class="features-row">
@@ -1373,7 +1373,7 @@
         </div>
     </header>
     <!-- Get in Touch Modal -->
-    <div id="id03" class="w3-modal">
+    <div id="id03" class="w3-modal" style="z-index:10;">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
             <header class="w3-container w3-teal w3-display-container">
                 <span onclick="document.getElementById('id03').style.display='none'"
@@ -2278,7 +2278,7 @@
                 const loader = document.querySelector(".loader");
                 loader.classList.remove("loader-hidden");
                 let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=' + form.interestedIn.value + '&Message=' + form.Message.value;
                 let response = await fetch(url);
                 clearTimeout(timeId);
 
