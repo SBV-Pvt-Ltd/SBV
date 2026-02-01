@@ -37,7 +37,11 @@
             --company-name-text: White;
             --accent1: #6366f1;
             --accent2: #8b5cf6;
+            --space-sm: 1rem;
+            --space-md: 2.5rem;
+            --space-lg: 5rem;
         }
+
 
         /* LIGHT MODE */
         [data-theme="light"] {
@@ -325,7 +329,9 @@
             color: var(--company-name-text);
             overflow-x: clip;
         }
+
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -867,7 +873,7 @@
             position: absolute;
             top: 30%;
             left: 5%;
-            z-index: 20;
+            z-index: 5;
             max-width: 50%;
         }
 
@@ -923,10 +929,12 @@
                 opacity: 0;
             }
         }
+
         #footer {
             background: var(--bg-body);
             color: var(--text-muted);
         }
+
         .get-in-touch-settings {
             background: var(--bg-body);
             color: var(--text-muted);
@@ -936,10 +944,12 @@
             cursor: pointer;
             text-decoration: underline;
         }
+
         .contact-us-settings {
             background: var(--bg-main);
             color: var(--text-muted);
         }
+
         h1, h2, h3 {
             line-height: 1.25;
             margin-bottom: 10px;
@@ -1032,12 +1042,13 @@
             padding: 3rem 1.5rem;
             text-align: center;
         }
+
         .mid-section {
             padding: 4rem 1.5rem;
             max-width: 1200px;
             margin: auto;
         }
-        
+
         @media (max-width: 1024px) {
             .overlay-text {
                 max-width: 90%;
@@ -1063,15 +1074,18 @@
                 font-size: 12px;
                 padding: 4px 8px;
             }
+
             .btn {
                 align-self: center;
                 width: 100%;
                 max-width: 180px;
             }
+
             .split {
                 grid-template-columns: 1fr;
             }
         }
+
         @media (max-width: 600px) {
             .get-in-touch-button-settings {
                 margin-bottom: 5px;
@@ -1083,6 +1097,18 @@
                 font-size: 0.75rem;
             }
         }
+
+        section {
+            padding: clamp(3rem, 8vw, 7rem) 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+        }
+
+        button {
+            min-height: 44px;
+        }
     </style>
     <script type="text/javascript">
         function delay(ms) {
@@ -1090,7 +1116,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -1100,7 +1126,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -1112,7 +1138,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1123,7 +1149,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1134,7 +1160,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -1143,6 +1169,8 @@
     </script>
 </head>
 <body data-theme="dark">
+    <div class="loader"></div>
+
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -1164,13 +1192,12 @@
                 </a>
             </div>
             <!-- Sidebar (hidden by default) -->
-            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:10;width:40%;min-width:300px" id="mySidebar">
+            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:100;width:40%;min-width:300px" id="mySidebar">
                 <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToIndex('#home')"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
@@ -1178,7 +1205,6 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
             </nav>
@@ -1333,7 +1359,6 @@
                 <div class="text-size-display" id="size-display">16px</div>
             </div>
         </div>
-        <div class="loader"></div>
     </header>
     <!-- Get in Touch Modal -->
     <div id="id03" class="w3-modal">
@@ -1399,10 +1424,12 @@
     <!-- VISION -->
     <section class="mid-section">
         <h2><span id="vision_text_1">The Future of Business Is Analytics-Driven</span></h2>
-        <p><span id="vision_text_2">
-            Across industries and geographies, data has become a strategic asset.
-            Businesses worldwide are shifting from intuition-based decisions to analytics-driven strategies.
-            Our vision is to help organizations embrace this shift early and build sustainable growth.</span>
+        <p>
+            <span id="vision_text_2">
+                Across industries and geographies, data has become a strategic asset.
+                Businesses worldwide are shifting from intuition-based decisions to analytics-driven strategies.
+                Our vision is to help organizations embrace this shift early and build sustainable growth.
+            </span>
         </p>
     </section>
     <!-- PHILOSOPHY -->
@@ -1434,17 +1461,21 @@
     <section class="split mid-section">
         <div>
             <h2><span id="cred_text_1">Academic Rigor. Modern Analytics.</span></h2>
-            <p><span id="cred_text_2">
-                Led by an MBA in Business Analytics, our approach combines statistical depth,
-                business strategy, and real-world decision frameworks.
-                Being new allows us to build modern, flexible solutions—free from legacy constraints.</span>
+            <p>
+                <span id="cred_text_2">
+                    Led by an MBA in Business Analytics, our approach combines statistical depth,
+                    business strategy, and real-world decision frameworks.
+                    Being new allows us to build modern, flexible solutions—free from legacy constraints.
+                </span>
             </p>
         </div>
         <div class="card">
             <h3><span id="cred_text_3">MBA in Business Analytics</span></h3>
-            <p><span id="cred_text_4">
-                Strong foundation in statistics, modeling, business strategy,
-                and data-driven decision-making.</span>
+            <p>
+                <span id="cred_text_4">
+                    Strong foundation in statistics, modeling, business strategy,
+                    and data-driven decision-making.
+                </span>
             </p>
         </div>
     </section>
@@ -1497,9 +1528,11 @@
     <section id="contact" class="split mid-section">
         <div>
             <h2><span id="contact_text_1">Let’s Explore Analytics for Your Business</span></h2>
-            <p><span id="contact_text_2">
-                Get a clear, practical view of how analytics can support your growth.
-                No sales pressure. No jargon.</span>
+            <p>
+                <span id="contact_text_2">
+                    Get a clear, practical view of how analytics can support your growth.
+                    No sales pressure. No jargon.
+                </span>
             </p>
         </div>
         <form style="margin-top: 10px;" method="get"
@@ -1529,7 +1562,7 @@
                     const loader = document.querySelector(".loader");
                     loader.classList.remove("loader-hidden");
                     let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
-                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' +  '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
                     let response = await fetch(url);
                     clearTimeout(timeId);
 
@@ -1682,7 +1715,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -1824,7 +1857,6 @@
                 applyTheme(e.matches ? 'dark' : 'light');
             }
         });
-
         const screen = document.querySelector('.screen');
         const moon = document.getElementById('moon');
 
@@ -1968,8 +2000,6 @@
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        console.log("savedLanguage");
-        console.log(savedLanguage);
 
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
@@ -2189,18 +2219,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                                                        position: fixed;
-                                                                        top: 20px;
-                                                                        right: 20px;
-                                                                        background: rgba(99, 102, 241, 0.9);
-                                                                        color: white;
-                                                                        padding: 16px 24px;
-                                                                        border-radius: 12px;
-                                                                        font-weight: 500;
-                                                                        z-index: 999;
-                                                                        backdrop-filter: blur(4px);
-                                                                        animation: slideInAlert 0.5s ease-out;
-                                                                    `;
+                                                                                position: fixed;
+                                                                                top: 20px;
+                                                                                right: 20px;
+                                                                                background: rgba(99, 102, 241, 0.9);
+                                                                                color: white;
+                                                                                padding: 16px 24px;
+                                                                                border-radius: 12px;
+                                                                                font-weight: 500;
+                                                                                z-index: 999;
+                                                                                backdrop-filter: blur(4px);
+                                                                                animation: slideInAlert 0.5s ease-out;
+                                                                            `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
