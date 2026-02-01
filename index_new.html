@@ -44,7 +44,9 @@
             --services-section-expanded-width: 70%;
             --services-section-transition: 0.45s ease;
             --process-surface: #111827;
+            --base-font-size: 16px;
         }
+
 
         body[data-theme="light"] {
             --bg-main: #f8fafc;
@@ -78,9 +80,9 @@
         }
 
         html {
-            font-size: 1rem;
             scroll-behavior: smooth;
             transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: var(--base-font-size);
         }
 
         body, button, .btn, .services-card-large-screen {
@@ -127,6 +129,9 @@
             min-height: 100vh;
             overflow: hidden;
             background: linear-gradient(135deg,var(--bg-hero1),var(--bg-hero2));
+            width: 100%;
+            float: none;
+            clear: both;
         }
 
         .hero-bg, .hero-overlay {
@@ -575,6 +580,7 @@
         }
 
         .loader {
+            z-index: 99999;
             position: fixed;
             top: 0;
             left: 0;
@@ -929,7 +935,7 @@
 
         .process-tour-header p {
             opacity: 0.9;
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         .process-progress-bar {
@@ -1034,7 +1040,7 @@
         .process-step-description {
             color: var(--text-muted);
             line-height: 1.8;
-            font-size: 16px;
+            font-size: 1rem;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -1089,7 +1095,7 @@
             padding: 12px 30px;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -1326,7 +1332,7 @@
         }
 
         async function navigateTo(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + features_service_page_name;
@@ -1336,7 +1342,7 @@
         }
 
         function navigateToIndex(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url = current_url_refined + index_page_name;
@@ -1348,7 +1354,7 @@
         }
 
         function navigateToPage(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1359,7 +1365,7 @@
         }
 
         function navigateToPageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined;
@@ -1370,7 +1376,7 @@
         }
 
         function navigateToExplorePageInAnotherTab(pageName) {
-            current_url = window.location.href;
+            const current_url = window.location.href;
             var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
             if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
             new_url_section = current_url_refined + pageName;
@@ -1382,6 +1388,8 @@
     </script>
 </head>
 <body data-theme="dark">
+    <div class="loader"></div>
+
     <header>
         <!-- Navbar (sit on top) -->
         <div class="w3-top top-navbar">
@@ -1501,7 +1509,6 @@
             </div>
         </div>
         <div class="mouse-follower"></div>
-        <div class="loader"></div>
 
 
     </header>
@@ -2228,7 +2235,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
@@ -3061,13 +3068,13 @@
 
         const style = document.createElement('style');
         style.textContent = `
-                                @keyframes ripple {
-                                    to {
-                                        transform: scale(20);
-                                        opacity: 0;
+                                    @keyframes ripple {
+                                        to {
+                                            transform: scale(20);
+                                            opacity: 0;
+                                        }
                                     }
-                                }
-                            `;
+                                `;
         document.head.appendChild(style);
 
         document.querySelectorAll('.btn-secondary').forEach(btn => {
@@ -3081,8 +3088,6 @@
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        console.log("savedLanguage");
-        console.log(savedLanguage);
 
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
@@ -3213,7 +3218,7 @@
             currentSettings.language = lang;
             const translation_here = translations[lang];
             const translation_fetched = await getAllOtherWords(lang);
-            translation = { ...translation_here, ...translation_fetched}
+            translation = { ...translation_here, ...translation_fetched }
             //const translation = translations[lang];
             // Add fade effect
             document.body.classList.add('fade-transition');
@@ -3249,10 +3254,16 @@
             updateLanguage(e.target.value);
         });
 
+
         textSizeSlider.addEventListener('input', (e) => {
             const size = textSizeSlider.value;
             document.documentElement.style.fontSize = size + "px";
             sizeDisplay.textContent = size + "px";
+            alert(e.target.value);
+            document.documentElement.style.setProperty(
+                "--base-font-size",
+                e.target.value + "px"
+            );
         });
 
         // Settings popup event listeners
@@ -3314,18 +3325,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        background: rgba(99, 102, 241, 0.9);
-                        color: white;
-                        padding: 16px 24px;
-                        border-radius: 12px;
-                        font-weight: 500;
-                        z-index: 999;
-                        backdrop-filter: blur(4px);
-                        animation: slideInAlert 0.5s ease-out;
-                    `;
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: rgba(99, 102, 241, 0.9);
+                            color: white;
+                            padding: 16px 24px;
+                            border-radius: 12px;
+                            font-weight: 500;
+                            z-index: 999;
+                            backdrop-filter: blur(4px);
+                            animation: slideInAlert 0.5s ease-out;
+                        `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -3353,7 +3364,7 @@
                 additional_featured_content_hidden = true;
             }
         }
-        
+
 
         function initializeProcessTour() {
             const stepIndicator = document.getElementById('processStepIndicator');
