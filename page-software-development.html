@@ -2,36 +2,289 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Graphics Designing section of Saharsh Bhadani Venture Private Limited.">
-    <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Graphics Designing,Graphics,Designing">
+    <meta name="description" content="Official webpage for software development created by Saharsh Bhadani Venture Private Limited.">
+    <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation,software development company india, custom software development, web application development, desktop software development, software maintenance services, AI integration, analytics dashboards, supply chain software, finance software, business management systems" />
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graphics Design - Saharsh Bhadani Venture Private Limited</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Saharsh Bhadani Venture Pvt. Ltd.</title>
     <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./css/w3-theme-black.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script src="Constant.js" defer></script>
+    <script src="Constant.js"></script>
 
-    <style>
-        /* ===================== */
-        /* THEME VARIABLES */
-        /* ===================== */
+    <!-- Basic Meta -->
+    <meta name="description" content="Saharsh Bhadani Venture Private Limited is an Indian IT company offering end-to-end custom software development, web and desktop applications, AI integration, analytics dashboards, supply-chain, finance and business management software." />
+
+    <!-- Search Engine -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.nextgentechsolutions.in/" />
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Saharsh Bhadani Venture Private Limited | AI-Driven Software Development Company" />
+    <meta property="og:description" content="We deliver scalable web and desktop software with AI-first architecture, analytics dashboards, modernization and long-term maintenance." />
+    <meta property="og:url" content="https://www.saharshbhadani.com/" />
+    <meta property="og:image" content="https://www.saharshbhadani.com/w3images/software-development.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saharsh Bhadani Venture Private Limited | Custom Software Development India" />
+    <meta name="twitter:description" content="End-to-end software development, AI integration, analytics dashboards and enterprise solutions." />
+    <meta name="twitter:image" content="https://www.saharshbhadani.com/w3images/software-development.png" />
+
+    <!-- Geo Targeting (India) -->
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="India" />
+    <meta name="language" content="EN" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+
+    <style type="text/css">
+                /* =====================
+           CSS VARIABLES
+        ====================== */
+                :root {
+                    --bg: #ffffff;
+                    --text: #0f172a;
+                    --muted: #64748b;
+                    --primary: #0ea5a4;
+                    --secondary: #0f766e;
+                    --card: #f8fafc;
+                    --border: #e2e8f0;
+                }
+
+                [data-theme="dark"] {
+                    --bg: #020617;
+                    --text: #e5e7eb;
+                    --muted: #9ca3af;
+                    --primary: #22d3ee;
+                    --secondary: #0ea5a4;
+                    --card: #020617;
+                    --border: #1e293b;
+                }
+
+                * {
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0;
+                    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+                }
+
+                body {
+                    background: var(--bg);
+                    color: var(--text);
+                    line-height: 1.6;
+                }
+
+                a {
+                    color: var(--primary);
+                    text-decoration: none;
+                }
+
+                section {
+                    background: var(--bg);
+                    padding: 80px 10%;
+                }
+
+                h1, h2, h3 {
+                    line-height: 1.2;
+                }
+
+                /* =====================
+           NAVBAR
+        ====================== */
+                nav {
+                    position: sticky;
+                    top: 0;
+                    background: var(--bg);
+                    border-bottom: 1px solid var(--border);
+                    padding: 16px 10%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    z-index: 100;
+                }
+
+                    nav .logo {
+                        font-weight: 700;
+                        font-size: 20px;
+                    }
+
+                    nav button {
+                        background: none;
+                        border: 1px solid var(--border);
+                        color: var(--text);
+                        padding: 6px 12px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                    }
+
+                /* =====================
+           HERO
+        ====================== */
+                .hero {
+                    display: grid;
+                    grid-template-columns: 1.2fr 1fr;
+                    gap: 40px;
+                    align-items: center;
+                }
+
+                    .hero h1 {
+                        font-size: 48px;
+                        margin-bottom: 20px;
+                    }
+
+                    .hero p {
+                        color: var(--muted);
+                        font-size: 18px;
+                        margin-bottom: 30px;
+                    }
+
+                .cta {
+                    display: flex;
+                    gap: 15px;
+                }
+
+                    .cta a {
+                        padding: 12px 20px;
+                        border-radius: 8px;
+                        font-weight: 600;
+                    }
+
+                    .cta .primary {
+                        background: var(--primary);
+                        color: #000;
+                    }
+
+                    .cta .secondary {
+                        border: 1px solid var(--border);
+                    }
+
+                /* =====================
+           CARDS
+        ====================== */
+                .grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                    gap: 25px;
+                }
+
+                .card {
+                    background: var(--card);
+                    border: 1px solid var(--border);
+                    padding: 25px;
+                    border-radius: 14px;
+                    transition: transform 0.2s ease;
+                }
+
+                    .card:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .card h3 {
+                        margin-bottom: 10px;
+                    }
+
+                    .card p {
+                        color: var(--muted);
+                        font-size: 15px;
+                    }
+
+                /* =====================
+           PROCESS
+        ====================== */
+                .steps {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 20px;
+                }
+
+                .step {
+                    padding: 20px;
+                    border-left: 4px solid var(--primary);
+                    background: var(--card);
+                }
+
+                /* =====================
+           LEAD FORM
+        ====================== */
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                    background: var(--card);
+                    padding: 30px;
+                    border-radius: 16px;
+                    border: 1px solid var(--border);
+                }
+
+                    form input, form textarea {
+                        width: 100%;
+                        margin-bottom: 15px;
+                        padding: 12px;
+                        border-radius: 8px;
+                        border: 1px solid var(--border);
+                        background: transparent;
+                        color: var(--text);
+                    }
+
+                    form button {
+                        width: 100%;
+                        padding: 14px;
+                        background: var(--primary);
+                        border: none;
+                        border-radius: 8px;
+                        font-weight: 700;
+                        cursor: pointer;
+                    }
+
+                /* =====================
+           FOOTER
+        ====================== */
+                footer {
+                    background: var(--card);
+                    border-top: 1px solid var(--border);
+                    padding: 30px 10%;
+                    text-align: center;
+                    color: var(--muted);
+                }
+
+                /* =====================
+           RESPONSIVE
+        ====================== */
+                @media (max-width: 900px) {
+                    .hero {
+                        grid-template-columns: 1fr;
+                    }
+
+                        .hero h1 {
+                            font-size: 36px;
+                        }
+                }
+
+                .subtitle {
+                    max-width: 700px;
+                    margin: 0 auto 40px;
+                }
+    </style>
+    <style type="text/css">
         :root {
-            --bg-body: #0a0a0a;
-            --hero-bg: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            --overlay: radial-gradient(ellipse at center, transparent 0%, rgba(10,10,10,.7) 100%);
+            /* ===== DARK MODE (DEFAULT) ===== */
+            --bg-main: linear-gradient(135deg, #0a1628 0%, #1a2947 50%, #0f3460 100%);
+            --bg-glass: rgba(10, 22, 40, 0.8);
+            --bg-glass-soft: rgba(255, 255, 255, 0.05);
             --text-primary: #ffffff;
-            --text-secondary: #bbbbbb;
-            --card-bg: rgba(255,255,255,0.05);
-            --card-border: rgba(255,255,255,0.1);
-            --accent: #ff6b6b;
-            --accent-2: #f39c12;
-            --glass: blur(10px);
+            --text-secondary: #b0bec5;
+            --accent-primary: #ff6b35;
+            --accent-secondary: #64b5f6;
+            --border-light: rgba(255, 255, 255, 0.15);
+            --border-accent: rgba(100, 181, 246, 0.35);
+            --grid-line: rgba(255, 255, 255, 0.03);
+            --tagline-bg: linear-gradient(135deg, #ffffff 0%, #64b5f6 100%);
             --text-main: #FFFFFF;
             --text-muted: #F8F8FF;
             --company-name-text: White;
@@ -40,13 +293,18 @@
         }
 
         [data-theme="light"] {
-            --bg-body: #f5f7fb;
-            --hero-bg: linear-gradient(135deg, #ffffff 0%, #eef1f7 50%, #e6ebf5 100%);
-            --overlay: radial-gradient(ellipse at center, transparent 0%, rgba(245,247,251,.9) 100%);
-            --text-primary: #1f2937;
-            --text-secondary: #4b5563;
-            --card-bg: rgba(255,255,255,0.05);
-            --card-border: rgba(0,0,0,0.9);
+            /* ===== SOFT MODE ===== */
+            --bg-main: linear-gradient(135deg, #f6f8fc 0%, #eef2f7 50%, #e8edf5 100%);
+            --bg-glass: rgba(255, 255, 255, 0.75);
+            --bg-glass-soft: rgba(255, 255, 255, 0.9);
+            --text-primary: #1a2947;
+            --text-secondary: #546e7a;
+            --accent-primary: #ff8a50;
+            --accent-secondary: #4fa3e3;
+            --border-light: rgba(26, 41, 71, 0.12);
+            --border-accent: rgba(79, 163, 227, 0.35);
+            --grid-line: rgba(26, 41, 71, 0.05);
+            --tagline-bg: linear-gradient(135deg, #000000 0%, #64b5f6 100%);
             --text-main: #0f172a;
             --text-muted: #475569;
             --company-name-text: black;
@@ -62,9 +320,11 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
             overflow-x: hidden;
-            background: #0a0a0a;
         }
 
         html {
@@ -73,357 +333,167 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        .hero-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
         .hero {
+            background: var(--bg-main);
             position: relative;
-            min-height: 100vh;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            overflow: hidden;
         }
 
-        /* Animated Geometric Background */
-        .geometric-bg {
+        .hero-grid-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        }
+
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        .hero-particles {
             position: absolute;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
         }
 
-        .shape {
+        .hero-particle {
             position: absolute;
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .circle {
-            width: 300px;
-            height: 300px;
+            width: 3px;
+            height: 3px;
+            background: rgba(100, 200, 255, 0.6);
             border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            top: 10%;
-            left: 5%;
-            animation: float 15s infinite ease-in-out, pulse 4s infinite ease-in-out;
-        }
-
-        .triangle {
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 260px solid #4ecdc4;
-            top: 60%;
-            right: 10%;
-            animation: float 18s infinite ease-in-out, rotate 20s linear infinite;
-        }
-
-        .square {
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, #f7b731, #f39c12);
-            top: 30%;
-            right: 20%;
-            transform: rotate(45deg);
-            animation: float 16s infinite ease-in-out, rotate 15s linear infinite;
-        }
-
-        .hexagon {
-            width: 180px;
-            height: 104px;
-            background: #9b59b6;
-            position: absolute;
-            bottom: 20%;
-            left: 15%;
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            animation: float 17s infinite ease-in-out, pulse 5s infinite ease-in-out;
-        }
-
-        .pentagon {
-            width: 160px;
-            height: 160px;
-            background: #e74c3c;
-            position: absolute;
-            top: 50%;
-            left: 40%;
-            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-            animation: float 19s infinite ease-in-out, rotate 18s linear infinite;
+            animation: float 15s infinite;
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.15;
-            }
-
-            50% {
-                transform: scale(1.15);
-                opacity: 0.25;
-            }
-        }
-
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Gradient Overlay */
-        .gradient-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.7) 100%);
-            z-index: 2;
-        }
-
-        /* Content */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
-            width: 100%;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .text-content {
-            animation: slideInUp 1s ease-out;
-            margin-bottom: 4rem;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.6rem 1.5rem;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(238, 90, 111, 0.2));
-            border: 2px solid rgba(255, 107, 107, 0.4);
-            border-radius: 50px;
-            color: #ff6b6b;
-            font-size: 0.875rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f39c12 50%, #ff6b6b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            color: #bbb;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-            max-width: 200px;
-            align-self: center;
-        }
-
-            .btn::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 0;
-                height: 0;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.3);
-                transform: translate(-50%, -50%);
-                transition: width 0.6s, height 0.6s;
-            }
-
-            .btn:hover::before {
-                width: 300px;
-                height: 300px;
-            }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.4);
-        }
-
-            .btn-primary:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 15px 50px rgba(255, 107, 107, 0.6);
-            }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 2px solid lightgrey;
-            backdrop-filter: blur(10px);
-        }
-
-            .btn-secondary:hover {
-                background: rgba(255, 255, 255, 0.2);
-                border-color: rgba(255, 255, 255, 0.5);
-                transform: translateY(-5px);
-            }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: fadeIn 1s ease-out 0.5s both;
-        }
-
-        .service-card {
-            padding: 2.5rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-            .service-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(247, 183, 49, 0.1));
+                transform: translateY(0) translateX(0);
                 opacity: 0;
-                transition: opacity 0.4s ease;
             }
 
-            .service-card:hover::before {
+            10% {
                 opacity: 1;
             }
 
-            .service-card:hover {
-                background: rgba(255, 255, 255, 0.08);
-                border-color: rgba(255, 107, 107, 0.4);
-                transform: translateY(-15px) scale(1.03);
-                box-shadow: 0 20px 60px rgba(255, 107, 107, 0.3);
+            90% {
+                opacity: 1;
             }
 
-        .service-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            transition: transform 0.4s ease;
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
         }
 
-        .service-card:hover .service-icon {
-            transform: scale(1.2) rotate(5deg);
+        .hero-data-viz {
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
 
-        .service-name {
-            font-size: 1.5rem;
+        .hero-chart-bar {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to top, #ff6b35, #f7931e);
+            bottom: 0;
+            border-radius: 2px 2px 0 0;
+            animation: barGrow 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes barGrow {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(1.3);
+            }
+        }
+
+        .hero-circuit-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64b5f6, transparent);
+            animation: circuitFlow 4s linear infinite;
+        }
+
+        @keyframes circuitFlow {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 20px;
+            color: var(--text-primary);
+        }
+
+        .hero-tagline {
+            font-size: 64px;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f39c12 100%);
+            line-height: 1.2;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            background: var(--tagline-bg);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .service-description {
-            font-size: 1rem;
-            color: #bbb;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+            background: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+            border: 1px solid color-mix(in srgb, var(--accent-primary) 50%, transparent);
+            color: var(--accent-primary);
         }
 
-        .service-features {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-
-            .service-features li {
-                color: var(--text-secondary);
-                font-size: 0.9rem;
-                padding: 0.5rem 0;
-                padding-left: 1.5rem;
-                position: relative;
-            }
-
-                .service-features li::before {
-                    content: '✓';
-                    position: absolute;
-                    left: 0;
-                    color: #ff6b6b;
-                    font-weight: bold;
-                }
-
-        /* Visual Content - Service Showcase */
-        .visual-content {
-            display: none;
-        }
-
-        @keyframes slideInUp {
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(-20px);
             }
 
             to {
@@ -432,184 +502,265 @@
             }
         }
 
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
+                transform: translateY(30px);
             }
 
             to {
                 opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Stats Bar */
-        .stats-bar {
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-cta-buttons {
+            margin-top: -20px;
             display: flex;
+            gap: 10px;
             justify-content: center;
-            align-items: center;
-            gap: 4rem;
-            margin: 0 auto 50px;
-            z-index: 10;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.9s both;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 1rem 1.2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .hero-btn {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-            .stat-item:hover {
-                background: rgba(255, 107, 107, 0.1);
-                border-color: rgba(255, 107, 107, 0.3);
-                transform: translateY(-10px);
+        .hero-btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), #f7931e);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+            .hero-btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
             }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ff6b6b 0%, #f39c12 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: #bbb;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            background: var(--bg-body);
+        .hero-btn-secondary {
+            backdrop-filter: blur(10px);
+            background: var(--bg-glass-soft);
             color: var(--text-primary);
-            transition: background .3s ease, color .3s ease;
+            border: 2px solid var(--border-light);
         }
 
-        /* ===================== */
-        /* THEME TOGGLE */
-        /* ===================== */
+
+
+            .hero-btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-2px);
+            }
+
+        .hero-stats {
+            position: absolute;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 60px;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .hero-stat-item {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            display: block;
+            color: var(--accent-secondary);
+        }
+
+
+        .hero-stat-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+
+
+        .hero-code-snippet {
+            position: absolute;
+            background: rgba(10, 22, 40, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: #64b5f6;
+            line-height: 1.4;
+            animation: floatCard 7s ease-in-out infinite;
+        }
+
+        .hero-code-1 {
+            top: 20%;
+            right: 50%;
+            width: 220px;
+        }
+
+        .hero-code-2 {
+            bottom: 0%;
+            right: 8%;
+            width: 200px;
+            animation-delay: -2s;
+        }
+
+        position: absolute;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 20px;
+        animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-floating-card {
+            top: 15%;
+            left: 8%;
+            width: 180px;
+        }
+
+        .hero-card-2 {
+            top: 25%;
+            right: 10%;
+            width: 200px;
+            animation-delay: -3s;
+        }
+
+        .hero-card-3 {
+            bottom: 30%;
+            left: 5%;
+            width: 160px;
+            animation-delay: -1.5s;
+        }
+
+        .hero-card-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #64b5f6, #42a5f5);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            font-size: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(100, 181, 246, 0.7);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px 10px rgba(100, 181, 246, 0);
+            }
+        }
+
+        .hero-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .hero-card-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+            animation: countUp 2s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-floating-card {
+            color: var(--text-primary);
+        }
+
+        .hero-code-snippet {
+            color: var(--text-primary);
+            background: var(--bg-glass);
+        }
+
         .theme-toggle {
             padding: .6rem 1.2rem;
             border-radius: 30px;
             background: var(--card-bg);
             border: 1px solid black;
-            color: var(--text-main);
+            color: black;
             cursor: pointer;
             backdrop-filter: blur(4px);
             font-size: 1rem;
         }
 
         [data-theme="light"] .theme-toggle {
-            background: rgba(0,0,0,0.1);
-            color: #0f172a;
+            background: rgba(0,0,0,0.9);
+            color: #FFFFFF;
         }
 
-        .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--hero-bg);
-            overflow: hidden;
-        }
-
-        .gradient-overlay {
-            position: absolute;
-            inset: 0;
-            background: var(--overlay);
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
-            width: 100%;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-2), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-        }
-
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-bottom: 50px;
-        }
-
-        .stat-item {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            padding: 1rem 1.2rem;
-            border-radius: 20px;
-            backdrop-filter: var(--glass);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: .875rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 25px;
-            padding: 2.5rem 2rem;
-            transition: .3s ease;
-        }
-
-        .service-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .service-description {
-            color: var(--text-secondary);
-        }
 
         .get-in-touch-button-settings {
+            padding: 18px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: transform .3s ease,box-shadow .3s ease;
             max-width: 175px;
+            background: linear-gradient(135deg,#00d4ff,#00ff88);
+            color: #000;
+            box-shadow: 0 10px 40px rgba(0,212,255,.4);
         }
+
+            .get-in-touch-button-settings:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 50px rgba(0,212,255,.6);
+            }
 
         .section-divider {
             width: 100%;
@@ -655,7 +806,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
-            background: var(--bg-body);
+            background: var(--bg-main);
             color: var(--text-main);
             padding: 30px;
             border-radius: 25px;
@@ -868,57 +1019,155 @@
             cursor: pointer;
             text-decoration: underline;
         }
-        .get_in_touch_modal_settings{
-            background: var(--bg-body);
-            color: var(--text-main)
-        }
-        .get-in-touch-settings {
-            background: var(--bg-body);
-            color: var(--text-muted);
-        }
+
         .contact-us-settings {
             background: var(--bg-main);
             color: var(--text-muted);
         }
 
-        @media (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 1.5rem;
+        @media (max-width: 992px) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 80px 0 100px;
             }
 
-            .stats-bar {
-                gap: 1rem;
+            .hero-content {
+                padding: 0 15px 0 15px;
+                text-align: left;
+                max-width: 55%;
+            }
+
+            .hero-tagline {
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .hero-badge {
+                font-size: 10px;
+                padding: 6px 12px;
+                margin-bottom: 20px;
+            }
+
+            .hero-stats {
+                position: absolute;
+                left: 5px;
+                margin-top: 100px;
+                margin-left: 10px;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 20px;
+                justify-content: flex-start;
+            }
+
+            .hero-stat-item {
+                margin-top: 50px;
+                flex: 0 0 calc(50% - 15px);
+            }
+
+            .hero-stat-number {
+                color: white;
+                font-size: 24px;
+            }
+
+            .hero-stat-label {
+                font-size: 11px;
+            }
+
+            .hero-cta-buttons {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .hero-floating-card {
+                padding: 10px;
+                right: 8px;
+            }
+
+            .hero-card-1 {
+                top: 115px;
+                width: 120px;
+            }
+
+            .hero-card-2 {
+                top: 190px;
+                width: 125px;
+            }
+
+            .hero-card-3 {
+                top: 265px;
+                width: 125px;
+            }
+
+            .hero-card-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 15px;
+                margin-bottom: 5px;
+            }
+
+            .hero-card-title {
+                font-size: 10px;
+                margin-bottom: 3px;
+            }
+
+            .hero-card-value {
+                font-size: 15px;
+            }
+
+            .hero-code-1 {
+                top: 20%;
+                left: 5%;
+                width: 220px;
+            }
+
+            .hero-code-2 {
+                bottom: 10px;
+                right: 5px;
             }
         }
 
-        @media (max-width: 768px) {
-            .services-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 600px) {
+            .hero-stat-item {
+                margin-left: -10px;
             }
 
-            .cta-buttons {
-                flex-direction: column;
+            .hero-stat-number {
+                color: white;
+                font-size: 16px;
             }
 
-            .btn {
-                width: 100%;
-                justify-content: center;
+            .hero-stat-label {
+                font-size: 11px;
             }
 
-            .service-card {
-                padding: 2rem 1.5rem;
-            }
-
-            .stats-bar {
-                flex-wrap: wrap;
-                gap: 1.5rem;
+            .hero-btn-secondary {
+                font-size: 18px;
+                backdrop-filter: blur(0px);
+                background: transparent;
             }
         }
 
         @media (max-width: 600px) {
             .get-in-touch-button-settings {
                 margin-bottom: 5px;
+            }
+        }
+
+        @media(max-width:480px) {
+            .get-in-touch-button-settings {
+                width: 100%;
+                max-width: 320px;
             }
         }
 
@@ -1042,59 +1291,82 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
         </div>
-        <section class="hero">
-            <!-- Geometric Background -->
-            <div class="geometric-bg">
-                <div class="shape circle"></div>
-                <div class="shape triangle"></div>
-                <div class="shape square"></div>
-                <div class="shape hexagon"></div>
-                <div class="shape pentagon"></div>
-            </div>
+        <div class="hero-section">
+            <div class="hero-container">
+                <div class="hero">
+                    <div class="hero-grid-background"></div>
 
-            <div class="gradient-overlay"></div>
+                    <div class="hero-particles" id="hero-particles"></div>
 
-            <div class="hero-content">
-                <div class="text-content">
-                    <div class="badge">
-                        <span>🇮🇳</span>
-                        <span id="hero_text_1">India's Creative Studio</span>
+                    <div class="hero-data-viz" id="hero-dataViz"></div>
+
+                    <div class="hero-floating-card hero-card-1">
+                        <div class="hero-card-icon">💻</div>
+                        <div class="hero-card-title"><span id="SD_1">Custom Software</span></div>
+                        <div class="hero-card-value" id="custom-software-number">500+</div>
                     </div>
 
-                    <h1><span id="hero_text_2">Transform Your Vision Into Stunning Visuals</span></h1>
-
-                    <p class="subtitle">
-                        <span id="hero_text_3">
-                            Professional graphics design services for content creation, 2D graphics, video editing,
-                            and comprehensive digital solutions. Elevate your brand with our creative expertise.
-                        </span>
-                    </p>
-
-                    <div class="cta-buttons">
-                        <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'">
-                            <span id="hero_text_4">Get In Touch</span>
-                        </button>
-                        <button class="btn btn-secondary">
-                            <span id="hero_text_5">View Portfolio</span>
-                        </button>
+                    <div class="hero-floating-card hero-card-2">
+                        <div class="hero-card-icon">📊</div>
+                        <div class="hero-card-title"><span id="SD_2">Analytics Solutions</span></div>
+                        <div class="hero-card-value">99.9%</div>
                     </div>
-                    <div class="stats-bar">
-                        <div class="stat-item">
-                            <div class="stat-number">500+</div>
-                            <div class="stat-label"><span id="hero_text_6">Projects</span></div>
+
+                    <div class="hero-floating-card hero-card-3">
+                        <div class="hero-card-icon">⚡</div>
+                        <div class="hero-card-title"><span id="SD_3">Deployment Speed</span></div>
+                        <div class="hero-card-value">2x <span id="SD_4">Fast</span></div>
+                    </div>
+
+                    <div class="hero-code-snippet hero-code-1">
+                        <span style="color: #ff6b35;">function</span> <span>analyzeData</span>() {<br>
+                        &nbsp;&nbsp;<span style="color: #90caf9;">const</span> insights = <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;processMetrics();<br>
+                        &nbsp;&nbsp;<span style="color: #ff6b35;">return</span> insights;<br>
+                        }
+                    </div>
+
+                    <div class="hero-code-snippet hero-code-2">
+                        <span style="color: #90caf9;">class</span> <span>Solution</span> {<br>
+                        &nbsp;&nbsp;deploy() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #4caf50;">// Enterprise ready</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;scale.<span>up</span>();<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+
+                    <div class="hero-content">
+                        <div class="hero-badge">🇮🇳 <span id="SD_5">BUSINESS ANALYTICS & SOFTWARE DEVELOPMENT FIRM</span></div>
+                        <h1 class="hero-tagline"><span id="SD_6">Transform Ideas Into</span><br><span id="SD_7">Intelligent Solutions</span></h1>
+                        <p class="hero-subtitle">
+                            <span id="SD_8">From phenomenal websites to custom software development to advanced business analytics – we build scalable applications</span>
+                            <span id="SD_9">and turn complex data into actionable insights that drive your business forward.</span>
+                        </p>
+                        <div class="hero-cta-buttons">
+                            <button class="hero-btn hero-btn-primary"><span id="SD_10">Get Started</span></button>
+                            <button class="hero-btn hero-btn-secondary"><span id="SD_11">View Our Work</span></button>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">200+</div>
-                            <div class="stat-label"><span id="hero_text_7">Happy Clients</span></div>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-number" id="apps-developed-number">500+</span>
+                            <span class="hero-stat-label"><span id="SD_12">Apps</span> <br /><span id="SD_13">Developed</span></span>
                         </div>
-                        <div class="stat-item">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label"><span id="hero_text_8">Satisfaction</span></div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-number" id="analytics-projects-number">200+</span>
+                            <span class="hero-stat-label"><span id="SD_14">Analytics</span> <br /><span id="SD_15">Projects</span></span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-number" id="client-satistaction-number">98%</span>
+                            <span class="hero-stat-label"><span id="SD_16">Client</span> <br /><span id="SD_17">Satisfaction</span></span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+
         <!-- Settings Overlay -->
         <div class="settings-overlay" id="settingsOverlay"></div>
         <!-- Settings Panel -->
@@ -1131,7 +1403,7 @@
         <div class="loader"></div>
     </header>
     <!-- Get in Touch Modal -->
-    <div id="id03" class="w3-modal get_in_touch_modal_settings" style="z-index:999999;">
+    <div id="id03" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
             <header class="w3-container w3-teal w3-display-container">
                 <span onclick="document.getElementById('id03').style.display='none'"
@@ -1186,108 +1458,180 @@
             </footer>
         </div>
     </div>
-
-
-
     <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
-           style="position:absolute;top:-28px;right:24px;z-index:999999;">+</a>
+           style="position:absolute;top:-28px;right:24px">+</a>
     </div>
-    <section style="margin-top: 20px; margin-bottom: 20px;">
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">🎨</div>
-                <div class="service-name"><span id="services_text_1">2D Graphics Design</span></div>
-                <p class="service-description">
-                    <span id="services_text_2">
-                        Stunning visual designs that capture attention and communicate your brand message effectively.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_3">Logo Design & Branding</span></li>
-                    <li><span id="services_text_4">Social Media Graphics</span></li>
-                    <li><span id="services_text_5">Marketing Materials</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">✏️</div>
-                <div class="service-name"><span id="services_text_6">Content Creation</span></div>
-                <p class="service-description">
-                    <span id="services_text_7">
-                        Engaging and compelling content that resonates with your audience and drives results.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_8">Creative Copywriting</span></li>
-                    <li><span id="services_text_9">Blog & Article Writing</span></li>
-                    <li><span id="services_text_10">Social Media Content</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🖼️</div>
-                <div class="service-name"><span id="services_text_11">Image Editing</span></div>
-                <p class="service-description">
-                    <span id="services_text_12">
-                        Professional photo editing and retouching to make your images truly stand out.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_13">Photo Retouching</span></li>
-                    <li><span id="services_text_14">Background Removal</span></li>
-                    <li><span id="services_text_15">Color Correction</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🎬</div>
-                <div class="service-name"><span id="services_text_16">Video Editing</span></div>
-                <p class="service-description">
-                    <span id="services_text_17">
-                        Dynamic video content with professional editing that tells your story perfectly.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_18">Promotional Videos</span></li>
-                    <li><span id="services_text_19">Social Media Clips</span></li>
-                    <li><span id="services_text_20">Motion Graphics</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🌐</div>
-                <div class="service-name"><span id="services_text_21">Website Content</span></div>
-                <p class="service-description">
-                    <span id="services_text_22">
-                        Optimized web content that enhances user experience and boosts conversions.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_23">Landing Page Copy</span></li>
-                    <li><span id="services_text_24">Product Descriptions</span></li>
-                    <li><span id="services_text_25">About & Service Pages</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">📄</div>
-                <div class="service-name"><span id="services_text_26">Professional Brochures</span></div>
-                <p class="service-description">
-                    <span id="services_text_27">
-                        Print-ready brochures and documents that professionally represent your business.
-                    </span>
-                </p>
-                <ul class="service-features">
-                    <li><span id="services_text_28">Corporate Brochures</span></li>
-                    <li><span id="services_text_29">Flyers & Leaflets</span></li>
-                    <li><span id="services_text_30">Business Presentations</span></li>
-                </ul>
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <h1><span id="SD_18">AI-Driven Software Built for Scale & Performance</span></h1>
+            <p>
+                <span id="SD_19">We are an Indian IT company delivering end-to-end web & desktop software,</span>
+                <span id="SD_20">analytics dashboards, AI integration, modernization and long-term maintenance.</span>
+            </p>
+            <div class="cta">
+                <a href="#contact" class="primary"><span id="SD_21">Get Free Consultation</span></a>
+                <a href="#services" class="secondary"><span id="SD_22">Our Services</span></a>
             </div>
         </div>
     </section>
-    <button style="margin-left: 10px;margin-bottom: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_services_section">Get In Touch</span></button>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2><span id="SD_23">Our Services</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card"><h3><span id="SD_24">Custom Software Development</span></h3><p><span id="SD_25">Tailored web & desktop solutions aligned with your business goals.</span></p></div>
+            <div class="card"><h3><span id="SD_26">AI Integration</span></h3><p><span id="SD_27">AI-first architecture from day one: automation, prediction & insights.</span></p></div>
+            <div class="card"><h3><span id="SD_28">Application Modernization</span></h3><p><span id="SD_29">Upgrade legacy systems for performance, security & scalability.</span></p></div>
+            <div class="card"><h3><span id="SD_30">Maintenance & Bug Fixing</span></h3><p><span id="SD_31">Continuous support, enhancements and issue resolution.</span></p></div>
+            <div class="card"><h3><span id="SD_32">Analytics & Dashboards</span></h3><p><span id="SD_33">Data-driven dashboards for smarter decision making.</span></p></div>
+            <div class="card"><h3><span id="SD_34">Enterprise Solutions</span></h3><p><span id="SD_35">Supply chain, finance & business management software.</span></p></div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+        <h2><span id="SD_36">Our Development Process</span></h2>
+        <br />
+        <div class="steps">
+            <div class="step"><span id="SD_37">1. Discovery & Planning</span></div>
+            <div class="step"><span id="SD_38">2. Architecture & Design</span></div>
+            <div class="step"><span id="SD_39">3. Agile Development</span></div>
+            <div class="step"><span id="SD_40">4. Testing & QA</span></div>
+            <div class="step"><span id="SD_41">5. Deployment & Support</span></div>
+        </div>
+    </section>
+
+    <!-- WHY US -->
+    <section>
+        <h2><span id="SD_42">Why Choose Us</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card"><h3><span id="SD_43">AI-First Approach</span></h3><p><span id="SD_45">We integrate AI from the beginning, not as an afterthought.</span></p></div>
+            <div class="card"><h3><span id="SD_46">Scalable Architecture</span></h3><p><span id="SD_47">Systems built to grow with your business.</span></p></div>
+            <div class="card"><h3><span id="SD_48">India-Based, Global Delivery</span></h3><p><span id="SD_49">Cost-effective solutions with global standards.</span></p></div>
+        </div>
+    </section>
+
+    <section>
+        <h2><span id="SD_50">Trusted by Growing Businesses</span></h2>
+        <p class="subtitle"><span id="SD_51">Startups, SMEs & enterprises across industries</span></p>
+
+        <div class="grid">
+            <div class="card">Client Logo 1</div>
+            <div class="card">Client Logo 2</div>
+            <div class="card">Client Logo 3</div>
+            <div class="card">Client Logo 4</div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_52">Industries We Serve</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card">
+                <h3><span id="SD_53">Supply Chain & Logistics</span></h3>
+                <p><span id="SD_54">Inventory systems, vendor management, tracking & optimization.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_55">Finance & Accounting</span></h3>
+                <p><span id="SD_56">Billing, MIS, forecasting, compliance-ready systems.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_57">Healthcare & Clinics</span></h3>
+                <p><span id="SD_58">Practice management, dashboards, automation & analytics.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_59">Manufacturing</span></h3>
+                <p><span id="SD_60">ERP modules, production tracking & performance analytics.</span></p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_61">Security & Compliance</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card">
+                <h3><span id="SD_62">Secure Architecture</span></h3>
+                <p><span id="SD_63">Role-based access, encryption, secure APIs & best practices.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_64">Data Privacy</span></h3>
+                <p><span id="SD_65">GDPR-ready practices and secure data handling policies.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_66">Code Quality</span></h3>
+                <p><span id="SD_67">Version control, testing, CI/CD & maintainable codebases.</span></p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_68">How We Work With You</span></h2>
+        <br />
+        <div class="steps">
+            <div class="step">📞 <span id="SD_69">Initial Consultation & NDA</span></div>
+            <div class="step">📋 <span id="SD_70">Requirement Analysis & Proposal</span></div>
+            <div class="step">🛠 <span id="SD_71">Development & Weekly Updates</span></div>
+            <div class="step">🚀 <span id="SD_72">Delivery, Deployment & Support</span></div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_73">Engagement Models</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card">
+                <h3><span id="SD_74">Fixed Price</span></h3>
+                <p><span id="SD_75">Best for well-defined requirements & clear scope.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_76">Dedicated Team</span></h3>
+                <p><span id="SD_77">Hire developers monthly for long-term projects.</span></p>
+            </div>
+
+            <div class="card">
+                <h3><span id="SD_78">Time & Material</span></h3>
+                <p><span id="SD_79">Flexible model for evolving requirements.</span></p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_80">Our Commitment</span></h2>
+        <br />
+        <div class="grid">
+            <div class="card">✔ <span id="SD_81">Clear Communication</span></div>
+            <div class="card">✔ <span id="SD_82">On-Time Delivery</span></div>
+            <div class="card">✔ <span id="SD_83">Clean & Scalable Code</span></div>
+            <div class="card">✔ <span id="SD_84">Long-Term Support</span></div>
+        </div>
+    </section>
+    <section>
+        <h2><span id="SD_85">Ready to Build or Modernize Your Software?</span></h2>
+        <p class="subtitle"><span id="SD_86">Let’s discuss your idea with our experts</span></p>
+
+        <div style="text-align:center">
+            <a href="#contact" class="btn primary"><span id="SD_87">Schedule Free Consultation</span></a>
+        </div>
+    </section>
+    <!-- CONTACT / LEAD -->
+    <section id="contact">
+        <h2><span id="SD_88">Talk to Our Experts</span></h2>
+        <form>
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Email Address" required />
+            <input type="text" placeholder="Company Name" />
+            <textarea rows="4" placeholder="Tell us about your project"></textarea>
+            <button type="submit"><span id="SD_89">Request Consultation</span></button>
+        </form>
+    </section>
+
 
     <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
@@ -1463,6 +1807,90 @@
     </footer>
 
 
+
+    <script type="text/javascript">
+        // Generate particles
+        const particlesContainer = document.getElementById('hero-particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'hero-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Generate chart bars
+        const dataViz = document.getElementById('hero-dataViz');
+        for (let i = 0; i < 15; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'hero-chart-bar';
+            bar.style.left = (i * 6 + 10) + '%';
+            bar.style.height = (Math.random() * 30 + 10) + '%';
+            bar.style.animationDelay = (i * 0.2) + 's';
+            dataViz.appendChild(bar);
+        }
+
+        // Generate circuit lines
+        for (let i = 0; i < 8; i++) {
+            const line = document.createElement('div');
+            line.className = 'hero-circuit-line';
+            line.style.top = (Math.random() * 100) + '%';
+            line.style.width = (Math.random() * 30 + 20) + '%';
+            line.style.left = (Math.random() * 100) + '%';
+            line.style.animationDelay = (Math.random() * 4) + 's';
+            dataViz.appendChild(line);
+        }
+    </script>
+    <script type="text/javascript">
+        async function fetchCustomSoftwareNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "custom-software!A2:A2";
+            document.getElementById("custom-software-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
+        }
+
+        async function fetchAppsDeployedNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "apps-developed!A2:A2";
+            document.getElementById("apps-developed-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
+        }
+
+        async function fetchAnalyticsProjectsNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "analytics-project!A2:A2";
+            document.getElementById("analytics-projects-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + " +";
+        }
+
+        async function fetchClientSatisfactionNumber(spreadsheetId, range) {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "client-satisfaction!A2:A2";
+            document.getElementById("client-satistaction-number").innerHTML = await fetchSpreadsheetData(spreadsheetId, range) + "%";
+        }
+
+        async function fetchSpreadsheetData(spreadsheetId, range) {
+            const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch products');
+
+                const data = await response.json();
+                const detailsFetched = await data.values;
+                return detailsFetched;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                throw error;
+            }
+        }
+
+        window.onload = () => {
+            fetchCustomSoftwareNumber();
+            fetchAppsDeployedNumber();
+            fetchAnalyticsProjectsNumber();
+            fetchClientSatisfactionNumber();
+        };
+
+    </script>
     <script>
         // Script to open and close sidebar
         function w3_open() {
@@ -1557,129 +1985,13 @@
             }
         });
 
-        // Button Click Effects
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function (e) {
-                const ripple = document.createElement('span');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.6)';
-                ripple.style.width = '20px';
-                ripple.style.height = '20px';
-                ripple.style.left = e.offsetX + 'px';
-                ripple.style.top = e.offsetY + 'px';
-                ripple.style.pointerEvents = 'none';
-                ripple.style.animation = 'ripple 0.6s ease-out';
-
-                this.appendChild(ripple);
-
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-
-        // Add ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-                                            @keyframes ripple {
-                                                to {
-                                                    transform: scale(20);
-                                                    opacity: 0;
-                                                }
-                                            }
-                                        `;
-        document.head.appendChild(style);
-
-        // Parallax Effect
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-
-            document.querySelectorAll('.shape').forEach((shape, index) => {
-                const speed = (index + 1) * 20;
-                shape.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-            });
-        });
-
-        // Service Card Hover Effect
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                this.style.transform = 'translateY(-10px) scale(1.05)';
-            });
-
-            card.addEventListener('mouseleave', function () {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Animate stats on scroll
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        const statsBar = document.querySelector('.stats-bar');
-        if (statsBar) {
-            observer.observe(statsBar);
-        }
-
-        function animateStats() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-
-            statNumbers.forEach(stat => {
-                const finalValue = stat.textContent;
-                const isPercentage = finalValue.includes('%');
-                let numValue = parseInt(finalValue);
-
-                if (isNaN(numValue)) return;
-
-                let currentValue = 0;
-                const increment = numValue / 50;
-                const duration = 2000;
-                const stepTime = duration / 50;
-
-                const counter = setInterval(() => {
-                    currentValue += increment;
-                    if (currentValue >= numValue) {
-                        stat.textContent = finalValue;
-                        clearInterval(counter);
-                    } else {
-                        if (isPercentage) {
-                            stat.textContent = Math.floor(currentValue) + '%';
-                        } else {
-                            stat.textContent = Math.floor(currentValue) + '+';
-                        }
-                    }
-                }, stepTime);
-            });
-        }
-
-        // Button Actions
-        
-
-        document.querySelector('.btn-secondary').addEventListener('click', () => {
-            navigateToExplorePageInAnotherTab("explore.html");
-        });
-
         /* Settings */
         // Settings state stored in memory
         const primaryLanguage = navigator.language;
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        console.log("savedLanguage");
-        console.log(savedLanguage);
-
+        
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
             background: 'dark',
@@ -1742,35 +2054,35 @@
         //fetch Spanish language
         async function fetchSpanishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_GraphicsDesign!A:B";
+            range = "Translation_SD!A:B";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 1);
         }
         //fetch French language
         async function fetchFrenchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_GraphicsDesign!A2:C259";
+            range = "Translation_SD!A:C";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 2);
         }
         //fetch Dutch language
         async function fetchDutchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_GraphicsDesign!A2:D259";
+            range = "Translation_SD!A:D";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 3);
         }
         //fetch Italiano language
         async function fetchItalianoLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_GraphicsDesign!A2:E259";
+            range = "Translation_SD!A:E";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 4);
         }
         //fetch English language
         async function fetchEnglishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_GraphicsDesign!A2:F259";
+            range = "Translation_SD!A:F";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
@@ -1897,18 +2209,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                        position: fixed;
-                                        top: 20px;
-                                        right: 20px;
-                                        background: rgba(99, 102, 241, 0.9);
-                                        color: white;
-                                        padding: 16px 24px;
-                                        border-radius: 12px;
-                                        font-weight: 500;
-                                        z-index: 999;
-                                        backdrop-filter: blur(4px);
-                                        animation: slideInAlert 0.5s ease-out;
-                                    `;
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                background: rgba(99, 102, 241, 0.9);
+                                color: white;
+                                padding: 16px 24px;
+                                border-radius: 12px;
+                                font-weight: 500;
+                                z-index: 999;
+                                backdrop-filter: blur(4px);
+                                animation: slideInAlert 0.5s ease-out;
+                            `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -1971,5 +2283,6 @@
             "btnColorScheme": "light"
         };
     </script>
+
 </body>
 </html>

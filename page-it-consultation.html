@@ -1,0 +1,2846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ================= SEO META ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI & IT Consulting Company - Saharsh Bhadani Venture Private Limited</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;700&family=Exo+2:wght@400;600;800&display=swap" rel="stylesheet">
+
+
+    <meta name="description" content="Saharsh Bhadani Venture Private Limited is an Indian IT consulting firm focused on AI, ML, data-driven platforms, intelligent automation, and future-ready digital solutions for businesses." />
+
+    <meta name="keywords" content="AI consulting company india, machine learning consulting, IT consulting firm india, artificial intelligence solutions, data analytics consulting, AI automation" />
+
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Saharsh Bhadani Venture Private Limited">
+    <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
+    <link rel="stylesheet" href="./css/w3.css">
+    <link rel="stylesheet" href="./css/w3-theme-black.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="Constant.js" defer></script>
+
+    <style>
+        /* ================= THEME VARIABLES ================= */
+        :root {
+            --bg-main: #ffffff;
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc;
+            --card: #f8fafc;
+            --bg-tertiary: #eef2f7;
+            --text-primary: #0f172a;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --muted: #64748b;
+            --border-color: #e2e8f0;
+            --border: #e2e8f0;
+            --brand-primary: #2563eb;
+            --primary: #2563eb;
+            --brand-secondary: #0ea5e9;
+            --secondary: #0ea5e9;
+            --brand-accent: #22c55e;
+            --accent: #22c55e;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --hero-overlay: rgba(255,255,255,0.85);
+        }
+
+        /* ================= DARK MODE ================= */
+        [data-theme="dark"] {
+            --bg-main: #020617;
+            --bg: #020617;
+            --bg-secondary: #020617;
+            --card: #020617;
+            --bg-tertiary: #020617;
+            --text-primary: #e5e7eb;
+            --text: #e5e7eb;
+            --text-secondary: #cbd5f5;
+            --text-muted: #f8f8ff;
+            --muted: #f8f8ff;
+            --border-color: #1f2937;
+            --border: #1f2937;
+            --brand-primary: #38bdf8;
+            --primary: #38bdf8;
+            --brand-secondary: #22d3ee;
+            --secondary: #22d3ee;
+            --brand-accent: #4ade80;
+            --accent: #4ade80;
+            --card-bg: #020617;
+            --card-border: #1f2937;
+            --hero-overlay: rgba(2,6,23,0.9);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: default;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary-orange);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.15s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 153, 51, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .custom-cursor.hovering {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 153, 51, 0.1);
+            border-color: var(--primary-white);
+        }
+
+        .cursor-follower.hovering {
+            width: 80px;
+            height: 80px;
+            border-color: var(--primary-orange);
+        }
+
+        /* Hero Container */
+        .hero-container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a1f3a 0%, var(--dark-bg) 100%);
+        }
+
+        /* Animated Background Particles */
+        .particles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: particle-float 20s infinite;
+        }
+
+        @keyframes particle-float {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0.6;
+            }
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1600px;
+            width: 100%;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        /* Left Content */
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .brand-logo {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+            .brand-logo::before {
+                content: '';
+                width: 40px;
+                height: 3px;
+                background: linear-gradient(90deg, var(--primary-orange), var(--primary-green));
+            }
+
+        .main-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--primary-white) 0%, var(--primary-orange) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: fadeInLeft 0.8s ease-out 0.2s backwards;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            line-height: 1.6;
+            animation: fadeInLeft 0.8s ease-out 0.4s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            animation: fadeInLeft 0.8s ease-out 0.6s backwards;
+        }
+
+        .cta-btn {
+            padding: 16px 36px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 8px;
+            cursor: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--primary-orange), #ff7733);
+            color: var(--dark-bg);
+            box-shadow: 0 10px 30px rgba(255, 153, 51, 0.3);
+        }
+
+            .cta-primary::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.5s, height 0.5s;
+            }
+
+            .cta-primary:hover::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            .cta-primary:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(255, 153, 51, 0.5);
+            }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+        }
+
+            .cta-secondary:hover {
+                background: var(--primary-orange);
+                color: var(--dark-bg);
+                transform: translateY(-5px);
+            }
+
+        /* Right Content - Interactive Icons Grid */
+        .hero-right {
+            position: relative;
+            height: 650px;
+            animation: fadeInRight 0.8s ease-out 0.4s backwards;
+        }
+
+        .icons-grid {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .tech-icon {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 153, 51, 0.1);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+            .tech-icon::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: radial-gradient(circle, var(--glow-orange), transparent);
+                transform: translate(-50%, -50%);
+                transition: all 0.5s ease;
+                opacity: 0;
+            }
+
+            .tech-icon:hover::before,
+            .tech-icon.auto-active::before {
+                width: 200%;
+                height: 200%;
+                opacity: 0.3;
+            }
+
+            .tech-icon:hover,
+            .tech-icon.auto-active {
+                transform: scale(1.15) translateY(-10px);
+                border-color: var(--primary-orange);
+                box-shadow: 0 20px 60px rgba(255, 153, 51, 0.4);
+                z-index: 10;
+            }
+
+            .tech-icon.auto-active-green::before {
+                background: radial-gradient(circle, var(--glow-green), transparent);
+            }
+
+            .tech-icon.auto-active-green {
+                border-color: var(--primary-green);
+                box-shadow: 0 20px 60px rgba(19, 136, 8, 0.4);
+            }
+
+            .tech-icon.auto-active-blue::before {
+                background: radial-gradient(circle, var(--glow-blue), transparent);
+            }
+
+            .tech-icon.auto-active-blue {
+                border-color: #00A8E8;
+                box-shadow: 0 20px 60px rgba(0, 168, 232, 0.4);
+            }
+
+        .icon-symbol {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            transition: all 0.4s ease;
+            filter: grayscale(1);
+        }
+
+        .tech-icon:hover .icon-symbol,
+        .tech-icon.auto-active .icon-symbol {
+            transform: scale(1.2) rotateY(360deg);
+            filter: grayscale(0);
+        }
+
+        .icon-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            color: var(--primary-orange);
+            text-align: center;
+        }
+
+        .tech-icon:hover .icon-label,
+        .tech-icon.auto-active .icon-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .icon-description {
+            position: absolute;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 14, 39, 0.95);
+            border: 1px solid var(--primary-orange);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: var(--text-light);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .tech-icon:hover .icon-description,
+        .tech-icon.auto-active .icon-description {
+            bottom: -70px;
+            opacity: 1;
+        }
+
+        .icon-description::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: rgba(10, 14, 39, 0.95);
+            border-left: 1px solid var(--primary-orange);
+            border-top: 1px solid var(--primary-orange);
+            transform: translateX(-50%) rotate(45deg);
+        }
+
+        /* Center Spotlight Icon */
+        .tech-icon.spotlight {
+            grid-column: 3;
+            grid-row: 3;
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(19, 136, 8, 0.1));
+            border: 2px solid var(--primary-orange);
+        }
+
+            .tech-icon.spotlight .icon-symbol {
+                font-size: 3rem;
+                animation: pulse 2s infinite;
+            }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* India Flag Accent */
+        .india-stripe {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--primary-orange) 0%, var(--primary-orange) 33.33%, var(--primary-white) 33.33%, var(--primary-white) 66.66%, var(--primary-green) 66.66%, var(--primary-green) 100%);
+            box-shadow: 0 -4px 20px rgba(255, 153, 51, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes autoActivate {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15) translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-content {
+                gap: 50px;
+            }
+
+            .icons-grid {
+                gap: 12px;
+            }
+
+            .icon-symbol {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 30px;
+            }
+
+            .hero-right {
+                height: 550px;
+            }
+
+            .icons-grid {
+                gap: 10px;
+            }
+
+            .icon-symbol {
+                font-size: 1.8rem;
+            }
+
+            .tech-icon.spotlight .icon-symbol {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: default;
+            }
+
+            .custom-cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 30px 20px;
+            }
+
+            .hero-right {
+                height: 450px;
+            }
+
+            .icons-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+                gap: 10px;
+            }
+
+            .tech-icon:nth-child(n+17) {
+                display: none;
+            }
+
+            .tech-icon.spotlight {
+                grid-column: 2 / 4;
+                grid-row: 2 / 4;
+            }
+
+            .icon-symbol {
+                font-size: 1.6rem;
+            }
+
+            .tech-icon.spotlight .icon-symbol {
+                font-size: 2.2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .icon-description {
+                white-space: normal;
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .hero-right {
+                height: 380px;
+            }
+
+            .icons-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+
+            .tech-icon:nth-child(n+10) {
+                display: none;
+            }
+
+            .tech-icon.spotlight {
+                grid-column: 2;
+                grid-row: 2;
+            }
+
+            .icon-symbol {
+                font-size: 1.4rem;
+            }
+
+            .tech-icon.spotlight .icon-symbol {
+                font-size: 1.8rem;
+            }
+
+            .icon-label {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Touch Device Adjustments */
+        @media (hover: none) {
+            .tech-icon:active {
+                transform: scale(1.05);
+            }
+
+                .tech-icon:active .icon-label {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .tech-icon:active .icon-description {
+                    opacity: 1;
+                    bottom: -70px;
+                }
+        }
+    </style>
+
+    <!-- ================= STYLES ================= -->
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-secondary);
+            line-height: 1.65
+        }
+
+        section {
+            padding: 90px 10%
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 12px
+        }
+
+        .subtitle {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 55px;
+            color: var(--muted)
+        }
+
+        /* HERO */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 60px;
+            align-items: center
+        }
+
+            .hero h1 {
+                font-size: 52px;
+                margin-bottom: 20px
+            }
+
+            .hero p {
+                font-size: 18px;
+                color: var(--muted);
+                margin-bottom: 32px
+            }
+
+        .cta a {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-right: 12px
+        }
+
+        .primary {
+            background: var(--primary);
+            color: #fff
+        }
+
+        .secondary {
+            border: 1px solid var(--border)
+        }
+
+        /* LEAD CARD */
+        .lead-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px
+        }
+
+            .lead-card h3 {
+                text-align: center;
+                margin-bottom: 15px
+            }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border)
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 32px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 32px;
+            border-radius: 18px
+        }
+
+            .card p {
+                color: var(--muted);
+                font-size: 15px
+            }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            gap: 30px;
+            text-align: center
+        }
+
+        .stat h3 {
+            font-size: 40px;
+            color: var(--primary)
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg,var(--primary),var(--secondary));
+            color: #fff;
+            text-align: center;
+            padding: 90px 10%
+        }
+
+            .cta-section a {
+                display: inline-block;
+                margin-top: 24px;
+                padding: 14px 30px;
+                background: #000;
+                color: #fff;
+                border-radius: 10px;
+                font-weight: 600
+            }
+
+        @media(max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+                .hero h1 {
+                    font-size: 38px
+                }
+        }
+
+        .theme-toggle {
+            padding: .6rem 1.2rem;
+            border-radius: 30px;
+            background: var(--card-bg);
+            border: 1px solid black;
+            color: var(--text-main);
+            cursor: pointer;
+            backdrop-filter: blur(4px);
+            font-size: 1rem;
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0,0,0,0.1);
+            color: #0f172a;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+
+            .btn {
+                align-self: center;
+                width: 100%;
+                max-width: 180px;
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 2px solid var(--border-strong);
+        }
+
+            .btn-secondary:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+        .get-in-touch-button-settings {
+            max-width: 175px;
+        }
+
+        @media (max-width: 600px) {
+            .get-in-touch-button-settings {
+                margin-bottom: 5px;
+            }
+        }
+
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: orange;
+            border: none;
+        }
+
+        .top-navbar {
+            z-index: 11;
+        }
+        /* Settings */
+        .settings-button {
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+            .settings-button:hover {
+                transform: scale(1.1) rotate(90deg);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+            .settings-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: var(--bg);
+            color: var(--text);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            z-index: 100;
+            max-width: 400px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+        .settings-panel {
+            padding: 48px 30px 30px;
+        }
+
+            .settings-panel.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+        .settings-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s ease;
+        }
+
+            .settings-close:hover {
+                color: #667eea;
+                transform: rotate(90deg);
+            }
+
+        .settings-title {
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            text-align: center;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .setting-group {
+            margin-bottom: 25px;
+        }
+
+        .setting-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+            select:focus {
+                outline: none;
+                border-color: #667eea;
+                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            }
+
+        input[type="range"] {
+            height: 40px;
+            -webkit-appearance: none;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+            }
+
+            input[type="range"]::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: white;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                cursor: pointer;
+                border: none;
+            }
+
+        .color-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 100%;
+            height: 40px;
+            border: 3px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .color-option:hover {
+                transform: scale(1.05);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .color-option.active {
+                border-color: #333;
+                transform: scale(1.1);
+            }
+
+            .color-option::after {
+                content: '✓';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 1rem;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .color-option.active::after {
+                opacity: 1;
+            }
+
+
+
+        .text-size-display {
+            margin-top: 5px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+
+
+        .company-name {
+            font-family: Brush Script MT, cursive;
+            margin-top: -5px;
+            margin-left: 5px;
+            font-size: 1.4rem;
+            color: var(--company-name-text);
+            overflow-x: clip;
+        }
+
+        @media (max-width: 360px) {
+            .company-name {
+                font-size: 0.75rem;
+            }
+        }
+
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            transition: opacity 0.75s, visibility 0.75s;
+        }
+
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader::after {
+            content: "";
+            width: 75px;
+            height: 75px;
+            border: 15px solid #dddddd;
+            border-top-color: #009688;
+            border-radius: 50%;
+            animation: loading 0.75s ease infinite;
+        }
+
+        @keyframes loading {
+            from {
+                transform: rotate(0turn);
+            }
+
+            to {
+                transform: rotate(1turn);
+            }
+        }
+
+        #footer {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+
+        .footer_link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .contact-us-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+        body {
+            background: var(--bg-main);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        section {
+            background: var(--bg-secondary);
+        }
+
+        header {
+            background: var(--bg-main);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+        }
+
+        .card,
+        .lead-card,
+        .tech-tile,
+        .service-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        input,
+        textarea {
+            background: var(--bg-main);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+            input::placeholder,
+            textarea::placeholder {
+                color: var(--text-muted);
+            }
+
+        button,
+        .cta-btn {
+            background: var(--brand-primary);
+            color: #fff;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            overflow: visible;
+            word-break: keep-all;
+        }
+
+        .hero-left {
+            max-width: 620px;
+            padding-top: 90px; /* offset fixed navbar */
+        }
+
+        .main-title {
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+            line-height: 1.15;
+            margin-bottom: 18px;
+            white-space: normal;
+        }
+
+        .top-navbar {
+            height: 90px;
+        }
+
+        .hero-container {
+            min-height: calc(100vh - 90px);
+        }
+        section {
+            padding: clamp(70px, 8vw, 110px) 10%;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        [data-theme="dark"] .card {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+        }
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-right {
+                margin-top: 40px;
+            }
+        }
+
+    </style>
+    <script type="text/javascript">
+        function delay(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function navigateTo(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + features_service_page_name;
+            new_url_section = new_url + "#" + pageName;
+            window.location.href = new_url_section;
+            //window.open(new_url_section, "_blank");
+        }
+
+        function navigateToIndex(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url = current_url_refined + index_page_name;
+            new_url_section = new_url;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = new_url + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPage(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.location.href = new_url_section;
+        }
+
+        function navigateToPageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined;
+            if (pageName.localeCompare("#") != 0) {
+                new_url_section = current_url_refined + pageName;
+            }
+            window.open(new_url_section);
+        }
+
+        function navigateToExplorePageInAnotherTab(pageName) {
+            current_url = window.location.href;
+            var current_url_refined = current_url.substr(0, current_url.lastIndexOf("/SBV/") + 5);
+            if (!working_local) current_url_refined = "https://SaharshBhadani.com/";
+            new_url_section = current_url_refined + pageName;
+            window.open(new_url_section);
+        }
+    </script>
+</head>
+
+<body data-theme="dark">
+    <header>
+        <!-- Navbar (sit on top) -->
+        <div class="w3-top top-navbar">
+            <div class="w3-bar" id="myNavbar">
+                <a class="w3-margin-left w3-xlarge w3-buttons w3-left">
+                    <i class="fa fa-bars side-navbar-items" onclick="w3_open()"></i>
+                </a>
+                <a onclick="navigateToIndex('#home')" class="company-name">
+                    Saharsh Bhadani Venture Pvt Ltd
+                </a>
+                <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" title="Settings">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
+                <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red" href="javascript:void(0);">
+                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
+                </a>
+                <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+            <!-- Sidebar (hidden by default) -->
+            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:10;width:40%;min-width:300px" id="mySidebar">
+                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
+                    <span id="close_menu_button">Close Menu</span>
+                    <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
+                </a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 <span id="Graphics_Designing_text">Graphics Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text">Website Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text">App Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text">Software Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
+            </nav>
+            <!-- Navbar on small screens -->
+            <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+                <a class="w3-bar-item w3-button side-navbar-items" href="#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(business_analytics_page)">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(ai_ml_page)">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(it_consultation_page)">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(graphics_designing_page)">🎨 <span id="Graphics_Designing_text1">Graphics Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(webdesigning_page)">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(app_development_page)">📲 <span id="App_Development_text1">App Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(software_development_page)">💻 <span id="Software_Development_text1">Software Development</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" href="#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
+                <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
+            </div>
+        </div>
+
+        <!-- Top hero image: Start-->
+        <div class="hero-container">
+            <!-- Custom Cursor -->
+            <div class="custom-cursor"></div>
+            <div class="cursor-follower"></div>
+
+            <!-- Particles Background -->
+            <div class="particles-container" id="particles"></div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <!-- Left Content -->
+                <div class="hero-left">
+                    <h1 class="main-title"><span id="it_con_1">Engineering Digital Excellence</span></h1>
+                    <p class="subtitle">
+                        <span id="it_con_2">Pioneering India's digital transformation with cutting-edge technology solutions.</span>
+                        <span id="it_con_3">Explore our interactive services ecosystem - hover over tiles or watch them come alive automatically.</span>
+                    </p>
+                    <div class="cta-buttons">
+                        <button class="cta-btn cta-primary"><span id="it_con_4">Discover Solutions</span></button>
+                        <button class="cta-btn cta-secondary"><span id="it_con_5">Get Consultation</span></button>
+                    </div>
+                </div>
+
+                <!-- Right Content - Interactive Icons -->
+                <div class="hero-right">
+                    <div class="icons-grid">
+                        <div class="tech-icon" data-service="cloud">
+                            <div class="icon-symbol">☁️</div>
+                            <div class="icon-label"><span id="it_con_6">Cloud</span></div>
+                            <div class="icon-description"><span id="it_con_7">AWS, Azure & GCP solutions</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="ai">
+                            <div class="icon-symbol">🤖</div>
+                            <div class="icon-label"><span id="it_con_8">AI/ML</span></div>
+                            <div class="icon-description"><span id="it_con_9">Intelligent automation</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="security">
+                            <div class="icon-symbol">🔒</div>
+                            <div class="icon-label"><span id="it_con_10">Security</span></div>
+                            <div class="icon-description"><span id="it_con_11">Cybersecurity solutions</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="blockchain">
+                            <div class="icon-symbol">⛓️</div>
+                            <div class="icon-label"><span id="it_con_12">Blockchain</span></div>
+                            <div class="icon-description"><span id="it_con_13">Decentralized solutions</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="quantum">
+                            <div class="icon-symbol">⚛️</div>
+                            <div class="icon-label"><span id="it_con_14">Quantum</span></div>
+                            <div class="icon-description"><span id="it_con_15">Next-gen computing</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="iot">
+                            <div class="icon-symbol">📡</div>
+                            <div class="icon-label"><span id="it_con_16">IoT</span></div>
+                            <div class="icon-description"><span id="it_con_17">Connected ecosystems</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="web3">
+                            <div class="icon-symbol">🌐</div>
+                            <div class="icon-label"><span id="it_con_18">Web3</span></div>
+                            <div class="icon-description"><span id="it_con_19">Decentralized web</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="ar">
+                            <div class="icon-symbol">🥽</div>
+                            <div class="icon-label"><span id="it_con_20">AR/VR</span></div>
+                            <div class="icon-description"><span id="it_con_21">Immersive experiences</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="data">
+                            <div class="icon-symbol">📊</div>
+                            <div class="icon-label"><span id="it_con_22">Analytics</span></div>
+                            <div class="icon-description"><span id="it_con_23">Business intelligence</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="5g">
+                            <div class="icon-symbol">📶</div>
+                            <div class="icon-label"><span id="it_con_24">5G</span></div>
+                            <div class="icon-description"><span id="it_con_25">Network solutions</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="edge">
+                            <div class="icon-symbol">🖥️</div>
+                            <div class="icon-label"><span id="it_con_26">Edge</span></div>
+                            <div class="icon-description"><span id="it_con_27">Edge computing</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="robotics">
+                            <div class="icon-symbol">🦾</div>
+                            <div class="icon-label"><span id="it_con_28">Robotics</span></div>
+                            <div class="icon-description"><span id="it_con_29">Automation systems</span></div>
+                        </div>
+
+                        <div class="tech-icon spotlight" data-service="digital">
+                            <div class="icon-symbol">💡</div>
+                            <div class="icon-label"><span id="it_con_30">Innovation Hub</span></div>
+                            <div class="icon-description"><span id="it_con_31">Complete digital transformation</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="mobile">
+                            <div class="icon-symbol">📱</div>
+                            <div class="icon-label"><span id="it_con_32">Mobile</span></div>
+                            <div class="icon-description"><span id="it_con_33">App development</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="devops">
+                            <div class="icon-symbol">⚙️</div>
+                            <div class="icon-label"><span id="it_con_34">DevOps</span></div>
+                            <div class="icon-description"><span id="it_con_35">CI/CD automation</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="fintech">
+                            <div class="icon-symbol">💳</div>
+                            <div class="icon-label"><span id="it_con_36">FinTech</span></div>
+                            <div class="icon-description"><span id="it_con_37">Payment solutions</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="ecommerce">
+                            <div class="icon-symbol">🛒</div>
+                            <div class="icon-label"><span id="it_con_38">E-Commerce</span></div>
+                            <div class="icon-description"><span id="it_con_39">Digital commerce</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="api">
+                            <div class="icon-symbol">🔌</div>
+                            <div class="icon-label"><span id="it_con_40">API</span></div>
+                            <div class="icon-description"><span id="it_con_41">Integration services</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="ml">
+                            <div class="icon-symbol">🧠</div>
+                            <div class="icon-label"><span id="it_con_42">ML Ops</span></div>
+                            <div class="icon-description"><span id="it_con_43">ML infrastructure</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="saas">
+                            <div class="icon-symbol">☁️</div>
+                            <div class="icon-label"><span id="it_con_44">SaaS</span></div>
+                            <div class="icon-description"><span id="it_con_45">Software platforms</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="cms">
+                            <div class="icon-symbol">📝</div>
+                            <div class="icon-label"><span id="it_con_46">CMS</span></div>
+                            <div class="icon-description"><span id="it_con_47">Content management</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="crm">
+                            <div class="icon-symbol">👥</div>
+                            <div class="icon-label"><span id="it_con_48">CRM</span></div>
+                            <div class="icon-description"><span id="it_con_49">Customer relations</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="erp">
+                            <div class="icon-symbol">📋</div>
+                            <div class="icon-label"><span id="it_con_50">ERP</span></div>
+                            <div class="icon-description"><span id="it_con_51">Enterprise systems</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="testing">
+                            <div class="icon-symbol">🧪</div>
+                            <div class="icon-label"><span id="it_con_52">Testing</span></div>
+                            <div class="icon-description"><span id="it_con_53">QA automation</span></div>
+                        </div>
+
+                        <div class="tech-icon" data-service="microservices">
+                            <div class="icon-symbol">🔷</div>
+                            <div class="icon-label"><span id="it_con_54">Micro</span></div>
+                            <div class="icon-description"><span id="it_con_55">Microservices</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- India Flag Accent -->
+            <div class="india-stripe"></div>
+        </div>
+
+        <script>
+            // Custom Cursor
+            const cursor = document.querySelector('.custom-cursor');
+            const follower = document.querySelector('.cursor-follower');
+
+            let mouseX = 0, mouseY = 0;
+            let followerX = 0, followerY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+            });
+
+            // Smooth follower animation
+            function animateFollower() {
+                followerX += (mouseX - followerX) * 0.1;
+                followerY += (mouseY - followerY) * 0.1;
+
+                follower.style.left = followerX + 'px';
+                follower.style.top = followerY + 'px';
+
+                requestAnimationFrame(animateFollower);
+            }
+            animateFollower();
+
+            // Cursor hover effects
+            const hoverElements = document.querySelectorAll('.tech-icon, .cta-btn');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hovering');
+                    follower.classList.add('hovering');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hovering');
+                    follower.classList.remove('hovering');
+                });
+            });
+
+            // Create particles
+            function createParticles() {
+                const container = document.getElementById('particles');
+                const particleCount = 50;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+
+                    const size = Math.random() * 3 + 1;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+
+                    particle.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                    particle.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+
+                    container.appendChild(particle);
+                }
+            }
+
+            // Icon interaction with magnetic effect
+            const icons = document.querySelectorAll('.tech-icon');
+            icons.forEach(icon => {
+                icon.addEventListener('mousemove', (e) => {
+                    const rect = icon.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const deltaX = (x - centerX) / centerX;
+                    const deltaY = (y - centerY) / centerY;
+
+                    icon.style.transform = `scale(1.15) translateY(-10px) rotateY(${deltaX * 10}deg) rotateX(${-deltaY * 10}deg)`;
+                });
+
+                icon.addEventListener('mouseleave', () => {
+                    if (!icon.classList.contains('auto-active')) {
+                        icon.style.transform = '';
+                    }
+                });
+            });
+
+            // Auto-activate random tiles
+            let autoActivationInterval;
+            let currentActiveIcons = [];
+
+            function activateRandomIcons() {
+                // Deactivate all currently active icons
+                currentActiveIcons.forEach(icon => {
+                    icon.classList.remove('auto-active', 'auto-active-green', 'auto-active-blue');
+                });
+                currentActiveIcons = [];
+
+                // Get all icons except spotlight
+                const allIcons = Array.from(document.querySelectorAll('.tech-icon:not(.spotlight)'));
+
+                // Randomly select 3-5 icons to activate
+                const numberOfActivations = Math.floor(Math.random() * 3) + 3; // 3-5 icons
+
+                for (let i = 0; i < numberOfActivations && allIcons.length > 0; i++) {
+                    const randomIndex = Math.floor(Math.random() * allIcons.length);
+                    const selectedIcon = allIcons[randomIndex];
+
+                    // Remove from array so we don't select it again
+                    allIcons.splice(randomIndex, 1);
+
+                    // Add random color variant
+                    const colors = ['auto-active', 'auto-active-green', 'auto-active-blue'];
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+                    selectedIcon.classList.add(randomColor);
+                    currentActiveIcons.push(selectedIcon);
+                }
+            }
+
+            // Start auto-activation after 2 seconds, then every 2.5 seconds
+            function startAutoActivation() {
+                setTimeout(() => {
+                    activateRandomIcons();
+                    autoActivationInterval = setInterval(activateRandomIcons, 2500);
+                }, 2000);
+            }
+
+            // Ripple effect on click
+            document.querySelectorAll('.cta-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.style.position = 'absolute';
+                    ripple.style.borderRadius = '50%';
+                    ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                    ripple.style.transform = 'scale(0)';
+                    ripple.style.animation = 'ripple 0.6s ease-out';
+
+                    this.appendChild(ripple);
+
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+
+            // Add ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                                                            @keyframes ripple {
+                                                                to {
+                                                                    transform: scale(2);
+                                                                    opacity: 0;
+                                                                }
+                                                            }
+                                                        `;
+            document.head.appendChild(style);
+
+            // Parallax effect on mouse move
+            document.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) / 50;
+                const moveY = (e.clientY - window.innerHeight / 2) / 50;
+
+                const particles = document.querySelectorAll('.particle');
+                particles.forEach((particle, index) => {
+                    const speed = (index % 3 + 1) * 0.5;
+                    particle.style.transform = `translate(${moveX * speed}px, ${moveY * speed}px)`;
+                });
+            });
+
+            // Initialize
+            window.addEventListener('load', () => {
+                createParticles();
+                startAutoActivation();
+            });
+
+            // Cleanup on unload
+            window.addEventListener('beforeunload', () => {
+                if (autoActivationInterval) {
+                    clearInterval(autoActivationInterval);
+                }
+            });
+        </script>
+        <!-- Top hero image : End -->
+        <!-- HERO -->
+        <section class="hero">
+            <div>
+                <h1><span id="it_con_56">Engineering Intelligence for the Future</span></h1>
+                <p>
+                    <span id="it_con_57">Saharsh Bhadani Venture Private Limited is an Indian IT consulting firm helping businesses</span>
+                    <span id="it_con_58">leverage Artificial Intelligence, Machine Learning and data-driven</span>
+                    <span id="it_con_59">technologies to build intelligent, scalable and future-ready systems.</span>
+                </p>
+                <div class="cta">
+                    <a href="#contact" class="primary"><span id="it_con_60">AI Consultation</span></a>
+                    <a href="#services" class="secondary"><span id="it_con_61">Our Capabilities</span></a>
+                </div>
+            </div>
+
+            <div class="lead-card">
+                <h3><span id="it_con_62">Talk to Our AI Experts</span></h3>
+                <form>
+                    <input placeholder="Your Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <input placeholder="Company / Industry">
+                    <textarea placeholder="Describe your AI or IT challenge"></textarea>
+                    <button><span id="it_con_63">Request Consultation</span></button>
+                </form>
+            </div>
+        </section>
+        <!-- Settings Overlay -->
+        <div class="settings-overlay" id="settingsOverlay"></div>
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <button class="settings-close" id="settingsClose">×</button>
+            <h3 class="settings-title" id="settings-title"><span id="settings_title_text">Settings</span></h3>
+
+            <div class="setting-group">
+                <label for="language" class="setting-label" id="lang-label"><span id="lang_label_text">Language</span></label>
+                <select id="language">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label class="setting-label" id="bg-label"><span id="bg_label_text">Toggle Background Color</span></label>
+                <div class="color-options">
+                    <div>
+                        <button class="theme-toggle">☀️ Light</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setting-group">
+                <label for="textSize" class="setting-label"><span id="text_size_label">Text Size</span></label>
+                <input type="range" id="textSize" min="12" max="24" value="16">
+                <div class="text-size-display" id="size-display">16px</div>
+            </div>
+        </div>
+        <div class="loader"></div>
+    </header>
+    <!-- Get in Touch Modal -->
+    <div id="id03" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-top">
+            <header class="w3-container w3-teal w3-display-container">
+                <span onclick="document.getElementById('id03').style.display='none'"
+                      class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
+                <h2><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
+            </header>
+            <div class="w3-container get-in-touch-settings">
+                <div class="w3-col m7 get-in-touch-settings" style="width: 100%;">
+                    <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
+                          onsubmit="close_modal(this)" method="get"
+                          target="display-frame">
+                        <input type="hidden" value="SAVE_LEADS" name="query">
+                        <input type="hidden" value="leads_form" name="module">
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_name_label">Name</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_email_label">Email</span></label>
+                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_country_label">Country</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
+                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required>
+                        </div>
+                        <div class="w3-section">
+                            <label><span id="get_in_touch_modal_remarks_label">Remarks (if any)</span></label>
+                            <input class="w3-input get-in-touch-settings" type="text" name="Message">
+                        </div>
+                        <div class="w3-row">
+                            <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
+                            <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                        </div>
+                    </form>
+                    <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
+                </div>
+            </div>
+            <footer class="w3-container w3-teal">
+                <p id="modal_footer_message">&nbsp;</p>
+            </footer>
+        </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+
+    <!-- VISION & MISSION -->
+    <section>
+        <h2><span id="it_con_64">Our Vision & Mission</span></h2>
+        <p class="subtitle">
+            <span id="it_con_65">Building intelligence-first digital ecosystems that empower businesses</span>
+            <span id="it_con_66">to make smarter decisions and scale sustainably.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_67">Vision</span></h3>
+                <p>
+                    <span id="it_con_68">To become a globally trusted AI consulting partner driving innovation,</span>
+                    <span id="it_con_69">automation and intelligence across industries.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_70">Mission</span></h3>
+                <p>
+                    <span id="it_con_71">Enable organizations to adopt AI responsibly, efficiently and</span>
+                    <span id="it_con_72">strategically—transforming data into actionable intelligence.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_73">Values</span></h3>
+                <p>
+                    <span id="it_con_74">Innovation, transparency, ethical AI, continuous learning and</span>
+                    <span id="it_con_75">long-term partnerships.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2><span id="it_con_76">IT & AI Consulting Services</span></h2>
+        <p class="subtitle">
+            <span id="it_con_77">End-to-end consulting from strategy to execution and long-term optimization</span>
+        </p>
+
+        <div class="grid">
+            <div class="card"><h3><span id="it_con_78">AI Strategy Consulting</span></h3><p><span id="it_con_79">Identify high-impact AI use cases aligned with business goals.</span></p></div>
+            <div class="card"><h3><span id="it_con_80">Machine Learning Solutions</span></h3><p><span id="it_con_81">Custom ML models for prediction, classification and optimization.</span></p></div>
+            <div class="card"><h3><span id="it_con_82">Data Engineering</span></h3><p><span id="it_con_83">Robust data pipelines, warehousing and real-time processing.</span></p></div>
+            <div class="card"><h3><span id="it_con_84">Intelligent Automation</span></h3><p><span id="it_con_85">AI-powered automation for operations, finance and support.</span></p></div>
+            <div class="card"><h3><span id="it_con_86">AI-Powered Applications</span></h3><p><span id="it_con_87">Web & enterprise apps with embedded AI intelligence.</span></p></div>
+            <div class="card"><h3><span id="it_con_88">Legacy Modernization</span></h3><p><span id="it_con_89">Upgrade existing IT systems with AI and modern architectures.</span></p></div>
+        </div>
+    </section>
+
+    <!-- AI EXPERTISE -->
+    <section id="ai">
+        <h2><span id="it_con_90">Our AI & ML Expertise</span></h2>
+        <p class="subtitle">
+            <span id="it_con_91">Deep technical capabilities across modern AI and data science domains</span>
+        </p>
+
+        <div class="grid">
+            <div class="card"><h3><span id="it_con_92">Predictive Analytics</span></h3><p><span id="it_con_93">Forecasting demand, churn, risk and business trends.</span></p></div>
+            <div class="card"><h3><span id="it_con_94">Natural Language Processing</span></h3><p><span id="it_con_95">Chatbots, document processing, sentiment analysis.</span></p></div>
+            <div class="card"><h3><span id="it_con_96">Computer Vision</span></h3><p><span id="it_con_97">Image recognition, video analytics and visual inspection.</span></p></div>
+            <div class="card"><h3><span id="it_con_98">MLOps & AI Governance</span></h3><p><span id="it_con_99">Model deployment, monitoring and ethical AI practices.</span></p></div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section>
+        <h2><span id="it_con_100">Industries We Serve</span></h2>
+        <p class="subtitle">
+            <span id="it_con_101">AI-driven transformation across diverse business domains</span>
+        </p>
+
+        <div class="grid">
+            <div class="card"><h3><span id="it_con_102">Finance & FinTech</span></h3><p><span id="it_con_103">Risk modeling, fraud detection and automation.</span></p></div>
+            <div class="card"><h3><span id="it_con_104">Healthcare</span></h3><p><span id="it_con_105">Clinical analytics, diagnostics and workflow optimization.</span></p></div>
+            <div class="card"><h3><span id="it_con_106">Retail & E-commerce</span></h3><p><span id="it_con_107">Recommendation engines and demand forecasting.</span></p></div>
+            <div class="card"><h3><span id="it_con_108">Manufacturing</span></h3><p><span id="it_con_109">Predictive maintenance and quality analytics.</span></p></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2><span id="it_con_110">Ready to Build Intelligent Systems?</span></h2>
+        <p><span id="it_con_111">Let’s turn your data into competitive advantage.</span></p>
+        <a href="#contact"><span id="it_con_112">Start AI Journey</span></a>
+    </section>
+
+
+    <!-- ================= AI USE CASES ================= -->
+    <section>
+        <h2><span id="it_con_113">AI Use Cases That Drive Real Business Impact</span></h2>
+        <p class="subtitle">
+            <span id="it_con_114">We don’t build AI for experimentation — we build AI systems that deliver</span>
+            <span id="it_con_115">measurable outcomes across core business functions.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_116">Revenue Intelligence</span></h3>
+                <p>
+                    <span id="it_con_117">AI-powered forecasting, lead scoring and customer segmentation to</span>
+                    <span id="it_con_118">maximize conversions and lifetime value.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_119">Operational Optimization</span></h3>
+                <p>
+                    <span id="it_con_120">Predictive maintenance, demand forecasting and intelligent scheduling</span>
+                    <span id="it_con_121">to reduce costs and downtime.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_122">Customer Experience AI</span></h3>
+                <p>
+                    <span id="it_con_123">NLP-driven chatbots, sentiment analysis and personalization engines</span>
+                    <span id="it_con_124">delivering superior customer engagement.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_125">Risk & Compliance Analytics</span></h3>
+                <p>
+                    <span id="it_con_126">Fraud detection, anomaly detection and real-time risk monitoring using</span>
+                    <span id="it_con_127">advanced ML models.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= THOUGHT LEADERSHIP ================= -->
+    <section>
+        <h2><span id="it_con_128">Research & Innovation</span></h2>
+        <p class="subtitle">
+            <span id="it_con_129">We actively research, experiment and contribute to the evolving AI ecosystem.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_130">AI Research & Prototyping</span></h3>
+                <p>
+                    <span id="it_con_131">Rapid prototyping of AI ideas using PoCs and MVPs to validate feasibility</span>
+                    <span id="it_con_132">before full-scale implementation.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_133">Future-Ready Architectures</span></h3>
+                <p>
+                    <span id="it_con_134">Designing modular, scalable AI architectures that evolve with new models,</span>
+                    <span id="it_con_135">data growth and business expansion.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_136">Continuous Learning Culture</span></h3>
+                <p>
+                    <span id="it_con_137">Our consultants stay ahead through research, certifications and real-world</span>
+                    <span id="it_con_138">experimentation.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ================= ENGAGEMENT MODELS ================= -->
+    <section>
+        <h2><span id="it_con_139">Engagement Models</span></h2>
+        <p class="subtitle">
+            <span id="it_con_140">Flexible collaboration models designed to match your business needs.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_141">Consulting & Advisory</span></h3>
+                <p>
+                    <span id="it_con_142">Strategic guidance, AI roadmaps and feasibility studies led by senior consultants.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_143">Project-Based Delivery</span></h3>
+                <p>
+                    <span id="it_con_144">End-to-end execution of AI or IT initiatives with defined scope and milestones.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_145">Dedicated AI Teams</span></h3>
+                <p>
+                    <span id="it_con_146">Long-term engagement with dedicated data scientists, engineers and architects.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= RESPONSIBLE AI ================= -->
+    <section>
+        <h2><span id="it_con_147">Responsible & Ethical AI</span></h2>
+        <p class="subtitle">
+            <span id="it_con_148">Building AI systems that are transparent, fair and trustworthy.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_149">Bias Mitigation</span></h3>
+                <p>
+                    <span id="it_con_150">Ensuring fairness and reducing bias in training data and model outputs.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_151">Explainable AI</span></h3>
+                <p>
+                    <span id="it_con_152">Interpretable models that allow stakeholders to understand AI decisions.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_153">Human-in-the-Loop</span></h3>
+                <p>
+                    <span id="it_con_154">Combining human judgment with AI for critical decision-making processes.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SECURITY & COMPLIANCE ================= -->
+    <section>
+        <h2><span id="it_con_155">Security, Compliance & Data Privacy</span></h2>
+        <p class="subtitle">
+            <span id="it_con_156">Enterprise-grade security embedded into every AI and IT solution we build.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_157">Data Protection</span></h3>
+                <p>
+                    <span id="it_con_158">Secure data pipelines, encryption and access controls across environments.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_159">Compliance Readiness</span></h3>
+                <p>
+                    <span id="it_con_160">Solutions aligned with GDPR, ISO and industry-specific regulations.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_161">Model Governance</span></h3>
+                <p>
+                    <span id="it_con_162">Versioning, monitoring and audit trails for deployed AI models.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section>
+        <h2><span id="it_con_163">Frequently Asked Questions</span></h2>
+        <p class="subtitle">
+            <span id="it_con_164">Common questions about AI & IT consulting engagements.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_165">Is AI suitable for my business?</span></h3>
+                <p>
+                    <span id="it_con_166">We assess readiness, data maturity and ROI before recommending AI solutions.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_167">How long does an AI project take?</span></h3>
+                <p>
+                    <span id="it_con_168">PoCs can take weeks, while full-scale implementations may span several months.
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_169">Do you support post-deployment?</span></h3>
+                <p>
+                    <span id="it_con_170">Yes, we provide monitoring, optimization and continuous improvement.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CAREERS ================= -->
+    <section>
+        <h2><span id="it_con_171">Careers at Our Firm</span></h2>
+        <p class="subtitle">
+            <span id="it_con_172">Join us in building the future of intelligent systems.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_173">Innovative Work</span></h3>
+                <p>
+                    <span id="it_con_174">Work on cutting-edge AI and data challenges across industries.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_175">Learning Culture</span></h3>
+                <p>
+                    <span id="it_con_176">Continuous learning, certifications and research opportunities.</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_177">Purpose-Driven Team</span></h3>
+                <p>
+                    <span id="it_con_178">Build technology that creates meaningful, long-term impact.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TECH STACK ================= -->
+    <section>
+        <h2><span id="it_con_179">Technology Stack & Platforms</span></h2>
+        <p class="subtitle">
+            <span id="it_con_180">Best-in-class tools and platforms chosen for scalability, performance and security.</span>
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span id="it_con_181">AI & ML</span></h3>
+                <p>
+                    <span id="it_con_182">Python, TensorFlow, PyTorch, Scikit-learn, Hugging Face, OpenAI APIs</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_183">Data Engineering</span></h3>
+                <p>
+                    <span id="it_con_184">Apache Spark, Kafka, Airflow, Snowflake, BigQuery</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_185">Cloud Platforms</span></h3>
+                <p>
+                    <span id="it_con_186">AWS, Azure, Google Cloud with cloud-native AI services</span>
+                </p>
+            </div>
+            <div class="card">
+                <h3><span id="it_con_187">Web & App Development</span></h3>
+                <p>
+                    <span id="it_con_188">React, Next.js, Node.js, FastAPI, Microservices Architecture</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2><span id="it_con_189">Contact Us</span></h2>
+        <p class="subtitle">
+            <span id="it_con_190">Discuss your AI, ML or IT transformation goals</span>
+        </p>
+
+        <form class="lead-card" style="max-width:700px;margin:auto;" method="get"
+              target="display-frame1" onsubmit="close_modal1(this)">
+            <input type="hidden" value="SAVE_LEADS" name="query" />
+            <input type="hidden" value="leads_form" name="module" />
+            <input placeholder="Name" name="Name" required />
+            <input type="email" name="Email" placeholder="Email" required />
+            <input placeholder="Phone / WhatsApp" name="PhoneNumber" />
+            <textarea name="Message" placeholder="Your requirements"></textarea>
+            <button type="submit"><span id="it_con_191">Submit</span></button>
+        </form>
+        <script>
+            const close_modal1 = async (form) => {
+                try {
+                    const loader = document.querySelector(".loader");
+                    loader.classList.remove("loader-hidden");
+                    let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    let response = await fetch(url);
+                    clearTimeout(timeId);
+
+                    if (response.ok) {
+                        loader.classList.add("loader-hidden");
+                        if (form.Email.value.localeCompare("system") == 0) {
+                            alert("Thank you for submitting your feedback!");
+                        }
+                        else {
+                            alert("We will contact you soon!");
+                            loader.classList.add("loader-hidden");
+
+                        }
+                        form.reset();
+                    }
+                    else {
+                        alert("Something went wrong");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+                return false;
+
+            }
+        </script>
+        <iframe name="display-frame1" style="width:0px;height:0px;border:0px solid white"></iframe>
+    </section>
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <section id="contact-us" class="contact-us-settings">
+        <div>
+            <div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium" id="contactUs">
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="contact_details_ls_1" style="color:white;">Contact details</span></p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
+                                <span id="contact_details_ls_2">Landmark</span>: Near Lansdowne Market<br>
+                                <span id="contact_details_ls_3">WhatsApp & Phone no</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="site_information_ls_1" style="color:white;">Site Information</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_ls_2">Careers</span></u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_ls_3">Frequently asked questions</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_ls_4">Privacy Policy</span></u></a>
+                            <br>
+                            <a onclick="navigateToPage(tnc_page_name)"><u><span id="site_information_ls_5">Terms and Conditions</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(cnr_page_name)"><u><span id="site_information_ls_6">Cancellation and Refund</span></u></a>
+                            <br>
+                            <a onclick="navigateToPage(payments_page_name)"><u><span id="site_information_ls_7">Payments</span></u></a>&nbsp;|&nbsp;
+                            <a onclick="navigateToPage(snd_page_name)"><u><span id="site_information_ls_8">Shipping and Delivery</span></u></a>
+                            <br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank"><span id="site_information_ls_9">Provide a feedback</span></a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom w3-padding-16">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="quick_links_ls_1" style="color:white;">Quick Links</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
+                            <span id="quick_links_ls_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br>
+                            <span id="quick_links_ls_7">Visit</span>: <a target="_blank"
+                                                                         href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                <span id="quick_links_ls_8">Location in Map.</span>
+                            </a><br>
+                            <span id="quick_links_ls_9">Get in touch</span>: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                <span id="quick_links_ls_10">Fill a Google form</span>
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- medium screen-->
+            <div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium " id="contactUs">
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow ">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="contact_details_m_1" style="color:white;">Contact details</span></p>
+                        </li>
+                        <li class="w3-padding-16">
+                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                                29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
+                                <span id="contact_details_m_2">WhatsApp & Phone</span> <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="site_information_m_1" style="color:white;">Site Information</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_m_2">Careers</span></u></a><br>
+                            <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_m_3">Frequently asked questions</span></u></a><br>
+                            <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_m_4">Policy</span></u></a><br>
+                            <a onclick="navigateToPage(payments_page_name)"><u><span id="site_information_m_5">Payments</span></u></a><br>
+                            <a href="https://forms.gle/Xn2BfDDbxLLmjWYy8" target="_blank"><span id="site_information_m_6">Provide a feedback</span></a><br>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w3-third w3-margin-bottom">
+                    <ul class="w3-ul w3-border w3-hover-shadow">
+                        <li class="w3-theme-l2">
+                            <p class="w3-xlarge"><span id="quick_links_m_1" style="color:white;">Quick Links</span></p>
+                        </li>
+                        <li class="w3-padding-16" style="text-align: left;">
+                            <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_m_3">WhatsApp</span></a><br>
+                            <span id="quick_links_m_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
+                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
+                            <span id="quick_links_m_7">Visit</span>: <a target="_blank"
+                                                                        href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
+                                <span id="quick_links_m_8">Location in Map.</span>
+                            </a><br>
+                            <span id="quick_links_m_9">Get in touch</span>: <a target="_blank" href="https://forms.gle/GzQpFfvKQcwuB7347">
+                                <span id="quick_links_m_10">Fill a Google form</span>
+                            </a><br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <br />
+            <button style="margin-left: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-32 w3-center" id="footer">
+        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+
+        <h4><span id="Follow_us_footer">Follow Us</span></h4>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
+           onclick="openLink('facebook')"><i class="fa fa-facebook"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')">
+            <i class="fa fa-twitter"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')">
+            <i class="fa fa-google-plus"></i>
+        </a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Instagram"
+           onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
+        <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
+           onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
+        <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
+        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
+
+        <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+            <span class="w3-text w3-padding w3-teal w3-hide-small" id="go_to_top_text_footer">Go To Top</span>
+            <a class="w3-button goto-top-button" href="#home">
+                <span class="w3-xlarge">
+                    <i class="fa fa-chevron-circle-up"></i>
+                </span>
+            </a>
+        </div>
+        <script>
+            function openLink(pageName) {
+                url_to_visit = ""
+                if (pageName == "linkedIn")
+                    url_to_visit = linkedIn
+                else if (pageName == "facebook")
+                    url_to_visit = facebook
+                else if (pageName == "twitter")
+                    url_to_visit = twitter
+                else if (pageName == "instagram")
+                    url_to_visit = instagram
+                else if (pageName == "youtube")
+                    url_to_visit = youtube
+                else if (pageName == "google")
+                    url_to_visit = google_business
+                else
+                    url_to_visit = website
+                window.open(url_to_visit);
+            }
+        </script>
+    </footer>
+    <script type="text/javascript">
+        // Script to open and close sidebar
+        function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
+
+        // Modal Image Gallery
+        function onClick(element) {
+            document.getElementById("img01").src = element.src;
+            document.getElementById("modal01").style.display = "block";
+            var captionText = document.getElementById("caption");
+            captionText.innerHTML = element.alt;
+        }
+
+        // Change style of navbar on scroll
+        window.onscroll = function () { myFunction() };
+        function myFunction() {
+            var navbar = document.getElementById("myNavbar");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                navbar.className += "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white" + "w3-black" + "w3-opacity";
+            } else {
+                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "w3-opacity");
+            }
+        }
+
+        // Used to toggle the menu on small screens when clicking on the menu button
+        function toggleFunction() {
+            var x = document.getElementById("navDemo");
+            if (x.className.indexOf("w3-show") == -1) {
+                x.className += " w3-show";
+            } else {
+                x.className = x.className.replace(" w3-show", "");
+            }
+        }
+        /* ======================
+        THEME TOGGLE
+        ====================== */
+        /* ======================
+        THEME: AUTO + PERSIST
+        ====================== */
+        const body = document.body;
+        const toggle = document.querySelector('.theme-toggle');
+        const STORAGE_KEY = 'ui-theme';
+        const LANGUAGE_KEY = 'SBV_LANGUAGE';
+
+        /* Apply theme */
+        function applyTheme(theme) {
+            body.setAttribute('data-theme', theme);
+            // toggle.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+            if (theme === 'dark') {
+                toggle.textContent = '☀️ Light';
+                toggle.style.backgroundColor = "#FFFFFF";
+                toggle.style.color = "#000000";
+
+            } else if (theme === 'light') {
+                toggle.textContent = '🌙 Dark';
+                toggle.style.backgroundColor = "#000000";
+                toggle.style.color = "#FFFFFF";
+            }
+        }
+
+        /* Detect system theme */
+        function getSystemTheme() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+        }
+
+        /* Init theme */
+        (function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEY);
+            const theme = savedTheme || getSystemTheme();
+            applyTheme(theme);
+        })();
+
+        /* Toggle handler */
+        toggle.addEventListener('click', () => {
+            const current = body.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(STORAGE_KEY, next);
+            applyTheme(next);
+        });
+
+        /* React to system theme change (only if user hasn't chosen manually) */
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        /* Settings */
+        // Settings state stored in memory
+        const primaryLanguage = navigator.language;
+        // Example output: "en-US"
+
+        const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
+        
+        let currentSettings = {
+            language: savedLanguage || primaryLanguage,
+            background: 'dark',
+            textSize: '16'
+        };
+        // Language settings
+        const translations = {
+            en: {
+                'main-title': 'Human-AI Collaboration',
+                'subtitle': 'Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions. Experience the future of intelligent automation and data-driven insights.'
+            },
+            es: {
+                'main-title': 'Colaboración entre humanos e IA',
+                'subtitle': 'Impulsamos a las empresas con soluciones de vanguardia de Inteligencia Artificial y Aprendizaje Automático. Experimente el futuro de la automatización inteligente y la información basada en datos.'
+            },
+            fr: {
+                'main-title': 'Collaboration homme-IA',
+                'subtitle': "Nous donnons aux entreprises les moyens d'exploiter des solutions de pointe en intelligence artificielle et en apprentissage automatique.Découvrez le futur de l'automatisation intelligente et des analyses de données."
+            },
+            de: {
+                'main-title': 'Samenwerking tussen mens en AI',
+                'subtitle': 'Bedrijven versterken met geavanceerde oplossingen op het gebied van kunstmatige intelligentie en machine learning. Ervaar de toekomst van intelligente automatisering en datagedreven inzichten.'
+            },
+            it: {
+                'main-title': 'Collaborazione uomo-intelligenza artificiale',
+                'subtitle': "Forniamo alle aziende soluzioni all'avanguardia di Intelligenza Artificiale e Machine Learning.Scopri il futuro dell'automazione intelligente e degli insight basati sui dati."
+            }
+        };
+        // DOM elements
+        const languageSelect = document.getElementById('language');
+        const textSizeSlider = document.getElementById('textSize');
+        const sizeDisplay = document.getElementById('size-display');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsOverlay = document.getElementById('settingsOverlay');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsClose = document.getElementById('settingsClose');
+
+        // Settings popup functions
+        function openSettings() {
+            settingsOverlay.classList.add('active');
+            settingsPanel.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSettings() {
+            settingsOverlay.classList.remove('active');
+            settingsPanel.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        //get spreadsheet data into map - key value pair
+        async function getMapFromSpreadSheetData(spreadsheetData, valueIndex) {
+            let lang = {};
+            for (var i = 0; i < spreadsheetData.length; i++) {
+                const arr = spreadsheetData[i];
+                lang[arr[0]] = arr[valueIndex];
+            }
+            return lang;
+        }
+        //fetch Spanish language
+        async function fetchSpanishLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_IT!A:B";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 1);
+        }
+        //fetch French language
+        async function fetchFrenchLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_IT!A:C";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 2);
+        }
+        //fetch Dutch language
+        async function fetchDutchLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_IT!A:D";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 3);
+        }
+        //fetch Italiano language
+        async function fetchItalianoLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_IT!A:E";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 4);
+        }
+        //fetch English language
+        async function fetchEnglishLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_IT!A:F";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 5);
+        }
+
+        // fetch translations from googlesheet
+        async function fetchSpreadsheetData(spreadsheetId, range) {
+            const API_KEY = "AIzaSyDKK039v7qBCELSM0KqMYZYJAGDm4wt_V0";
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${API_KEY}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch products');
+
+                const data = await response.json();
+                const detailsFetched = await data.values;
+                return detailsFetched;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                throw error;
+            }
+        }
+        async function getAllOtherWords(lang) {
+            if (lang === "en") {
+                return await fetchEnglishLanguage();
+            } else if (lang === "es") {
+                return await fetchSpanishLanguage();
+            } else if (lang === "fr") {
+                return await fetchFrenchLanguage();
+            } else if (lang === "de") {
+                return await fetchDutchLanguage();
+            } else if (lang === "it") {
+                return await fetchItalianoLanguage();
+            }
+        }
+        // Update language function
+        async function updateLanguage(lang) {
+            currentSettings.language = lang;
+            const translation_here = translations[lang];
+            const translation_fetched = await getAllOtherWords(lang);
+            translation = { ...translation_here, ...translation_fetched }
+            //const translation = translations[lang];
+            // Add fade effect
+            document.body.classList.add('fade-transition');
+            try {
+                setTimeout(() => {
+                    Object.keys(translation).forEach(key => {
+                        const element = document.getElementById(key);
+                        if (element) {
+                            element.textContent = translation[key];
+                        }
+                    });
+                    document.body.classList.add('show');
+                }, 150);
+            }
+            finally {
+                setTimeout(() => {
+                    document.body.classList.remove('fade-transition', 'show');
+                }, 450);
+            }
+            localStorage.setItem(LANGUAGE_KEY, lang);
+
+        }
+
+        // Update text size function
+        function updateTextSize(size) {
+            currentSettings.textSize = size;
+            document.documentElement.style.fontSize = size + 'px';
+            sizeDisplay.textContent = size + 'px';
+        }
+
+        // Event listeners
+        languageSelect.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        textSizeSlider.addEventListener('input', (e) => {
+            const size = textSizeSlider.value;
+            document.documentElement.style.fontSize = size + "px";
+            sizeDisplay.textContent = size + "px";
+        });
+
+        // Settings popup event listeners
+        settingsBtn.addEventListener('click', openSettings);
+        settingsClose.addEventListener('click', closeSettings);
+        settingsOverlay.addEventListener('click', closeSettings);
+
+        // Prevent panel from closing when clicking inside it
+        settingsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close settings with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && settingsPanel.classList.contains('active')) {
+                closeSettings();
+            }
+        });
+
+        // Initialize settings
+        function initializeSettings() {
+            updateLanguage(currentSettings.language);
+            updateTextSize(currentSettings.textSize);
+            if (savedLanguage === null) {
+                currentSettings.language = "en";
+            }
+            else {
+                currentSettings.language = savedLanguage;
+            }
+            // Set initial values
+            languageSelect.value = currentSettings.language;
+            textSizeSlider.value = currentSettings.textSize;
+        }
+        // Initialize when page loads
+        window.onload = function () {
+            document.getElementById('last_updated_on').textContent = last_updated_on;
+            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+
+            initializeSettings();
+            _waEmbed(wa_btnSetting);
+            const loader = document.querySelector(".loader");
+            loader.classList.add("loader-hidden");
+            showAlert("Click on Settings to personalize this webpage the way you like.");
+        }
+        // Alert function - utility function
+        function showAlert(message) {
+            const alertDiv = document.createElement('div');
+            alertDiv.style.cssText = `
+                                    position: fixed;
+                                    top: 20px;
+                                    right: 20px;
+                                    background: rgba(99, 102, 241, 0.9);
+                                    color: white;
+                                    padding: 16px 24px;
+                                    border-radius: 12px;
+                                    font-weight: 500;
+                                    z-index: 999;
+                                    backdrop-filter: blur(4px);
+                                    animation: slideInAlert 0.5s ease-out;
+                                `;
+            alertDiv.textContent = message;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.style.animation = 'slideOutAlert 0.5s ease-out forwards';
+                setTimeout(() => alertDiv.remove(), 500);
+            }, 3000);
+        }
+
+    </script>
+    <!--Get In Touch Modal-->
+    <script type="text/javascript">
+        const close_modal = async (form) => {
+            try {
+                const loader = document.querySelector(".loader");
+                loader.classList.remove("loader-hidden");
+                let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=' + form.Country.value + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=' + form.CompanyName.value + '&interestedIn=&' + form.interestedIn.value + '&Message=' + form.Message.value;
+                let response = await fetch(url);
+                clearTimeout(timeId);
+
+                if (response.ok) {
+                    loader.classList.add("loader-hidden");
+                    if (form.Email.value.localeCompare("system") == 0) {
+                        alert("Thank you for submitting your feedback!");
+                    }
+                    else {
+                        alert("We will contact you soon!");
+                        loader.classList.add("loader-hidden");
+
+                    }
+                    form.reset();
+                    document.getElementById('id03').style.display = 'none';
+                }
+                else {
+                    alert("Something went wrong");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            return false;
+
+        }
+    </script>
+    <!--Code for WhatsApp-->
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_btnSetting = {
+            "btnColor": "#16BE45",
+            "ctaText": "",
+            "cornerRadius": 40,
+            "marginBottom": 20,
+            "marginLeft": 20,
+            "marginRight": 20,
+            "btnPosition": "right",
+            "whatsAppNumber": "918910441949",
+            "welcomeMessage": "Hello",
+            "zIndex": 999999,
+            "btnColorScheme": "light"
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hover Scroll Long Image</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .image-container {
+            width: 50%; /* Fixed display width */
+            height: 50%; /* Fixed display height */
+            overflow: hidden;
+            border: 2px solid #333;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+            .image-container img {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                transition: top 60s linear;
+                pointer-events: none; /* Prevent flicker */
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="image-container" id="imgBox">
+        <img id="longImg"
+             src="https://d11a6trkgmumsb.cloudfront.net/original/3X/d/9/d9aada40f2e4927b10c4f44c1d5f24618482e959.png"
+             alt="Very Long Image">
+    </div>
+
+    <script>
+        const box = document.getElementById("imgBox");
+        const img = document.getElementById("longImg");
+
+        function scrollDown() {
+            const scrollAmount = img.offsetHeight - box.offsetHeight;
+            if (scrollAmount > 0) {
+                img.style.top = `-${scrollAmount}px`;
+            }
+        }
+
+        function scrollUp() {
+            img.style.top = "0px";
+        }
+
+        box.addEventListener("mouseenter", scrollDown);
+        box.addEventListener("mouseleave", scrollUp);
+
+        // Ensure image is loaded before calculating height
+        img.addEventListener("load", () => {
+            img.style.top = "0px";
+        });
+    </script>
+
+</body>
+</html>

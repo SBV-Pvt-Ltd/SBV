@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="Website designing section of Saharsh Bhadani Venture Private Limited.">
     <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Website designing,web designing, website, designing">
+    <meta name="description" content="Indian IT company providing modern web designing, website maintenance, web-app development, AI-integrated, analytics-based and SEO-friendly websites. End-to-end website development services." />
+
+    <meta name="keywords" content="web designing company india, website development india, website maintenance services, web app development company, AI website integration, SEO friendly website" />
+
+    <meta name="robots" content="index, follow">
+
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Designing - Saharsh Bhadani Venture Private Limited</title>
@@ -15,7 +21,196 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="Constant.js" defer></script>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #0ea5a4;
+            --secondary: #0f766e;
+            --card: #f8fafc;
+            --border: #e2e8f0;
+            --header-bg: #ffffff;
+        }
 
+        /* 🌙 DARK MODE */
+        [data-theme="dark"] {
+            --bg: #020617;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --primary: #22d3ee;
+            --secondary: #06b6d4;
+            --card: #020617;
+            --border: #1f2933;
+            --header-bg: #020617;
+        }
+
+        /* Smooth transition */
+        body, section, .card, .lead-card {
+            transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui,-apple-system,Segoe UI,Roboto,sans-serif
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6
+        }
+
+        section {
+            padding: 90px 10%
+        }
+
+        h1, h2, h3 {
+            line-height: 1.2
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 10px
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            max-width: 800px;
+            margin: 0 auto 50px
+        }
+
+        /* HERO */
+        .hero-1 {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: center
+        }
+
+            .hero-1 h1 {
+                font-size: 48px;
+                margin-bottom: 20px
+            }
+
+            .hero-1 p {
+                font-size: 18px;
+                color: var(--muted);
+                margin-bottom: 30px
+            }
+
+        .cta a {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-right: 10px
+        }
+
+        .primary {
+            background: var(--primary)
+        }
+
+        .secondary {
+            border: 1px solid var(--border)
+        }
+
+        /* LEAD CARD */
+        .lead-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 35px
+        }
+
+            .lead-card h3 {
+                text-align: center;
+                margin-bottom: 15px
+            }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border)
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--secondary);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 30px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 16px
+        }
+
+            .card p {
+                color: var(--muted);
+                font-size: 15px
+            }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+            gap: 30px;
+            text-align: center
+        }
+
+        .stat h3 {
+            font-size: 36px;
+            color: var(--secondary)
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background: var(--primary);
+            text-align: center;
+            padding: 80px 10%
+        }
+
+            .cta-section a {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 14px 28px;
+                background: #000;
+                color: #fff;
+                border-radius: 8px;
+                font-weight: 600
+            }
+
+        /* RESPONSIVE */
+        @media(max-width:900px) {
+            .hero-1 {
+                grid-template-columns: 1fr
+            }
+
+                .hero-1 h1 {
+                    font-size: 36px
+                }
+        }
+    </style>
     <style>
         :root {
             /* Core */
@@ -1613,11 +1808,7 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .get-in-touch-button-settings {
-                margin-bottom: 5px;
-            }
-        }
+        
 
 
 
@@ -1866,12 +2057,6 @@
             .plant {
                 width: 35px;
                 height: 48px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .company-name {
-                font-size: 0.75rem;
             }
         }
     </style>
@@ -2184,7 +2369,170 @@
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
     </div>
+    <!-- HERO -->
+    <section class="hero-1">
+        <div>
+            <h1>High-Performance Websites Built to Convert</h1>
+            <p>
+                We design, develop, modernize and maintain websites and web-apps that are fast,
+                secure, SEO-friendly and AI-ready — built to grow your business.
+            </p>
+            <div class="cta">
+                <a href="#contact" class="primary">Free Consultation</a>
+                <a href="#services" class="secondary">Our Services</a>
+            </div>
+        </div>
 
+        <div class="lead-card">
+            <h3>Request a Free Website Audit</h3>
+            <form>
+                <input placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input placeholder="Website / Business Name">
+                <textarea placeholder="What do you need help with?"></textarea>
+                <button>Get Callback</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section>
+        <h2>About Us</h2>
+        <p class="subtitle">
+            NextGen Web Solutions is an Indian IT company specializing in modern web design,
+            website development, web-app solutions and long-term maintenance services.
+        </p>
+        <div class="grid">
+            <div class="card">
+                <h3>End-to-End Delivery</h3>
+                <p>From concept and UI/UX design to deployment, analytics and ongoing support.</p>
+            </div>
+            <div class="card">
+                <h3>Business-Focused Approach</h3>
+                <p>Every website is built with conversion, performance and ROI in mind.</p>
+            </div>
+            <div class="card">
+                <h3>India-Based, Global Quality</h3>
+                <p>Cost-effective development with international best practices.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <h2>Our Services</h2>
+        <p class="subtitle">
+            Complete website & web-app development, enhancement and maintenance solutions
+        </p>
+
+        <div class="grid">
+            <div class="card"><h3>Website Designing</h3><p>Modern UI/UX, mobile-first, conversion-oriented designs.</p></div>
+            <div class="card"><h3>Custom Website Development</h3><p>Tailor-made websites using modern frameworks and clean code.</p></div>
+            <div class="card"><h3>Web Application Development</h3><p>Secure and scalable web-apps for business automation.</p></div>
+            <div class="card"><h3>Website Maintenance</h3><p>Updates, security patches, performance monitoring and backups.</p></div>
+            <div class="card"><h3>Bug Fixing & Enhancements</h3><p>Resolve issues and continuously improve existing websites.</p></div>
+            <div class="card"><h3>Website Modernization</h3><p>Upgrade outdated websites to fast, SEO-ready platforms.</p></div>
+            <div class="card"><h3>AI Integration</h3><p>Chatbots, personalization, automation & smart analytics.</p></div>
+            <div class="card"><h3>Analytics & SEO</h3><p>Analytics-driven websites with technical SEO foundations.</p></div>
+        </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section id="expertise">
+        <h2>Our Expertise</h2>
+        <p class="subtitle">
+            Deep technical and strategic expertise across modern web technologies
+        </p>
+
+        <div class="grid">
+            <div class="card"><h3>SEO-Optimized Architecture</h3><p>Clean URLs, schema-ready, fast loading & crawl-friendly.</p></div>
+            <div class="card"><h3>Performance Optimization</h3><p>Core Web Vitals, caching, image optimization & CDN readiness.</p></div>
+            <div class="card"><h3>Security Best Practices</h3><p>Secure forms, role-based access, backups & monitoring.</p></div>
+            <div class="card"><h3>Scalable Web-Apps</h3><p>Built to handle traffic growth and feature expansion.</p></div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section>
+        <h2>Our Impact</h2>
+        <div class="stats">
+            <div class="stat"><h3>100%</h3><p>Responsive Websites</p></div>
+            <div class="stat"><h3>98%</h3><p>Client Satisfaction</p></div>
+            <div class="stat"><h3>24×7</h3><p>Maintenance Support</p></div>
+            <div class="stat"><h3>AI-First</h3><p>Development Approach</p></div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+        <h2>Our Process</h2>
+        <p class="subtitle">A transparent and collaborative workflow</p>
+
+        <div class="grid">
+            <div class="card"><h3>Discovery</h3><p>Understanding goals, users & competition.</p></div>
+            <div class="card"><h3>Design</h3><p>Wireframes, UI/UX & responsive layouts.</p></div>
+            <div class="card"><h3>Development</h3><p>SEO-friendly, clean, scalable code.</p></div>
+            <div class="card"><h3>Testing</h3><p>Performance, browser & security testing.</p></div>
+            <div class="card"><h3>Launch & Support</h3><p>Deployment, analytics & long-term care.</p></div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Ready to Build or Upgrade Your Website?</h2>
+        <p>Let’s create a high-performing digital presence.</p>
+        <a href="#contact">Talk to Our Experts</a>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p class="subtitle">Tell us about your project</p>
+
+        <form class="lead-card" style="max-width:650px;margin:auto" method="get"
+              target="display-frame1" onsubmit="close_modal1(this)">
+            <input type="hidden" value="SAVE_LEADS" name="query"/>
+            <input type="hidden" value="leads_form" name="module"/>
+            <input placeholder="Name" type="text" name="Name" required/>
+            <input type="email" name="Email" placeholder="Email" required/>
+            <input placeholder="Phone / WhatsApp" name="PhoneNumber" />
+            <textarea name="Message" placeholder="Project details"></textarea>
+            <button type="submit">Submit Enquiry</button>
+        </form>
+        <script>
+            const close_modal1 = async (form) => {
+                try {
+                    const loader = document.querySelector(".loader");
+                    loader.classList.remove("loader-hidden");
+                    let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' + '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    let response = await fetch(url);
+                    clearTimeout(timeId);
+
+                    if (response.ok) {
+                        loader.classList.add("loader-hidden");
+                        if (form.Email.value.localeCompare("system") == 0) {
+                            alert("Thank you for submitting your feedback!");
+                        }
+                        else {
+                            alert("We will contact you soon!");
+                            loader.classList.add("loader-hidden");
+
+                        }
+                        form.reset();
+                    }
+                    else {
+                        alert("Something went wrong");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+                return false;
+
+            }
+        </script>
+        <iframe name="display-frame1" style="width:0px;height:0px;border:0px solid white"></iframe>
+    </section>
 
     <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
@@ -2525,35 +2873,35 @@
         //fetch Spanish language
         async function fetchSpanishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_BusinessAnalytics!A:B";
+            range = "Translation_WebDesigning!A:B";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 1);
         }
         //fetch French language
         async function fetchFrenchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:C259";
+            range = "Translation_WebDesigning!A:C";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 2);
         }
         //fetch Dutch language
         async function fetchDutchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:D259";
+            range = "Translation_WebDesigning!A:D";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 3);
         }
         //fetch Italiano language
         async function fetchItalianoLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:E259";
+            range = "Translation_WebDesigning!A:E";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 4);
         }
         //fetch English language
         async function fetchEnglishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:F259";
+            range = "Translation_WebDesigning!A:F";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
@@ -2680,18 +3028,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            right: 20px;
-                            background: rgba(99, 102, 241, 0.9);
-                            color: white;
-                            padding: 16px 24px;
-                            border-radius: 12px;
-                            font-weight: 500;
-                            z-index: 999;
-                            backdrop-filter: blur(4px);
-                            animation: slideInAlert 0.5s ease-out;
-                        `;
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                background: rgba(99, 102, 241, 0.9);
+                                color: white;
+                                padding: 16px 24px;
+                                border-radius: 12px;
+                                font-weight: 500;
+                                z-index: 999;
+                                backdrop-filter: blur(4px);
+                                animation: slideInAlert 0.5s ease-out;
+                            `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);

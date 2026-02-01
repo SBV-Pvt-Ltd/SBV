@@ -5,8 +5,8 @@
     <meta name="description" content="Business Analytics section of Saharsh Bhadani Venture Private Limited.">
     <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics">
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI/ML - Saharsh Bhadani Venture Private Limited</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Analytics - Saharsh Bhadani Venture Pvt. Ltd.</title>
     <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./css/w3-theme-black.css">
@@ -17,26 +17,21 @@
     <script src="Constant.js" defer></script>
 
     <style>
-        /* Theme variables (do NOT replace original colors) */
         :root {
-            --theme-bg: transparent;
-            --theme-text: inherit;
-        }
-
-        [data-theme="light"] {
-            --theme-bg: #f8fafc;
-            --theme-text: #0f172a;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --company-name-text: black;
-            --accent1: #667eea;
-            --accent2: #764ba2;
-        }
-
-        [data-theme="dark"] {
-            --theme-bg: #000000;
-            --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
-            --theme-text: #ffffff;
+            /* DARK MODE (default) */
+            --bg-body: #0a0a0a;
+            --bg-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.85);
+            --building-grad: linear-gradient(to top, #1a1a2e, #2d2d44);
+            --window-light: rgba(255, 200, 100, 0.6);
+            --screen-bg: linear-gradient(135deg, #1a1a2e, #252540);
+            --screen-inner: #0f0f1e;
+            --chart-bg: rgba(30, 58, 95, 0.3);
+            --border-accent: rgba(0, 212, 255, 0.2);
+            --moon-main: #ffffff;
+            --moon-glow: rgba(255,255,255,0.5);
+            --page-header: linear-gradient(135deg, #ffffff, #00d4ff);
             --text-main: #FFFFFF;
             --text-muted: #F8F8FF;
             --company-name-text: White;
@@ -44,45 +39,77 @@
             --accent2: #8b5cf6;
         }
 
+        /* LIGHT MODE */
+        [data-theme="light"] {
+            --bg-body: #f4f7fb;
+            --bg-hero: linear-gradient(135deg, #dbeafe 0%, #eef2ff 50%, #ffffff 100%);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --building-grad: linear-gradient(to top, #c7d2fe, #a5b4fc);
+            --window-light: rgba(255, 180, 80, 0.8);
+            --screen-bg: linear-gradient(135deg, #ffffff, #e5e7eb);
+            --screen-inner: #f8fafc;
+            --chart-bg: rgba(59, 130, 246, 0.12);
+            --border-accent: rgba(59, 130, 246, 0.35);
+            --moon-main: #fde68a; /* sun-like */
+            --moon-glow: rgba(253,230,138,0.6);
+            --page-header: black;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --company-name-text: black;
+            --accent1: #667eea;
+            --accent2: #764ba2;
+        }
+
         .theme-toggle {
             padding: .6rem 1.2rem;
             border-radius: 30px;
+            background: var(--card-bg);
             border: 1px solid black;
+            color: var(--text-main);
             cursor: pointer;
             backdrop-filter: blur(4px);
             font-size: 1rem;
         }
 
         [data-theme="light"] .theme-toggle {
-            background: black;
-            color: white;
+            background: rgba(0,0,0,0.1);
+            color: #0f172a;
         }
 
-        [data-theme="dark"] .theme-toggle {
-            background: white;
-            color: black
-        }
-
-        /* ================= RESET ================= */
-        *, *::before, *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        .fa, .fa::before {
-            font-family: FontAwesome !important;
+        html {
+            font-size: 1rem;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Non-destructive overrides */
         body {
-            background-color: var(--theme-bg);
-            background-image: var(--theme-bg-img);
-            color: var(--theme-text);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-family: 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            background: var(--bg-body);
+            color: var(--text-primary);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg,var(--accent1),var(--accent2));
+            color: #fff;
         }
 
         .get-in-touch-button-settings {
@@ -298,7 +325,6 @@
             color: var(--company-name-text);
             overflow-x: clip;
         }
-
         .loader {
             position: fixed;
             top: 0;
@@ -337,410 +363,715 @@
             }
         }
 
-
-        /* ================= HERO ================= */
         .hero {
             position: relative;
-            min-height: 100svh;
+            width: 100%;
+            height: 100vh;
             overflow: hidden;
+            background: var(--bg-hero);
         }
 
-        /* ================= BACKGROUND ================= */
-        .stars,
-        .network-canvas {
+        .moon {
             position: absolute;
-            inset: 0;
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            animation: twinkle 3s ease-in-out infinite;
+            z-index: 2; /* behind desk, in sky */
+            background: radial-gradient( circle at 30% 30%, var(--moon-main), #e5e7eb 60%, #c7c7c7 100% );
+            box-shadow: 0 0 40px var(--moon-glow), 0 0 80px rgba(255,255,255,0.25);
         }
 
-        @keyframes twinkle {
-            0%,100% {
-                opacity: .3;
-                transform: scale(1)
+
+        .moon {
+            animation: moonFloat 12s ease-in-out infinite;
+        }
+
+        @keyframes moonFloat {
+            0%, 100% {
+                transform: translateY(0);
             }
 
             50% {
-                opacity: 1;
-                transform: scale(1.5)
+                transform: translateY(-6px);
             }
         }
 
-        .network-canvas {
-            opacity: .6
+        .moon::after {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
         }
 
-        /* ================= CONTENT ================= */
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            max-width: 1400px;
-            margin: auto;
-            padding: 0 40px 220px;
-            min-height: 100svh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        @media(max-width:768px) {
-            .hero-content {
-                padding: 0 20px 160px;
-            }
-        }
-
-        /* ================= BADGE ================= */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            border-radius: 50px;
-            background: rgba(0,212,255,.1);
-            border: 1px solid rgba(0,212,255,.3);
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            animation: fadeInDown 1s ease-out;
-        }
-
-        .india-flag {
-            font-size: 20px
-        }
-
-        /* ================= HEADINGS ================= */
-        .hero-heading {
-            font-size: clamp(40px,8vw,90px);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -3px;
-            animation: fadeInUp 1s ease-out .2s both;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg,#00d4ff,#00ff88,#a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* ================= TEXT ================= */
-        .subtitle {
-            font-size: clamp(16px,3vw,22px);
-            max-width: 700px;
-            margin: 0 auto 50px;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease-out .4s both;
-        }
-
-        /* ================= CTA ================= */
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-            animation: fadeInUp 1s ease-out .6s both;
-        }
-
-        @media(max-width:480px) {
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 320px;
-            }
-        }
-
-        .btn {
-            padding: 18px 40px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: transform .3s ease,box-shadow .3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg,#00d4ff,#00ff88);
-            color: #000;
-            box-shadow: 0 10px 40px rgba(0,212,255,.4);
-        }
-
-            .btn-primary:hover {
-                transform: translateY(-3px);
-                box-shadow: 0 15px 50px rgba(0,212,255,.6);
-            }
-
-        .btn-secondary {
-            background: rgba(255,255,255,.05);
-            color: #00d4ff;
-            border: 2px solid rgba(0,212,255,.5);
-            backdrop-filter: blur(10px);
-        }
-
-            .btn-secondary:hover {
-                background: rgba(255,255,255,.1);
-                border-color: #00d4ff;
-                transform: translateY(-3px);
-            }
-
-        /* ================= FEATURES ================= */
-        .features-row {
-            display: flex;
-            gap: 50px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out .8s both;
-        }
-
-        .feature {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .feature-icon {
-            font-size: 32px
-        }
-
-        .feature-value {
-            font-size: clamp(28px,5vw,42px);
-            font-weight: 900;
-            background: linear-gradient(135deg,#00d4ff,#00ff88);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .feature-label {
-            font-size: 13px;
-            font-weight: bolder;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* ================= CITY ================= */
-        .city-container {
+        .cityscape {
             position: absolute;
             bottom: 0;
-            width: 100%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            pointer-events: none;
-        }
-
-        @media(max-height:700px) {
-            .city-container {
-                height: 40%
-            }
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);
         }
 
         .building {
-            position: relative;
-            margin: 0 5px;
-            background: linear-gradient(180deg,rgba(10,25,70,.8),rgba(5,15,45,.9));
-            border: 1px solid rgba(0,200,255,.3);
-            animation: buildingFloat 6s ease-in-out infinite;
+            position: absolute;
+            bottom: 0;
+            background: var(--building-grad);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1);
         }
 
-            .building::before {
+        .window-grid {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 12px);
+            grid-gap: 8px;
+            padding: 10px;
+        }
+
+        .window {
+            width: 8px;
+            height: 8px;
+            background: var(--window-light);
+            box-shadow: 0 0 10px rgba(255, 200, 100, 0.4);
+            animation: flicker 4s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .desk {
+            position: absolute;
+            bottom: 0%;
+            left: 5%;
+            width: 35%;
+            min-width: 300px;
+            max-width: 500px;
+            height: 25px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            border-radius: 3px;
+            z-index: 5;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 1px 0 rgba(139, 69, 19, 0.4), inset 0 -1px 0 rgba(0,0,0,0.3);
+        }
+
+            .desk::before {
                 content: '';
                 position: absolute;
-                inset: 0;
-                height: 3px;
-                background: linear-gradient(90deg,transparent,#00d4ff,transparent);
-                animation: scanLine 2s linear infinite;
+                top: -6px;
+                left: 0;
+                right: 0;
+                height: 6px;
+                background: linear-gradient(to bottom, #A0522D, #8B4513);
+                border-radius: 3px 3px 0 0;
+                box-shadow: inset 0 1px 0 rgba(160, 82, 45, 0.6);
             }
 
-        @keyframes buildingFloat {
-            50% {
-                transform: translateY(-10px)
-            }
+        .wood-grain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient( 90deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 11px );
+            border-radius: 3px;
         }
 
-        @keyframes scanLine {
-            to {
-                transform: translateY(200px)
-            }
+        .screen {
+            position: absolute;
+            top: -216px;
+            left: 10%;
+            width: 80%;
+            height: 210px;
+            background: var(--screen-bg);
+            border-radius: 6px;
+            border: 4px solid #0d1b2a;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
         }
 
-        .building-1 {
+        .screen-stand {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 60px;
-            height: 200px
+            height: 30px;
+            background: linear-gradient(to bottom, #2d2d44, #1a1a2e);
+            clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%);
         }
 
-        .building-2 {
-            width: 80px;
-            height: 280px
+        .screen-content {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            position: relative;
+            background: var(--screen-inner);
         }
 
-        .building-3 {
-            width: 70px;
-            height: 320px
+        .chart-container {
+            background: var(--chart-bg);
+            border: 1px solid var(--border-accent);
+            border-radius: 6px;
+            padding: 12px;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            overflow: hidden;
+            opacity: 0;
+            animation: chartFade 40s ease-in-out infinite;
         }
 
-        .building-4 {
-            width: 90px;
-            height: 250px
+            .chart-container:nth-child(1) {
+                animation-delay: 0s;
+            }
+
+            .chart-container:nth-child(2) {
+                animation-delay: 5s;
+            }
+
+            .chart-container:nth-child(3) {
+                animation-delay: 10s;
+            }
+
+            .chart-container:nth-child(4) {
+                animation-delay: 15s;
+            }
+
+            .chart-container:nth-child(5) {
+                animation-delay: 20s;
+            }
+
+            .chart-container:nth-child(6) {
+                animation-delay: 25s;
+            }
+
+            .chart-container:nth-child(7) {
+                animation-delay: 30s;
+            }
+
+            .chart-container:nth-child(8) {
+                animation-delay: 35s;
+            }
+
+        @keyframes chartFade {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            4%, 8% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            12% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
         }
 
-        .building-5 {
-            width: 65px;
-            height: 220px
+        .chart-title {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
-        .building-6 {
-            width: 75px;
-            height: 290px
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: calc(100% - 30px);
+            gap: 6px;
         }
 
-        .building-7 {
-            width: 55px;
-            height: 180px
+        .bar {
+            width: 100%;
+            background: linear-gradient(to top, #00d4ff, #0099ff);
+            border-radius: 4px 4px 0 0;
+            animation: barGrow 2s ease-out infinite;
         }
 
-        /* ================= WINDOWS ================= */
-        .window {
+        @keyframes barGrow {
+            0%, 100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(0.85);
+            }
+        }
+
+        /* Pie Chart */
+        .pie-chart {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient( #00d4ff 0deg 120deg, #00ff88 120deg 240deg, #ffc864 240deg 360deg );
+            margin: 20px auto;
+            animation: pieRotate 8s linear infinite;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        }
+
+        @keyframes pieRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Line Chart */
+        .line-chart {
+            position: relative;
+            height: calc(100% - 30px);
+        }
+
+        .line-path {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(to right, #00ff88, #00d4ff);
+            box-shadow: 0 0 12px rgba(0, 255, 136, 0.6);
+            transform-origin: left center;
+        }
+
+        /* Histogram */
+        .histogram {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: calc(100% - 30px);
+            gap: 4px;
+        }
+
+        .hist-bar {
+            width: 100%;
+            background: linear-gradient(to top, #ffc864, #ff9a44);
+            border-radius: 3px 3px 0 0;
+            animation: histPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes histPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Scatter Plot */
+        .scatter-plot {
+            position: relative;
+            height: calc(100% - 30px);
+        }
+
+        .scatter-point {
             position: absolute;
             width: 8px;
             height: 8px;
-            background: rgba(0,200,255,.6);
-            box-shadow: 0 0 8px rgba(0,200,255,.8);
-            animation: windowBlink 3s ease-in-out infinite;
-        }
-
-        @keyframes windowBlink {
-            0%,100% {
-                opacity: .3
-            }
-
-            50% {
-                opacity: 1
-            }
-        }
-
-        /* ================= ANTENNA ================= */
-        .antenna {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 30px;
-            background: linear-gradient(#00d4ff,transparent);
-        }
-
-            .antenna::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 8px;
-                height: 8px;
-                background: #00d4ff;
-                border-radius: 50%;
-                box-shadow: 0 0 16px #00d4ff;
-                animation: pulse 2s ease-in-out infinite;
-            }
-
-        @keyframes pulse {
-            50% {
-                transform: translateX(-50%) scale(1.5);
-                opacity: .5
-            }
-        }
-
-        /* ================= PARTICLES ================= */
-        .data-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
             background: #00ff88;
             border-radius: 50%;
-            box-shadow: 0 0 8px #00ff88;
-            animation: floatUp 8s ease-in-out infinite;
+            box-shadow: 0 0 12px rgba(0, 255, 136, 0.8);
+            animation: scatterFloat 4s ease-in-out infinite;
         }
 
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh);
-                opacity: 0
+        @keyframes scatterFloat {
+            0%, 100% {
+                transform: translate(0, 0);
             }
 
-            10%,90% {
-                opacity: 1
+            50% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        /* Treemap */
+        .treemap {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 6px;
+            height: calc(100% - 30px);
+        }
+
+        .tree-block {
+            border-radius: 4px;
+            animation: treeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes treeGlow {
+            0%, 100% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Heatmap */
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 3px;
+            height: calc(100% - 30px);
+        }
+
+        .heat-cell {
+            border-radius: 2px;
+            animation: heatPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heatPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Gantt Chart */
+        .gantt-chart {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: calc(100% - 30px);
+            gap: 6px;
+        }
+
+        .gantt-bar {
+            height: 100%;
+            background: linear-gradient(to right, #00d4ff, #0099ff);
+            border-radius: 4px;
+            animation: ganttSlide 3s ease-in-out infinite;
+        }
+
+        @keyframes ganttSlide {
+            0%, 100% {
+                transform: scaleX(1);
+            }
+
+            50% {
+                transform: scaleX(0.9);
+            }
+        }
+
+        .window-frame {
+            position: absolute;
+            top: 12%;
+            right: 8%;
+            width: 35%;
+            min-width: 300px;
+            max-width: 450px;
+            height: 55%;
+            min-height: 400px;
+            border: 8px solid #2d2d44;
+            background: linear-gradient(to bottom, rgba(135, 206, 235, 0.1), rgba(255, 200, 100, 0.05));
+            z-index: 3;
+            box-shadow: inset 0 0 50px rgba(255,255,255,0.05);
+            overflow: hidden;
+        }
+
+        .window-pane {
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background: #2d2d44;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .window-pane-h {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: #2d2d44;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .kpi-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .floating-kpi {
+            position: absolute;
+            font-size: 16px;
+            color: rgba(0, 255, 136, 0.9);
+            font-weight: 700;
+            animation: kpiFloat 8s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 6px 12px;
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            white-space: nowrap;
+        }
+
+            .floating-kpi.cyan {
+                color: rgba(0, 212, 255, 0.9);
+                text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+                border-color: rgba(0, 212, 255, 0.3);
+            }
+
+            .floating-kpi.yellow {
+                color: rgba(255, 200, 100, 0.9);
+                text-shadow: 0 0 15px rgba(255, 200, 100, 0.6);
+                border-color: rgba(255, 200, 100, 0.3);
+            }
+
+        @keyframes kpiFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0;
+            }
+
+            5%, 95% {
+                opacity: 1;
+            }
+
+            50% {
+                transform: translate(var(--x), var(--y)) scale(1.05);
+            }
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            z-index: 20;
+            max-width: 50%;
+        }
+
+            .overlay-text h1 {
+                color: var(--text-primary);
+                font-size: clamp(2rem, 5vw, 3.8rem);
+                font-weight: 700;
+                margin-bottom: 15px;
+                background: var(--page-header);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .overlay-text p {
+                color: var(--text-secondary);
+                font-size: clamp(0.9rem, 2vw, 1.4rem);
+                line-height: 1.6;
+            }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(0, 212, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
             }
 
             100% {
-                transform: translateY(-100px) translateX(50px);
-                opacity: 0
-            }
-        }
-
-        /* ================= ANIMATIONS ================= */
-        @keyframes fadeInDown {
-            from {
+                transform: translateY(-100px) translateX(100px);
                 opacity: 0;
-                transform: translateY(-30px)
+            }
+        }
+        #footer {
+            background: var(--bg-body);
+            color: var(--text-muted);
+        }
+        .get-in-touch-settings {
+            background: var(--bg-body);
+            color: var(--text-muted);
+        }
+
+        .footer_link {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .contact-us-settings {
+            background: var(--bg-main);
+            color: var(--text-muted);
+        }
+        h1, h2, h3 {
+            line-height: 1.25;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--muted);
+            max-width: 720px;
+        }
+
+        /* CARDS */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .card {
+            background: var(--chart-bg);
+            border-radius: 14px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+            .card h3 {
+                margin-bottom: 0.5rem;
             }
 
-            to {
-                opacity: 1;
-                transform: none
+        /* SPLIT */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* STEPS */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .step {
+            background: var(--screen-bg);
+            padding: 1.5rem;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        /* FORM */
+        form {
+            background: var(--screen-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #020617;
+            color: #cbd5f5;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        .mid-section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        @media (max-width: 1024px) {
+            .overlay-text {
+                max-width: 90%;
+            }
+
+            .desk {
+                width: 90%;
+                max-width: 90%;
+                left: 5%;
+            }
+
+            .window-frame {
+                width: 90%;
+                max-width: 90%;
+                right: 5%;
+                top: 52%;
+                height: 42%;
             }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px)
+        @media (max-width: 768px) {
+            .floating-kpi {
+                font-size: 12px;
+                padding: 4px 8px;
             }
-
-            to {
-                opacity: 1;
-                transform: none
+            .btn {
+                align-self: center;
+                width: 100%;
+                max-width: 180px;
             }
-        }
-
-        /* ================= GLOW ================= */
-        .content-glow {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: radial-gradient(circle,rgba(0,212,255,.15),transparent);
-            filter: blur(100px);
-            animation: glowPulse 8s ease-in-out infinite;
-        }
-
-        @keyframes glowPulse {
-            50% {
-                opacity: .6;
-                transform: translateX(-50%) scale(1.2)
+            .split {
+                grid-template-columns: 1fr;
             }
         }
-
         @media (max-width: 600px) {
             .get-in-touch-button-settings {
                 margin-bottom: 5px;
@@ -810,9 +1141,7 @@
             window.open(new_url_section);
         }
     </script>
-
 </head>
-
 <body data-theme="dark">
     <header>
         <!-- Navbar (sit on top) -->
@@ -869,39 +1198,107 @@
                 <a class="w3-bar-item w3-button side-navbar-items" onclick="navigateToPage(about_us_page)"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
             </div>
         </div>
+        <!-- Hero Image-->
         <div class="hero">
-            <div class="stars" id="stars"></div>
-            <canvas class="network-canvas" id="networkCanvas"></canvas>
-            <div class="content-glow"></div>
+            <!--
+            <button class="theme-toggle" id="themeToggle">🌞 Light</button>
+                -->
+            <div class="moon" id="moon"></div>
 
-            <div class="hero-content">
-                <div class="badge"><span class="india-flag">🇮🇳</span><span>India-powered AI transforming businesses and cities</span></div>
-                <h1 class="hero-heading">Where <span class="gradient-text">Intelligence</span><br>Meets <span class="gradient-text">Innovation</span></h1>
-                <p class="subtitle ">Building India's smart cities with cutting-edge AI and Machine Learning. Transforming urban infrastructure through neural networks and intelligent systems.</p>
+            <div class="particles" id="particles"></div>
 
-                <div class="cta-buttons">
-                    <button class="btn btn-primary">Explore Solutions</button>
-                    <button class="btn btn-secondary">View Our Work</button>
-                </div>
-
-                <div class="features-row">
-                    <div class="feature"><div class="feature-icon">🏙️</div><div class="feature-value">50+</div><div class="feature-label">Smart Cities</div></div>
-                    <div class="feature"><div class="feature-icon">🤖</div><div class="feature-value">500+</div><div class="feature-label">AI Models</div></div>
-                    <div class="feature"><div class="feature-icon">⚡</div><div class="feature-value">99.8%</div><div class="feature-label">Uptime</div></div>
-                </div>
+            <div class="overlay-text">
+                <h1><span id="data_driven_insights_text">Data-Driven Insights</span></h1>
+                <p><span id="hero_image_subheading_text">Transforming raw data into strategic foresight for tomorrow's business leaders</span></p>
             </div>
 
-            <div class="city-container">
-                <div class="building building-1"><div class="antenna"></div></div>
-                <div class="building building-2"><div class="antenna"></div></div>
-                <div class="building building-3"><div class="antenna"></div></div>
-                <div class="building building-4"><div class="antenna"></div></div>
-                <div class="building building-5"><div class="antenna"></div></div>
-                <div class="building building-6"><div class="antenna"></div></div>
-                <div class="building building-7"><div class="antenna"></div></div>
+            <div class="cityscape" id="cityscape"></div>
+
+            <div class="window-frame">
+                <div class="window-pane"></div>
+                <div class="window-pane-h"></div>
+                <div class="kpi-container" id="kpiContainer"></div>
+            </div>
+
+            <div class="desk">
+                <div class="wood-grain"></div>
+                <div class="screen">
+                    <div class="screen-stand"></div>
+                    <div class="screen-content">
+                        <!-- Bar Chart -->
+                        <div class="chart-container">
+                            <div class="chart-title">Revenue</div>
+                            <div class="bar-chart">
+                                <div class="bar" style="height: 60%; animation-delay: 0s;"></div>
+                                <div class="bar" style="height: 80%; animation-delay: 0.2s;"></div>
+                                <div class="bar" style="height: 45%; animation-delay: 0.4s;"></div>
+                                <div class="bar" style="height: 90%; animation-delay: 0.6s;"></div>
+                                <div class="bar" style="height: 70%; animation-delay: 0.8s;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart -->
+                        <div class="chart-container">
+                            <div class="chart-title">Market Share</div>
+                            <div class="pie-chart"></div>
+                        </div>
+
+                        <!-- Line Chart -->
+                        <div class="chart-container">
+                            <div class="chart-title">Growth Trend</div>
+                            <div class="line-chart" id="lineChart"></div>
+                        </div>
+
+                        <!-- Histogram -->
+                        <div class="chart-container">
+                            <div class="chart-title">Distribution</div>
+                            <div class="histogram">
+                                <div class="hist-bar" style="height: 40%; animation-delay: 0s;"></div>
+                                <div class="hist-bar" style="height: 60%; animation-delay: 0.3s;"></div>
+                                <div class="hist-bar" style="height: 85%; animation-delay: 0.6s;"></div>
+                                <div class="hist-bar" style="height: 70%; animation-delay: 0.9s;"></div>
+                                <div class="hist-bar" style="height: 50%; animation-delay: 1.2s;"></div>
+                                <div class="hist-bar" style="height: 35%; animation-delay: 1.5s;"></div>
+                                <div class="hist-bar" style="height: 25%; animation-delay: 1.8s;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Scatter Plot -->
+                        <div class="chart-container">
+                            <div class="chart-title">Correlation</div>
+                            <div class="scatter-plot" id="scatterPlot"></div>
+                        </div>
+
+                        <!-- Treemap -->
+                        <div class="chart-container">
+                            <div class="chart-title">Hierarchy</div>
+                            <div class="treemap">
+                                <div class="tree-block" style="background: rgba(0, 212, 255, 0.5); grid-row: span 2; animation-delay: 0s;"></div>
+                                <div class="tree-block" style="background: rgba(0, 255, 136, 0.5); animation-delay: 0.5s;"></div>
+                                <div class="tree-block" style="background: rgba(255, 200, 100, 0.5); animation-delay: 1s;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Heatmap -->
+                        <div class="chart-container">
+                            <div class="chart-title">Performance</div>
+                            <div class="heatmap" id="heatmap"></div>
+                        </div>
+
+                        <!-- Gantt Chart -->
+                        <div class="chart-container">
+                            <div class="chart-title">Timeline</div>
+                            <div class="gantt-chart">
+                                <div class="gantt-bar" style="width: 70%; animation-delay: 0s;"></div>
+                                <div class="gantt-bar" style="width: 85%; animation-delay: 0.4s;"></div>
+                                <div class="gantt-bar" style="width: 60%; animation-delay: 0.8s;"></div>
+                                <div class="gantt-bar" style="width: 90%; animation-delay: 1.2s;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
 
         <!-- Settings Overlay -->
         <div class="settings-overlay" id="settingsOverlay"></div>
@@ -999,8 +1396,167 @@
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
     </div>
+    <!-- VISION -->
+    <section class="mid-section">
+        <h2><span id="vision_text_1">The Future of Business Is Analytics-Driven</span></h2>
+        <p><span id="vision_text_2">
+            Across industries and geographies, data has become a strategic asset.
+            Businesses worldwide are shifting from intuition-based decisions to analytics-driven strategies.
+            Our vision is to help organizations embrace this shift early and build sustainable growth.</span>
+        </p>
+    </section>
+    <!-- PHILOSOPHY -->
+    <section class="mid-section">
+        <h2><span id="phil_text_1">Analytics That Understands Your Business</span></h2>
+        <div class="grid grid-3">
+            <div class="card">
+                <h3><span id="phil_text_2">Business Context</span></h3>
+                <p><span id="phil_text_3">Analytics aligned with strategy, not just data availability.</span></p>
+            </div>
+            <div class="card">
+                <h3><span id="phil_text_4">Decision Focus</span></h3>
+                <p><span id="phil_text_5">Insights designed to support leadership and execution.</span></p>
+            </div>
+            <div class="card">
+                <h3><span id="phil_text_6">Scalable Thinking</span></h3>
+                <p><span id="phil_text_7">Frameworks built to grow with your business.</span></p>
+            </div>
+        </div>
+    </section>
+    <button style="margin-left: 10px;margin-bottom: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_intro_section">Get In Touch</span></button>
 
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <!-- CREDENTIALS -->
+    <section class="split mid-section">
+        <div>
+            <h2><span id="cred_text_1">Academic Rigor. Modern Analytics.</span></h2>
+            <p><span id="cred_text_2">
+                Led by an MBA in Business Analytics, our approach combines statistical depth,
+                business strategy, and real-world decision frameworks.
+                Being new allows us to build modern, flexible solutions—free from legacy constraints.</span>
+            </p>
+        </div>
+        <div class="card">
+            <h3><span id="cred_text_3">MBA in Business Analytics</span></h3>
+            <p><span id="cred_text_4">
+                Strong foundation in statistics, modeling, business strategy,
+                and data-driven decision-making.</span>
+            </p>
+        </div>
+    </section>
+    <!-- SERVICES -->
+    <section id="services" class="mid-section">
+        <h2><span id="services_text_1">Business Analytics Services</span></h2>
+        <div class="grid grid-3">
+            <div class="card"><h3><span id="services_text_2">Descriptive Analytics</span></h3><p><span id="services_text_3">Understand what has happened.</span></p></div>
+            <div class="card"><h3><span id="services_text_4">Diagnostic Analytics</span></h3><p><span id="services_text_5">Understand why it happened.</span></p></div>
+            <div class="card"><h3><span id="services_text_6">Predictive Analytics</span></h3><p><span id="services_text_7">Forecast future outcomes.</span></p></div>
+            <div class="card"><h3><span id="services_text_8">Prescriptive Analytics</span></h3><p><span id="services_text_9">Recommend optimal actions.</span></p></div>
+            <div class="card"><h3><span id="services_text_10">Dashboards & Reporting</span></h3><p><span id="services_text_11">Executive-ready insights.</span></p></div>
+            <div class="card"><h3><span id="services_text_12">Analytics Roadmap</span></h3><p><span id="services_text_13">Strategy aligned with growth.</span></p></div>
+        </div>
+    </section>
+    <button style="margin-left: 10px;margin-bottom: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_services_section">Get In Touch</span></button>
 
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <!-- VALUE -->
+    <section class="mid-section">
+        <h2><span id="value_text_1">What Our Analytics Is Built to Deliver</span></h2>
+        <div class="grid grid-3">
+            <div class="card"><h3><span id="value_text_2">Faster Decisions</span></h3><p><span id="value_text_3">Reduced decision latency.</span></p></div>
+            <div class="card"><h3><span id="value_text_4">Planning Confidence</span></h3><p><span id="value_text_5">Better forecasts and clarity.</span></p></div>
+            <div class="card"><h3><span id="value_text_6">Scalable Growth</span></h3><p><span id="value_text_7">Built for expanding data needs.</span></p></div>
+        </div>
+    </section>
+    <!-- PROCESS -->
+    <section class="mid-section">
+        <h2><span id="process_text_1">How We Work</span></h2>
+        <div class="steps">
+            <div class="step"><span id="process_text_2">Discovery Call</span></div>
+            <div class="step"><span id="process_text_3">Business & Data Review</span></div>
+            <div class="step"><span id="process_text_4">Pilot Use Case</span></div>
+            <div class="step"><span id="process_text_5">Scale Analytics</span></div>
+        </div>
+    </section>
+    <button style="margin-left: 10px;margin-bottom: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_process_section">Get In Touch</span></button>
+
+    <div class="section-divider"></div>
+    <div class="w3-container" style="position:relative">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
+           style="position:absolute;top:-28px;right:24px">+</a>
+    </div>
+    <!-- CONTACT -->
+    <section id="contact" class="split mid-section">
+        <div>
+            <h2><span id="contact_text_1">Let’s Explore Analytics for Your Business</span></h2>
+            <p><span id="contact_text_2">
+                Get a clear, practical view of how analytics can support your growth.
+                No sales pressure. No jargon.</span>
+            </p>
+        </div>
+        <form style="margin-top: 10px;" method="get"
+              target="display-frame1" onsubmit="close_modal1(this)">
+            <input type="hidden" value="SAVE_LEADS" name="query">
+            <input type="hidden" value="leads_form" name="module">
+            <label><span id="contact_text_3">Name</span></label>
+            <input type="text" name="Name" placeholder="Your full name" required />
+
+            <label><span id="contact_text_4">Email</span></label>
+            <input type="email" name="Email" placeholder="Work email preferred" required />
+
+            <label><span id="contact_text_5">Phone No.</span></label>
+            <input type="text" name="PhoneNumber" placeholder="Work Phone Number preferred" required />
+
+            <label><span id="contact_text_6">Business Challenge</span></label>
+            <textarea name="Message" placeholder="e.g., forecasting, customer insights"></textarea>
+
+            <button class="btn" type="submit"><span id="contact_text_7">Get My Free Analytics Assessment</span></button>
+            <p style="font-size:0.85rem;margin-top:0.5rem;color:var(--muted);">
+                <span id="contact_text_8">We will contact you soon.</span>
+            </p>
+        </form>
+        <script>
+            const close_modal1 = async (form) => {
+                try {
+                    const loader = document.querySelector(".loader");
+                    loader.classList.remove("loader-hidden");
+                    let timeId = setTimeout(() => alert('The request take more than 20 sec'), 50 * 1000); // 20 sec
+                    url = 'https://django-hello-world-pink-ten.vercel.app?query=' + form.query.value + '&module=' + form.module.value + '&Name=' + form.Name.value + '&Email=' + form.Email.value + '&Country=None' +  '&PhoneNumber=' + form.PhoneNumber.value + '&CompanyName=None' + '&interestedIn=BusinessAnalytics&' + 'Message=' + form.Message.value;
+                    let response = await fetch(url);
+                    clearTimeout(timeId);
+
+                    if (response.ok) {
+                        loader.classList.add("loader-hidden");
+                        if (form.Email.value.localeCompare("system") == 0) {
+                            alert("Thank you for submitting your feedback!");
+                        }
+                        else {
+                            alert("We will contact you soon!");
+                            loader.classList.add("loader-hidden");
+
+                        }
+                        form.reset();
+                    }
+                    else {
+                        alert("Something went wrong");
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+                return false;
+
+            }
+        </script>
+        <iframe name="display-frame1" style="width:0px;height:0px;border:0px solid white"></iframe>
+    </section>
     <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
@@ -1141,9 +1697,10 @@
            onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
         <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
            onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
-        <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
-        <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
-
+        <center>
+            <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
+            <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
+        </center>
         <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
             <span class="w3-text w3-padding w3-teal w3-hide-small" id="go_to_top_text_footer">Go To Top</span>
             <a class="w3-button goto-top-button" href="#home">
@@ -1173,7 +1730,6 @@
             }
         </script>
     </footer>
-
 
     <script type="text/javascript">
         // Script to open and close sidebar
@@ -1268,105 +1824,144 @@
                 applyTheme(e.matches ? 'dark' : 'light');
             }
         });
-    </script>
 
-    <script>
-        /* ================= STARS ================= */
-        const stars = document.getElementById('stars');
-        const starFrag = document.createDocumentFragment();
-        for (let i = 0; i < 200; i++) {
-            const s = document.createElement('div');
-            s.className = 'star';
-            s.style.left = Math.random() * 100 + '%';
-            s.style.top = Math.random() * 100 + '%';
-            s.style.animationDelay = Math.random() * 3 + 's';
-            starFrag.appendChild(s);
+        const screen = document.querySelector('.screen');
+        const moon = document.getElementById('moon');
+
+        function positionMoon() {
+            const screenRect = screen.getBoundingClientRect();
+            const heroRect = document.querySelector('.hero').getBoundingClientRect();
+
+            const screenCenterX = screenRect.left + screenRect.width / 2;
+            const moonSize = moon.offsetWidth;
+
+            moon.style.left = (screenCenterX - heroRect.left - moonSize / 2) + 'px';
+            moon.style.top = '8%'; // sky height
         }
-        stars.appendChild(starFrag);
 
-        /* ================= WINDOWS ================= */
-        document.querySelectorAll('.building').forEach(b => {
-            const { height, width } = b.getBoundingClientRect();
-            const rows = Math.floor(height / 20);
-            const cols = Math.floor(width / 15);
-            const frag = document.createDocumentFragment();
-            for (let r = 1; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    const w = document.createElement('div');
-                    w.className = 'window';
-                    w.style.left = c * 15 + 4 + 'px';
-                    w.style.top = r * 20 + 5 + 'px';
-                    w.style.animationDelay = Math.random() * 3 + 's';
-                    frag.appendChild(w);
-                }
+        positionMoon();
+        window.addEventListener('resize', positionMoon);
+
+        // Generate cityscape
+        const cityscape = document.getElementById('cityscape');
+        for (let i = 0; i < 15; i++) {
+            const building = document.createElement('div');
+            building.className = 'building';
+            const width = 40 + Math.random() * 80;
+            const height = 200 + Math.random() * 400;
+            building.style.width = width + 'px';
+            building.style.height = height + 'px';
+            building.style.left = (i * 90) + 'px';
+
+            const windowGrid = document.createElement('div');
+            windowGrid.className = 'window-grid';
+
+            const numWindows = Math.floor((width / 20) * (height / 30));
+            for (let j = 0; j < numWindows; j++) {
+                const window = document.createElement('div');
+                window.className = 'window';
+                window.style.animationDelay = (Math.random() * 4) + 's';
+                windowGrid.appendChild(window);
             }
-            b.appendChild(frag);
+
+            building.appendChild(windowGrid);
+            cityscape.appendChild(building);
+        }
+
+        // Generate line chart paths
+        const lineChart = document.getElementById('lineChart');
+        const linePaths = [
+            { top: '70%', width: '25%', rotation: '-15deg' },
+            { top: '50%', width: '30%', rotation: '10deg' },
+            { top: '30%', width: '28%', rotation: '-5deg' },
+            { top: '40%', width: '20%', rotation: '20deg' }
+        ];
+
+        linePaths.forEach((path, i) => {
+            const line = document.createElement('div');
+            line.className = 'line-path';
+            line.style.top = path.top;
+            line.style.left = (i * 25) + '%';
+            line.style.width = path.width;
+            line.style.transform = `rotate(${path.rotation})`;
+            lineChart.appendChild(line);
         });
 
-        /* ================= PARTICLES ================= */
-        const hero = document.querySelector('.hero');
-        const pFrag = document.createDocumentFragment();
+        // Generate scatter plot points
+        const scatterPlot = document.getElementById('scatterPlot');
+        for (let i = 0; i < 12; i++) {
+            const point = document.createElement('div');
+            point.className = 'scatter-point';
+            point.style.left = (10 + Math.random() * 80) + '%';
+            point.style.top = (10 + Math.random() * 80) + '%';
+            point.style.animationDelay = (Math.random() * 4) + 's';
+            scatterPlot.appendChild(point);
+        }
+
+        // Generate heatmap cells
+        const heatmap = document.getElementById('heatmap');
+        const heatColors = [
+            'rgba(0, 212, 255, 0.3)',
+            'rgba(0, 212, 255, 0.5)',
+            'rgba(0, 255, 136, 0.4)',
+            'rgba(255, 200, 100, 0.5)',
+            'rgba(255, 154, 68, 0.6)'
+        ];
+
         for (let i = 0; i < 30; i++) {
-            const p = document.createElement('div');
-            p.className = 'data-particle';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.animationDelay = Math.random() * 8 + 's';
-            p.style.animationDuration = Math.random() * 4 + 6 + 's';
-            pFrag.appendChild(p);
+            const cell = document.createElement('div');
+            cell.className = 'heat-cell';
+            cell.style.background = heatColors[Math.floor(Math.random() * heatColors.length)];
+            cell.style.animationDelay = (Math.random() * 2) + 's';
+            heatmap.appendChild(cell);
         }
-        hero.appendChild(pFrag);
 
-        /* ================= CANVAS ================= */
-        const canvas = document.getElementById('networkCanvas');
-        const ctx = canvas.getContext('2d');
-        let dpr = window.devicePixelRatio || 1;
+        // Generate KPIs in window
+        const kpis = [
+            { text: '↑ Revenue +42%', class: 'cyan' },
+            { text: 'ROI: 156%', class: '' },
+            { text: '↗ Growth +34%', class: 'yellow' },
+            { text: 'Efficiency +28%', class: '' },
+            { text: 'Market Share ↑ 18%', class: 'cyan' },
+            { text: 'Customer Retention 94%', class: '' },
+            { text: '↑ Profit Margin +23%', class: 'yellow' },
+            { text: 'Productivity +31%', class: 'cyan' },
+            { text: 'Cost Reduction 19%', class: '' },
+            { text: '↗ Sales +47%', class: 'yellow' }
+        ];
 
-        function resize() {
-            canvas.width = innerWidth * dpr;
-            canvas.height = innerHeight * dpr;
-            canvas.style.width = innerWidth + 'px';
-            canvas.style.height = innerHeight + 'px';
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const kpiContainer = document.getElementById('kpiContainer');
+
+        kpis.forEach((kpi, index) => {
+            const kpiElement = document.createElement('div');
+            kpiElement.className = `floating-kpi ${kpi.class}`;
+            kpiElement.textContent = kpi.text;
+
+            const startX = Math.random() * 70 + 10;
+            const startY = Math.random() * 70 + 10;
+            const moveX = (Math.random() - 0.5) * 60;
+            const moveY = (Math.random() - 0.5) * 60;
+
+            kpiElement.style.left = startX + '%';
+            kpiElement.style.top = startY + '%';
+            kpiElement.style.setProperty('--x', moveX + 'px');
+            kpiElement.style.setProperty('--y', moveY + 'px');
+            kpiElement.style.animationDelay = (index * 0.8) + 's';
+
+            kpiContainer.appendChild(kpiElement);
+        });
+
+        // Generate particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = (Math.random() * 15) + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            particles.appendChild(particle);
         }
-        resize();
-        window.addEventListener('resize', () => requestAnimationFrame(resize));
 
-        const nodes = Array.from({ length: 60 }, () => ({
-            x: Math.random() * innerWidth,
-            y: Math.random() * innerHeight,
-            vx: (Math.random() - .5) * .5,
-            vy: (Math.random() - .5) * .5
-        }));
-
-        (function animate() {
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (const n of nodes) {
-                n.x += n.vx; n.y += n.vy;
-                if (n.x < 0 || n.x > innerWidth) n.vx *= -1;
-                if (n.y < 0 || n.y > innerHeight) n.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(n.x, n.y, 3, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0,212,255,.8)';
-                ctx.fill();
-            }
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const d = Math.hypot(dx, dy);
-                    if (d < 150) {
-                        ctx.strokeStyle = `rgba(0,212,255,${1 - d / 150})`;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        })();
-    </script>
-    <script type="text/javascript">
         /* Settings */
         // Settings state stored in memory
         const primaryLanguage = navigator.language;
@@ -1381,27 +1976,28 @@
             background: 'dark',
             textSize: '16'
         };
+
         // Language settings
         const translations = {
             en: {
-                'main-title': 'Human-AI Collaboration',
-                'subtitle': 'Empowering businesses with cutting-edge Artificial Intelligence and Machine Learning solutions. Experience the future of intelligent automation and data-driven insights.'
+                'data_driven_insights_text': 'Data-Driven Insights',
+                'hero_image_subheading_text': "Transforming raw data into strategic foresight for tomorrow's business leaders"
             },
             es: {
-                'main-title': 'Colaboración entre humanos e IA',
-                'subtitle': 'Impulsamos a las empresas con soluciones de vanguardia de Inteligencia Artificial y Aprendizaje Automático. Experimente el futuro de la automatización inteligente y la información basada en datos.'
+                'data_driven_insights_text': 'Perspectivas basadas en datos',
+                'hero_image_subheading_text': 'Transformando datos sin procesar en previsión estratégica para los líderes empresariales del mañana'
             },
             fr: {
-                'main-title': 'Collaboration homme-IA',
-                'subtitle': "Nous donnons aux entreprises les moyens d'exploiter des solutions de pointe en intelligence artificielle et en apprentissage automatique.Découvrez le futur de l'automatisation intelligente et des analyses de données."
+                'data_driven_insights_text': 'Informations basées sur les données',
+                'hero_image_subheading_text': "Transformer les données brutes en vision stratégique pour les dirigeants d'entreprise de demain"
             },
             de: {
-                'main-title': 'Samenwerking tussen mens en AI',
-                'subtitle': 'Bedrijven versterken met geavanceerde oplossingen op het gebied van kunstmatige intelligentie en machine learning. Ervaar de toekomst van intelligente automatisering en datagedreven inzichten.'
+                'data_driven_insights_text': 'Datagestuurde inzichten',
+                'hero_image_subheading_text': 'Ruwe data omzetten in strategisch inzicht voor de bedrijfsleiders van morgen.'
             },
             it: {
-                'main-title': 'Collaborazione uomo-intelligenza artificiale',
-                'subtitle': "Forniamo alle aziende soluzioni all'avanguardia di Intelligenza Artificiale e Machine Learning.Scopri il futuro dell'automazione intelligente e degli insight basati sui dati."
+                'data_driven_insights_text': 'Approfondimenti basati sui dati',
+                'hero_image_subheading_text': "Trasformare i dati grezzi in previsioni strategiche per i leader aziendali di domani"
             }
         };
         // DOM elements
@@ -1445,28 +2041,28 @@
         //fetch French language
         async function fetchFrenchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:C259";
+            range = "Translation_BusinessAnalytics!A:C";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 2);
         }
         //fetch Dutch language
         async function fetchDutchLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:D259";
+            range = "Translation_BusinessAnalytics!A:D";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 3);
         }
         //fetch Italiano language
         async function fetchItalianoLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:E259";
+            range = "Translation_BusinessAnalytics!A:E";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 4);
         }
         //fetch English language
         async function fetchEnglishLanguage() {
             spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
-            range = "Translation_index!A2:F259";
+            range = "Translation_BusinessAnalytics!A:F";
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
@@ -1593,18 +2189,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            right: 20px;
-                            background: rgba(99, 102, 241, 0.9);
-                            color: white;
-                            padding: 16px 24px;
-                            border-radius: 12px;
-                            font-weight: 500;
-                            z-index: 999;
-                            backdrop-filter: blur(4px);
-                            animation: slideInAlert 0.5s ease-out;
-                        `;
+                                                                        position: fixed;
+                                                                        top: 20px;
+                                                                        right: 20px;
+                                                                        background: rgba(99, 102, 241, 0.9);
+                                                                        color: white;
+                                                                        padding: 16px 24px;
+                                                                        border-radius: 12px;
+                                                                        font-weight: 500;
+                                                                        z-index: 999;
+                                                                        backdrop-filter: blur(4px);
+                                                                        animation: slideInAlert 0.5s ease-out;
+                                                                    `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -1652,7 +2248,7 @@
     </script>
     <!--Code for WhatsApp-->
     <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-    <script type="text/javascript">
+    <script>
         var wa_btnSetting = {
             "btnColor": "#16BE45",
             "ctaText": "",
