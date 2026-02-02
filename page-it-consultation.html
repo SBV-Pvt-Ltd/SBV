@@ -50,6 +50,8 @@
             --card-bg: #ffffff;
             --card-border: #e2e8f0;
             --hero-overlay: rgba(255,255,255,0.85);
+            --primary-orange: #FFA500;
+            --primary-white: #FFFFFF;
         }
 
         /* ================= DARK MODE ================= */
@@ -87,7 +89,7 @@
 
         body {
             font-family: 'Exo 2', sans-serif;
-            background: var(--dark-bg);
+            background: var(--bg-main);
             color: var(--text-light);
             overflow-x: hidden;
             cursor: none;
@@ -144,7 +146,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background: radial-gradient(ellipse at center, #1a1f3a 0%, var(--dark-bg) 100%);
+            background: radial-gradient(ellipse at center, #1a1f3a 0%, var(--bg-main) 100%);
         }
 
         /* Animated Background Particles */
@@ -235,6 +237,12 @@
             line-height: 1.6;
             animation: fadeInLeft 0.8s ease-out 0.4s backwards;
         }
+        .subtitle-hero {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: var(--text-primary);
+            line-height: 1.6;
+            animation: fadeInLeft 0.8s ease-out 0.4s backwards;
+        }
 
         .cta-buttons {
             display: flex;
@@ -260,7 +268,7 @@
 
         .cta-primary {
             background: linear-gradient(135deg, var(--primary-orange), #ff7733);
-            color: var(--dark-bg);
+            color: var(--bg-main);
             box-shadow: 0 10px 30px rgba(255, 153, 51, 0.3);
         }
 
@@ -295,7 +303,7 @@
 
             .cta-secondary:hover {
                 background: var(--primary-orange);
-                color: var(--dark-bg);
+                color: var(--bg-main);
                 transform: translateY(-5px);
             }
 
@@ -1406,7 +1414,7 @@
                 <!-- Left Content -->
                 <div class="hero-left">
                     <h1 class="main-title"><span id="it_con_1">Engineering Digital Excellence</span></h1>
-                    <p class="subtitle">
+                    <p class="subtitle-hero">
                         <span id="it_con_2">Pioneering India's digital transformation with cutting-edge technology solutions.</span>
                         <span id="it_con_3">Explore our interactive services ecosystem - hover over tiles or watch them come alive automatically.</span>
                     </p>
