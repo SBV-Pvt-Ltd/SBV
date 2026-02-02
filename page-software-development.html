@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Official webpage for software development created by Saharsh Bhadani Venture Private Limited.">
     <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation,software development company india, custom software development, web application development, desktop software development, software maintenance services, AI integration, analytics dashboards, supply chain software, finance software, business management systems" />
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,13 +44,49 @@
            CSS VARIABLES
         ====================== */
         :root {
+            --accent1: #6366f1;
+            --accent2: #8b5cf6;
+            --accent-primary: #ff6b35;
+            --accent-secondary: #64b5f6;
             --bg: #ffffff;
-            --text: #0f172a;
+            --bg-glass: rgba(10, 22, 40, 0.8);
+            --bg-glass-soft: rgba(255, 255, 255, 0.05);
+            --bg-main: linear-gradient(135deg, #0a1628 0%, #1a2947 50%, #0f3460 100%);
+            --border: #e2e8f0;
+            --border-light: rgba(255, 255, 255, 0.15);
+            --border-accent: rgba(100, 181, 246, 0.35);
+            --card: #f8fafc;
+            --company-name-text: White;
+            --grid-line: rgba(255, 255, 255, 0.03);
             --muted: #64748b;
             --primary: #0ea5a4;
             --secondary: #0f766e;
-            --card: #f8fafc;
-            --border: #e2e8f0;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --tagline-bg: linear-gradient(135deg, #ffffff 0%, #64b5f6 100%);
+            --text: #0f172a;
+            --text-main: #FFFFFF;
+            --text-muted: #F8F8FF;
+        }
+
+        [data-theme="light"] {
+            /* ===== SOFT MODE ===== */
+            --bg-main: linear-gradient(135deg, #f6f8fc 0%, #eef2f7 50%, #e8edf5 100%);
+            --bg-glass: rgba(255, 255, 255, 0.75);
+            --bg-glass-soft: rgba(255, 255, 255, 0.9);
+            --text-primary: #1a2947;
+            --text-secondary: #546e7a;
+            --accent-primary: #ff8a50;
+            --accent-secondary: #4fa3e3;
+            --border-light: rgba(26, 41, 71, 0.12);
+            --border-accent: rgba(79, 163, 227, 0.35);
+            --grid-line: rgba(26, 41, 71, 0.05);
+            --tagline-bg: linear-gradient(135deg, #000000 0%, #64b5f6 100%);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --company-name-text: black;
+            --accent1: #667eea;
+            --accent2: #764ba2;
         }
 
         [data-theme="dark"] {
@@ -244,46 +279,6 @@
         }
     </style>
     <style type="text/css">
-        :root {
-            /* ===== DARK MODE (DEFAULT) ===== */
-            --bg-main: linear-gradient(135deg, #0a1628 0%, #1a2947 50%, #0f3460 100%);
-            --bg-glass: rgba(10, 22, 40, 0.8);
-            --bg-glass-soft: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: #b0bec5;
-            --accent-primary: #ff6b35;
-            --accent-secondary: #64b5f6;
-            --border-light: rgba(255, 255, 255, 0.15);
-            --border-accent: rgba(100, 181, 246, 0.35);
-            --grid-line: rgba(255, 255, 255, 0.03);
-            --tagline-bg: linear-gradient(135deg, #ffffff 0%, #64b5f6 100%);
-            --text-main: #FFFFFF;
-            --text-muted: #F8F8FF;
-            --company-name-text: White;
-            --accent1: #6366f1;
-            --accent2: #8b5cf6;
-        }
-
-        [data-theme="light"] {
-            /* ===== SOFT MODE ===== */
-            --bg-main: linear-gradient(135deg, #f6f8fc 0%, #eef2f7 50%, #e8edf5 100%);
-            --bg-glass: rgba(255, 255, 255, 0.75);
-            --bg-glass-soft: rgba(255, 255, 255, 0.9);
-            --text-primary: #1a2947;
-            --text-secondary: #546e7a;
-            --accent-primary: #ff8a50;
-            --accent-secondary: #4fa3e3;
-            --border-light: rgba(26, 41, 71, 0.12);
-            --border-accent: rgba(79, 163, 227, 0.35);
-            --grid-line: rgba(26, 41, 71, 0.05);
-            --tagline-bg: linear-gradient(135deg, #000000 0%, #64b5f6 100%);
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --company-name-text: black;
-            --accent1: #667eea;
-            --accent2: #764ba2;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -2345,18 +2340,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                        position: fixed;
-                                        top: 20px;
-                                        right: 20px;
-                                        background: rgba(99, 102, 241, 0.9);
-                                        color: white;
-                                        padding: 16px 24px;
-                                        border-radius: 12px;
-                                        font-weight: 500;
-                                        z-index: 999;
-                                        backdrop-filter: blur(4px);
-                                        animation: slideInAlert 0.5s ease-out;
-                                    `;
+                                            position: fixed;
+                                            top: 20px;
+                                            right: 20px;
+                                            background: rgba(99, 102, 241, 0.9);
+                                            color: white;
+                                            padding: 16px 24px;
+                                            border-radius: 12px;
+                                            font-weight: 500;
+                                            z-index: 999;
+                                            backdrop-filter: blur(4px);
+                                            animation: slideInAlert 0.5s ease-out;
+                                        `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);

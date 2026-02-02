@@ -16,18 +16,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="Constant.js" defer></script>
     <style>
+        /* Theme variables (do NOT replace original colors) */
         :root {
-            /* DARK (default) */
+            --theme-bg: transparent;
+            --theme-text: inherit;
             --bg-main: #05060a;
             --bg-secondary: #0d1020;
             --primary: #00e5ff;
             --secondary: #7c7cff;
-            --text-main: #eaeaf0;
-            --text-muted: #b2b6d9;
             --glass: rgba(255, 255, 255, 0.08);
             --border-glass: rgba(255, 255, 255, 0.15);
             --radius-lg: 22px;
             --radius-md: 14px;
+            /* DARK (default) */
+            --text-main: #eaeaf0;
+            --text-muted: #b2b6d9;
         }
 
         /* LIGHT MODE */
@@ -38,6 +41,23 @@
             --text-muted: #5a5f85;
             --glass: rgba(0, 0, 0, 0.05);
             --border-glass: rgba(0, 0, 0, 0.12);
+            --theme-bg: #f8fafc;
+            --theme-text: #0f172a;
+            --company-name-text: black;
+            --accent1: #667eea;
+            --accent2: #764ba2;
+        }
+
+        [data-theme="dark"] {
+            /* DARK (default) */
+            --theme-bg: #000000;
+            --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
+            --theme-text: #ffffff;
+            --text-main: #FFFFFF;
+            --text-muted: #F8F8FF;
+            --company-name-text: White;
+            --accent1: #6366f1;
+            --accent2: #8b5cf6;
         }
 
 
@@ -410,46 +430,6 @@
         }
     </style>
     <style>
-        /* Theme variables (do NOT replace original colors) */
-        :root {
-            --theme-bg: transparent;
-            --theme-text: inherit;
-            --bg-main: #05060a;
-            --bg-secondary: #0d1020;
-            --primary: #00e5ff;
-            --secondary: #7c7cff;
-            --glass: rgba(255, 255, 255, 0.08);
-            --border-glass: rgba(255, 255, 255, 0.15);
-            --radius-lg: 22px;
-            --radius-md: 14px;
-        }
-
-        [data-theme="light"] {
-            --bg-main: #f6f7fb;
-            --bg-secondary: #ffffff;
-            --glass: rgba(0, 0, 0, 0.05);
-            --border-glass: rgba(0, 0, 0, 0.12);
-            --theme-bg: #f8fafc;
-            --theme-text: #0f172a;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --company-name-text: black;
-            --accent1: #667eea;
-            --accent2: #764ba2;
-        }
-
-        [data-theme="dark"] {
-            /* DARK (default) */
-            --theme-bg: #000000;
-            --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
-            --theme-text: #ffffff;
-            --text-main: #FFFFFF;
-            --text-muted: #F8F8FF;
-            --company-name-text: White;
-            --accent1: #6366f1;
-            --accent2: #8b5cf6;
-        }
-
         .theme-toggle {
             padding: .6rem 1.2rem;
             border-radius: 30px;
