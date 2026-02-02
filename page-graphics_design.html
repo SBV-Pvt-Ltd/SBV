@@ -1114,6 +1114,15 @@
                     <option value="fr">Français</option>
                     <option value="de">Deutsch</option>
                     <option value="it">Italiano</option>
+                    <option value="hi">Hindi</option>
+                    <option value="bn">Bengali</option>
+                    <option value="mr">Marathi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                    <option value="kn">Kannada</option>
+                    <option value="gu">Gujarati</option>
+                    <option value="pa">Punjabi</option>
+                    <option value="or">Odia</option>
                 </select>
             </div>
 
@@ -1680,8 +1689,6 @@
         // Example output: "en-US"
 
         const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
-        console.log("savedLanguage");
-        console.log(savedLanguage);
 
         let currentSettings = {
             language: savedLanguage || primaryLanguage,
@@ -1709,6 +1716,42 @@
             it: {
                 'main-title': 'Collaborazione uomo-intelligenza artificiale',
                 'subtitle': "Forniamo alle aziende soluzioni all'avanguardia di Intelligenza Artificiale e Machine Learning.Scopri il futuro dell'automazione intelligente e degli insight basati sui dati."
+            },
+            hi: {
+                'main-title': 'मानव-एआई सहयोग',
+                'subtitle': "अत्याधुनिक कृत्रिम बुद्धिमत्ता और मशीन लर्निंग समाधानों के साथ व्यवसायों को सशक्त बनाना। बुद्धिमान स्वचालन और डेटा-संचालित अंतर्दृष्टि के भविष्य का अनुभव करें।"
+            },
+            bn: {
+                'main-title': 'মানব-এআই সহযোগিতা',
+                'subtitle': "অত্যাধুনিক কৃত্রিম বুদ্ধিমত্তা এবং মেশিন লার্নিং সমাধানের মাধ্যমে ব্যবসাগুলিকে ক্ষমতায়িত করা। বুদ্ধিমান অটোমেশন এবং ডেটা-চালিত অন্তর্দৃষ্টির ভবিষ্যতের অভিজ্ঞতা অর্জন করুন।"
+            },
+            mr: {
+                'main-title': 'मानव-एआय सहयोग',
+                'subtitle': 'अत्याधुनिक कृत्रिम बुद्धिमत्ता आणि मशीन लर्निंग सोल्यूशन्ससह व्यवसायांना सक्षम बनवणे. बुद्धिमान ऑटोमेशन आणि डेटा-चालित अंतर्दृष्टीच्या भविष्याचा अनुभव घ्या.'
+            },
+            ta: {
+                'main-title': 'மனித-AI ஒத்துழைப்பு',
+                'subtitle': 'அதிநவீன செயற்கை நுண்ணறிவு மற்றும் இயந்திர கற்றல் தீர்வுகள் மூலம் வணிகங்களை மேம்படுத்துதல். அறிவார்ந்த ஆட்டோமேஷன் மற்றும் தரவு சார்ந்த நுண்ணறிவுகளின் எதிர்காலத்தை அனுபவியுங்கள்.'
+            },
+            te: {
+                'main-title': 'మానవ-AI సహకారం',
+                'subtitle': 'అత్యాధునిక కృత్రిమ మేధస్సు మరియు యంత్ర అభ్యాస పరిష్కారాలతో వ్యాపారాలను శక్తివంతం చేయడం. తెలివైన ఆటోమేషన్ మరియు డేటా ఆధారిత అంతర్దృష్టుల భవిష్యత్తును అనుభవించండి.'
+            },
+            kn: {
+                'main-title': 'ಮಾನವ-AI ಸಹಯೋಗ',
+                'subtitle': 'ಅತ್ಯಾಧುನಿಕ ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ ಮತ್ತು ಯಂತ್ರ ಕಲಿಕೆ ಪರಿಹಾರಗಳೊಂದಿಗೆ ವ್ಯವಹಾರಗಳನ್ನು ಸಬಲೀಕರಣಗೊಳಿಸುವುದು. ಬುದ್ಧಿವಂತ ಯಾಂತ್ರೀಕೃತಗೊಂಡ ಮತ್ತು ಡೇಟಾ-ಚಾಲಿತ ಒಳನೋಟಗಳ ಭವಿಷ್ಯವನ್ನು ಅನುಭವಿಸಿ.'
+            },
+            gu: {
+                'main-title': 'માનવ-એઆઈ સહયોગ',
+                'subtitle': 'અત્યાધુનિક આર્ટિફિશિયલ ઇન્ટેલિજન્સ અને મશીન લર્નિંગ સોલ્યુશન્સ સાથે વ્યવસાયોને સશક્ત બનાવવું. બુદ્ધિશાળી ઓટોમેશન અને ડેટા-આધારિત આંતરદૃષ્ટિના ભવિષ્યનો અનુભવ કરો.'
+            },
+            pa: {
+                'main-title': 'ਮਨੁੱਖੀ-AI ਸਹਿਯੋਗ',
+                'subtitle': 'ਅਤਿ-ਆਧੁਨਿਕ ਆਰਟੀਫੀਸ਼ੀਅਲ ਇੰਟੈਲੀਜੈਂਸ ਅਤੇ ਮਸ਼ੀਨ ਲਰਨਿੰਗ ਹੱਲਾਂ ਨਾਲ ਕਾਰੋਬਾਰਾਂ ਨੂੰ ਸਸ਼ਕਤ ਬਣਾਉਣਾ। ਬੁੱਧੀਮਾਨ ਆਟੋਮੇਸ਼ਨ ਅਤੇ ਡੇਟਾ-ਅਧਾਰਿਤ ਸੂਝ ਦੇ ਭਵਿੱਖ ਦਾ ਅਨੁਭਵ ਕਰੋ।'
+            },
+            or: {
+                'main-title': 'ମାନବ-ଏଆଇ ସହଯୋଗ',
+                'subtitle': 'ଅତ୍ୟାଧୁନିକ କୃତ୍ରିମ ବୁଦ୍ଧିମତ୍ତା ଏବଂ ମେସିନ୍ ଲର୍ଣ୍ଣିଂ ସମାଧାନ ସହିତ ବ୍ୟବସାୟଗୁଡ଼ିକୁ ସଶକ୍ତ କରିବା। ବୁଦ୍ଧିମାନ ସ୍ୱୟଂଚାଳିତତା ଏବଂ ଡାଟା-ଚାଳିତ ଅନ୍ତର୍ଦୃଷ୍ଟିର ଭବିଷ୍ୟତର ଅଭିଜ୍ଞତା ନିଅନ୍ତୁ।'
             }
         };
         // DOM elements
@@ -1777,6 +1820,69 @@
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
+        //fetch Hindi language
+        async function fetchHindiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:G";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 6);
+        }
+        //fetch Bengali language
+        async function fetchBengaliLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:H";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 7);
+        }
+        //fetch Marathi language
+        async function fetchMarathiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:I";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 8);
+        }
+        //fetch Tamil language
+        async function fetchTamilLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:J";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 9);
+        }
+        //fetch Telugu language
+        async function fetchTeluguLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:K";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 10);
+        }
+        //fetch Kannada language
+        async function fetchKannadaLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:L";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 11);
+        }
+        //fetch Gujarati language
+        async function fetchGujaratiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:M";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 12);
+        }
+        //fetch Punjabi language
+        async function fetchPunjabiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:N";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 13);
+        }
+        //fetch Odia language
+        async function fetchOdiaLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_GraphicsDesign!A:O";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 14);
+        }
 
         // fetch translations from googlesheet
         async function fetchSpreadsheetData(spreadsheetId, range) {
@@ -1805,6 +1911,24 @@
                 return await fetchDutchLanguage();
             } else if (lang === "it") {
                 return await fetchItalianoLanguage();
+            } else if (lang === "hi") {
+                return await fetchHindiLanguage();
+            } else if (lang === "bn") {
+                return await fetchBengaliLanguage();
+            } else if (lang === "mr") {
+                return await fetchMarathiLanguage();
+            } else if (lang === "ta") {
+                return await fetchTamilLanguage();
+            } else if (lang === "te") {
+                return await fetchTeluguLanguage();
+            } else if (lang === "kn") {
+                return await fetchKannadaLanguage();
+            } else if (lang === "gu") {
+                return await fetchGujaratiLanguage();
+            } else if (lang === "pa") {
+                return await fetchPunjabiLanguage();
+            } else if (lang === "or") {
+                return await fetchOdiaLanguage();
             }
         }
         // Update language function

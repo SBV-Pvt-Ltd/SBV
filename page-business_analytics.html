@@ -1342,6 +1342,15 @@
                     <option value="fr">Français</option>
                     <option value="de">Deutsch</option>
                     <option value="it">Italiano</option>
+                    <option value="hi">Hindi</option>
+                    <option value="bn">Bengali</option>
+                    <option value="mr">Marathi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                    <option value="kn">Kannada</option>
+                    <option value="gu">Gujarati</option>
+                    <option value="pa">Punjabi</option>
+                    <option value="or">Odia</option>
                 </select>
             </div>
 
@@ -2029,7 +2038,43 @@
             it: {
                 'data_driven_insights_text': 'Approfondimenti basati sui dati',
                 'hero_image_subheading_text': "Trasformare i dati grezzi in previsioni strategiche per i leader aziendali di domani"
-            }
+            },
+            hi: {
+                'data_driven_insights_text': 'डेटा-आधारित अंतर्दृष्टि',
+                'hero_image_subheading_text': "कच्चे डेटा को भावी व्यापारिक नेताओं के लिए रणनीतिक दूरदर्शिता में परिवर्तित करना।"
+            },
+            bn: {
+                'data_driven_insights_text': 'ডেটা-চালিত অন্তর্দৃষ্টি',
+                'hero_image_subheading_text': "আগামী দিনের ব্যবসায়ী নেতাদের জন্য কাঁচা তথ্যকে কৌশলগত দূরদর্শিতায় রূপান্তর করা"
+            },
+            mr: {
+                'data_driven_insights_text': 'डेटा-चालित अंतर्दृष्टी',
+                'hero_image_subheading_text': "उद्याच्या व्यावसायिक नेत्यांसाठी कच्च्या डेटाचे धोरणात्मक दूरदृष्टीमध्ये रूपांतर करणे"
+            },
+            ta: {
+                'data_driven_insights_text': 'தரவு சார்ந்த நுண்ணறிவுகள்',
+                'hero_image_subheading_text': "நாளைய வணிகத் தலைவர்களுக்கு மூலத் தரவை மூலோபாய தொலைநோக்குப் பார்வையாக மாற்றுதல்."
+            },
+            te: {
+                'data_driven_insights_text': 'డేటా ఆధారిత అంతర్దృష్టులు',
+                'hero_image_subheading_text': "రేపటి వ్యాపార నాయకుల కోసం ముడి డేటాను వ్యూహాత్మక దూరదృష్టిగా మార్చడం."
+            },
+            kn: {
+                'data_driven_insights_text': 'ಡೇಟಾ-ಚಾಲಿತ ಒಳನೋಟಗಳು',
+                'hero_image_subheading_text': "ನಾಳೆಯ ವ್ಯವಹಾರ ನಾಯಕರಿಗೆ ಕಚ್ಚಾ ಡೇಟಾವನ್ನು ಕಾರ್ಯತಂತ್ರದ ದೂರದೃಷ್ಟಿಯನ್ನಾಗಿ ಪರಿವರ್ತಿಸುವುದು."
+            },
+            gu: {
+                'data_driven_insights_text': 'ડેટા-આધારિત આંતરદૃષ્ટિ',
+                'hero_image_subheading_text': "આવતીકાલના વ્યાપારી નેતાઓ માટે કાચા ડેટાને વ્યૂહાત્મક દૂરંદેશીમાં રૂપાંતરિત કરવું"
+            },
+            pa: {
+                'data_driven_insights_text': 'ਡਾਟਾ-ਅਧਾਰਿਤ ਸੂਝਾਂ',
+                'hero_image_subheading_text': "ਕੱਲ੍ਹ ਦੇ ਕਾਰੋਬਾਰੀ ਆਗੂਆਂ ਲਈ ਕੱਚੇ ਡੇਟਾ ਨੂੰ ਰਣਨੀਤਕ ਦੂਰਦਰਸ਼ਤਾ ਵਿੱਚ ਬਦਲਣਾ"
+            },
+            or: {
+                'data_driven_insights_text': 'ଡାଟା-ଚାଳିତ ଅନ୍ତର୍ଦୃଷ୍ଟି',
+                'hero_image_subheading_text': "ଆସନ୍ତାକାଲିର ବ୍ୟବସାୟ ନେତାମାନଙ୍କ ପାଇଁ କଞ୍ଚା ତଥ୍ୟକୁ ରଣନୈତିକ ଦୂରଦୃଷ୍ଟିରେ ପରିଣତ କରିବା"
+            } // need to add here as well
         };
         // DOM elements
         const languageSelect = document.getElementById('language');
@@ -2097,6 +2142,69 @@
             const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
             return await getMapFromSpreadSheetData(spreadsheetData, 5);
         }
+        //fetch Hindi language
+        async function fetchHindiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:G";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 6);
+        }
+        //fetch Bengali language
+        async function fetchBengaliLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:H";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 7);
+        }
+        //fetch Marathi language
+        async function fetchMarathiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:I";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 8);
+        }
+        //fetch Tamil language
+        async function fetchTamilLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:J";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 9);
+        }
+        //fetch Telugu language
+        async function fetchTeluguLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:K";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 10);
+        }
+        //fetch Kannada language
+        async function fetchKannadaLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:L";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 11);
+        }
+        //fetch Gujarati language
+        async function fetchGujaratiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:M";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 12);
+        }
+        //fetch Punjabi language
+        async function fetchPunjabiLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:N";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 13);
+        }
+        //fetch Odia language
+        async function fetchOdiaLanguage() {
+            spreadsheetId = "1tVr62br3isauBU-b0k9tuIi1yVSP5cmhBZ932C9AM1g";
+            range = "Translation_BusinessAnalytics!A:O";
+            const spreadsheetData = await fetchSpreadsheetData(spreadsheetId, range);
+            return await getMapFromSpreadSheetData(spreadsheetData, 14);
+        }
 
         // fetch translations from googlesheet
         async function fetchSpreadsheetData(spreadsheetId, range) {
@@ -2125,6 +2233,24 @@
                 return await fetchDutchLanguage();
             } else if (lang === "it") {
                 return await fetchItalianoLanguage();
+            } else if (lang === "hi") {
+                return await fetchHindiLanguage();
+            } else if (lang === "bn") {
+                return await fetchBengaliLanguage();
+            } else if (lang === "mr") {
+                return await fetchMarathiLanguage();
+            } else if (lang === "ta") {
+                return await fetchTamilLanguage();
+            } else if (lang === "te") {
+                return await fetchTeluguLanguage();
+            } else if (lang === "kn") {
+                return await fetchKannadaLanguage();
+            } else if (lang === "gu") {
+                return await fetchGujaratiLanguage();
+            } else if (lang === "pa") {
+                return await fetchPunjabiLanguage();
+            } else if (lang === "or") {
+                return await fetchOdiaLanguage();
             }
         }
         // Update language function
