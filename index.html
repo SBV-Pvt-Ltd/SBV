@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Official Homepage of Saharsh Bhadani Venture Private Limited.">
+    <meta name="description" content="Saharsh Bhadani Venture Pvt. Ltd. is an India-based AI & IT consulting firm offering AI/ML, software development, analytics, and digital transformation services.">
     <meta name="keywords" content="Saharsh,Bhadani,Venture,Private,Limited,Saharsh Bhadani,Saharsh Bhadani Venture Private Limited,Service-based,Business Consulting,Business Analytics,IT Consulting,Software development, Application development, Mobile app development, Mobile Application Development, Graphics designing, Content creation">
     <meta name="author" content="Saharsh Bhadani Venture Private Limited">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <Title>Saharsh Bhadani Venture Pvt. Ltd.</Title>
+    <title>AI & IT Consulting Company in India | Saharsh Bhadani Venture Pvt. Ltd.</title>
     <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./css/w3-theme-black.css">
@@ -14,8 +14,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://saharshbhadani.com/">
+    <meta name="robots" content="index, follow">
+
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Saharsh Bhadani Venture Private Limited | AI-Driven Software Development Company" />
+    <meta property="og:description" content="We deliver scalable web and desktop software with AI-first architecture, analytics dashboards, modernization and long-term maintenance." />
+    <meta property="og:url" content="https://www.saharshbhadani.com/" />
+    <meta property="og:image" content="https://www.saharshbhadani.com/Logo/Logo.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Saharsh Bhadani Venture Private Limited | AI & IT Consulting Company in India" />
+    <meta name="twitter:description" content="End-to-end software development, AI integration, analytics dashboards and enterprise solutions." />
+    <meta name="twitter:image" content="https://www.saharshbhadani.com/Logo/Logo.png" />
+
+    <!-- Geo Targeting (India) -->
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="India" />
+    <meta name="language" content="EN" />
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="Constant.js" defer></script>
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Saharsh Bhadani Venture Pvt. Ltd.",
+          "url": "https://saharshbhadani.com",
+          "logo": "https://saharshbhadani.com/Logo/Logo.png",
+          "sameAs": [],
+          "address": {
+            "@type": "29B, Bakul Bagan Row, Kolkata, West Bengal, India. Pincode- 700025",
+            "addressCountry": "IN"
+          }
+        }
+    </script>
+
     <style>
         /* =========================
                     THEME VARIABLES
@@ -672,6 +709,15 @@
             flex-direction: column;
         }
 
+        #seo-intro {
+            background: var(--bg-main);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         .services-cards-container-large-screen {
             margin: 5px auto;
             padding: 12px;
@@ -1165,6 +1211,7 @@
             background: var(--bg-main);
             color: var(--text-muted);
         }
+
         .footer_link {
             cursor: pointer;
             text-decoration: underline;
@@ -1569,11 +1616,22 @@
             </footer>
         </div>
     </div>
+    <section id="seo-intro" class="w3-row-padding w3-container w3-padding-64">
+        <h2><span id="index_seo_1">AI & IT Consulting Company in India</span></h2>
+        <p>
+            <span id="index_seo_2">
+                Saharsh Bhadani Venture Pvt. Ltd. is a technology consulting company specializing in Artificial Intelligence, Machine Learning, Business Analytics, Software Development, and Digital Transformation for startups and enterprises.
+            </span>
+        </p>
+    </section>
     <div class="section-divider"></div>
     <div class="w3-container" style="position:relative">
         <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
            style="position:absolute;top:-28px;right:24px">+</a>
     </div>
+
+
+
 
     <!-- Services -->
     <section id="Services-section" class="w3-row-padding w3-container w3-padding-64">
@@ -3068,13 +3126,13 @@
 
         const style = document.createElement('style');
         style.textContent = `
-                                    @keyframes ripple {
-                                        to {
-                                            transform: scale(20);
-                                            opacity: 0;
-                                        }
-                                    }
-                                `;
+                                            @keyframes ripple {
+                                                to {
+                                                    transform: scale(20);
+                                                    opacity: 0;
+                                                }
+                                            }
+                                        `;
         document.head.appendChild(style);
 
         document.querySelectorAll('.btn-secondary').forEach(btn => {
@@ -3325,18 +3383,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                            position: fixed;
-                            top: 20px;
-                            right: 20px;
-                            background: rgba(99, 102, 241, 0.9);
-                            color: white;
-                            padding: 16px 24px;
-                            border-radius: 12px;
-                            font-weight: 500;
-                            z-index: 999;
-                            backdrop-filter: blur(4px);
-                            animation: slideInAlert 0.5s ease-out;
-                        `;
+                                    position: fixed;
+                                    top: 20px;
+                                    right: 20px;
+                                    background: rgba(99, 102, 241, 0.9);
+                                    color: white;
+                                    padding: 16px 24px;
+                                    border-radius: 12px;
+                                    font-weight: 500;
+                                    z-index: 999;
+                                    backdrop-filter: blur(4px);
+                                    animation: slideInAlert 0.5s ease-out;
+                                `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
