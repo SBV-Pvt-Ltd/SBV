@@ -1442,6 +1442,88 @@
             }
         }
     </style>
+    <style type="text/css">
+        .index_style1 {
+            display: none;
+            z-index: 10;
+            width: 40%;
+            min-width: 300px;
+        }
+        .index_style2 {
+            border-radius: 25px;
+            font-size: 0.9375rem;
+        }
+        .index_style3 {
+            color: white;
+        }
+        .index_style4 {
+            text-decoration: none;
+        }
+        .index_style5 {
+            width: 100% !important;
+        }
+        .index_style6 {
+            width: 0px !important;
+            height: 0px !important;
+            border: 0px solid white !important;
+        }
+        .index_style7 {
+            position: relative;
+        }
+        .index_style8 {
+            position: absolute;
+            top: -28px;
+            right: 24px;
+        }
+        .index_style9 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .index_style10 {
+            width: 100% !important;
+        }
+        .index_style11 {
+            margin: 10px 0;
+        }
+        .index_style12 {
+            width: 100%;
+            cursor: pointer;
+            border: 1px solid grey;
+            border-top: none;
+        }
+        .index_style13 {
+            width: 100%;
+            border-bottom: 1px solid black;
+            background-color: white;
+        }
+        .index_style14 {
+            font-size: 0.8125rem;
+        }
+        .index_style15 {
+            margin-bottom: 15px;
+        }
+        .index_style16 {
+            text-align: left;
+        }
+        .index_style17 {
+            text-align: justify;
+        }
+        .index_style18 {
+            text-align: left;
+            text-align: justify;
+            word-wrap: break-word;
+        }
+        .index_style19 {
+            margin-left: 10px;
+        }
+        .index_style20 {
+            position: relative;
+            bottom: 100px;
+            z-index: 1;
+        }
+
+    </style>
     <script type="text/javascript">
         function delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
@@ -1545,7 +1627,7 @@
                 </a>
             </div>
             <!-- Sidebar (hidden by default) -->
-            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar" style="display:none;z-index:10;width:40%;min-width:300px" id="mySidebar">
+            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar index_style1" id="mySidebar">
                 <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
                     <span id="close_menu_button">Close Menu</span>
                     <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
@@ -1600,8 +1682,8 @@
                 </p>
 
                 <div class="hero-buttons">
-                    <button class="w3-theme w3-hover-teal btn" title="Submit Form" style="border-radius:25px; font-size: 0.9375rem;">
-                        <a href="tel:+918910441949" class="phone_number" style="text-decoration: none;">&nbsp;<i class="fa fa-phone" style="color:white"></i>&nbsp;8910441949</a>
+                    <button class="w3-theme w3-hover-teal btn index_style2" title="Submit Form">
+                        <a href="tel:+918910441949" class="phone_number index_style4">&nbsp;<i class="fa fa-phone index_style3"></i>&nbsp;8910441949</a>
                     </button>
                     <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hero_section">Get In Touch</span></button>
                     <button class="btn btn-secondary"><span id="View_Demo_text_hero_section">View Demo</span></button>
@@ -1665,7 +1747,7 @@
                 <h2><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
             </header>
             <div class="w3-container get-in-touch-settings">
-                <div class="w3-col m7 get-in-touch-settings" style="width: 100%;">
+                <div class="w3-col m7 get-in-touch-settings index_style5">
                     <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
                           onsubmit="close_modal(this)" method="get"
                           target="display-frame">
@@ -1704,7 +1786,7 @@
                             <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
                         </div>
                     </form>
-                    <iframe name="display-frame" style="width:0px;height:0px;border:0px solid white"></iframe>
+                    <iframe name="display-frame" class="index_style6"></iframe>
                 </div>
             </div>
             <footer class="w3-container w3-teal">
@@ -1721,9 +1803,8 @@
         </p>
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container" style="position:relative">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
-           style="position:absolute;top:-28px;right:24px">+</a>
+    <div class="w3-container index_style7">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
     </div>
 
 
@@ -1732,10 +1813,10 @@
     <!-- Services -->
     <section id="Services-section" class="w3-row-padding w3-container w3-padding-64">
 
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="index_style9">
             <h2 class="w3-wide"><u><span id="FEATURED_SERVICES_SECTION_HEADER">FEATURED SERVICES</span></u></h2><br />
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="index_style9">
             <h3 class="w3-opacity w3-center"><i><span id="FEATURED_SERVICES_SECTION_HEADER_DESCRIPTION">Highlighting Our Top Offerings Designed to Deliver Exceptional Value and Results.</span></i></h3><br>
         </div>
 
@@ -1833,7 +1914,7 @@
             </div>
 
 
-            <div style="width: 100%;" id="services-large-screen">
+            <div class="index_style10" id="services-large-screen">
                 <div class="services-cards-container-large-screen">
 
 
@@ -1931,26 +2012,25 @@
 
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container" style="position:relative">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
-           style="position:absolute;top:-28px;right:24px">+</a>
+    <div class="w3-container index_style7">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
     </div>
     <section id="Hire-us-section" class="w3-row-padding w3-container w3-padding-64">
         <!-- include all here: process, testimonials, strengths, portfolio -->
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="index_style9">
             <h2 class="w3-wide"><u><span id="WHY_HIRE_US_SECTION_HEADER_TEXT">WHY HIRE US?</span></u></h2><br />
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="index_style9">
             <h3 class="w3-opacity w3-center"><i><span id="WHY_HIRE_US_SECTION_DESCRIPTION_TEXT">Discover what makes us unique!</span></i></h3><br>
         </div>
         <div class="w3-padding-16 w3-xlarge">
-            <p style="text-align: justify;"><span id="WHY_HIRE_US_SECTION_INTRO_TEXT">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation.</span></p>
+            <p class="index_style17"><span id="WHY_HIRE_US_SECTION_INTRO_TEXT">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation.</span></p>
         </div>
 
-        <div class="w3-row w3-container w3-row-padding" style="margin:10px 0">
+        <div class="w3-row w3-container w3-row-padding index_style11">
             <div class="w3-half w3-container">
                 <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/client_centric_pricess.png" style="width:100%; cursor:pointer; border: 1px solid grey; border-top: none;" onclick="openProcessTour()">
+                    <img src="./w3images/client_centric_pricess.png" class="index_style12" onclick="openProcessTour()">
                     <h2><span id="WHY_HIRE_US_SECTION1_HEADING_TEXT">Hassle-free client process</span></h2>
                     <button class="take_interactive_tour_button" onclick="openProcessTour()">
                         🚀&nbsp;<span id="WHY_HIRE_US_SECTION1_BUTTON_TEXT">Take an Interactive Process Tour</span>
@@ -1963,7 +2043,7 @@
 
             <div class="w3-half w3-container">
                 <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/testimonials.png" style="width: 100%; cursor: pointer; border: 1px solid grey; border-top: none;" onclick="read_testimonials()">
+                    <img src="./w3images/testimonials.png" class="index_style12" onclick="read_testimonials()">
                     <h2><span id="WHY_HIRE_US_SECTION2_HEADING_TEXT">Testimonials</span></h2>
                     <button class="toggle_additional_feature_button" onclick="read_testimonials()">
                         🌟&nbsp;<span id="WHY_HIRE_US_SECTION2_BUTTON_TEXT">Read Testimonials</span>
@@ -1984,17 +2064,17 @@
                     <div class="w3-container modal-settings">
                         <div class="w3-row-padding w3-padding-16">
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-DrBhadanisDentalClinic.png" alt="Testimonials-DrBhadanisDentalClinic.png" style="width: 100%; border-bottom: 1px solid black; background-color: white;">
+                                <img src="./images/Testimonials-DrBhadanisDentalClinic.png" alt="Testimonials-DrBhadanisDentalClinic.png" class="index_style13">
                                 <div class="w3-container w3-white">
                                     <p><b>Dr. Bhadani's Dental Clinic, Kolkata, West Bengal, India</b></p>
                                     <br />
                                     <p class="w3-opacity">Wednesday July, 10, 2024</p>
-                                    <p style="font-size: 0.8125rem;">
+                                    <p class="index_style14">
                                         <span id="TESTIMONIAL_1_TEXT1">
                                             I collaborated with Saharsh Bhadani Venture Private Limited for logo design, website development, Google My Business setup, and data-driven business consultation. Their work exceeded my expectations. The in-depth analytics report offered actionable insights that helped me improve my work-life balance, minimize material waste, and optimize supply purchases based on usage patterns.
                                         </span>
                                     <p>
-                                    <p id="testimonial_read_content_p_1" style="font-size: 0.8125rem;">
+                                    <p id="testimonial_read_content_p_1" class="index_style14">
                                         <span id="TESTIMONIAL_1_TEXT2">
                                             They also delivered customized Excel-based inventory management software and a reliable patient appointment system, both of which have significantly improved the efficiency of my clinic. Their exceptional IT support has made me feel more organized and in control of my operations. I highly recommend Saharsh Bhadani Venture Private Limited to anyone seeking practical and comprehensive business solutions.
                                         </span>
@@ -2002,16 +2082,16 @@
                                 </div>
                             </div>
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-Olivia.png" alt="Olivia.png" style="width:100%; border-bottom: 1px solid black; background-color: white;">
+                                <img src="./images/Testimonials-Olivia.png" alt="Olivia.png" class="index_style13">
                                 <div class="w3-container w3-white">
                                     <p><b>Olivia (CEO - Olivia & Ava PrimePlanners, Hobart, Australia)</b><br /></p>
                                     <p class="w3-opacity">Saturday March, 29, 2025</p>
-                                    <p style="font-size: 0.8125rem;">
+                                    <p class="index_style14">
                                         <span id="TESTIMONIAL_2_TEXT1">
                                             I engaged Saharsh Bhadani Private Limited to design and develop a website for my event management company, Olivia & Ava PrimePlanners. I shared a clear vision and a strict one-month deadline—and they not only met it but delivered a website that surpassed my expectations in both design and functionality.
                                         </span>
                                     </p>
-                                    <p id="testimonial_read_content_p_2" style="font-size: 0.8125rem;">
+                                    <p id="testimonial_read_content_p_2" class="index_style14">
                                         <span id="TESTIMONIAL_2_TEXT2">
                                             The final product is visually striking, highly intuitive, and fully responsive across all devices, including smartphones, tablets, and desktops. What truly set them apart was their professionalism, transparent communication, and unwavering dedication to quality. Their commitment to excellence is exceptional, and I wholeheartedly recommend Saharsh Bhadani Private Limited to anyone in need of outstanding web development services.
                                         </span>
@@ -2020,17 +2100,17 @@
                                 </div>
                             </div>
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-JavierRamos.jpg" alt="JavierRamos.jpg" style="width: 100%; border-bottom: 1px solid black; background-color: white;">
+                                <img src="./images/Testimonials-JavierRamos.jpg" alt="JavierRamos.jpg" class="index_style13">
                                 <div class="w3-container w3-white">
                                     <p><b>Javier Ramos</b></p>
                                     <p><b>(Independent seller on Amazon)</b></p>
                                     <p class="w3-opacity">Monday March, 17, 2025</p>
-                                    <p style="font-size: 0.8125rem;">
+                                    <p class="index_style14">
                                         <span id="TESTIMONIAL_3_TEXT1">
                                             I had the opportunity to collaborate with Saharsh Bhadani Private Limited for my business analytics requirements, and I was genuinely impressed by their expertise. As an Amazon seller with over three years of experience, I was struggling with frequent order cancellations. After sharing two months of sales data, their team delivered in-depth, insightful reports that uncovered key patterns—such as product performance, regional trends, and recurring order issues—that I hadn’t previously identified.
                                         </span>
                                     </p>
-                                    <p id="testimonial_read_content_p_3" style="font-size: 0.8125rem;">
+                                    <p id="testimonial_read_content_p_3" class="index_style14">
                                         <span id="TESTIMONIAL_3_TEXT2">
                                             Their findings were not only precise but also actionable, helping me implement practical strategies that are already improving my business operations. I now feel more empowered to make informed, data-driven decisions and look forward to even better results. I highly recommend Saharsh Bhadani Private Limited to anyone seeking expert analytics and impactful business insights.
                                         </span>
@@ -2047,10 +2127,10 @@
         </div>
 
 
-        <div class="w3-row w3-container w3-row-padding" style="margin:10px 0">
+        <div class="w3-row w3-container w3-row-padding index_style11">
             <div class="w3-half w3-container">
                 <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/our_core_competencies.png" style="width:100%; cursor:pointer; border: 1px solid grey; border-top: none;" onclick="values_we_bring()">
+                    <img src="./w3images/our_core_competencies.png" class="index_style12" onclick="values_we_bring()">
                     <h2><span id="WHY_HIRE_US_SECTION3_HEADING_TEXT">Values We Bring to You</span></h2>
                     <button class="watch_featured_videos_button" onclick="values_we_bring()">
                         &nbsp;<span id="WHY_HIRE_US_SECTION3_BUTTON_TEXT">Learn More</span>
@@ -2069,8 +2149,8 @@
                         <h2><span id="CORE_COMPETENCIES_TEXT_1">Discover what makes us unique!</span></h2>
                     </header>
                     <div class="w3-container modal-settings">
-                        <h2 style="margin-bottom: 15px;">🤝 <span id="CORE_COMPETENCIES_TEXT_2">Why Businesses Trust Us</span></h2>
-                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                        <h2 class="index_style15">🤝 <span id="CORE_COMPETENCIES_TEXT_2">Why Businesses Trust Us</span></h2>
+                        <div class="w3-row w3-row-padding row-eq-height index_style15">
                             <div class="w3-third">
                                 <div class="why_choose_us_article">
                                     <h3>
@@ -2108,7 +2188,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                        <div class="w3-row w3-row-padding row-eq-height index_style15">
                             <div class="w3-third">
                                 <div class="why_choose_us_article">
                                     <h3>
@@ -2134,8 +2214,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h2 style="margin-bottom: 15px;">🌟 <span id="CORE_COMPETENCIES_TEXT_13">Our Core Competencies</span></h2><br />
-                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px;">
+                        <h2 class="index_style15">🌟 <span id="CORE_COMPETENCIES_TEXT_13">Our Core Competencies</span></h2><br />
+                        <div class="w3-row w3-row-padding row-eq-height index_style15">
                             <div class="w3-third">
                                 <div class="why_choose_us_article w3-card-4">
                                     <h3>
@@ -2171,7 +2251,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w3-row w3-row-padding row-eq-height" style="margin-bottom: 15px; ">
+                        <div class="w3-row w3-row-padding row-eq-height index_style15">
                             <div class="w3-third">
                                 <div class="why_choose_us_article w3-card-4">
                                     <h3>
@@ -2219,7 +2299,7 @@
 
             <div class="w3-half w3-container">
                 <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/portfolio_project.png" style="width: 100%; cursor: pointer; border: 1px solid grey; border-top: none;" onclick="view_our_project()">
+                    <img src="./w3images/portfolio_project.png" class="index_style12" onclick="view_our_project()">
                     <h2><span id="WHY_HIRE_US_SECTION4_HEADING_TEXT">Portfolio</span></h2>
                     <button class="take_interactive_tour_button" onclick="view_our_project()">
                         &nbsp;<span id="WHY_HIRE_US_SECTION4_BUTTON_TEXT">View our projects</span>
@@ -2232,9 +2312,8 @@
         </div>
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container" style="position:relative">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
-           style="position:absolute;top:-28px;right:24px">+</a>
+    <div class="w3-container index_style7">
+        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
     </div>
     <section id="contact-us" class="contact-us-settings">
         <div>
@@ -2245,7 +2324,7 @@
                             <p class="w3-xlarge"><span id="contact_details_ls_1">Contact details</span></p>
                         </li>
                         <li class="w3-padding-16">
-                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                            <div class="index_style18">
                                 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
                                 <span id="contact_details_ls_2">Landmark</span>: Near Lansdowne Market<br>
                                 <span id="contact_details_ls_3">WhatsApp & Phone no</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
@@ -2260,7 +2339,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="site_information_ls_1">Site Information</span></p>
                         </li>
-                        <li class="w3-padding-16" style="text-align: left;">
+                        <li class="w3-padding-16 index_style16">
                             <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_ls_2">Careers</span></u></a><br>
                             <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_ls_3">Frequently asked questions</span></u></a>&nbsp;|&nbsp;
                             <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_ls_4">Privacy Policy</span></u></a>
@@ -2281,7 +2360,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="quick_links_ls_1">Quick Links</span></p>
                         </li>
-                        <li class="w3-padding-16" style="text-align: left;">
+                        <li class="w3-padding-16 index_style16">
                             <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
                             <span id="quick_links_ls_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
                             <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br>
@@ -2338,7 +2417,7 @@
                             <p class="w3-xlarge"><span id="contact_details_m_1">Contact details</span></p>
                         </li>
                         <li class="w3-padding-16">
-                            <div style="text-align: left; text-align: justify;word-wrap: break-word;">
+                            <div class="index_style18">
                                 29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
                                 <span id="contact_details_m_2">WhatsApp & Phone</span> <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
                                 <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
@@ -2352,7 +2431,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="site_information_m_1">Site Information</span></p>
                         </li>
-                        <li class="w3-padding-16" style="text-align: left;">
+                        <li class="w3-padding-16 index_style16">
                             <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_m_2">Careers</span></u></a><br>
                             <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_m_3">Frequently asked questions</span></u></a><br>
                             <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_m_4">Policy</span></u></a><br>
@@ -2367,7 +2446,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="quick_links_m_1">Quick Links</span></p>
                         </li>
-                        <li class="w3-padding-16" style="text-align: left;">
+                        <li class="w3-padding-16 index_style16">
                             <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_m_3">WhatsApp</span></a><br>
                             <span id="quick_links_m_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
                             <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
@@ -2384,7 +2463,7 @@
             </div>
 
             <br />
-            <button style="margin-left: 10px;" class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
+            <button class="btn btn-primary get-in-touch-button-settings index_style19" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
         </div>
     </section>
     <!-- Footer -->
@@ -2407,7 +2486,7 @@
         <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
         <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
 
-        <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+        <div class="w3-tooltip w3-right index_style20">
             <span class="w3-text w3-padding w3-teal w3-hide-small" id="go_to_top_text_footer">Go To Top</span>
             <a class="w3-button goto-top-button" href="#home">
                 <span class="w3-xlarge">
