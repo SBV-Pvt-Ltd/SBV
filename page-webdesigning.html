@@ -623,16 +623,23 @@
             font-size: 0.9em;
             text-align: center;
         }
-
-
+        #myNavbar {
+            display: flex;
+            align-items: center;
+            height: 60px; /* match your navbar height */
+            padding: 0 1rem;
+        }
 
         .company-name {
-            font-family: Brush Script MT, cursive;
-            margin-top: -5px;
-            margin-left: 5px;
-            font-size: 1.4rem;
+            /* No padding-top here */
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
             color: var(--company-name-text);
-            overflow-x: clip;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            margin-left: 0.75rem;
+            flex: 1;
         }
 
         .loader {
