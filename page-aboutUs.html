@@ -22,8 +22,7 @@
           media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
     <!-- Fonts: Fraunces (display/editorial) + DM Sans (body) -->
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <!-- Structured Data -->
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Saharsh Bhadani Venture Private Limited","url":"https://www.saharshbhadani.com","logo":"https://saharshbhadani.com/Logo/Logo.png","description":"Indian IT consulting company providing AI, software development, analytics, and digital transformation services globally.","telephone":"+91-8910441949","address":{"@type":"PostalAddress","streetAddress":"29B/1F Bakul Bagan Row, Near Lansdowne Market","addressLocality":"Kolkata","addressRegion":"West Bengal","postalCode":"700025","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":"22.5400","longitude":"88.3500"},"sameAs":["https://www.youtube.com/@SaharshBhadaniVenture","https://x.com/SaharshBVenture","https://www.linkedin.com/company/saharsh-bhadani-venture-private-limited/","https://www.facebook.com/profile.php?id=61572408011368","https://www.instagram.com/saharshbhadaniventure/"],"contactPoint":{"@type":"ContactPoint","telephone":"+91-8910441949","contactType":"customer service","email":"saharshbhadaniventure@gmail.com","availableLanguage":["English","Hindi"]}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"AboutPage","name":"About Saharsh Bhadani Venture Private Limited","url":"https://www.saharshbhadani.com/page-aboutUs.html","description":"Learn about Saharsh Bhadani Venture, an AI-driven IT consulting and technology services company based in Kolkata, India."}</script>
@@ -1537,6 +1536,25 @@
             transition-delay: .4s;
         }
 
+        #myNavbar {
+            display: flex;
+            align-items: center;
+            height: 56px;
+            padding: 0 1rem;
+        }
+
+
+        .company-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--company-name-text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            margin-left: 0.75rem;
+            flex: 1;
+        }
+
         /* ============================================
            RESPONSIVE
         ============================================ */
@@ -1610,24 +1628,23 @@
 <body id="myPage">
 
 <!-- ===================== NAVBAR ===================== -->
-<nav class="navbar" id="mainNav">
-    <a class="nav-logo" onclick="navigateToIndex('#')" href="javascript:void(0)">
-        <img src="./Logo/Logo.png" alt="SBV Logo">
-        <span>SBV</span>
-    </a>
-    <div class="nav-links">
-        <a href="#story">Our Story</a>
-        <a href="#team">Team</a>
-        <a href="#why">Why Us</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#contact">Contact</a>
-        <a onclick="navigateToIndex('#')" href="javascript:void(0)">Home</a>
-    </div>
-    <button class="nav-cta" onclick="openGit()">Get In Touch</button>
-    <button class="nav-hamburger" id="hamburgerBtn" onclick="openDrawer()">
-        <i class="fa fa-bars"></i>
-    </button>
-</nav>
+    <nav class="navbar" id="mainNav">
+        <a href="./index.html#home" class="company-name">
+            Saharsh Bhadani Venture Pvt Ltd
+        </a>
+        <div class="nav-links">
+            <a href="#story">Our Story</a>
+            <a href="#team">Team</a>
+            <a href="#why">Why Us</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            <a onclick="navigateToIndex('#')" href="javascript:void(0)">Home</a>
+        </div>
+        <button class="nav-cta" onclick="openGit()">Get In Touch</button>
+        <button class="nav-hamburger" id="hamburgerBtn" onclick="openDrawer()">
+            <i class="fa fa-bars"></i>
+        </button>
+    </nav>
 
 <!-- ===================== DRAWER ===================== -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
