@@ -10,10 +10,9 @@
     <link rel="icon" type="image/x-icon" href="./Logo/Logo.png">
     <link rel="stylesheet" href="./css/w3.css">
     <link rel="stylesheet" href="./css/w3-theme-black.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></noscript>
     <link rel="canonical" href="https://saharshbhadani.com/">
     <meta name="robots" content="index, follow">
 
@@ -36,8 +35,8 @@
     <meta name="geo.placename" content="India" />
     <meta name="language" content="EN" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="Constant.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="Constant.js"></script>
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -124,8 +123,8 @@
 
     <style>
         /* =========================
-                    THEME VARIABLES
-                ========================= */
+           THEME VARIABLES
+        ========================= */
         :root {
             --bg-main: #0a0a0a;
             --bg-hero1: #0f0f23;
@@ -134,14 +133,14 @@
             --overlay2: rgba(26,26,46,.9);
             --overlay3: rgba(15,15,35,.95);
             --text-main: #FFFFFF;
-            --text-muted: #F8F8FF;
+            --text-muted: #94a3b8;
             --card-bg: rgba(255,255,255,.05);
             --card-border: rgba(255,255,255,.1);
             --accent1: #6366f1;
             --accent2: #8b5cf6;
             --theme-bg-img: linear-gradient(to bottom, #4B0082, #091F92);
             --logo-url: "./Logo/Logo_inverted.png";
-            --company-name-text: White;
+            --company-name-text: #ffffff;
             --services-card-bg: #1e293b;
             --primary-services-heading: #38bdf8;
             --services-card-border: #334155;
@@ -151,8 +150,9 @@
             --services-section-transition: 0.45s ease;
             --process-surface: #111827;
             --base-font-size: 16px;
+            --btn-radius: 50px;
+            --nav-height: 56px;
         }
-
 
         body[data-theme="light"] {
             --bg-main: #f8fafc;
@@ -168,7 +168,7 @@
             --accent1: #667eea;
             --accent2: #764ba2;
             --logo-url: "./Logo/Logo.png";
-            --company-name-text: black;
+            --company-name-text: #0f172a;
             --services-card-bg: #f1f5f9;
             --primary-services-heading: #2563eb;
             --services-card-border: #e2e8f0;
@@ -176,88 +176,137 @@
         }
 
         /* =========================
-                        BASE
-            ========================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-        }
+           BASE RESET
+        ========================= */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-size: var(--base-font-size);
-        }
-
-        body, button, .btn, .services-card-large-screen {
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px; /* baseline; overridden by JS inline style when user adjusts slider */
         }
 
         body {
-            font-family: 'Inter',sans-serif;
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+            font-size: 1rem;
             overflow-x: hidden;
             background: var(--bg-main);
             color: var(--text-main);
-            transition: background .3s,color .3s;
             background-image: var(--theme-bg-img);
+            transition: background .3s, color .3s;
         }
 
-            body.scrolling .particle {
-                animation-play-state: paused;
-            }
+        body.scrolling .particle { animation-play-state: paused; }
+        body.scrolling .mouse-follower { display: none; }
+        body.scrolling .mouse-follower,
+        body.scrolling .settings-overlay { filter: none; backdrop-filter: none; }
 
-            body.scrolling .mouse-follower {
-                display: none;
-            }
-
-            body.scrolling .mouse-follower,
-            body.scrolling .settings-overlay {
-                filter: none;
-                backdrop-filter: none;
-            }
-
-
-        .hero-bg,
-        .hero-overlay,
-        .particles,
-        .mouse-follower {
-            will-change: transform, opacity;
-        }
-
+        .hero-bg, .hero-overlay, .particles, .mouse-follower { will-change: transform, opacity; }
 
         /* =========================
-                        HERO
-                    ========================= */
+           TYPOGRAPHY
+        ========================= */
+        h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        .top-navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 500;
+            backdrop-filter: blur(0.1px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(10,10,35,0.75);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: background 0.3s;
+        }
+
+        body[data-theme="light"] .top-navbar {
+            background: rgba(248,250,252,0.0);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        #myNavbar {
+            display: flex;
+            align-items: center;
+            height: var(--nav-height);
+            padding: 0 1rem;
+        }
+
+        .company-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--company-name-text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+            margin-left: 0.75rem;
+            flex: 1;
+        }
+
+        .nav-action-btn {
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+        }
+        .nav-action-btn:hover { background: var(--card-bg); }
+
+        /* Sidebar */
+        .side-navbar {
+            display: none;
+            z-index: 600;
+            width: 280px;
+            min-width: 280px;
+            background: var(--bg-main);
+            border-right: 1px solid var(--card-border);
+        }
+
+        .side-navbar a {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.25rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--card-border);
+            transition: background 0.2s;
+        }
+        .side-navbar a:hover { background: var(--card-bg); }
+        .side-navbar a:first-child { font-weight: 700; justify-content: space-between; }
+
+        /* =========================
+           HERO
+        ========================= */
         .hero-container {
             position: relative;
             min-height: 100vh;
             overflow: hidden;
-            background: linear-gradient(135deg,var(--bg-hero1),var(--bg-hero2));
+            background: linear-gradient(135deg, var(--bg-hero1), var(--bg-hero2));
             width: 100%;
-            float: none;
-            clear: both;
         }
 
-        .hero-bg, .hero-overlay {
-            position: absolute;
-            inset: 0
-        }
+        .hero-bg, .hero-overlay { position: absolute; inset: 0; }
 
         .hero-bg {
             opacity: .15;
-            background: radial-gradient(circle at 30% 50%,rgba(99,102,241,.15),transparent 50%), radial-gradient(circle at 70% 50%,rgba(139,92,246,.15),transparent 50%);
+            background: radial-gradient(circle at 30% 50%,rgba(99,102,241,.15),transparent 50%),
+                        radial-gradient(circle at 70% 50%,rgba(139,92,246,.15),transparent 50%);
         }
 
         .hero-overlay {
             background: linear-gradient(135deg, var(--overlay1), var(--overlay2), var(--overlay3));
         }
 
-        .particles {
-            position: absolute;
-            inset: 0
-        }
+        .particles { position: absolute; inset: 0; }
 
         .particle {
             position: absolute;
@@ -265,55 +314,17 @@
             background: radial-gradient(circle,rgba(99,102,241,.6),transparent);
             animation: float 15s infinite ease-in-out;
         }
-
-            .particle:nth-child(1) {
-                width: 80px;
-                height: 80px;
-                top: 20%;
-                left: 10%
-            }
-
-            .particle:nth-child(2) {
-                width: 60px;
-                height: 60px;
-                top: 60%;
-                left: 80%
-            }
-
-            .particle:nth-child(3) {
-                width: 100px;
-                height: 100px;
-                top: 40%;
-                left: 60%
-            }
-
-            .particle:nth-child(4) {
-                width: 70px;
-                height: 70px;
-                top: 70%;
-                left: 20%
-            }
+        .particle:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; }
+        .particle:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; }
+        .particle:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 60%; }
+        .particle:nth-child(4) { width: 70px; height: 70px; top: 70%; left: 20%; }
 
         @keyframes float {
-            0%,100% {
-                transform: translate(0) scale(1);
-                opacity: .6
-            }
-
-            33% {
-                transform: translate(30px,-50px) scale(1.1);
-                opacity: .8
-            }
-
-            66% {
-                transform: translate(-20px,-30px) scale(.9);
-                opacity: .5
-            }
+            0%,100% { transform: translate(0) scale(1); opacity: .6; }
+            33% { transform: translate(30px,-50px) scale(1.1); opacity: .8; }
+            66% { transform: translate(-20px,-30px) scale(.9); opacity: .5; }
         }
 
-        /* =========================
-                        CONTENT
-                    ========================= */
         .hero-content {
             position: relative;
             z-index: 1;
@@ -324,6 +335,7 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
+            padding-top: calc(var(--nav-height) + 2rem);
         }
 
         .hero-badge {
@@ -333,468 +345,411 @@
             border: 1px solid rgba(99,102,241,.3);
             color: currentColor;
             margin-bottom: 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
         }
 
         .hero-title {
-            font-size: clamp(2.5rem,8vw,5rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg,var(--text-main),var(--accent1));
+            background: linear-gradient(135deg, var(--text-main), var(--accent1));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem,3vw,1.5rem);
+            font-size: clamp(1rem, 3vw, 1.25rem);
             color: var(--text-muted);
-            max-width: 700px;
+            max-width: 640px;
             margin-bottom: 3rem;
+            line-height: 1.7;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap
-        }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
 
+        /* =========================
+           BUTTONS — unified system
+        ========================= */
         .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.75rem 2rem;
+            border-radius: var(--btn-radius);
             font-weight: 600;
+            font-size: 0.95rem;
             border: none;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            letter-spacing: 0.01em;
         }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,.35); }
+        .btn:active { transform: translateY(0); }
 
         .btn-primary {
-            background: linear-gradient(135deg,var(--accent1),var(--accent2));
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
             color: #fff;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--card-border);
+        }
+        .btn-secondary:hover { border-color: var(--accent1); box-shadow: 0 8px 24px rgba(99,102,241,.2); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent1);
+            border: 2px solid var(--accent1);
+        }
+        .btn-outline:hover { background: var(--accent1); color: #fff; }
+
+        /* Legacy button classes — remapped to unified system */
+        .toggle_additional_feature_button,
+        .watch_featured_videos_button,
+        .take_interactive_tour_button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--btn-radius);
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 2px solid var(--accent1);
+            background: transparent;
+            color: var(--accent1);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .toggle_additional_feature_button:hover,
+        .watch_featured_videos_button:hover,
+        .take_interactive_tour_button:hover {
+            background: var(--accent1);
+            color: #fff;
+            transform: translateY(-2px);
         }
 
         .get-in-touch-button-settings {
             max-width: 175px;
+            margin-top: 0.5rem;
         }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        /* Phone button */
+        .phone-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: var(--btn-radius);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
             color: var(--text-main);
-            border: 2px solid rgba(255,255,255,.2);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
         }
+        .phone-btn {
+            border: 1px solid var(--card-border); /* was: rgba(255,255,255,0.25) */
+            color: var(--text-main); /* was: var(--text-main) — same but now reliable */
+            background: var(--card-bg); /* was: rgba(255,255,255,0.1) */
+        }
+        .phone-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
 
-        body[data-theme="light"] .btn-secondary {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            border: 2px solid rgba(0,0,0,.15);
-        }
-
-        .section-divider {
-            width: 100%;
-            height: 1px;
-            background: orange;
-            border: none;
-        }
         /* =========================
-                        STATS
-                    ========================= */
+           STATS
+        ========================= */
         .hero-stats {
             position: absolute;
             bottom: 5%;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 4rem;
+            gap: 2.5rem;
             z-index: 1;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .stat-item {
-            padding: 1.5rem;
-            border-radius: 20px;
+            padding: 1.25rem 1.75rem;
+            border-radius: 16px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             text-align: center;
+            backdrop-filter: blur(8px);
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
             font-weight: 800;
-            background: linear-gradient(135deg,var(--accent1),var(--accent2));
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
-        .stat-label {
-            font-size: .875rem;
-            color: var(--text-muted);
+        .stat-label { font-size: .85rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        /* =========================
+           SECTION DIVIDER
+        ========================= */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent1), transparent);
+            border: none;
+            opacity: 0.4;
         }
 
         /* =========================
-                        TOGGLE
-                ========================= */
+           THEME TOGGLE
+        ========================= */
         .theme-toggle {
-            padding: .6rem 1.2rem;
+            padding: .5rem 1.1rem;
             border-radius: 30px;
             background: var(--card-bg);
-            border: 1px solid black;
+            border: 1px solid var(--card-border);
             color: var(--text-main);
             cursor: pointer;
-            backdrop-filter: blur(4px);
-            font-size: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.2s;
         }
+        .theme-toggle:hover { background: var(--accent1); color: #fff; border-color: var(--accent1); }
 
-        /* ========================= */
+        /* =========================
+           NEURAL CANVAS
+        ========================= */
         #neural-canvas {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
+            z-index: 0;
             pointer-events: none;
+            opacity: 0.6;
         }
 
+        /* =========================
+           MOUSE FOLLOWER
+        ========================= */
         .mouse-follower {
             position: fixed;
             width: 20px;
             height: 20px;
+            background: radial-gradient(circle, rgba(99,102,241,0.6), transparent);
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(99,102,241,.6), transparent);
             pointer-events: none;
-            z-index: 10;
-            filter: blur(4px);
-            transition: transform 0.15s ease;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: left 0.1s, top 0.1s;
         }
 
-        .top-navbar {
-            z-index: 11;
-        }
-
-        .add-background {
-            background: var(--bg-main);
-        }
-
-        .side-navbar {
-            background: var(--bg-main);
-        }
-
-        .side-navbar-items {
-            font-size: 1em;
-            color: var(--text-main);
-            background: var(--bg-main);
-            cursor: pointer;
-        }
-
-        /* Settings */
-        .settings-button {
-            font-size: 1.5em;
-            transition: all 0.3s ease;
-        }
-
-            .settings-button:hover {
-                transform: scale(1.1) rotate(90deg);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            }
-
+        /* =========================
+           SETTINGS PANEL
+        ========================= */
         .settings-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 800;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s, visibility 0.3s;
         }
-
-            .settings-overlay.active {
-                opacity: 1;
-                visibility: visible;
-            }
+        .settings-overlay.active { opacity: 1; visibility: visible; }
 
         .settings-panel {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
+            transform: translate(-50%, -50%) scale(0.9);
             background: var(--bg-main);
             color: var(--text-main);
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            z-index: 100;
-            max-width: 400px;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+            border: 1px solid var(--card-border);
+            z-index: 900;
+            max-width: 420px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.68,-0.55,0.265,1.55);
+            transition: opacity 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), visibility 0.3s;
         }
-
-            .settings-panel.active {
-                opacity: 1;
-                visibility: visible;
-                transform: translate(-50%, -50%) scale(1);
-            }
+        .settings-panel.active { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
 
         .settings-close {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 14px; right: 18px;
             background: none;
             border: none;
-            font-size: 1.5em;
+            font-size: 1.4rem;
             cursor: pointer;
-            color: #999;
-            transition: color 0.3s ease;
+            color: var(--text-muted);
+            transition: color 0.2s, transform 0.2s;
+            line-height: 1;
         }
-
-            .settings-close:hover {
-                color: #667eea;
-                transform: rotate(90deg);
-            }
+        .settings-close:hover { color: var(--accent1); transform: rotate(90deg); }
 
         .settings-title {
-            margin-bottom: 25px;
-            font-size: 1.4em;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
             text-align: center;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent1);
+            padding-bottom: 0.75rem;
         }
 
-        .setting-group {
-            margin-bottom: 25px;
-        }
+        .setting-group { margin-bottom: 1.5rem; }
 
         .setting-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        select, input[type="range"] {
+        select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e5e9;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--card-border);
             border-radius: 10px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            background: white;
+            font-size: 0.95rem;
+            background: var(--card-bg);
+            color: var(--text-main);
+            transition: border-color 0.2s;
         }
-
-            select:focus {
-                outline: none;
-                border-color: #667eea;
-                box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-            }
+        select:focus { outline: none; border-color: var(--accent1); }
 
         input[type="range"] {
-            height: 40px;
+            width: 100%;
+            height: 6px;
             -webkit-appearance: none;
-            background: linear-gradient(to right, #667eea, #764ba2);
+            background: linear-gradient(to right, var(--accent1), var(--accent2));
             border-radius: 20px;
             cursor: pointer;
+            border: none;
+            padding: 0;
         }
-
-            input[type="range"]::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: white;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                cursor: pointer;
-            }
-
-            input[type="range"]::-moz-range-thumb {
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background: white;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                cursor: pointer;
-                border: none;
-            }
-
-        .color-options {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .color-option {
-            width: 100%;
-            height: 40px;
-            border: 3px solid transparent;
-            border-radius: 10px;
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
             cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            border: none;
         }
 
-            .color-option:hover {
-                transform: scale(1.05);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .color-option.active {
-                border-color: #333;
-                transform: scale(1.1);
-            }
-
-            .color-option::after {
-                content: '✓';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: white;
-                font-weight: bold;
-                font-size: 1rem;
-                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-
-            .color-option.active::after {
-                opacity: 1;
-            }
-
-
+        .color-options { margin-top: 0.5rem; }
 
         .text-size-display {
-            margin-top: 5px;
-            font-size: 0.9em;
+            margin-top: 0.4rem;
+            font-size: 0.85rem;
             text-align: center;
+            color: var(--text-muted);
         }
 
-        .company-name {
-            font-family: Brush Script MT, cursive;
-            margin-top: -5px;
-            margin-left: 5px;
-            font-size: 1.4rem;
-            color: var(--company-name-text);
-            overflow-x: clip;
-            text-decoration: none;
-        }
-
-        .phone_number:link, .phone_number:visited, .phone_number:hover, .phone_number:active {
-            cursor: pointer;
-            text-decoration: none; /* Optional: also removes the underline */
-        }
-
+        /* =========================
+           LOADER
+        ========================= */
         .loader {
             z-index: 99999;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            inset: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--bg-main);
             transition: opacity 0.75s, visibility 0.75s;
         }
-
-        .loader-hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
+        .loader-hidden { opacity: 0; visibility: hidden; }
         .loader::after {
             content: "";
-            width: 75px;
-            height: 75px;
-            border: 15px solid #dddddd;
-            border-top-color: #009688;
+            width: 48px; height: 48px;
+            border: 4px solid rgba(99,102,241,0.2);
+            border-top-color: var(--accent1);
             border-radius: 50%;
-            animation: loading 0.75s ease infinite;
+            animation: spin 0.75s linear infinite;
         }
+        @keyframes spin { to { transform: rotate(1turn); } }
 
-        @keyframes loading {
-            from {
-                transform: rotate(0turn);
-            }
-
-            to {
-                transform: rotate(1turn);
-            }
-        }
-        /* Style the tab */
-        .services-tab {
-            flex: 1;
-            margin-top: 15px;
-            float: left;
-            border: 1px solid #ccc;
-            width: 30%;
-        }
-
-            /* Style the buttons inside the tab */
-            .services-tab button {
-                display: block;
-                color: var(--text-muted);
-                padding: 22px 16px;
-                width: 100%;
-                border: none;
-                outline: none;
-                text-align: left;
-                cursor: pointer;
-                transition: 0.3s;
-                font-size: 1rem;
-            }
-
-                /* Change background color of buttons on hover */
-                .services-tab button:hover {
-                    color: var(--text-main);
-                }
-
-                /* Create an active/current "tab button" class */
-                .services-tab button.active {
-                    color: var(--text-main);
-                }
-
-        /* Style the tab content */
-        .services-tabcontent {
-            background: var(--bg-main);
-            flex: 1;
-            width: 70%;
-            float: left;
-            padding: 0px 12px;
-            border: 1px solid #ccc;
-            border-left: none;
-            overflow-y: scroll;
-        }
-
-        /* =====================
-            Service section
-        ====================== */
-        #Services-section {
-            background: var(--bg-main);
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
+        /* =========================
+           SEO INTRO SECTION
+        ========================= */
         #seo-intro {
             background: var(--bg-main);
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            padding: 3rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        #seo-intro h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+        #seo-intro p { color: var(--text-muted); line-height: 1.75; }
+
+        /* =========================
+           SERVICES SECTION
+        ========================= */
+        #Services-section {
+            background: var(--bg-main);
+            width: 100%;
+            padding: 4rem 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .section-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-intro-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            text-align: justify;
+            margin-bottom: 2rem;
         }
 
         .services-cards-container-large-screen {
-            margin: 5px auto;
-            padding: 12px;
+            margin: 8px auto;
+            padding: 8px;
             display: flex;
             width: 100%;
             height: var(--services-section-card-height);
             overflow: hidden;
+            gap: 6px;
         }
 
         /* Card base */
@@ -803,54 +758,34 @@
             height: 100%;
             background: var(--services-card-bg);
             border: 1px solid var(--services-card-border);
-            border-radius: 12px;
-            padding: 1px;
+            border-radius: 14px;
+            overflow: hidden;
             flex: 0 0 auto;
             transition: width var(--services-section-transition);
-            overflow: hidden;
         }
-
-            /* States */
-            .services-card-large-screen.active {
-                width: var(--services-section-expanded-width);
-                cursor: default;
-            }
-
-            .services-card-large-screen.collapsed {
-                width: var(--services-section-collapsed-width);
-                cursor: pointer;
-            }
-
-
-            .services-card-large-screen h2 {
-                margin-top: 0;
-                color: var(--primary-services-heading);
-            }
-
-            .services-card-large-screen p {
-                line-height: 1.6;
-            }
-
+        .services-card-large-screen.active { width: var(--services-section-expanded-width); cursor: default; }
+        .services-card-large-screen.collapsed { width: var(--services-section-collapsed-width); cursor: pointer; }
+        .services-card-large-screen h2 { margin-top: 0; color: var(--primary-services-heading); }
+        .services-card-large-screen p { line-height: 1.6; }
 
         /* Name strip */
         .services-card-name-large-screen {
             width: var(--services-section-collapsed-width);
-            min-width: 48px;
-            background: var(--bg-main);
+            min-width: 56px;
+            background: linear-gradient(180deg, var(--accent1), var(--accent2));
             display: flex;
             justify-content: center;
             align-items: center;
-            pointer-events: none; /* allow full card click */
-            margin-left: -10px;
+            pointer-events: none;
         }
-
-            .services-card-name-large-screen span {
-                writing-mode: vertical-rl;
-                transform: rotate(180deg);
-                letter-spacing: 2px;
-                font-weight: bold;
-                color: #38bdf8;
-            }
+        .services-card-name-large-screen span {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            letter-spacing: 3px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
 
         /* Content */
         .services-card-content-large-screen {
@@ -858,672 +793,526 @@
             padding: 20px;
             opacity: 0;
             transition: opacity 0.3s ease;
-            overflow-y: scroll
+            overflow-y: auto;
         }
+        .services-card-large-screen.active .services-card-content-large-screen { opacity: 1; }
+        .services-card-large-screen.collapsed .services-card-content-large-screen { width: 0%; }
 
-        .services-card-large-screen.active .services-card-content-large-screen {
-            opacity: 1;
+        #services-medium-scall-screen { display: none; }
+        #services-large-screen { display: block; width: 100%; }
+
+        /* =========================
+           LAZY IFRAMES
+        ========================= */
+        .lazy-iframe-wrapper {
+            position: relative;
+            width: 80%;
+            padding-top: 45%;
+            background: #0a0a0a;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            margin-bottom: 1rem;
         }
-
-        .services-card-large-screen.collapsed .services-card-content-large-screen {
-            width: 0%;
-        }
-
-        #services-medium-scall-screen {
-            display: none;
-        }
-
-        #services-large-screen {
-            display: block;
-        }
-
-        /* =====================
-            Hire us section
-        ====================== */
-        #Hire-us-section {
-            background: var(--bg-main);
+        .lazy-iframe-wrapper iframe {
+            position: absolute;
+            inset: 0;
             width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .lazy-iframe-thumb {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
             display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: background 0.2s;
         }
-
-        .row-eq-height {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
+        .lazy-iframe-thumb:hover { background: linear-gradient(135deg, #2d3f55, #1a2840); }
+        .lazy-iframe-thumb .play-icon {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            background: rgba(99,102,241,0.85);
             display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            transition: transform 0.2s;
+        }
+        .lazy-iframe-thumb:hover .play-icon { transform: scale(1.1); }
+        .lazy-iframe-thumb span { color: #94a3b8; font-size: 0.85rem; }
+        .lazy-iframe-wrapper.loaded .lazy-iframe-thumb { display: none; }
+
+        /* =========================
+           HIRE US SECTION
+        ========================= */
+        #Hire-us-section {
+            background: var(--bg-main);
+            padding: 4rem 1.5rem;
         }
 
+        /* Card grid for hire-us items */
+        .hire-us-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .hire-us-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .hire-us-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(99,102,241,.15); }
+
+        .hire-us-card img {
+            width: 100%;
+            aspect-ratio: 16/7;
+            object-fit: cover;
+            cursor: pointer;
+            display: block;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .hire-us-card-body {
+            padding: 1.25rem 1.5rem;
+        }
+        .hire-us-card-body h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+        .hire-us-card-body .btn-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Why choose us cards */
         .why_choose_us_article {
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
             height: 100%;
-            padding: 16px;
+            padding: 1.25rem;
             box-sizing: border-box;
-            border-radius: 1rem;
-            border: 6px solid #009688;
-            background: transparent;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            transition: border-color 0.2s, transform 0.2s;
         }
+        .why_choose_us_article:hover { border-color: var(--accent1); transform: translateY(-2px); }
+        .why_choose_us_article h3 { line-height: 1.2; margin: 0 0 0.5rem; font-size: 1rem; }
+        .why_choose_us_article p { margin: 0; color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; }
 
-            .why_choose_us_article h3 {
-                line-height: 1.1;
-                margin: 0;
-            }
+        .row-eq-height { display: flex; }
 
-            .why_choose_us_article p {
-                margin: 0.75rem 0 0;
-            }
-
-        .toggle_additional_feature_button {
-            background-color: #2e8b57;
-            color: #fff;
+        /* =========================
+           FLOATING MENU BUTTON
+        ========================= */
+        .floating-menu-btn {
+            position: absolute;
+            top: -22px;
+            right: 24px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-            .toggle_additional_feature_button:hover {
-                background-color: #246b45;
-            }
-
-        .watch_featured_videos_button {
-            margin-top: 5px;
-            background-color: #FF0000;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
             color: white;
-            font-size: 1rem;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-            .watch_featured_videos_button:hover {
-                background-color: #8B0000;
-            }
-
-        .take_interactive_tour_button {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 24px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 6px;
+            font-size: 1.4rem;
             cursor: pointer;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 10;
         }
+        .floating-menu-btn:hover { transform: rotate(45deg) scale(1.1); }
+        .floating-menu-anchor { position: relative; }
 
-            .take_interactive_tour_button:hover {
-                background-color: #00008B;
-            }
-        /* Modal Overlay */
+        /* =========================
+           PROCESS TOUR MODAL
+        ========================= */
         .process-modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: var(--bg-main);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
             z-index: 999;
-            animation: fadeIn 0.3s ease;
+        }
+        .process-modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-            .process-modal-overlay.active {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 20px;
-            }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Tour Modal */
         .process-tour-container {
-            background: var(--card-bg);
+            background: var(--bg-main);
+            border: 1px solid var(--card-border);
             border-radius: 20px;
-            max-width: 900px;
+            max-width: 860px;
             width: 100%;
             max-height: 90vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.4s ease;
+            animation: slideUp 0.35s ease;
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .process-tour-header {
             position: relative;
             background: linear-gradient(135deg, var(--accent1), var(--accent2));
             color: #fff;
-            padding: 30px;
+            padding: 1.75rem 2rem;
             text-align: center;
         }
-
         .process-close-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 16px; right: 16px;
+            background: rgba(255,255,255,.2);
             border: none;
             color: white;
-            width: 35px;
-            height: 35px;
+            width: 32px; height: 32px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.2s, transform 0.2s;
         }
+        .process-close-button:hover { background: rgba(255,255,255,.35); transform: rotate(90deg); }
+        .process-tour-header h2 { font-size: 1.5rem; margin-bottom: 0.4rem; }
+        .process-tour-header p { opacity: 0.88; font-size: 0.95rem; }
 
-            .process-close-button:hover {
-                background: rgba(255, 255, 255, 0.3);
-                transform: rotate(90deg);
-            }
-
-        .process-tour-header h2 {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .process-tour-header p {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        .process-progress-bar {
-            background: rgba(255, 255, 255, 0.2);
-            height: 6px;
-            margin-top: 20px;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .process-progress-fill {
-            background: white;
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s ease;
-        }
+        .process-progress-bar { background: rgba(255,255,255,.2); height: 5px; margin-top: 1.25rem; border-radius: 3px; overflow: hidden; }
+        .process-progress-fill { background: white; height: 100%; width: 0%; transition: width 0.4s ease; }
 
         .process-step-indicator {
             display: flex;
             justify-content: space-between;
-            padding: 50px 30px;
-            background: #f8f9fa;
+            padding: 1.5rem 2rem;
+            background: var(--process-surface);
             overflow-x: auto;
-            gap: 10px;
+            gap: 8px;
         }
 
         .process-step-dot {
-            width: 40px;
-            height: 40px;
+            width: 38px; height: 38px;
             border-radius: 50%;
-            background: #e0e0e0;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: #999;
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: all 0.3s ease;
             flex-shrink: 0;
+            transition: all 0.25s;
+            color: var(--text-muted);
         }
+        .process-step-dot.active { background: var(--accent1); border-color: var(--accent1); color: #fff; }
+        .process-step-dot.completed { background: #10b981; border-color: #10b981; color: #fff; }
 
-            .process-step-dot.active {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                transform: scale(1.1);
-            }
+        .process-content-area { padding: 2rem; overflow-y: auto; flex: 1; }
 
-            .process-step-dot.completed {
-                background: #10b981;
-                color: white;
-            }
-
-        .process-content-area {
-            padding: 40px;
-            color: var(--text-main);
-            overflow-y: auto;
-            flex: 1;
-        }
-
-
-        .process-step-content {
-            display: none;
-            animation: fadeInContent 0.5s ease;
-        }
-
-            .process-step-content.active {
-                display: block;
-            }
+        .process-step-content { display: none; animation: fadeInContent 0.3s ease; }
+        .process-step-content.active { display: block; }
 
         @keyframes fadeInContent {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .process-step-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 72px; height: 72px;
+            margin: 0 auto 1.25rem;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: 2rem;
         }
-
-        .process-step-title {
-            font-size: 24px;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        /* DETAILS */
-
-        .process-step-description {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        .process-step-title { font-size: 1.4rem; color: var(--text-main); margin-bottom: 0.75rem; text-align: center; }
+        .process-step-description { color: var(--text-muted); line-height: 1.75; text-align: center; margin-bottom: 1.25rem; }
 
         .process-step-details {
-            padding: 20px;
+            padding: 1.25rem;
             border-radius: 10px;
             background: var(--process-surface);
             border-left: 4px solid var(--accent1);
         }
-
-            .process-step-details h3 {
-                color: var(--accent1);
-                margin-bottom: 10px;
-                font-size: 18px;
-            }
-
-            .process-step-details ul {
-                list-style: none;
-                padding-left: 0;
-            }
-
-            .process-step-details li {
-                color: var(--text-muted);
-                padding: 8px 0;
-                position: relative;
-                padding-left: 25px;
-            }
-
-                .process-step-details li:before {
-                    content: "✓";
-                    position: absolute;
-                    left: 0;
-                    color: #10b981;
-                    font-weight: bold;
-                }
+        .process-step-details h3 { color: var(--accent1); margin-bottom: 0.6rem; font-size: 1rem; }
+        .process-step-details ul { list-style: none; }
+        .process-step-details li { color: var(--text-muted); padding: 6px 0 6px 22px; position: relative; font-size: 0.9rem; }
+        .process-step-details li::before { content: "✓"; position: absolute; left: 0; color: #10b981; font-weight: bold; }
 
         .process-navigation {
             display: flex;
             justify-content: space-between;
-            padding: 30px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .process-step-indicator,
-        .process-navigation {
+            align-items: center;
+            padding: 1.25rem 2rem;
             background: var(--process-surface);
+            border-top: 1px solid var(--card-border);
         }
+        .process-step-counter { text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
         .process-nav-button {
-            padding: 12px 30px;
+            padding: 0.6rem 1.5rem;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            transition: all 0.2s;
         }
+        .process-nav-button:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-prev { background: var(--card-bg); color: var(--accent1); border: 1px solid var(--accent1); }
+        .btn-prev:hover:not(:disabled) { background: var(--accent1); color: #fff; }
+        .btn-next { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: #fff; }
+        .btn-next:hover:not(:disabled) { opacity: 0.9; box-shadow: 0 6px 20px rgba(99,102,241,.4); }
 
-            .process-nav-button:disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-
-        .process-btn-prev {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-            .process-btn-prev:hover:not(:disabled) {
-                background: #667eea;
-                color: white;
-            }
-
-        .process-btn-next {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-            .process-btn-next:hover:not(:disabled) {
-                transform: translateX(5px);
-                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-            }
-
-        .process-step-counter {
-            text-align: center;
-            color: #999;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .modal-settings {
+        /* =========================
+           MODALS (w3 override)
+        ========================= */
+        .modal-settings, .contact-us-settings, .get-in-touch-settings {
             background: var(--bg-main);
             color: var(--text-muted);
         }
+        .modal-settings h2 { color: var(--text-main); }
 
-            .modal-settings h2 {
-                color: var(--text-main);
-            }
-
-        .contact-us-settings {
-            background: var(--bg-main);
-            color: var(--text-muted);
+        /* Get in Touch form */
+        .git-form-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+            margin-top: 0.25rem;
         }
+        .git-form-input:focus { outline: none; border-color: var(--accent1); }
+        .git-form-label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.1rem; }
+        .git-form-group { margin-bottom: 1rem; }
+        .git-form-buttons { display: flex; gap: 0.75rem; margin-top: 1.25rem; }
 
-        .get-in-touch-settings {
+        /* =========================
+           CONTACT SECTION
+        ========================= */
+        #contact-us {
             background: var(--bg-main);
-            color: var(--text-muted);
+            padding: 4rem 1.5rem;
         }
+        #contact-us ul { list-style: none; }
+        #contact-us a { color: var(--accent1); text-decoration: none; }
+        #contact-us a:hover { text-decoration: underline; }
 
-        .goto-top-button {
-            background: var(--bg-main);
-            color: var(--text-muted);
-        }
-
+        /* =========================
+           FOOTER
+        ========================= */
         #footer {
             background: var(--bg-main);
             color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+            padding: 2rem 1.5rem;
+        }
+        .footer_link { cursor: pointer; text-decoration: underline; color: var(--accent1); }
+        .goto-top-button {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.45);
+            z-index: 400;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+            transform: translateY(8px);
+        }
+        .goto-top-button.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .goto-top-button:hover {
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.6);
+            transform: translateY(-2px);
         }
 
-        .footer_link {
-            cursor: pointer;
-            text-decoration: underline;
-        }
-        /* ========================
-
-        ======================== */
+        /* =========================
+           RESPONSIVE
+        ========================= */
         @media (max-width: 1024px) {
-            .hero-container {
-            }
-
-            #neural-canvas {
-                top: 45%;
-                transform: translate(-50%, -40%);
-            }
+            #neural-canvas { top: 45%; transform: translate(-50%, -40%); }
         }
 
         @media (max-width: 768px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: 1rem;
-                bottom: 2%;
-            }
+            .hero-stats { flex-direction: column; gap: 0.75rem; bottom: 2%; }
+            .hero-buttons { flex-direction: column; width: 100%; align-items: center; }
+            .btn { width: 100%; max-width: 240px; }
+            #services-large-screen { display: none; }
+            #services-medium-scall-screen { display: block; }
 
-            .hero-buttons {
-                flex-direction: column;
+.services-cards-container-medium-small-screen {
                 width: 100%;
-            }
-
-            .btn {
-                align-self: center;
-                width: 100%;
-                max-width: 180px;
-            }
-
-            #services-large-screen {
-                display: none;
-            }
-
-            #services-medium-scall-screen {
-                display: block;
-            }
-            /* =====================
-                    THEME VARIABLES
-                ====================== */
-            :root {
-                --services-section-collapsed-height: 60px;
-                --services-section-expanded-height: 500px;
-            }
-
-            /* =====================
-                    CONTAINER
-                ====================== */
-            .services-cards-container-medium-small-screen {
-                width: 100%;
-                max-width: 1fr;
-                margin: 20px auto;
-                padding: 10px;
+                margin: 16px auto;
+                padding: 0;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
             }
 
-            /* =====================
-                    CARD
-                ====================== */
             .services-card-medium-small-screen {
                 width: 100%;
                 background: var(--services-card-bg);
                 border: 1px solid var(--services-card-border);
                 border-radius: 12px;
                 overflow: hidden;
-                transition: height var(--services-section-transition);
+                transition: box-shadow 0.2s;
                 cursor: pointer;
             }
+            .services-card-medium-small-screen:hover {
+                box-shadow: 0 4px 20px rgba(99,102,241,0.15);
+            }
 
-                .services-card-medium-small-screen.active {
-                    height: var(--services-section-expanded-height);
-                    cursor: default;
-                }
+            /* Remove fixed heights — let content breathe */
+            .services-card-medium-small-screen.active { cursor: default; }
+            .services-card-medium-small-screen.collapsed { cursor: pointer; }
+            .services-card-medium-small-screen.collapsed .services-card-content-medium-small-screen {
+                display: none;
+            }
 
-                .services-card-medium-small-screen.collapsed {
-                    height: var(--services-section-collapsed-height);
-                }
-
-            /* =====================
-                    CARD HEADER (TITLE STRIP)
-                ====================== */
             .services-card-name-medium-small-screen {
                 width: 100%;
-                height: var(--services-section-collapsed-height);
+                min-height: 52px;
                 display: flex;
                 align-items: center;
-                padding: 0 20px;
-                background: var(--bg-main);
-                font-weight: bold;
-                letter-spacing: 1px;
+                justify-content: space-between;
+                padding: 0 1.25rem;
+                background: linear-gradient(90deg, var(--accent1), var(--accent2));
+                font-weight: 700;
+                font-size: 0.875rem;
+                color: #fff;
+                letter-spacing: 0.05em;
+                user-select: none;
+            }
+            .services-card-name-medium-small-screen::after {
+                content: '﹀';
+                font-size: 1rem;
+                transition: transform 0.3s;
+                flex-shrink: 0;
+            }
+            .services-card-medium-small-screen.active .services-card-name-medium-small-screen::after {
+                transform: rotate(180deg);
             }
 
-            /* =====================
-                    CONTENT
-                ====================== */
             .services-card-content-medium-small-screen {
-                overflow-y: scroll;
-                padding: 20px;
-                opacity: 0;
-                transition: opacity 0.3s ease;
+                padding: 1.25rem;
+                animation: fadeInContent 0.25s ease;
             }
-
-            .services-card-medium-small-screen.active .services-card-content-medium-small-screen {
-                opacity: 1;
-            }
-
             .services-card-medium-small-screen h2 {
                 color: var(--primary-services-heading);
-                margin-bottom: 10px;
+                margin-bottom: 0.75rem;
+                font-size: 1rem;
+            }
+            .services-card-medium-small-screen p { line-height: 1.6; color: var(--text-main); }
+
+            /* Compact video wrapper for mobile */
+            .services-card-content-medium-small-screen .lazy-iframe-wrapper {
+                width: 100%;
+                padding-top: 56.25%; /* 16:9 */
+                margin-bottom: 1rem;
             }
 
-            .services-card-medium-small-screen p {
-                line-height: 1.6;
-                color: var(--text-main);
+            /* Visit page link styled as subtle button */
+            .svc-visit-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                margin-top: 0.5rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                border: 1px solid var(--accent1);
+                color: var(--accent1);
+                font-size: 0.875rem;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background 0.2s, color 0.2s;
             }
+            .svc-visit-link:hover { background: var(--accent1); color: #fff; }
 
-            .process-tour-container {
-                max-height: 95vh;
-            }
-
-            .process-content-area {
-                padding: 20px;
-            }
-
-            .process-tour-header {
-                padding: 20px;
-            }
-
-            .process-step-indicator {
-                padding: 15px 20px;
-            }
-
-            .process-navigation {
-                padding: 20px;
-            }
+            .hire-us-grid { grid-template-columns: 1fr; }
+            .process-tour-container { max-height: 95vh; }
+            .process-content-area { padding: 1.25rem; }
+            .process-tour-header { padding: 1.25rem; }
+            .process-step-indicator { padding: 0.75rem 1rem; }
+            .process-navigation { padding: 1rem; }
         }
 
         @media (max-width: 600px) {
-            .row-eq-height {
-                display: block;
-                width: 100%;
-            }
-
-            .get-in-touch-button-settings {
-                margin-bottom: 5px;
-            }
+            .row-eq-height { display: block; width: 100%; }
+            .get-in-touch-button-settings { margin-bottom: 0.4rem; }
         }
 
         @media (max-width: 360px) {
-            .company-name {
-                font-size: 0.75rem;
-            }
-        }
-    </style>
-    <style type="text/css">
-        .index_style1 {
-            display: none;
-            z-index: 10;
-            width: 40%;
-            min-width: 300px;
-        }
-        .index_style2 {
-            border-radius: 25px;
-            font-size: 0.9375rem;
-        }
-        .index_style3 {
-            color: white;
-        }
-        .index_style4 {
-            text-decoration: none;
-        }
-        .index_style5 {
-            width: 100% !important;
-        }
-        .index_style6 {
-            width: 0px !important;
-            height: 0px !important;
-            border: 0px solid white !important;
-        }
-        .index_style7 {
-            position: relative;
-        }
-        .index_style8 {
-            position: absolute;
-            top: -28px;
-            right: 24px;
-        }
-        .index_style9 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .index_style10 {
-            width: 100% !important;
-        }
-        .index_style11 {
-            margin: 10px 0;
-        }
-        .index_style12 {
-            width: 100%;
-            cursor: pointer;
-            border: 1px solid grey;
-            border-top: none;
-        }
-        .index_style13 {
-            width: 100%;
-            border-bottom: 1px solid black;
-            background-color: white;
-        }
-        .index_style14 {
-            font-size: 0.8125rem;
-        }
-        .index_style15 {
-            margin-bottom: 15px;
-        }
-        .index_style16 {
-            text-align: left;
-        }
-        .index_style17 {
-            text-align: justify;
-        }
-        .index_style18 {
-            text-align: left;
-            text-align: justify;
-            word-wrap: break-word;
-        }
-        .index_style19 {
-            margin-left: 10px;
-        }
-        .index_style20 {
-            position: relative;
-            bottom: 100px;
-            z-index: 1;
+            .company-name { font-size: 0.9rem; }
         }
 
+        /* =========================
+           UTILITY CLASSES (replaces index_style1–20)
+        ========================= */
+        .u-hidden { display: none !important; }
+        .u-sidebar { display: none; z-index: 600; width: 40%; min-width: 300px; }
+        .u-invis-iframe { width: 0 !important; height: 0 !important; border: none !important; }
+        .u-full-width { width: 100% !important; }
+        .u-center { display: flex; justify-content: center; align-items: center; }
+        .u-margin-sm { margin: 10px 0; }
+        .u-img-clickable { width: 100%; cursor: pointer; border: 1px solid var(--card-border); border-top: none; border-radius: 0 0 8px 8px; }
+        .u-testimonial-img { width: 100%; background-color: white; border-radius: 8px 8px 0 0; }
+        .u-text-sm { font-size: 0.8125rem; }
+        .u-mb { margin-bottom: 15px; }
+        .u-text-left { text-align: left; }
+        .u-text-justify { text-align: justify; word-wrap: break-word; }
+        .u-ml { margin-left: 10px; }
+
+        /* Slide in/out alert */
+        @keyframes slideInAlert {
+            from { transform: translateX(120%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutAlert {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(120%); opacity: 0; }
+        }
+
+        /* Fade transition */
+        body.fade-transition { transition: opacity 0.15s; }
+        body.fade-transition.show { opacity: 1; }
     </style>
     <script type="text/javascript">
         function delay(ms) {
@@ -1608,59 +1397,38 @@
     <div class="loader"></div>
 
     <header>
-        <!-- Navbar (sit on top) -->
-        <div class="w3-top top-navbar">
-            <div class="w3-bar" id="myNavbar">
-                <a class="w3-margin-left w3-xlarge w3-buttons w3-left">
-                    <i class="fa fa-bars side-navbar-items" onclick="w3_open()"></i>
-                </a>
+        <!-- Navbar -->
+        <div class="top-navbar">
+            <div id="myNavbar">
+                <button class="nav-action-btn" onclick="w3_open()" aria-label="Open menu">
+                    <i class="fa fa-bars"></i>
+                </button>
                 <a href="./index.html#home" class="company-name">
                     Saharsh Bhadani Venture Pvt Ltd
                 </a>
-                <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" title="Settings">
-                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
-                </a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red" href="javascript:void(0);">
-                    <i class="fa fa-gear settings-button" id="settingsBtn" onclick="openSettings()"></i>
-                </a>
-                <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-hover-red">
-                    <i class="fa fa-search"></i>
-                </a>
+                <button class="nav-action-btn" onclick="openSettings()" id="settingsBtn" aria-label="Settings">
+                    <i class="fa fa-gear"></i>
+                </button>
             </div>
-            <!-- Sidebar (hidden by default) -->
-            <nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left side-navbar index_style1" id="mySidebar">
-                <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">
+            <!-- Sidebar -->
+            <nav class="side-navbar" id="mySidebar">
+                <a href="javascript:void(0)" onclick="w3_close()">
                     <span id="close_menu_button">Close Menu</span>
-                    <span class="w3-right w3-hover-red"><b>&nbsp;x&nbsp;</b></span>
+                    <b>✕</b>
                 </a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-business_analytics.html">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-AI-ML.html">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-it-consultation.html">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-graphics_design.html">🎨 <span id="Graphics_Designing_text">Graphics Designing</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-webdesigning.html">🌐 <span id="Website_Designing_text">Website Designing</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-mobile-app-development.html">📲 <span id="App_Development_text">App Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-software-development.html">💻 <span id="Software_Development_text">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text">CONTACT</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-aboutUs.html"><i class="fa fa-user"></i> <span id="About_Us_text">About Us</span></a>
+                <a href="./index.html#home" onclick="w3_close()">🏠 <span id="home_text">HOME</span></a>
+                <a href="./index.html#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text">Featured Service</span></a>
+                <a href="./page-business_analytics.html">📊 <span id="Business_Analytics_text">Business Analytics</span></a>
+                <a href="./page-AI-ML.html">🤖 <span id="AI_Machine_Learning_text">AI & Machine Learning</span></a>
+                <a href="./page-it-consultation.html">🧑‍💻 <span id="IT_Consultation_text">IT Consultation</span></a>
+                <a href="./page-graphics_design.html">🎨 <span id="Graphics_Designing_text">Graphics Designing</span></a>
+                <a href="./page-webdesigning.html">🌐 <span id="Website_Designing_text">Website Designing</span></a>
+                <a href="./page-mobile-app-development.html">📲 <span id="App_Development_text">App Development</span></a>
+                <a href="./page-software-development.html">💻 <span id="Software_Development_text">Software Development</span></a>
+                <a href="./index.html#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text">WHY HIRE US?</span></a>
+                <a href="./index.html#contact-us" onclick="w3_close()">✉️ <span id="CONTACT_text">CONTACT</span></a>
+                <a href="./page-aboutUs.html">👤 <span id="About_Us_text">About Us</span></a>
             </nav>
-            <!-- Navbar on small screens -->
-            <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#home" onclick="w3_close()"><i class="fa fa-home"></i> <span id="home_text1">HOME</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#Services-section" onclick="w3_close()">🛠️ <span id="Featured_service_text1">Featured Service</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-business_analytics.html">📊 <span id="Business_Analytics_text1">Business Analytics</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-AI-ML.html">🤖 <span id="AI_Machine_Learning_text1">AI & Machine Learning</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-it-consultation.html">🧑‍💻 <span id="IT_Consultation_text1">IT Consultation</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-graphics_design.html">🎨 <span id="Graphics_Designing_text1">Graphics Designing</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-webdesigning.html">🌐 <span id="Website_Designing_text1">Website Designing</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-mobile-app-development.html">📲 <span id="App_Development_text1">App Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-software-development.html">💻 <span id="Software_Development_text1">Software Development</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#Hire-us-section" onclick="w3_close()">🤝 <span id="WHY_HIRE_US_text1">WHY HIRE US?</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./index.html#contact-us" onclick="w3_close()"><i class="fa fa-envelope"></i> <span id="CONTACT_text1">CONTACT</span></a>
-                <a class="w3-bar-item w3-button side-navbar-items" href="./page-aboutUs.html"><i class="fa fa-user"></i> <span id="About_Us_text1">About Us</span></a>
-            </div>
         </div>
         <div class="hero-container" id="home">
             <div class="hero-bg"></div>
@@ -1683,9 +1451,9 @@
                 </p>
 
                 <div class="hero-buttons">
-                    <button class="w3-theme w3-hover-teal btn index_style2" title="Submit Form">
-                        <a href="tel:+918910441949" class="phone_number index_style4">&nbsp;<i class="fa fa-phone index_style3"></i>&nbsp;8910441949</a>
-                    </button>
+                    <a href="tel:+918910441949" class="phone-btn">
+                        <i class="fa fa-phone"></i>&nbsp;<span>8910441949</span>
+                    </a>
                     <button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hero_section">Get In Touch</span></button>
                     <button class="btn btn-secondary"><span id="View_Demo_text_hero_section">View Demo</span></button>
                 </div>
@@ -1742,83 +1510,81 @@
     <!-- Get in Touch Modal -->
     <div id="id03" class="w3-modal">
         <div class="w3-modal-content w3-card-4 w3-animate-top">
-            <header class="w3-container w3-teal w3-display-container">
+            <header class="w3-container w3-display-container" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:1.25rem 1.5rem;">
                 <span onclick="document.getElementById('id03').style.display='none'"
-                      class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
-                <h2><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
+                      class="w3-button w3-display-topright" style="background:rgba(255,255,255,0.2);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">✕</span>
+                <h2 style="color:white;font-size:1.1rem;"><span id="get_in_touch_modal_header">Please provide your details and we will contact you soon.</span></h2>
             </header>
             <div class="w3-container get-in-touch-settings">
-                <div class="w3-col m7 get-in-touch-settings index_style5">
-                    <form class="form_leads w3-container w3-card-4 w3-padding-16 get-in-touch-settings"
-                          onsubmit="close_modal(this)" method="get"
-                          target="display-frame">
+                <div class="get-in-touch-settings" style="width:100%;padding:1.25rem 1.5rem">
+                    <form class="form_leads" onsubmit="close_modal(this)" method="get" target="display-frame">
                         <input type="hidden" value="SAVE_LEADS" name="query">
                         <input type="hidden" value="leads_form" name="module">
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_name_label">Name</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Name" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_name_label">Name</span></label>
+                            <input class="git-form-input" type="text" name="Name" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_email_label">Email</span></label>
-                            <input class="w3-input get-in-touch-settings" type="email" name="Email" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_email_label">Email</span></label>
+                            <input class="git-form-input" type="email" name="Email" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_country_label">Country</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Country" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_country_label">Country</span></label>
+                            <input class="git-form-input" type="text" name="Country" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
-                            <input class="w3-input get-in-touch-settings" type="number" name="PhoneNumber" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
+                            <input class="git-form-input" type="number" name="PhoneNumber" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="CompanyName" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
+                            <input class="git-form-input" type="text" name="CompanyName" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="interestedIn" required>
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
+                            <input class="git-form-input" type="text" name="interestedIn" required>
                         </div>
-                        <div class="w3-section">
-                            <label><span id="get_in_touch_modal_remarks_label">Remarks (if any)</span></label>
-                            <input class="w3-input get-in-touch-settings" type="text" name="Message">
+                        <div class="git-form-group">
+                            <label class="git-form-label"><span id="get_in_touch_modal_remarks_label">Remarks (if any)</span></label>
+                            <input class="git-form-input" type="text" name="Message">
                         </div>
-                        <div class="w3-row">
-                            <button type="reset" class="w3-red w3-button w3-right"><span id="clear_button_text_get_in_touch">Clear</span></button>
-                            <button type="submit" class="w3-button w3-left-align w3-teal"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                        <div class="git-form-buttons">
+                            <button type="submit" class="btn btn-primary"><span id="submit_button_text_get_in_touch">Submit</span></button>
+                            <button type="reset" class="btn btn-secondary"><span id="clear_button_text_get_in_touch">Clear</span></button>
                         </div>
                     </form>
-                    <iframe name="display-frame" class="index_style6"></iframe>
+                    <iframe name="display-frame" class="u-invis-iframe"></iframe>
                 </div>
             </div>
-            <footer class="w3-container w3-teal">
-                <p id="modal_footer_message">&nbsp;</p>
+            <footer style="padding:0.75rem 1.5rem;border-top:1px solid var(--card-border);">
+                <p id="modal_footer_message" style="margin:0;color:var(--text-muted);font-size:0.85rem;">&nbsp;</p>
             </footer>
         </div>
     </div>
-    <section id="seo-intro" class="w3-row-padding w3-container w3-padding-64">
+    <section>
+    <div id="seo-intro">
         <h2><span id="index_seo_1">AI & IT Consulting Company in India</span></h2>
         <p>
             <span id="index_seo_2">
                 Saharsh Bhadani Venture Pvt. Ltd. is a technology consulting company specializing in Artificial Intelligence, Machine Learning, Business Analytics, Software Development, and Digital Transformation for startups and enterprises.
             </span>
         </p>
+    </div>
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container index_style7">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
+    <div class="w3-container floating-menu-anchor">
+        <a onclick="w3_open()" class="floating-menu-btn">+</a>
     </div>
 
 
 
 
     <!-- Services -->
-    <section id="Services-section" class="w3-row-padding w3-container w3-padding-64">
+    <section id="Services-section">
 
-        <div class="index_style9">
-            <h2 class="w3-wide"><u><span id="FEATURED_SERVICES_SECTION_HEADER">FEATURED SERVICES</span></u></h2><br />
-        </div>
-        <div class="index_style9">
-            <h3 class="w3-opacity w3-center"><i><span id="FEATURED_SERVICES_SECTION_HEADER_DESCRIPTION">Highlighting Our Top Offerings Designed to Deliver Exceptional Value and Results.</span></i></h3><br>
+        <div class="section-header">
+            <h2><span id="FEATURED_SERVICES_SECTION_HEADER">FEATURED SERVICES</span></h2>
+            <p><span id="FEATURED_SERVICES_SECTION_HEADER_DESCRIPTION">Highlighting Our Top Offerings Designed to Deliver Exceptional Value and Results.</span></p>
         </div>
 
         <div class="w3-padding-16 w3-xlarge">
@@ -1828,11 +1594,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="BUSINESS_ANALYTICS_CARD_HEADER">BUSINESS ANALYTICS</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT">BUSINESS ANALYTICS</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/9fFQA-JOXA0?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(business_analytics_page)"><u><span id="visit_business_analytics_text">Visit our Business Analytics section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, '9fFQA-JOXA0')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(business_analytics_page)" class="svc-visit-link"><span id="visit_business_analytics_text">→ Visit Business Analytics</span></a>
                     </div>
                 </div>
 
@@ -1840,11 +1608,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="AI_MACHINE_LEARNING_CARD_HEADER">AI & MACHINE LEARNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT">AI & MACHINE LEARNING</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/qYNweeDHiyU?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(ai_ml_page)"><u><span id="visit_ai_ml_page_text">Visit our AI & Machine Learning section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'qYNweeDHiyU')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(ai_ml_page)" class="svc-visit-link"><span id="visit_ai_ml_page_text">→ Visit AI & Machine Learning</span></a>
 
                     </div>
                 </div>
@@ -1853,11 +1623,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="IT_CONSULTATION_CARD_HEADER">IT CONSULTATION</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="IT_CONSULTATION_CARD_HEADER_TEXT">IT CONSULTATION</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/Rp7Cx8ZH7Zs?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(it_consultation_page)"><u><span id="visit_it_consultation_page_text">Visit our IT Consultation section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Rp7Cx8ZH7Zs')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(it_consultation_page)" class="svc-visit-link"><span id="visit_it_consultation_page_text">→ Visit IT Consultation</span></a>
 
                     </div>
                 </div>
@@ -1866,11 +1638,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="GRAPHIC_DESIGNING_CARD_HEADER">GRAPHICS DESIGNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT">GRAPHICS DESIGNING</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/m0gAHqYqI1g?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_graphic_designing_page_text">Visit our Graphic Designing section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'm0gAHqYqI1g')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(graphics_designing_page)" class="svc-visit-link"><span id="visit_graphic_designing_page_text">→ Visit Graphic Designing</span></a>
 
                     </div>
                 </div>
@@ -1879,11 +1653,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="WEBSITE_DESIGNING_CARD_HEADER">WEBSITE DESIGNING</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="WEBSITE_DESIGNING_CARD_HEADER_TEXT">WEBSITE DESIGNING</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/wdjSAXXciMc?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_website_designing_page_text">Visit our Website Designing section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'wdjSAXXciMc')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(graphics_designing_page)" class="svc-visit-link"><span id="visit_website_designing_page_text">→ Visit Website Designing</span></a>
 
                     </div>
                 </div>
@@ -1892,11 +1668,13 @@
                     <div class="services-card-name-medium-small-screen"><span id="APP_DEVELOPMENT_CARD_HEADER">APP DEVELOPMENT</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="APP_DEVELOPMENT_CARD_HEADER_TEXT">APP DEVELOPMENT</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/Sfpcl4FX3TU?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(app_development_page)"><u><span id="visit_app_development_page_text">Visit our App Development section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Sfpcl4FX3TU')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(app_development_page)" class="svc-visit-link"><span id="visit_app_development_page_text">→ Visit App Development</span></a>
 
                     </div>
                 </div>
@@ -1904,18 +1682,20 @@
                     <div class="services-card-name-medium-small-screen"><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER">SOFTWARE DEVELOPMENT</span></div>
                     <div class="services-card-content-medium-small-screen">
                         <h2><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT">SOFTWARE DEVELOPMENT</span></h2>
-                        <iframe width="80%" height="80%"
-                                src="https://www.youtube.com/embed/pquPUX1EihM?autoplay=1&mute=1" allowfullscreen>
-                        </iframe>
-                        <br />
-                        <a onclick="navigateToPage(software_development_page)"><u><span id="visit_software_development_page_text">Visit our Software Development section for more details.</span></u></a>
+                        <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'pquPUX1EihM')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
+                        <a onclick="navigateToPage(software_development_page)" class="svc-visit-link"><span id="visit_software_development_page_text">→ Visit Software Development</span></a>
 
                     </div>
                 </div>
             </div>
 
 
-            <div class="index_style10" id="services-large-screen">
+            <div class="u-full-width" id="services-large-screen">
                 <div class="services-cards-container-large-screen">
 
 
@@ -1923,9 +1703,12 @@
                         <div class="services-card-name-large-screen"><span id="BUSINESS_ANALYTICS_CARD_HEADER1">BUSINESS ANALYTICS</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT1">BUSINESS ANALYTICS</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/9fFQA-JOXA0?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, '9fFQA-JOXA0')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(business_analytics_page)"><u><span id="visit_business_analytics_text1">Visit our Business Analytics section for more details.</span></u></a>
                         </div>
@@ -1935,9 +1718,12 @@
                         <div class="services-card-name-large-screen"><span id="AI_MACHINE_LEARNING_CARD_HEADER1">AI & MACHINE LEARNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT1">AI & MACHINE LEARNING</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/qYNweeDHiyU?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'qYNweeDHiyU')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(ai_ml_page)"><u><span id="visit_ai_ml_page_text1">Visit our AI & Machine Learning section for more details.</span></u></a>
                         </div>
@@ -1947,9 +1733,12 @@
                         <div class="services-card-name-large-screen"><span id="IT_CONSULTATION_CARD_HEADER1">IT CONSULTATION</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="IT_CONSULTATION_CARD_HEADER_TEXT1">IT CONSULTATION</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/Rp7Cx8ZH7Zs?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Rp7Cx8ZH7Zs')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(it_consultation_page)"><u><span id="visit_it_consultation_page_text1">Visit our IT Consultation section for more details.</span></u></a>
 
@@ -1960,9 +1749,12 @@
                         <div class="services-card-name-large-screen"><span id="GRAPHIC_DESIGNING_CARD_HEADER1">GRAPHICS DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT1">GRAPHICS DESIGNING</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/m0gAHqYqI1g?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'm0gAHqYqI1g')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_graphic_designing_page_text1">Visit our Graphic Designing section for more details.</span></u></a>
 
@@ -1973,9 +1765,12 @@
                         <div class="services-card-name-large-screen"><span id="WEBSITE_DESIGNING_CARD_HEADER1">WEBSITE DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="WEBSITE_DESIGNING_CARD_HEADER_TEXT1">WEBSITE DESIGNING</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/wdjSAXXciMc?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'wdjSAXXciMc')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_website_designing_page_text1">Visit our Website Designing section for more details.</span></u></a>
 
@@ -1986,9 +1781,12 @@
                         <div class="services-card-name-large-screen"><span id="APP_DEVELOPMENT_CARD_HEADER1">APP DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="APP_DEVELOPMENT_CARD_HEADER_TEXT1">APP DEVELOPMENT</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/Sfpcl4FX3TU?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Sfpcl4FX3TU')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(app_development_page)"><u><span id="visit_app_development_page_text1">Visit our App Development section for more details.</span></u></a>
 
@@ -1998,9 +1796,12 @@
                         <div class="services-card-name-large-screen"><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER1">SOFTWARE DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
                             <h2><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT1">SOFTWARE DEVELOPMENT</span></h2>
-                            <iframe width="80%" height="80%"
-                                    src="https://www.youtube.com/embed/pquPUX1EihM?autoplay=1&mute=1" allowfullscreen>
-                            </iframe>
+                            <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'pquPUX1EihM')">
+                            <div class="lazy-iframe-thumb">
+                                <div class="play-icon">▶</div>
+                                <span>Click to play video</span>
+                            </div>
+                        </div>
                             <br />
                             <a onclick="navigateToPage(software_development_page)"><u><span id="visit_software_development_page_text1">Visit our Software Development section for more details.</span></u></a>
 
@@ -2009,73 +1810,71 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_featured_services_section">Get In Touch</span></button>
+        <div style="text-align:center;margin-top:1.5rem;"><button class="btn btn-primary" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_featured_services_section">Get In Touch</span></button></div>
 
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container index_style7">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
+    <div class="w3-container floating-menu-anchor">
+        <a onclick="w3_open()" class="floating-menu-btn">+</a>
     </div>
-    <section id="Hire-us-section" class="w3-row-padding w3-container w3-padding-64">
+    <section id="Hire-us-section">
         <!-- include all here: process, testimonials, strengths, portfolio -->
-        <div class="index_style9">
-            <h2 class="w3-wide"><u><span id="WHY_HIRE_US_SECTION_HEADER_TEXT">WHY HIRE US?</span></u></h2><br />
+        <div class="section-header">
+            <h2><span id="WHY_HIRE_US_SECTION_HEADER_TEXT">WHY HIRE US?</span></h2>
+            <p><span id="WHY_HIRE_US_SECTION_DESCRIPTION_TEXT">Discover what makes us unique!</span></p>
         </div>
-        <div class="index_style9">
-            <h3 class="w3-opacity w3-center"><i><span id="WHY_HIRE_US_SECTION_DESCRIPTION_TEXT">Discover what makes us unique!</span></i></h3><br>
-        </div>
-        <div class="w3-padding-16 w3-xlarge">
-            <p class="index_style17"><span id="WHY_HIRE_US_SECTION_INTRO_TEXT">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation.</span></p>
+        <div>
+            <p class="section-intro-text"><span id="WHY_HIRE_US_SECTION_INTRO_TEXT">At Saharsh Bhadani Venture Private Limited, we don't just offer services — we deliver smart, scalable, and creative solutions that help businesses evolve and lead in the digital age. Our wide-ranging expertise in AI & Machine Learning, data analytics, business consulting, automation, graphic designing, and content creation makes us a one-stop destination for innovation and transformation.</span></p>
         </div>
 
-        <div class="w3-row w3-container w3-row-padding index_style11">
-            <div class="w3-half w3-container">
-                <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/client_centric_pricess.png" class="index_style12" onclick="openProcessTour()">
+        <div class="hire-us-grid">
+            <div class="hire-us-card">
+                <img src="./w3images/client_centric_pricess.png" class="u-img-clickable" onclick="openProcessTour()" alt="Client Process">
+                <div class="hire-us-card-body">
                     <h2><span id="WHY_HIRE_US_SECTION1_HEADING_TEXT">Hassle-free client process</span></h2>
-                    <button class="take_interactive_tour_button" onclick="openProcessTour()">
-                        🚀&nbsp;<span id="WHY_HIRE_US_SECTION1_BUTTON_TEXT">Take an Interactive Process Tour</span>
-                    </button>
-                    <br />
-                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_1">Get In Touch</span></button>
-
+                    <div class="btn-row">
+                        <button class="take_interactive_tour_button" onclick="openProcessTour()">
+                            🚀&nbsp;<span id="WHY_HIRE_US_SECTION1_BUTTON_TEXT">Interactive Process Tour</span>
+                        </button>
+                        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_1">Get In Touch</span></button>
+                    </div>
                 </div>
             </div>
 
-            <div class="w3-half w3-container">
-                <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/testimonials.png" class="index_style12" onclick="read_testimonials()">
+            <div class="hire-us-card">
+                <img src="./w3images/testimonials.png" class="u-img-clickable" onclick="read_testimonials()" alt="Testimonials">
+                <div class="hire-us-card-body">
                     <h2><span id="WHY_HIRE_US_SECTION2_HEADING_TEXT">Testimonials</span></h2>
-                    <button class="toggle_additional_feature_button" onclick="read_testimonials()">
-                        🌟&nbsp;<span id="WHY_HIRE_US_SECTION2_BUTTON_TEXT">Read Testimonials</span>
-                    </button>
-                    <br />
-                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_2">Get In Touch</span></button>
-
+                    <div class="btn-row">
+                        <button class="toggle_additional_feature_button" onclick="read_testimonials()">
+                            🌟&nbsp;<span id="WHY_HIRE_US_SECTION2_BUTTON_TEXT">Read Testimonials</span>
+                        </button>
+                        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_2">Get In Touch</span></button>
+                    </div>
                 </div>
             </div>
             <!-- Testimonials Modal -->
             <div id="id02" class="w3-modal">
                 <div class="w3-modal-content w3-card-4 w3-animate-top">
-                    <header class="w3-container w3-teal w3-display-container">
+                    <header class="w3-container w3-display-container" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:1.25rem 1.5rem;">
                         <span onclick="document.getElementById('id02').style.display='none'"
-                              class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
-                        <h2><span id="WHY_HIRE_US_SECTION3_HEADING_TEXT">What Clients Value Most About Us!</span></h2>
+                              class="w3-button w3-display-topright" style="background:rgba(255,255,255,0.2);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">✕</span>
+                        <h2 style="color:white;"><span id="WHY_HIRE_US_SECTION3_HEADING_TEXT">What Clients Value Most About Us!</span></h2>
                     </header>
                     <div class="w3-container modal-settings">
                         <div class="w3-row-padding w3-padding-16">
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-DrBhadanisDentalClinic.png" alt="Testimonials-DrBhadanisDentalClinic.png" class="index_style13">
+                                <img src="./images/Testimonials-DrBhadanisDentalClinic.png" alt="Testimonials-DrBhadanisDentalClinic.png" class="u-testimonial-img">
                                 <div class="w3-container w3-white">
                                     <p><b>Dr. Bhadani's Dental Clinic, Kolkata, West Bengal, India</b></p>
                                     <br />
                                     <p class="w3-opacity">Wednesday July, 10, 2024</p>
-                                    <p class="index_style14">
+                                    <p class="u-text-sm">
                                         <span id="TESTIMONIAL_1_TEXT1">
                                             I collaborated with Saharsh Bhadani Venture Private Limited for logo design, website development, Google My Business setup, and data-driven business consultation. Their work exceeded my expectations. The in-depth analytics report offered actionable insights that helped me improve my work-life balance, minimize material waste, and optimize supply purchases based on usage patterns.
                                         </span>
                                     <p>
-                                    <p id="testimonial_read_content_p_1" class="index_style14">
+                                    <p id="testimonial_read_content_p_1" class="u-text-sm">
                                         <span id="TESTIMONIAL_1_TEXT2">
                                             They also delivered customized Excel-based inventory management software and a reliable patient appointment system, both of which have significantly improved the efficiency of my clinic. Their exceptional IT support has made me feel more organized and in control of my operations. I highly recommend Saharsh Bhadani Venture Private Limited to anyone seeking practical and comprehensive business solutions.
                                         </span>
@@ -2083,16 +1882,16 @@
                                 </div>
                             </div>
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-Olivia.png" alt="Olivia.png" class="index_style13">
+                                <img src="./images/Testimonials-Olivia.png" alt="Olivia.png" class="u-testimonial-img">
                                 <div class="w3-container w3-white">
                                     <p><b>Olivia (CEO - Olivia & Ava PrimePlanners, Hobart, Australia)</b><br /></p>
                                     <p class="w3-opacity">Saturday March, 29, 2025</p>
-                                    <p class="index_style14">
+                                    <p class="u-text-sm">
                                         <span id="TESTIMONIAL_2_TEXT1">
                                             I engaged Saharsh Bhadani Private Limited to design and develop a website for my event management company, Olivia & Ava PrimePlanners. I shared a clear vision and a strict one-month deadline—and they not only met it but delivered a website that surpassed my expectations in both design and functionality.
                                         </span>
                                     </p>
-                                    <p id="testimonial_read_content_p_2" class="index_style14">
+                                    <p id="testimonial_read_content_p_2" class="u-text-sm">
                                         <span id="TESTIMONIAL_2_TEXT2">
                                             The final product is visually striking, highly intuitive, and fully responsive across all devices, including smartphones, tablets, and desktops. What truly set them apart was their professionalism, transparent communication, and unwavering dedication to quality. Their commitment to excellence is exceptional, and I wholeheartedly recommend Saharsh Bhadani Private Limited to anyone in need of outstanding web development services.
                                         </span>
@@ -2101,17 +1900,17 @@
                                 </div>
                             </div>
                             <div class="w3-third w3-margin-bottom">
-                                <img src="./images/Testimonials-JavierRamos.jpg" alt="JavierRamos.jpg" class="index_style13">
+                                <img src="./images/Testimonials-JavierRamos.jpg" alt="JavierRamos.jpg" class="u-testimonial-img">
                                 <div class="w3-container w3-white">
                                     <p><b>Javier Ramos</b></p>
                                     <p><b>(Independent seller on Amazon)</b></p>
                                     <p class="w3-opacity">Monday March, 17, 2025</p>
-                                    <p class="index_style14">
+                                    <p class="u-text-sm">
                                         <span id="TESTIMONIAL_3_TEXT1">
                                             I had the opportunity to collaborate with Saharsh Bhadani Private Limited for my business analytics requirements, and I was genuinely impressed by their expertise. As an Amazon seller with over three years of experience, I was struggling with frequent order cancellations. After sharing two months of sales data, their team delivered in-depth, insightful reports that uncovered key patterns—such as product performance, regional trends, and recurring order issues—that I hadn’t previously identified.
                                         </span>
                                     </p>
-                                    <p id="testimonial_read_content_p_3" class="index_style14">
+                                    <p id="testimonial_read_content_p_3" class="u-text-sm">
                                         <span id="TESTIMONIAL_3_TEXT2">
                                             Their findings were not only precise but also actionable, helping me implement practical strategies that are already improving my business operations. I now feel more empowered to make informed, data-driven decisions and look forward to even better results. I highly recommend Saharsh Bhadani Private Limited to anyone seeking expert analytics and impactful business insights.
                                         </span>
@@ -2120,38 +1919,36 @@
                             </div>
                         </div>
                     </div>
-                    <footer class="w3-container w3-teal">
-                        <p id="modal_footer_message">&nbsp;</p>
-                    </footer>
+                    <footer style="padding:0.6rem 1.25rem;border-top:1px solid var(--card-border);"><p style="margin:0;color:var(--text-muted);font-size:0.85rem;">&nbsp;</p></footer>
                 </div>
             </div>
         </div>
 
 
-        <div class="w3-row w3-container w3-row-padding index_style11">
-            <div class="w3-half w3-container">
-                <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/our_core_competencies.png" class="index_style12" onclick="values_we_bring()">
+        <div class="hire-us-grid" style="margin-top:1.5rem;">
+            <div class="hire-us-card">
+                <img src="./w3images/our_core_competencies.png" class="u-img-clickable" onclick="values_we_bring()" alt="Core Competencies">
+                <div class="hire-us-card-body">
                     <h2><span id="WHY_HIRE_US_SECTION3_HEADING_TEXT">Values We Bring to You</span></h2>
-                    <button class="watch_featured_videos_button" onclick="values_we_bring()">
-                        &nbsp;<span id="WHY_HIRE_US_SECTION3_BUTTON_TEXT">Learn More</span>
-                    </button>
-                    <br />
-                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_3">Get In Touch</span></button>
-
+                    <div class="btn-row">
+                        <button class="watch_featured_videos_button" onclick="values_we_bring()">
+                            &nbsp;<span id="WHY_HIRE_US_SECTION3_BUTTON_TEXT">Learn More</span>
+                        </button>
+                        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_3">Get In Touch</span></button>
+                    </div>
                 </div>
             </div>
             <!-- Strengths Modal -->
             <div id="id01" class="w3-modal">
                 <div class="w3-modal-content w3-card-4 w3-animate-top">
-                    <header class="w3-container w3-teal w3-display-container">
+                    <header class="w3-container w3-display-container" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:1.25rem 1.5rem;">
                         <span onclick="document.getElementById('id01').style.display='none'"
-                              class="w3-button w3-teal w3-display-topright"><i class="fa fa-remove"></i></span>
-                        <h2><span id="CORE_COMPETENCIES_TEXT_1">Discover what makes us unique!</span></h2>
+                              class="w3-button w3-display-topright" style="background:rgba(255,255,255,0.2);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">✕</span>
+                        <h2 style="color:white;"><span id="CORE_COMPETENCIES_TEXT_1">Discover what makes us unique!</span></h2>
                     </header>
                     <div class="w3-container modal-settings">
-                        <h2 class="index_style15">🤝 <span id="CORE_COMPETENCIES_TEXT_2">Why Businesses Trust Us</span></h2>
-                        <div class="w3-row w3-row-padding row-eq-height index_style15">
+                        <h2 class="u-mb">🤝 <span id="CORE_COMPETENCIES_TEXT_2">Why Businesses Trust Us</span></h2>
+                        <div class="w3-row w3-row-padding row-eq-height u-mb">
                             <div class="w3-third">
                                 <div class="why_choose_us_article">
                                     <h3>
@@ -2189,7 +1986,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w3-row w3-row-padding row-eq-height index_style15">
+                        <div class="w3-row w3-row-padding row-eq-height u-mb">
                             <div class="w3-third">
                                 <div class="why_choose_us_article">
                                     <h3>
@@ -2215,8 +2012,8 @@
                                 </div>
                             </div>
                         </div>
-                        <h2 class="index_style15">🌟 <span id="CORE_COMPETENCIES_TEXT_13">Our Core Competencies</span></h2><br />
-                        <div class="w3-row w3-row-padding row-eq-height index_style15">
+                        <h2 class="u-mb">🌟 <span id="CORE_COMPETENCIES_TEXT_13">Our Core Competencies</span></h2><br />
+                        <div class="w3-row w3-row-padding row-eq-height u-mb">
                             <div class="w3-third">
                                 <div class="why_choose_us_article w3-card-4">
                                     <h3>
@@ -2252,7 +2049,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="w3-row w3-row-padding row-eq-height index_style15">
+                        <div class="w3-row w3-row-padding row-eq-height u-mb">
                             <div class="w3-third">
                                 <div class="why_choose_us_article w3-card-4">
                                     <h3>
@@ -2291,32 +2088,30 @@
                             </div>
                         </div>
                     </div>
-                    <footer class="w3-container w3-teal">
-                        <p id="modal_footer_message">&nbsp;</p>
-                    </footer>
+                    <footer style="padding:0.6rem 1.25rem;border-top:1px solid var(--card-border);"><p style="margin:0;color:var(--text-muted);font-size:0.85rem;">&nbsp;</p></footer>
                 </div>
             </div>
 
 
-            <div class="w3-half w3-container">
-                <div class="w3-topbar w3-border-amber">
-                    <img src="./w3images/portfolio_project.png" class="index_style12" onclick="view_our_project()">
+            <div class="hire-us-card">
+                <img src="./w3images/portfolio_project.png" class="u-img-clickable" onclick="view_our_project()" alt="Portfolio">
+                <div class="hire-us-card-body">
                     <h2><span id="WHY_HIRE_US_SECTION4_HEADING_TEXT">Portfolio</span></h2>
-                    <button class="take_interactive_tour_button" onclick="view_our_project()">
-                        &nbsp;<span id="WHY_HIRE_US_SECTION4_BUTTON_TEXT">View our projects</span>
-                    </button>
-                    <br />
-                    <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_4">Get In Touch</span></button>
-
+                    <div class="btn-row">
+                        <button class="take_interactive_tour_button" onclick="view_our_project()">
+                            &nbsp;<span id="WHY_HIRE_US_SECTION4_BUTTON_TEXT">View our projects</span>
+                        </button>
+                        <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_hire_us_section_4">Get In Touch</span></button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <div class="section-divider"></div>
-    <div class="w3-container index_style7">
-        <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal index_style8">+</a>
+    <div class="w3-container floating-menu-anchor">
+        <a onclick="w3_open()" class="floating-menu-btn">+</a>
     </div>
-    <section id="contact-us" class="contact-us-settings">
+    <section id="contact-us" class="contact-us-settings" style="background:var(--bg-main);">
         <div>
             <div class="w3-row-padding w3-center w3-padding-16 w3-large w3-small w3-hide-medium" id="contactUs">
                 <div class="w3-third w3-margin-bottom w3-padding-16">
@@ -2325,11 +2120,11 @@
                             <p class="w3-xlarge"><span id="contact_details_ls_1">Contact details</span></p>
                         </li>
                         <li class="w3-padding-16">
-                            <div class="index_style18">
+                            <div class="u-text-justify">
                                 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
                                 <span id="contact_details_ls_2">Landmark</span>: Near Lansdowne Market<br>
                                 <span id="contact_details_ls_3">WhatsApp & Phone no</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span>SaharshBhadaniVenture@gmail.com</span></a>
                             </div>
                         </li>
                     </ul>
@@ -2340,7 +2135,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="site_information_ls_1">Site Information</span></p>
                         </li>
-                        <li class="w3-padding-16 index_style16">
+                        <li class="w3-padding-16 u-text-left">
                             <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_ls_2">Careers</span></u></a><br>
                             <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_ls_3">Frequently asked questions</span></u></a>&nbsp;|&nbsp;
                             <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_ls_4">Privacy Policy</span></u></a>
@@ -2361,10 +2156,10 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="quick_links_ls_1">Quick Links</span></p>
                         </li>
-                        <li class="w3-padding-16 index_style16">
+                        <li class="w3-padding-16 u-text-left">
                             <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
                             <span id="quick_links_ls_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br>
+                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br />
                             <span id="quick_links_ls_7">Visit</span>: <a target="_blank"
                                                                          href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
                                 <span id="quick_links_ls_8">Location in Map.</span>
@@ -2376,6 +2171,7 @@
                     </ul>
                 </div>
                 <div class="w3-row w3-border w3-center">
+                    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
                     <script>
                         const form_submitted = async (form) => {
                             try {
@@ -2418,10 +2214,10 @@
                             <p class="w3-xlarge"><span id="contact_details_m_1">Contact details</span></p>
                         </li>
                         <li class="w3-padding-16">
-                            <div class="index_style18">
+                            <div class="u-text-justify">
                                 29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
                                 <span id="contact_details_m_2">WhatsApp & Phone</span> <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com">SaharshBhadaniVenture@gmail.com</a>
+                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span>saharshbhadaniventure@gmail.com</span></a>
                             </div>
                         </li>
                     </ul>
@@ -2432,7 +2228,7 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="site_information_m_1">Site Information</span></p>
                         </li>
-                        <li class="w3-padding-16 index_style16">
+                        <li class="w3-padding-16 u-text-left">
                             <a onclick="navigateToPage(careers_page_name)"><u><span id="site_information_m_2">Careers</span></u></a><br>
                             <a onclick="navigateToPage(faq_page_name)"><u><span id="site_information_m_3">Frequently asked questions</span></u></a><br>
                             <a onclick="navigateToPage(policy_page_name)"><u><span id="site_information_m_4">Policy</span></u></a><br>
@@ -2447,10 +2243,10 @@
                         <li class="w3-theme-l2">
                             <p class="w3-xlarge"><span id="quick_links_m_1">Quick Links</span></p>
                         </li>
-                        <li class="w3-padding-16 index_style16">
+                        <li class="w3-padding-16 u-text-left">
                             <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_m_3">WhatsApp</span></a><br>
                             <span id="quick_links_m_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
+                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
                             <span id="quick_links_m_7">Visit</span>: <a target="_blank"
                                                                         href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
                                 <span id="quick_links_m_8">Location in Map.</span>
@@ -2464,7 +2260,7 @@
             </div>
 
             <br />
-            <button class="btn btn-primary get-in-touch-button-settings index_style19" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
+            <button class="btn btn-primary get-in-touch-button-settings" onclick="document.getElementById('id03').style.display='block'"><span id="get_in_touch_button_text_contact_us_section">Get In Touch</span></button>
         </div>
     </section>
     <!-- Footer -->
@@ -2472,29 +2268,24 @@
         <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
-        <a class="w3-button w3-teal" href="javascript:void(0)" title="Facebook"
+        <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Facebook"
            onclick="openLink('facebook')"><i class="fa fa-facebook"></i></a>
-        <a class="w3-button w3-teal" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')">
+        <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Twitter" onclick="openLink('twitter')">
             <i class="fa fa-twitter"></i>
         </a>
-        <a class="w3-button w3-teal" href="javascript:void(0)" title="Google +" onclick="openLink('google')">
+        <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Google +" onclick="openLink('google')">
             <i class="fa fa-google-plus"></i>
         </a>
-        <a class="w3-button w3-teal" href="javascript:void(0)" title="Instagram"
+        <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Instagram"
            onclick="openLink('instagram')"><i class="fa fa-instagram"></i></a>
-        <a class="w3-button w3-teal" href="javascript:void(0)" title="Linkedin"
+        <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Linkedin"
            onclick="openLink('linkedIn')"><i class="fa fa-linkedin"></i></a>
         <p><span id="last_updated_on_text_footer">Last updated on</span> : <span id="last_updated_on"></span></p>
         <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
 
-        <div class="w3-tooltip w3-right index_style20">
-            <span class="w3-text w3-padding w3-teal w3-hide-small" id="go_to_top_text_footer">Go To Top</span>
-            <a class="w3-button goto-top-button" href="#home">
-                <span class="w3-xlarge">
-                    <i class="fa fa-chevron-circle-up"></i>
-                </span>
-            </a>
-        </div>
+        <a class="goto-top-button" href="#home" id="go_to_top_text_footer" aria-label="Go to top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
         <script>
             function openLink(pageName) {
                 url_to_visit = ""
@@ -2654,7 +2445,7 @@
                     <div class="process-step-details">
                         <h3><span id="Customer_Journey_text_65">Contact Options:</span></h3>
                         <ul>
-                            <li>📧 <span id="Customer_Journey_text_66">Email</span>: <a href="mailto:SaharshBhadaniVenture@gmail.com" target="_blank">SaharshBhadaniVenture@gmail.com</a></li>
+                            <li>📧 <span id="Customer_Journey_text_66">Email</span>: <a href="mailto:saharshbhadaniventure@gmail.com" target="_blank"><span>saharshbhadaniventure@gmail.com</span></a></li>
                             <li>📱 <span id="Customer_Journey_text_67">Phone</span>: <a href="tel:+918910441949" target="_blank">+91 8910441949</a></li>
                             <li>💬 <span id="Customer_Journey_text_68">Live Chat</span>: <a href="https://wa.me/918910441949?text=hi" target="_blank">Chat with us on WhatsApp @+91 8910441949</a></li>
                             <li>🌐 <span id="Customer_Journey_text_69">Website</span>: <a href="https://www.saharshbhadani.com" target="_blank">www.saharshbhadani.com</a></li>
@@ -2667,10 +2458,10 @@
             </div>
 
             <div class="process-navigation">
-                <button class="process-nav-button btn-prev" id="processPrevBtn" onclick="changeProcessStep(-1)">
+                <button class="process-nav-button btn-prev process-btn-prev" id="processPrevBtn" onclick="changeProcessStep(-1)">
                     ← <span id="Customer_Journey_text_73">Previous</span>
                 </button>
-                <button class="process-nav-button btn-next" id="processNextBtn" onclick="changeProcessStep(1)">
+                <button class="process-nav-button btn-next process-btn-next" id="processNextBtn" onclick="changeProcessStep(1)">
                     <span id="Customer_Journey_text_74">Next</span> →
                 </button>
             </div>
@@ -2698,15 +2489,42 @@
             captionText.innerHTML = element.alt;
         }
 
-        // Change style of navbar on scroll
-        window.onscroll = function () { myFunction() };
-        function myFunction() {
-            var navbar = document.getElementById("myNavbar");
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                navbar.className += "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white" + "w3-black" + "w3-opacity";
+        // Navbar scroll behavior
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector(".top-navbar");
+            if (window.scrollY > 60) {
+                navbar.style.background = document.body.getAttribute("data-theme") === "light"
+                    ? "rgba(248,250,252,0.97)"
+                    : "rgba(10,10,35,0.97)";
+                navbar.style.boxShadow = "0 4px 20px rgba(0,0,0,0.15)";
             } else {
-                navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "w3-opacity");
+                navbar.style.background = "";
+                navbar.style.boxShadow = "";
             }
+            // Show/hide go-to-top button
+            var topBtn = document.getElementById('go_to_top_text_footer');
+            if (topBtn) {
+                if (window.scrollY > 300) {
+                    topBtn.classList.add('visible');
+                } else {
+                    topBtn.classList.remove('visible');
+                }
+            }
+        });
+
+        // YouTube lazy load
+        function loadYouTube(wrapper, videoId) {
+            wrapper.classList.add("loaded");
+            var iframe = document.createElement("iframe");
+            iframe.src = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&mute=1";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            iframe.style.position = "absolute";
+            iframe.style.inset = "0";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            wrapper.appendChild(iframe);
         }
 
         // Used to toggle the menu on small screens when clicking on the menu button
@@ -3598,6 +3416,7 @@
         function updateTextSize(size) {
             currentSettings.textSize = size;
             document.documentElement.style.fontSize = size + 'px';
+            document.documentElement.style.setProperty('--base-font-size', size + 'px');
             sizeDisplay.textContent = size + 'px';
         }
 
@@ -3611,7 +3430,6 @@
             const size = textSizeSlider.value;
             document.documentElement.style.fontSize = size + "px";
             sizeDisplay.textContent = size + "px";
-            alert(e.target.value);
             document.documentElement.style.setProperty(
                 "--base-font-size",
                 e.target.value + "px"
@@ -3663,11 +3481,11 @@
 
         // Initialize when page loads
         window.onload = function () {
-            document.getElementById('last_updated_on').textContent = last_updated_on;
-            document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
+            if (typeof last_updated_on !== 'undefined') document.getElementById('last_updated_on').textContent = last_updated_on;
+            if (typeof year_to_display_along_with_copyright !== 'undefined') document.getElementById('year_to_display_along_with_copyright').textContent = year_to_display_along_with_copyright;
 
             initializeSettings();
-            _waEmbed(wa_btnSetting);
+            if (typeof _waEmbed === 'function') _waEmbed(wa_btnSetting);
             const loader = document.querySelector(".loader");
             loader.classList.add("loader-hidden");
             showAlert("Click on Settings to personalize this webpage the way you like.");
@@ -3813,7 +3631,7 @@
         }
     </script>
     <script defer>
-        // Services
+        // Services cards (both large and small screen)
         document.addEventListener("click", e => {
             const card = e.target.closest(
                 ".services-card-large-screen, .services-card-medium-small-screen"
@@ -3872,24 +3690,6 @@
             return false;
 
         }
-    </script>
-
-    <!--Code for WhatsApp-->
-    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-    <script>
-        var wa_btnSetting = {
-            "btnColor": "#16BE45",
-            "ctaText": "",
-            "cornerRadius": 40,
-            "marginBottom": 20,
-            "marginLeft": 20,
-            "marginRight": 20,
-            "btnPosition": "right",
-            "whatsAppNumber": "918910441949",
-            "welcomeMessage": "Hello",
-            "zIndex": 999999,
-            "btnColorScheme": "light"
-        };
     </script>
 
 </body>
