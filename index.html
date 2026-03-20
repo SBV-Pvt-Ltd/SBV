@@ -427,12 +427,27 @@
         .hero-title {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.25;
             margin-bottom: 1.5rem;
+            /* Extra padding so gradient clip doesn't cut Devanagari/Bengali descenders */
+            padding-bottom: 0.2em;
             background: linear-gradient(135deg, var(--text-main), var(--accent1));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            /* Allow the title to shrink gracefully on long translations */
+            max-width: 900px;
+            width: 100%;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Tighter floor for very small screens so Indic text still fits */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: clamp(1.6rem, 7vw, 2.5rem);
+                line-height: 1.35;
+            }
         }
 
         .hero-subtitle {
@@ -1848,6 +1863,11 @@
             body.fade-transition.show {
                 opacity: 1;
             }
+
+        /* Hide mouse follower on touch-only devices */
+        @media (hover: none) {
+            .mouse-follower { display: none !important; }
+        }
     </style>
     <script type="text/javascript">
         function delay(ms) {
@@ -2068,11 +2088,11 @@
                         </div>
                         <div class="git-form-group">
                             <label class="git-form-label"><span id="get_in_touch_modal_phone_number_label">Phone number</span></label>
-                            <input class="git-form-input" type="number" name="PhoneNumber" required>
+                            <input class="git-form-input" type="tel" inputmode="numeric" pattern="[0-9+\-\s()]{7,15}" name="PhoneNumber" placeholder="+91 XXXXX XXXXX" required>
                         </div>
                         <div class="git-form-group">
-                            <label class="git-form-label"><span id="get_in_touch_modal_company_name_label">Company Name</span></label>
-                            <input class="git-form-input" type="text" name="CompanyName" required>
+                            <label class="git-form-label"><span id="get_in_touch_modal_company_name_label">Company / Individual Name</span></label>
+                            <input class="git-form-input" type="text" name="CompanyName" placeholder="Your company or your own name">
                         </div>
                         <div class="git-form-group">
                             <label class="git-form-label"><span id="get_in_touch_modal_products_services_label">Products or services interested in</span></label>
@@ -2157,7 +2177,7 @@
                                 <span>Click to play video</span>
                             </div>
                         </div>
-                        <a onclick="navigateToPage(graphics_designing_page)" class="svc-visit-link"><span id="visit_website_designing_page_text">→ Visit Website Designing</span></a>
+                        <a onclick="navigateToPage(webdesigning_page)" class="svc-visit-link"><span id="visit_website_designing_page_text">→ Visit Website Designing</span></a>
 
                     </div>
                 </div>
@@ -2245,9 +2265,9 @@
                 <div class="services-cards-container-large-screen">
 
                     <div class="services-card-large-screen active" data-index="0">
-                        <div class="services-card-name-large-screen"><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER1">SOFTWARE DEVELOPMENT</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="SOFTWARE_DEVELOPMENT_CARD_HEADER" id="SOFTWARE_DEVELOPMENT_CARD_HEADER1">SOFTWARE DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT1">SOFTWARE DEVELOPMENT</span></h2>
+                            <h2><span data-i18n="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT" id="SOFTWARE_DEVELOPMENT_CARD_HEADER_TEXT1">SOFTWARE DEVELOPMENT</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'pquPUX1EihM')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2261,9 +2281,9 @@
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="1">
-                        <div class="services-card-name-large-screen"><span id="WEBSITE_DESIGNING_CARD_HEADER1">WEBSITE DESIGNING</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="WEBSITE_DESIGNING_CARD_HEADER" id="WEBSITE_DESIGNING_CARD_HEADER1">WEBSITE DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="WEBSITE_DESIGNING_CARD_HEADER_TEXT1">WEBSITE DESIGNING</span></h2>
+                            <h2><span data-i18n="WEBSITE_DESIGNING_CARD_HEADER_TEXT" id="WEBSITE_DESIGNING_CARD_HEADER_TEXT1">WEBSITE DESIGNING</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'wdjSAXXciMc')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2271,15 +2291,15 @@
                                 </div>
                             </div>
                             <br />
-                            <a onclick="navigateToPage(graphics_designing_page)"><u><span id="visit_website_designing_page_text1">Visit our Website Designing section for more details.</span></u></a>
+                            <a onclick="navigateToPage(webdesigning_page)"><u><span id="visit_website_designing_page_text1">Visit our Website Designing section for more details.</span></u></a>
 
                         </div>
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="2">
-                        <div class="services-card-name-large-screen"><span id="GRAPHIC_DESIGNING_CARD_HEADER1">GRAPHICS DESIGNING</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="GRAPHIC_DESIGNING_CARD_HEADER" id="GRAPHIC_DESIGNING_CARD_HEADER1">GRAPHICS DESIGNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT1">GRAPHICS DESIGNING</span></h2>
+                            <h2><span data-i18n="GRAPHICS_DESIGNING_CARD_HEADER_TEXT" id="GRAPHICS_DESIGNING_CARD_HEADER_TEXT1">GRAPHICS DESIGNING</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'm0gAHqYqI1g')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2293,9 +2313,9 @@
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="3">
-                        <div class="services-card-name-large-screen"><span id="IT_CONSULTATION_CARD_HEADER1">IT CONSULTATION</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="IT_CONSULTATION_CARD_HEADER" id="IT_CONSULTATION_CARD_HEADER1">IT CONSULTATION</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="IT_CONSULTATION_CARD_HEADER_TEXT1">IT CONSULTATION</span></h2>
+                            <h2><span data-i18n="IT_CONSULTATION_CARD_HEADER_TEXT" id="IT_CONSULTATION_CARD_HEADER_TEXT1">IT CONSULTATION</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Rp7Cx8ZH7Zs')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2309,9 +2329,9 @@
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="4">
-                        <div class="services-card-name-large-screen"><span id="APP_DEVELOPMENT_CARD_HEADER1">APP DEVELOPMENT</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="APP_DEVELOPMENT_CARD_HEADER" id="APP_DEVELOPMENT_CARD_HEADER1">APP DEVELOPMENT</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="APP_DEVELOPMENT_CARD_HEADER_TEXT1">APP DEVELOPMENT</span></h2>
+                            <h2><span data-i18n="APP_DEVELOPMENT_CARD_HEADER_TEXT" id="APP_DEVELOPMENT_CARD_HEADER_TEXT1">APP DEVELOPMENT</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'Sfpcl4FX3TU')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2325,9 +2345,9 @@
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="5">
-                        <div class="services-card-name-large-screen"><span id="BUSINESS_ANALYTICS_CARD_HEADER1">BUSINESS AUTOMATION</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="BUSINESS_AUTOMATION_CARD_HEADER" id="BUSINESS_ANALYTICS_CARD_HEADER1">BUSINESS AUTOMATION</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT1">BUSINESS AUTOMATION</span></h2>
+                            <h2><span data-i18n="BUSINESS_AUTOMATION_CARD_HEADER_TEXT" id="BUSINESS_ANALYTICS_CARD_HEADER_TEXT1">BUSINESS AUTOMATION</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, '9fFQA-JOXA0')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2340,9 +2360,9 @@
                     </div>
 
                     <div class="services-card-large-screen collapsed" data-index="6">
-                        <div class="services-card-name-large-screen"><span id="AI_MACHINE_LEARNING_CARD_HEADER1">AI & MACHINE LEARNING</span></div>
+                        <div class="services-card-name-large-screen"><span data-i18n="AI_MACHINE_LEARNING_CARD_HEADER" id="AI_MACHINE_LEARNING_CARD_HEADER1">AI & MACHINE LEARNING</span></div>
                         <div class="services-card-content-large-screen">
-                            <h2><span id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT1">AI & MACHINE LEARNING</span></h2>
+                            <h2><span data-i18n="AI_MACHINE_LEARNING_CARD_HEADER_TEXT" id="AI_MACHINE_LEARNING_CARD_HEADER_TEXT1">AI & MACHINE LEARNING</span></h2>
                             <div class="lazy-iframe-wrapper" onclick="loadYouTube(this, 'qYNweeDHiyU')">
                                 <div class="lazy-iframe-thumb">
                                     <div class="play-icon">▶</div>
@@ -2406,7 +2426,7 @@
                     <header class="w3-container w3-display-container" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;padding:1.25rem 1.5rem;">
                         <span onclick="document.getElementById('id02').style.display='none'"
                               class="w3-button w3-display-topright" style="background:rgba(255,255,255,0.2);color:white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;">✕</span>
-                        <h2 style="color:white;"><span id="WHY_HIRE_US_SECTION3_HEADING_TEXT">What Clients Value Most About Us!</span></h2>
+                        <h2 style="color:white;"><span id="What_Clients_Value_Most_About_Us_text">What Clients Value Most About Us!</span></h2>
                     </header>
                     <div class="w3-container modal-settings">
                         <div class="w3-row-padding w3-padding-16">
@@ -2671,7 +2691,7 @@
                                 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025<br>
                                 <span id="contact_details_ls_2">Landmark</span>: Near Lansdowne Market<br>
                                 <span id="contact_details_ls_3">WhatsApp & Phone no</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span>SaharshBhadaniVenture@gmail.com</span></a>
+                                <span id="contact_details_ls_4">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span>SaharshBhadaniVenture@gmail.com</span></a>
                             </div>
                         </li>
                     </ul>
@@ -2704,9 +2724,9 @@
                             <p class="w3-xlarge"><span id="quick_links_ls_1">Quick Links</span></p>
                         </li>
                         <li class="w3-padding-16 u-text-left">
-                            <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
+                            <span id="quick_links_ls_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20your%20services"><span id="quick_links_ls_3">WhatsApp chat</span></a><br>
                             <span id="quick_links_ls_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br />
+                            <span id="quick_links_ls_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_ls_6">Send email</span></a><br />
                             <span id="quick_links_ls_7">Visit</span>: <a target="_blank"
                                                                          href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
                                 <span id="quick_links_ls_8">Location in Map.</span>
@@ -2744,7 +2764,10 @@
                                     alert("Something went wrong");
                                 }
                             } catch (error) {
-                                console.log(error);
+                                const loader = document.querySelector(".loader");
+                                if (loader) loader.classList.add("loader-hidden");
+                                console.error("Form submission error:", error);
+                                alert("Unable to send your message. Please contact us directly at +91 8910441949 or via WhatsApp.");
                             }
                             return false;
                         }
@@ -2753,7 +2776,7 @@
                 </div>
             </div>
             <!-- medium screen-->
-            <div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium " id="contactUs">
+            <div class="w3-row-padding w3-center w3-padding-64 w3-hide-large w3-hide-small w3-medium " id="contactUs-medium">
 
                 <div class="w3-third w3-margin-bottom">
                     <ul class="w3-ul w3-border w3-hover-shadow ">
@@ -2764,7 +2787,7 @@
                             <div class="u-text-justify">
                                 29B/1F Bakul Bagan Row, Kolkata, India - 700025<br>
                                 <span id="contact_details_m_2">WhatsApp & Phone</span> <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span>saharshbhadaniventure@gmail.com</span></a>
+                                <span id="contact_details_m_3">Email</span><a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span>SaharshBhadaniVenture@gmail.com</span></a>
                             </div>
                         </li>
                     </ul>
@@ -2791,9 +2814,9 @@
                             <p class="w3-xlarge"><span id="quick_links_m_1">Quick Links</span></p>
                         </li>
                         <li class="w3-padding-16 u-text-left">
-                            <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text="><span id="quick_links_m_3">WhatsApp</span></a><br>
+                            <span id="quick_links_m_2">Chat now</span>: <a target="_blank" href="https://wa.me/918910441949?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20your%20services"><span id="quick_links_m_3">WhatsApp</span></a><br>
                             <span id="quick_links_m_4">Call</span>: <a target="_blank" href="tel:+918910441949">+91 8910441949</a><br>
-                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:saharshbhadaniventure@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
+                            <span id="quick_links_m_5">Email</span>: <a target="_blank" href="mailto:SaharshBhadaniVenture@gmail.com"><span id="quick_links_m_6">Send email</span></a><br>
                             <span id="quick_links_m_7">Visit</span>: <a target="_blank"
                                                                         href="https://www.google.com/maps/dir/22.5275043,88.350982/Saharsh+Bhadani/@22.5275434,88.3483587,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a0277acf27299ad:0xf7a390a337e2b7d5!2m2!1d88.350861!2d22.5274887?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D">
                                 <span id="quick_links_m_8">Location in Map.</span>
@@ -2812,7 +2835,7 @@
     </section>
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-center" id="footer">
-        <a class="footer_link"><span id="trending_text_footer">Trending</span></a> | <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link"><span id="pricing_text_footer">Pricing</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
+        <a class="footer_link" onclick="navigateToPage(about_us_page)"><span id="about_us_text_footer">About us</span></a> | <a class="footer_link" onclick="openSettings()"><span id="settings_text_footer">Settings</span></a><br /><br />
 
         <h4><span id="Follow_us_footer">Follow Us</span></h4>
         <a style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:white;text-decoration:none;font-size:0.9rem;" href="javascript:void(0)" title="Facebook"
@@ -2831,7 +2854,7 @@
         <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
 
 
-        <script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
             function openLink(pageName) {
                 url_to_visit = ""
                 if (pageName == "linkedIn")
@@ -2990,12 +3013,12 @@
                     <div class="process-step-details">
                         <h3><span id="Customer_Journey_text_65">Contact Options:</span></h3>
                         <ul>
-                            <li>📧 <span id="Customer_Journey_text_66">Email</span>: <a href="mailto:saharshbhadaniventure@gmail.com" target="_blank"><span>saharshbhadaniventure@gmail.com</span></a></li>
+                            <li>📧 <span id="Customer_Journey_text_66">Email</span>: <a href="mailto:SaharshBhadaniVenture@gmail.com" target="_blank"><span>SaharshBhadaniVenture@gmail.com</span></a></li>
                             <li>📱 <span id="Customer_Journey_text_67">Phone</span>: <a href="tel:+918910441949" target="_blank">+91 8910441949</a></li>
                             <li>💬 <span id="Customer_Journey_text_68">Live Chat</span>: <a href="https://wa.me/918910441949?text=hi" target="_blank">Chat with us on WhatsApp @+91 8910441949</a></li>
                             <li>🌐 <span id="Customer_Journey_text_69">Website</span>: <a href="https://www.saharshbhadani.com" target="_blank">www.saharshbhadani.com</a></li>
                             <li>📍 <span id="Customer_Journey_text_70">Office</span>: 29B/1F Bakul Bagan Row, Kolkata, West Bengal, India - 700025</li>
-                            <li>🕒 <span id="Customer_Journey_text_71">Business Hours</span>: Mon-Fri, 9:00 AM - 9:00 PM</li>
+                            <li>🕒 <span id="Customer_Journey_text_71">Business Hours</span>: Mon-Sun, 9:00 AM - 9:00 PM</li>
                         </ul>
                     </div>
                     <div class="process-step-counter">🎉 <span id="Customer_Journey_text_72">Thank you for choosing us for your project!</span></div>
@@ -3016,7 +3039,7 @@
         <!-- captcha contact-->
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Script to open and close sidebar
         function w3_open() {
             document.getElementById("mySidebar").style.display = "block";
@@ -3932,9 +3955,25 @@
         async function updateLanguage(lang) {
             currentSettings.language = lang;
             const translation_here = translations[lang];
+
+            // Fix #3: Apply cached translation immediately to avoid flash-of-English
+            const TRANS_CACHE_KEY = 'SBV_TRANS_' + lang;
+            const cached = localStorage.getItem(TRANS_CACHE_KEY);
+            if (cached) {
+                try {
+                    const cachedTranslation = JSON.parse(cached);
+                    Object.keys(cachedTranslation).forEach(key => {
+                        const element = document.getElementById(key);
+                        if (element) element.textContent = cachedTranslation[key];
+                        // Fix #7: also update data-i18n duplicates
+                        document.querySelectorAll('[data-i18n="' + key + '"]').forEach(el => { el.textContent = cachedTranslation[key]; });
+                    });
+                } catch(e) { /* ignore corrupt cache */ }
+            }
+
             const translation_fetched = await getAllOtherWords(lang);
-            translation = { ...translation_here, ...translation_fetched }
-            //const translation = translations[lang];
+            const translation = { ...translation_here, ...translation_fetched };
+
             // Add fade effect
             document.body.classList.add('fade-transition');
             try {
@@ -3944,8 +3983,14 @@
                         if (element) {
                             element.textContent = translation[key];
                         }
+                        // Fix #7: also update any data-i18n duplicates (elements that exist across screen sizes)
+                        document.querySelectorAll('[data-i18n="' + key + '"]').forEach(el => { el.textContent = translation[key]; });
                     });
                     document.body.classList.add('show');
+                    // Update cache with fresh fetch
+                    try { localStorage.setItem(TRANS_CACHE_KEY, JSON.stringify(translation)); } catch(e) {}
+                    // Re-fit hero title in case translated text is longer than English
+                    fitHeroTitle();
                 }, 150);
             }
             finally {
@@ -3954,7 +3999,6 @@
                 }, 450);
             }
             localStorage.setItem(LANGUAGE_KEY, lang);
-
         }
 
         // Update text size function
@@ -3963,6 +4007,42 @@
             document.documentElement.style.fontSize = size + 'px';
             document.documentElement.style.setProperty('--base-font-size', size + 'px');
             sizeDisplay.textContent = size + 'px';
+        }
+
+        /* -------------------------------------------------------
+           fitHeroTitle — shrinks the hero <h1> font size until
+           the text no longer overflows its container.
+           Called after every language switch so long Indic
+           translations never get clipped by the gradient mask.
+        ------------------------------------------------------- */
+        function fitHeroTitle() {
+            const title = document.getElementById('main-title');
+            if (!title) return;
+
+            // Reset to CSS-controlled size before measuring
+            title.style.fontSize = '';
+            title.style.lineHeight = '';
+
+            const parent = title.parentElement;
+            const maxW = parent ? parent.clientWidth : window.innerWidth;
+
+            // Compute the current rendered font size from CSS
+            const computedPx = parseFloat(window.getComputedStyle(title).fontSize);
+            let fs = computedPx;
+            const MIN_FS = 16; // never go below 16px
+
+            // Tighten line-height for Indic scripts which need more vertical room
+            const indicLangs = ['hi','bn','mr','ta','te','kn','gu','pa','or'];
+            const lang = (localStorage.getItem('SBV_LANGUAGE') || navigator.language || 'en').split('-')[0];
+            title.style.lineHeight = indicLangs.includes(lang) ? '1.45' : '1.25';
+
+            // Iteratively shrink until scrollWidth fits
+            let iterations = 0;
+            while (title.scrollWidth > maxW + 4 && fs > MIN_FS && iterations < 40) {
+                fs = Math.max(MIN_FS, fs - 1);
+                title.style.fontSize = fs + 'px';
+                iterations++;
+            }
         }
 
         // Event listeners
@@ -3979,6 +4059,8 @@
                 "--base-font-size",
                 e.target.value + "px"
             );
+            // Fix #13: persist text size preference
+            localStorage.setItem('SBV_TEXT_SIZE', size);
         });
 
         // Settings popup event listeners
@@ -4000,6 +4082,10 @@
 
         // Initialize settings
         function initializeSettings() {
+            // Fix #13: restore persisted text size
+            const savedTextSize = localStorage.getItem('SBV_TEXT_SIZE') || '16';
+            currentSettings.textSize = savedTextSize;
+
             updateLanguage(currentSettings.language);
             updateTextSize(currentSettings.textSize);
             if (savedLanguage === null) {
@@ -4033,8 +4119,20 @@
             if (typeof _waEmbed === 'function') _waEmbed(wa_btnSetting);
             const loader = document.querySelector(".loader");
             loader.classList.add("loader-hidden");
-            showAlert("Click on Settings to personalize this webpage the way you like.");
+
+            // Fit hero title for current language on first load
+            fitHeroTitle();
+
+            // Fix #4: Show settings hint only once per visitor
+            const HINT_KEY = 'SBV_SETTINGS_HINT_SHOWN';
+            if (!localStorage.getItem(HINT_KEY)) {
+                showAlert("Click on Settings to personalize this webpage the way you like.");
+                localStorage.setItem(HINT_KEY, '1');
+            }
         }
+
+        // Re-fit on viewport resize (orientation change, window resize)
+        window.addEventListener('resize', fitHeroTitle);
 
         // Alert function - utility function
         function showAlert(message) {
@@ -4110,7 +4208,7 @@
 
         function closeOnProcessOverlay(event) {
             if (event.target === document.getElementById('processModalOverlay')) {
-                closeTour();
+                closeProcessTour();
             }
         }
 
@@ -4226,35 +4324,19 @@
 
                     }
                     form.reset();
-                    document.getElementById('id03').style.display = 'none';
-                }
-                else {
-                    alert("Something went wrong");
+                 
+                } else {
+                    loader.classList.add("loader-hidden");
+                    alert("Something went wrong. Please try contacting us via WhatsApp or email directly.");
                 }
             } catch (error) {
-                console.log(error);
+                const loader = document.querySelector(".loader");
+                if (loader) loader.classList.add("loader-hidden");
+                console.error("Form submission error:", error);
+                alert("Unable to send your message. Please contact us directly at +91 8910441949 or via WhatsApp.");
             }
             return false;
-
         }
     </script>
-    <!--Code for WhatsApp-->
-    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-    <script>
-        var wa_btnSetting = {
-            "btnColor": "#16BE45",
-            "ctaText": "",
-            "cornerRadius": 40,
-            "marginBottom": 20,
-            "marginLeft": 20,
-            "marginRight": 20,
-            "btnPosition": "right",
-            "whatsAppNumber": "918910441949",
-            "welcomeMessage": "Hello",
-            "zIndex": 999999,
-            "btnColorScheme": "light"
-        };
-    </script>
-
 </body>
 </html>
