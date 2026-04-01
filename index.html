@@ -2854,7 +2854,8 @@
         <p>&#169; <span id="year_to_display_along_with_copyright">2025</span> <span id="disclamer_text_footer">by Saharsh Bhadani Venture Private Limited. All Rights Reserved.</span></p>
 
 
-        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+        <script>
             function openLink(pageName) {
                 url_to_visit = ""
                 if (pageName == "linkedIn")
@@ -3039,7 +3040,8 @@
         <!-- captcha contact-->
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // Script to open and close sidebar
         function w3_open() {
             document.getElementById("mySidebar").style.display = "block";
@@ -3688,13 +3690,13 @@
 
         const style = document.createElement('style');
         style.textContent = `
-                                                                @keyframes ripple {
-                                                                    to {
-                                                                        transform: scale(20);
-                                                                        opacity: 0;
+                                                                    @keyframes ripple {
+                                                                        to {
+                                                                            transform: scale(20);
+                                                                            opacity: 0;
+                                                                        }
                                                                     }
-                                                                }
-                                                            `;
+                                                                `;
         document.head.appendChild(style);
 
         document.querySelectorAll('.btn-secondary').forEach(btn => {
@@ -3968,7 +3970,7 @@
                         // Fix #7: also update data-i18n duplicates
                         document.querySelectorAll('[data-i18n="' + key + '"]').forEach(el => { el.textContent = cachedTranslation[key]; });
                     });
-                } catch(e) { /* ignore corrupt cache */ }
+                } catch (e) { /* ignore corrupt cache */ }
             }
 
             const translation_fetched = await getAllOtherWords(lang);
@@ -3988,7 +3990,7 @@
                     });
                     document.body.classList.add('show');
                     // Update cache with fresh fetch
-                    try { localStorage.setItem(TRANS_CACHE_KEY, JSON.stringify(translation)); } catch(e) {}
+                    try { localStorage.setItem(TRANS_CACHE_KEY, JSON.stringify(translation)); } catch (e) { }
                     // Re-fit hero title in case translated text is longer than English
                     fitHeroTitle();
                 }, 150);
@@ -4032,7 +4034,7 @@
             const MIN_FS = 16; // never go below 16px
 
             // Tighten line-height for Indic scripts which need more vertical room
-            const indicLangs = ['hi','bn','mr','ta','te','kn','gu','pa','or'];
+            const indicLangs = ['hi', 'bn', 'mr', 'ta', 'te', 'kn', 'gu', 'pa', 'or'];
             const lang = (localStorage.getItem('SBV_LANGUAGE') || navigator.language || 'en').split('-')[0];
             title.style.lineHeight = indicLangs.includes(lang) ? '1.45' : '1.25';
 
@@ -4138,18 +4140,18 @@
         function showAlert(message) {
             const alertDiv = document.createElement('div');
             alertDiv.style.cssText = `
-                                                        position: fixed;
-                                                        top: 20px;
-                                                        right: 20px;
-                                                        background: rgba(99, 102, 241, 0.9);
-                                                        color: white;
-                                                        padding: 16px 24px;
-                                                        border-radius: 12px;
-                                                        font-weight: 500;
-                                                        z-index: 999;
-                                                        backdrop-filter: blur(4px);
-                                                        animation: slideInAlert 0.5s ease-out;
-                                                    `;
+                                                            position: fixed;
+                                                            top: 20px;
+                                                            right: 20px;
+                                                            background: rgba(99, 102, 241, 0.9);
+                                                            color: white;
+                                                            padding: 16px 24px;
+                                                            border-radius: 12px;
+                                                            font-weight: 500;
+                                                            z-index: 999;
+                                                            backdrop-filter: blur(4px);
+                                                            animation: slideInAlert 0.5s ease-out;
+                                                        `;
             alertDiv.textContent = message;
 
             document.body.appendChild(alertDiv);
@@ -4324,7 +4326,7 @@
 
                     }
                     form.reset();
-                 
+
                 } else {
                     loader.classList.add("loader-hidden");
                     alert("Something went wrong. Please try contacting us via WhatsApp or email directly.");
@@ -4337,6 +4339,23 @@
             }
             return false;
         }
+    </script>
+    <!--Code for WhatsApp-->
+    <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
+    <script>
+        var wa_btnSetting = {
+            "btnColor": "#16BE45",
+            "ctaText": "",
+            "cornerRadius": 40,
+            "marginBottom": 20,
+            "marginLeft": 20,
+            "marginRight": 20,
+            "btnPosition": "right",
+            "whatsAppNumber": "918910441949",
+            "welcomeMessage": "Hello",
+            "zIndex": 999999,
+            "btnColorScheme": "light"
+        };
     </script>
 </body>
 </html>
