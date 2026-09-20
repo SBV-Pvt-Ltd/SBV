@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0D10;
+    --surface:#14171C;
+    --surface-2:#1B1F26;
+    --border:#262B33;
+    --text:#E8EAED;
+    --text-muted:#8A919E;
+    --accent:#E8A33D;
+    --buy:#3DDC84;
+    --sell:#FF5C5C;
+    --accumulate:#5B9DFF;
+    --neutral:#8A919E;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,.brand{font-family:'Space Grotesk',sans-serif;}
+  a{color:var(--accent);}
+  button{font-family:inherit;cursor:pointer;}
+  input,select{font-family:inherit;}
+
+  /* ---------- Ticker tape ---------- */
+  .tape{
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--border);
+    background:var(--surface);
+    height:28px;
+    line-height:28px;
+  }
+  .tape-track{
+    display:inline-block;
+    padding-left:100%;
+    animation:scroll-left 40s linear infinite;
+  }
+  .tape span{margin-right:28px;color:var(--text-muted);}
+  .tape .up{color:var(--buy);}
+  .tape .down{color:var(--sell);}
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .tape-track{animation:none;padding-left:16px;}
+  }
+
+  /* ---------- Login ---------- */
+  #login-screen{
+    position:fixed;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:var(--bg);
+    z-index:200;
+    gap:22px;
+  }
+  #login-screen.hidden{display:none;}
+  .login-box{
+    width:min(90vw,340px);
+    border:1px solid var(--border);
+    background:var(--surface);
+    padding:28px 26px;
+    border-radius:2px;
+  }
+  .login-box .brand{font-size:22px;font-weight:700;letter-spacing:0.5px;color:var(--text);margin:0 0 4px;}
+  .login-box .sub{color:var(--text-muted);font-size:12px;margin:0 0 20px;}
+  .login-box input{
+    width:100%;padding:10px 12px;background:var(--bg);
+    border:1px solid var(--border);color:var(--text);border-radius:2px;
+    font-size:14px;margin-bottom:12px;
+  }
+  .login-box input:focus{outline:none;border-color:var(--accent);}
+  .login-box button{
+    width:100%;padding:10px 12px;background:var(--accent);color:#1a1300;
+    border:none;font-weight:600;border-radius:2px;font-size:13px;
+  }
+  .login-error{color:var(--sell);font-size:12px;min-height:16px;margin:-4px 0 10px;}
+  .login-hint{color:var(--text-muted);font-size:11px;max-width:340px;text-align:center;line-height:1.6;}
+
+  /* ---------- App shell ---------- */
+  #app{display:none;height:100vh;flex-direction:column;}
+  #app.visible{display:flex;}
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;border-bottom:1px solid var(--border);
+    background:var(--surface);
+  }
+  header .left{display:flex;align-items:center;gap:14px;}
+  header .brand{font-size:18px;font-weight:700;color:var(--text);}
+  .status-dot{width:7px;height:7px;border-radius:50%;background:var(--buy);display:inline-block;box-shadow:0 0 6px var(--buy);}
+  .status-text{color:var(--text-muted);font-size:11px;}
+  header .right{display:flex;align-items:center;gap:8px;}
+  .iconbtn{
+    background:transparent;border:1px solid var(--border);color:var(--text-muted);
+    padding:7px 12px;border-radius:2px;font-size:12px;
+  }
+  .iconbtn:hover{color:var(--text);border-color:var(--accent);}
+
+  /* ---------- Filter bar ---------- */
+  .filterbar{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    padding:12px 20px;border-bottom:1px solid var(--border);
+    background:var(--bg);
+  }
+  .filterbar label{color:var(--text-muted);font-size:11px;margin-right:6px;}
+  .filterbar select,.filterbar input[type=text]{
+    background:var(--surface);border:1px solid var(--border);color:var(--text);
+    padding:6px 10px;border-radius:2px;font-size:12px;
+  }
+  .filterbar .grp{display:flex;align-items:center;}
+  .checkgrp{display:flex;align-items:center;gap:6px;color:var(--text-muted);font-size:11px;}
+  .filterbar .count{margin-left:auto;color:var(--text-muted);font-size:11px;}
+
+  /* ---------- Table ---------- */
+  .tablewrap{flex:1;overflow:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{
+    position:sticky;top:0;background:var(--surface);
+    text-align:left;padding:9px 14px;font-size:10.5px;color:var(--text-muted);
+    border-bottom:1px solid var(--border);white-space:nowrap;font-weight:500;
+  }
+  tbody td{
+    padding:9px 14px;border-bottom:1px solid var(--border);white-space:nowrap;
+    font-size:12.5px;
+  }
+  tbody tr:hover{background:var(--surface-2);}
+  .ticker-cell{color:var(--text);font-weight:600;}
+  .co-cell{color:var(--text-muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+  .badge{
+    display:inline-block;padding:2px 8px;border-radius:2px;font-size:11px;font-weight:600;
+    border:1px solid transparent;
+  }
+  .badge-BUY{color:var(--buy);border-color:var(--buy);background:rgba(61,220,132,0.08);}
+  .badge-SELL{color:var(--sell);border-color:var(--sell);background:rgba(255,92,92,0.08);}
+  .badge-ACCUMULATE{color:var(--accumulate);border-color:var(--accumulate);background:rgba(91,157,255,0.08);}
+  .badge-NEUTRAL{color:var(--neutral);border-color:var(--neutral);background:rgba(138,145,158,0.08);}
+  .num{text-align:right;}
+  .muted{color:var(--text-muted);}
+  .pos{color:var(--buy);}
+  .neg{color:var(--sell);}
+  .newsbtn{
+    background:transparent;border:1px solid var(--border);color:var(--text-muted);
+    padding:4px 10px;border-radius:2px;font-size:11px;
+  }
+  .newsbtn:hover{color:var(--accent);border-color:var(--accent);}
+  .spinner{
+    display:inline-block;width:11px;height:11px;border:2px solid var(--border);
+    border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .empty-row td{text-align:center;color:var(--text-muted);padding:40px 0;}
+
+  /* ---------- News drawer ---------- */
+  #overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;display:none;}
+  #overlay.visible{display:block;}
+  #drawer{
+    position:fixed;top:0;right:-420px;width:400px;max-width:92vw;height:100vh;
+    background:var(--surface);border-left:1px solid var(--border);z-index:100;
+    transition:right 0.25s ease;display:flex;flex-direction:column;
+  }
+  #drawer.open{right:0;}
+  .drawer-head{
+    padding:18px 20px;border-bottom:1px solid var(--border);
+    display:flex;justify-content:space-between;align-items:flex-start;
+  }
+  .drawer-head h2{margin:0 0 4px;font-size:16px;}
+  .drawer-head .co{color:var(--text-muted);font-size:11.5px;}
+  .drawer-close{background:none;border:none;color:var(--text-muted);font-size:18px;}
+  .drawer-body{padding:14px 20px;overflow-y:auto;flex:1;}
+  .news-item{padding:12px 0;border-bottom:1px solid var(--border);}
+  .news-item a{color:var(--text);text-decoration:none;font-size:12.5px;line-height:1.5;display:block;}
+  .news-item a:hover{color:var(--accent);}
+  .news-item .date{color:var(--text-muted);font-size:10.5px;margin-top:5px;}
+  .drawer-state{color:var(--text-muted);font-size:12px;padding:20px 0;text-align:center;}
+
+  /* ---------- Settings modal ---------- */
+  #settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:150;display:none;align-items:center;justify-content:center;}
+  #settings-overlay.visible{display:flex;}
+  .modal{width:min(92vw,440px);background:var(--surface);border:1px solid var(--border);border-radius:2px;padding:22px;}
+  .modal h2{margin:0 0 4px;font-size:15px;}
+  .modal .sub{color:var(--text-muted);font-size:11px;margin:0 0 18px;line-height:1.6;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;color:var(--text-muted);font-size:11px;margin-bottom:5px;}
+  .field input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);
+    padding:8px 10px;border-radius:2px;font-size:12px;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+  .btn-primary{background:var(--accent);color:#1a1300;border:none;padding:8px 16px;border-radius:2px;font-weight:600;font-size:12px;}
+  .btn-secondary{background:transparent;color:var(--text-muted);border:1px solid var(--border);padding:8px 16px;border-radius:2px;font-size:12px;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="tape" style="position:fixed;top:0;left:0;right:0;">
+    <div class="tape-track" id="tape-track-login"></div>
+  </div>
+  <div class="login-box">
+    <p class="brand">SIGNAL DESK</p>
+    <p class="sub">Private access — daily technical signal feed</p>
+    <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+    <div class="login-error" id="login-error"></div>
+    <button id="login-submit">Unlock</button>
+  </div>
+  <p class="login-hint">This is a lightweight client-side gate meant to keep the dashboard off the open web,<br>not a substitute for real authentication — see the note in Settings.</p>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="tape">
+    <div class="tape-track" id="tape-track-main"></div>
+  </div>
+  <header>
+    <div class="left">
+      <span class="brand">SIGNAL DESK</span>
+      <span class="status-dot" id="status-dot"></span>
+      <span class="status-text" id="status-text">loading…</span>
+    </div>
+    <div class="right">
+      <button class="iconbtn" id="btn-refresh-prices">Refresh prices</button>
+      <button class="iconbtn" id="btn-reload-sheet">Reload sheet</button>
+      <button class="iconbtn" id="btn-settings">Settings</button>
+      <button class="iconbtn" id="btn-logout">Log out</button>
+    </div>
+  </header>
+
+  <div class="filterbar">
+    <div class="grp">
+      <label for="filter-signal">Signal</label>
+      <select id="filter-signal">
+        <option value="ALL">All</option>
+        <option value="BUY">Buy</option>
+        <option value="SELL">Sell</option>
+        <option value="ACCUMULATE">Accumulate</option>
+        <option value="NEUTRAL">Neutral</option>
+      </select>
+    </div>
+    <div class="grp">
+      <label for="filter-search">Search</label>
+      <input type="text" id="filter-search" placeholder="ticker or company">
+    </div>
+    <div class="checkgrp">
+      <input type="checkbox" id="filter-showold">
+      <label for="filter-showold" style="margin:0;">Include entries older than <span id="days-label">2</span> days</label>
+    </div>
+    <div class="count" id="row-count"></div>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ticker</th>
+          <th>Company</th>
+          <th>Signal</th>
+          <th>Pattern</th>
+          <th>Trend</th>
+          <th class="num">Support</th>
+          <th class="num">Resistance</th>
+          <th class="num">Price</th>
+          <th class="num">vs Support</th>
+          <th class="num">vs Resistance</th>
+          <th>Entry</th>
+          <th>News</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <tr class="empty-row"><td colspan="12">Loading sheet…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- NEWS DRAWER -->
+<div id="overlay"></div>
+<div id="drawer">
+  <div class="drawer-head">
+    <div>
+      <h2 id="drawer-ticker">—</h2>
+      <div class="co" id="drawer-company"></div>
+    </div>
+    <button class="drawer-close" id="drawer-close">×</button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings-overlay">
+  <div class="modal">
+    <h2>Settings</h2>
+    <p class="sub">
+      Price and news lookups need a proxy to reach Yahoo Finance and Google News from
+      the browser. By default this points at a small local proxy (see server.js) —
+      run <code>node server.js</code> in the same folder and open the page through it
+      (http://localhost:8787/signal-desk.html) instead of double-clicking the file.
+      If that proxy isn't running, the app automatically falls back to a couple of
+      free public proxies, but those are shared, unauthenticated, and go down or get
+      rate-limited without warning — treat them as a backup, not the plan.<br><br>
+      The password below is checked against a hash baked into this file. Anyone who can
+      view the page source can find and replace it, so treat this as a light deterrent —
+      for real access control, put this behind a server-side login.
+    </p>
+    <div class="field">
+      <label>Google Sheet ID</label>
+      <input type="text" id="cfg-sheet-id">
+    </div>
+    <div class="field">
+      <label>Sheet gid (leave blank for first tab)</label>
+      <input type="text" id="cfg-gid" placeholder="e.g. 0">
+    </div>
+    <div class="field">
+      <label>CORS proxy (URL-prefix style)</label>
+      <input type="text" id="cfg-proxy">
+    </div>
+    <div class="field">
+      <label>Max entry age shown by default (days)</label>
+      <input type="text" id="cfg-days">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" id="settings-cancel">Cancel</button>
+      <button class="btn-primary" id="settings-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================= CONFIG ============================= */
+const DEFAULT_CONFIG = {
+  sheetId: '1PyLCMjgDzMnCv_na-fNCnUr5tD6MwKL-bUmzHQrgFaE',
+  gid: '',
+  corsProxy: 'http://localhost:8787/proxy?url=',
+  maxAgeDays: 2
+};
+// SHA-256 of the login password. Default password is "signaldesk2026" — change both
+// the password you type AND this hash before giving this file to anyone.
+// To generate a new hash, open the browser console on this page and run:
+//   crypto.subtle.digest('SHA-256', new TextEncoder().encode('yourNewPassword'))
+//     .then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')))
+const PASSWORD_HASH = 'e1327474893e2a91009c5ab9c779ca5d9d678d4d7518e7bc24f997fec3f83bbf';
+
+function getConfig(){
+  try{
+    const stored = JSON.parse(localStorage.getItem('signalDeskConfig') || '{}');
+    return {...DEFAULT_CONFIG, ...stored};
+  }catch(e){ return {...DEFAULT_CONFIG}; }
+}
+function saveConfig(cfg){
+  localStorage.setItem('signalDeskConfig', JSON.stringify(cfg));
+}
+
+/* ============================= STATE ============================= */
+let allRows = [];          // parsed sheet rows
+let priceCache = {};        // ticker -> {price, ts, error}
+let newsCache = {};          // query -> items
+
+/* ============================= AUTH ============================= */
+async function sha256Hex(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+function isLoggedIn(){
+  return sessionStorage.getItem('sd_auth') === '1';
+}
+function showApp(){
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app').classList.add('visible');
+  init();
+}
+document.getElementById('login-submit').addEventListener('click', attemptLogin);
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') attemptLogin();
+});
+async function attemptLogin(){
+  const pw = document.getElementById('login-password').value;
+  const hash = await sha256Hex(pw);
+  if (hash === PASSWORD_HASH){
+    sessionStorage.setItem('sd_auth','1');
+    showApp();
+  } else {
+    document.getElementById('login-error').textContent = 'Incorrect password.';
+  }
+}
+document.getElementById('btn-logout').addEventListener('click', () => {
+  sessionStorage.removeItem('sd_auth');
+  location.reload();
+});
+
+/* ============================= TICKER TAPE (decorative) ============================= */
+function renderTape(elId, rows){
+  const el = document.getElementById(elId);
+  if (!rows.length){ el.textContent = ''; return; }
+  const items = rows.slice(0, 40).map(r => {
+    const dir = r.trend === 'BULLISH' ? 'up' : 'down';
+    const arrow = dir === 'up' ? '▲' : '▼';
+    return `<span class="${dir}">${r.ticker.replace('NSE:','')} ${arrow}</span>`;
+  });
+  el.innerHTML = items.join('') + items.join('');
+}
+
+/* ============================= SHEET LOADING (JSONP against gviz) ============================= */
+function loadSheet(sheetId, gid){
+  return new Promise((resolve, reject) => {
+    const cbName = 'sd_cb_' + Math.random().toString(36).slice(2);
+    let settled = false;
+    window[cbName] = function(resp){
+      settled = true;
+      resolve(resp);
+      cleanup();
+    };
+    let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json;responseHandler:${cbName}`;
+    if (gid) url += `&gid=${encodeURIComponent(gid)}`;
+    const script = document.createElement('script');
+    script.src = url;
+    script.onerror = () => { if(!settled){ settled = true; reject(new Error('Could not load the sheet. Check the Sheet ID / gid and make sure sharing is set to "Anyone with the link — Viewer".')); cleanup(); } };
+    document.body.appendChild(script);
+    function cleanup(){ delete window[cbName]; script.remove(); }
+    setTimeout(() => { if(!settled){ settled = true; reject(new Error('Sheet request timed out.')); cleanup(); } }, 15000);
+  });
+}
+
+function parseGvizDate(v){
+  // gviz encodes datetime cells as strings like "Date(2026,8,20,1,1,17)"
+  if (typeof v === 'string' && v.startsWith('Date(')){
+    const parts = v.slice(5,-1).split(',').map(Number);
+    const [y,mo,d,h=0,mi=0,s=0] = parts;
+    return new Date(y, mo, d, h, mi, s);
+  }
+  if (typeof v === 'string'){
+    const d = new Date(v);
+    if (!isNaN(d)) return d;
+  }
+  return null;
+}
+
+function rowsFromGviz(resp){
+  const rows = resp.table.rows || [];
+  return rows.map(r => {
+    const c = r.c || [];
+    const val = i => (c[i] && c[i].v !== undefined && c[i].v !== null) ? c[i].v : '';
+    const bseCode = String(val(0)).trim();
+    const ticker = String(val(1)).trim();
+    const company = String(val(2)).trim();
+    const pattern = String(val(3)).trim() || '—';
+    const signal = String(val(4)).trim().toUpperCase();
+    const trend = String(val(5)).trim().toUpperCase();
+    const support = Number(val(6)) || null;
+    const resistance = Number(val(7)) || null;
+    const entryDate = parseGvizDate(c[8] && c[8].v);
+    return { bseCode, ticker, company, pattern, signal, trend, support, resistance, entryDate };
+  }).filter(r => r.ticker);
+}
+
+/* ============================= FILTERING / RENDERING ============================= */
+function currentFilters(){
+  return {
+    signal: document.getElementById('filter-signal').value,
+    search: document.getElementById('filter-search').value.trim().toLowerCase(),
+    showOld: document.getElementById('filter-showold').checked
+  };
+}
+
+function filteredRows(){
+  const f = currentFilters();
+  const cfg = getConfig();
+  const cutoff = Date.now() - cfg.maxAgeDays * 24 * 60 * 60 * 1000;
+  return allRows.filter(r => {
+    if (f.signal !== 'ALL' && r.signal !== f.signal) return false;
+    if (f.search){
+      const hay = (r.ticker + ' ' + r.company).toLowerCase();
+      if (!hay.includes(f.search)) return false;
+    }
+    if (!f.showOld && r.entryDate && r.entryDate.getTime() < cutoff) return false;
+    return true;
+  });
+}
+
+function fmtNum(n){
+  if (n === null || n === undefined || isNaN(n)) return '—';
+  return n.toLocaleString('en-IN', {maximumFractionDigits:2});
+}
+function fmtEntry(d){
+  if (!d) return '—';
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'}) + ' ' +
+         d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+}
+
+function render(){
+  const rows = filteredRows();
+  document.getElementById('row-count').textContent = `${rows.length} of ${allRows.length} signals`;
+  const tbody = document.getElementById('table-body');
+  if (!rows.length){
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="12">No signals match these filters.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map((r, idx) => {
+    const key = r.ticker;
+    return `<tr data-key="${key}">
+      <td class="ticker-cell">${r.ticker.replace('NSE:','')}</td>
+      <td class="co-cell" title="${r.company}">${r.company}</td>
+      <td><span class="badge badge-${r.signal}">${r.signal||'—'}</span></td>
+      <td class="muted">${r.pattern}</td>
+      <td class="muted">${r.trend||'—'}</td>
+      <td class="num">${fmtNum(r.support)}</td>
+      <td class="num">${fmtNum(r.resistance)}</td>
+      <td class="num" data-cell="price">${priceCellHtml(key)}</td>
+      <td class="num" data-cell="vsupport">${marginCellHtml(key,'support')}</td>
+      <td class="num" data-cell="vresist">${marginCellHtml(key,'resistance')}</td>
+      <td class="muted">${fmtEntry(r.entryDate)}</td>
+      <td><button class="newsbtn" data-news="${key}">Headlines</button></td>
+    </tr>`;
+  }).join('');
+
+  document.querySelectorAll('[data-news]').forEach(btn => {
+    btn.addEventListener('click', () => openNews(btn.getAttribute('data-news')));
+  });
+
+  renderTape('tape-track-main', rows);
+  kickOffPriceFetches(rows);
+}
+
+function priceCellHtml(ticker){
+  const c = priceCache[ticker];
+  if (!c) return '<span class="spinner"></span>';
+  if (c.error) return '<span class="muted">n/a</span>';
+  return fmtNum(c.price);
+}
+function marginCellHtml(ticker, which){
+  const c = priceCache[ticker];
+  const row = allRows.find(r => r.ticker === ticker);
+  if (!c || c.error || !row) return '<span class="muted">—</span>';
+  const level = which === 'support' ? row.support : row.resistance;
+  if (!level) return '<span class="muted">—</span>';
+  const pct = ((c.price - level) / level) * 100;
+  const cls = pct >= 0 ? 'pos' : 'neg';
+  const sign = pct >= 0 ? '+' : '';
+  return `<span class="${cls}">${sign}${pct.toFixed(2)}%</span>`;
+}
+
+/* ============================= CORS PROXY FALLBACK CHAIN ============================= */
+// Free public proxies are unreliable individually — try the configured one first,
+// then fall back through a couple of others before giving up. Each entry is a
+// function that wraps a target URL.
+function proxyChain(){
+  const cfg = getConfig();
+  const wrappers = [
+    url => cfg.corsProxy + encodeURIComponent(url),
+    url => 'https://corsproxy.io/?url=' + encodeURIComponent(url),
+    url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
+    url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+  ];
+  // de-dupe in case the configured proxy is already one of the fallbacks
+  const seen = new Set();
+  return wrappers.filter(w => { const k = w('__probe__'); if (seen.has(k)) return false; seen.add(k); return true; });
+}
+async function fetchViaProxyChain(targetUrl){
+  const attempts = [];
+  for (const wrap of proxyChain()){
+    const proxyUrl = wrap(targetUrl);
+    const proxyHost = (() => { try { return new URL(proxyUrl).host; } catch(e){ return proxyUrl.slice(0,30); } })();
+    try{
+      const res = await fetch(proxyUrl);
+      if (!res.ok) { attempts.push(`${proxyHost}: HTTP ${res.status}`); continue; }
+      return await res.text();
+    }catch(e){ attempts.push(`${proxyHost}: ${e.message || 'network error'}`); }
+  }
+  throw new Error(attempts.join(' | '));
+}
+
+/* ============================= PRICE FETCHING (Yahoo via CORS proxy) ============================= */
+async function fetchPriceFor(row){
+  const symbolClean = row.ticker.includes(':') ? row.ticker.split(':')[1] : row.ticker;
+  const candidates = [];
+  if (symbolClean) candidates.push(symbolClean + '.NS');
+  if (row.bseCode) candidates.push(row.bseCode + '.BO');
+  for (const sym of candidates){
+    try{
+      const target = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}`;
+      const text = await fetchViaProxyChain(target);
+      const data = JSON.parse(text);
+      const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
+      if (typeof price === 'number'){
+        priceCache[row.ticker] = { price, ts: Date.now() };
+        return;
+      }
+    }catch(e){ /* try next candidate */ }
+  }
+  priceCache[row.ticker] = { error: true, ts: Date.now() };
+}
+
+let fetchQueueRunning = false;
+async function kickOffPriceFetches(rows){
+  const pending = rows.filter(r => !priceCache[r.ticker] || (Date.now() - priceCache[r.ticker].ts > 60000));
+  if (!pending.length || fetchQueueRunning) return;
+  fetchQueueRunning = true;
+  setStatus('fetching prices…', false);
+  for (const row of pending){
+    await fetchPriceFor(row);
+    updatePriceCells(row.ticker);
+    await new Promise(res => setTimeout(res, 250)); // stagger to be gentle on the free proxy
+  }
+  fetchQueueRunning = false;
+  setStatus('live', true);
+}
+function updatePriceCells(ticker){
+  const tr = document.querySelector(`tr[data-key="${CSS.escape(ticker)}"]`);
+  if (!tr) return;
+  tr.querySelector('[data-cell="price"]').innerHTML = priceCellHtml(ticker);
+  tr.querySelector('[data-cell="vsupport"]').innerHTML = marginCellHtml(ticker,'support');
+  tr.querySelector('[data-cell="vresist"]').innerHTML = marginCellHtml(ticker,'resistance');
+}
+
+document.getElementById('btn-refresh-prices').addEventListener('click', () => {
+  priceCache = {};
+  render();
+});
+
+/* ============================= NEWS (Google News RSS via CORS proxy) ============================= */
+function openNews(ticker){
+  const row = allRows.find(r => r.ticker === ticker);
+  if (!row) return;
+  document.getElementById('drawer-ticker').textContent = row.ticker.replace('NSE:','');
+  document.getElementById('drawer-company').textContent = row.company;
+  document.getElementById('overlay').classList.add('visible');
+  document.getElementById('drawer').classList.add('open');
+  const body = document.getElementById('drawer-body');
+
+  const query = row.company || row.ticker;
+  if (newsCache[query]){
+    renderNews(newsCache[query]);
+    return;
+  }
+  body.innerHTML = '<div class="drawer-state"><span class="spinner"></span> Loading headlines…</div>';
+  fetchNews(query).then(items => {
+    newsCache[query] = items;
+    renderNews(items);
+  }).catch(err => {
+    body.innerHTML = `<div class="drawer-state">Couldn't load headlines.<br><br>
+      <span style="font-size:10.5px;">${err.message}</span><br><br>
+      If every proxy shows a network error, it's most likely an ad-blocker or
+      privacy extension blocking these proxy domains, or a network-level block —
+      try a private/incognito window with extensions off, or a different network.</div>`;
+  });
+}
+function renderNews(items){
+  const body = document.getElementById('drawer-body');
+  if (!items.length){
+    body.innerHTML = '<div class="drawer-state">No recent headlines found.</div>';
+    return;
+  }
+  body.innerHTML = items.map(it => `
+    <div class="news-item">
+      <a href="${it.link}" target="_blank" rel="noopener">${it.title}</a>
+      <div class="date">${it.pubDate ? new Date(it.pubDate).toLocaleString('en-IN') : ''}</div>
+    </div>`).join('');
+}
+async function fetchNews(query){
+  const rss = `https://news.google.com/rss/search?q=${encodeURIComponent(query + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
+  const text = await fetchViaProxyChain(rss);
+  const doc = new DOMParser().parseFromString(text, 'text/xml');
+  if (doc.querySelector('parsererror')) throw new Error('could not parse feed');
+  return Array.from(doc.querySelectorAll('item')).slice(0, 8).map(it => ({
+    title: it.querySelector('title')?.textContent || '(untitled)',
+    link: it.querySelector('link')?.textContent || '#',
+    pubDate: it.querySelector('pubDate')?.textContent || ''
+  }));
+}
+document.getElementById('drawer-close').addEventListener('click', closeDrawer);
+document.getElementById('overlay').addEventListener('click', closeDrawer);
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('visible');
+  document.getElementById('drawer').classList.remove('open');
+}
+
+/* ============================= SETTINGS ============================= */
+document.getElementById('btn-settings').addEventListener('click', () => {
+  const cfg = getConfig();
+  document.getElementById('cfg-sheet-id').value = cfg.sheetId;
+  document.getElementById('cfg-gid').value = cfg.gid;
+  document.getElementById('cfg-proxy').value = cfg.corsProxy;
+  document.getElementById('cfg-days').value = cfg.maxAgeDays;
+  document.getElementById('settings-overlay').classList.add('visible');
+});
+document.getElementById('settings-cancel').addEventListener('click', () => {
+  document.getElementById('settings-overlay').classList.remove('visible');
+});
+document.getElementById('settings-save').addEventListener('click', () => {
+  const cfg = {
+    sheetId: document.getElementById('cfg-sheet-id').value.trim(),
+    gid: document.getElementById('cfg-gid').value.trim(),
+    corsProxy: document.getElementById('cfg-proxy').value.trim(),
+    maxAgeDays: Number(document.getElementById('cfg-days').value) || 2
+  };
+  saveConfig(cfg);
+  document.getElementById('settings-overlay').classList.remove('visible');
+  document.getElementById('days-label').textContent = cfg.maxAgeDays;
+  loadAndRender();
+});
+
+/* ============================= FILTER BAR EVENTS ============================= */
+document.getElementById('filter-signal').addEventListener('change', render);
+document.getElementById('filter-search').addEventListener('input', render);
+document.getElementById('filter-showold').addEventListener('change', render);
+document.getElementById('btn-reload-sheet').addEventListener('click', loadAndRender);
+
+/* ============================= STATUS ============================= */
+function setStatus(text, ok){
+  document.getElementById('status-text').textContent = text;
+  document.getElementById('status-dot').style.background = ok ? 'var(--buy)' : 'var(--accent)';
+  document.getElementById('status-dot').style.boxShadow = `0 0 6px ${ok ? 'var(--buy)' : 'var(--accent)'}`;
+}
+
+/* ============================= INIT ============================= */
+async function loadAndRender(){
+  const cfg = getConfig();
+  document.getElementById('days-label').textContent = cfg.maxAgeDays;
+  setStatus('loading sheet…', false);
+  document.getElementById('table-body').innerHTML = '<tr class="empty-row"><td colspan="12">Loading sheet…</td></tr>';
+  try{
+    const resp = await loadSheet(cfg.sheetId, cfg.gid);
+    allRows = rowsFromGviz(resp);
+    priceCache = {};
+    render();
+    setStatus('live', true);
+  }catch(err){
+    document.getElementById('table-body').innerHTML =
+      `<tr class="empty-row"><td colspan="12">${err.message}</td></tr>`;
+    setStatus('error loading sheet', false);
+  }
+}
+function init(){
+  loadAndRender();
+}
+
+/* Login screen decorative tape with placeholder tickers before data loads */
+renderTape('tape-track-login', [
+  {ticker:'NSE:RELIANCE',trend:'BULLISH'},{ticker:'NSE:TCS',trend:'BEARISH'},
+  {ticker:'NSE:HDFCBANK',trend:'BULLISH'},{ticker:'NSE:INFY',trend:'BEARISH'},
+  {ticker:'NSE:SBIN',trend:'BULLISH'},{ticker:'NSE:ITC',trend:'BEARISH'}
+]);
+
+if (isLoggedIn()) showApp();
+</script>
+</body>
+</html>
