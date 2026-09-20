@@ -305,12 +305,13 @@
     <h2>Settings</h2>
     <p class="sub">
       Price and news lookups need a proxy to reach Yahoo Finance and Google News from
-      the browser. By default this points at a small local proxy (see server.js) —
-      run <code>node server.js</code> in the same folder and open the page through it
-      (http://localhost:8787/signal-desk.html) instead of double-clicking the file.
-      If that proxy isn't running, the app automatically falls back to a couple of
-      free public proxies, but those are shared, unauthenticated, and go down or get
-      rate-limited without warning — treat them as a backup, not the plan.<br><br>
+      the browser (GitHub Pages only serves static files, so it can't do this itself).
+      Deploy the included Cloudflare Worker (cloudflare-worker-proxy.js — free, no CLI,
+      instructions are in the file) and paste its URL below, e.g.
+      <code>https://signal-desk-proxy.you.workers.dev/?url=</code>.<br><br>
+      Until that's set, or if it's ever unreachable, the app falls back to a couple of
+      free public proxies — but those are shared, unauthenticated, and go down or get
+      rate-limited without warning, so treat them as a backup, not the plan.<br><br>
       The password below is checked against a hash baked into this file. Anyone who can
       view the page source can find and replace it, so treat this as a light deterrent —
       for real access control, put this behind a server-side login.
@@ -324,8 +325,8 @@
       <input type="text" id="cfg-gid" placeholder="e.g. 0">
     </div>
     <div class="field">
-      <label>CORS proxy (URL-prefix style)</label>
-      <input type="text" id="cfg-proxy">
+      <label>CORS proxy — your Cloudflare Worker URL (see cloudflare-worker-proxy.js)</label>
+      <input type="text" id="cfg-proxy" placeholder="https://signal-desk-proxy.you.workers.dev/?url=">
     </div>
     <div class="field">
       <label>Max entry age shown by default (days)</label>
@@ -343,7 +344,7 @@
 const DEFAULT_CONFIG = {
   sheetId: '1PyLCMjgDzMnCv_na-fNCnUr5tD6MwKL-bUmzHQrgFaE',
   gid: '',
-  corsProxy: 'http://localhost:8787/proxy?url=',
+  corsProxy: '',
   maxAgeDays: 2
 };
 // SHA-256 of the login password. Default password is "signaldesk2026" — change both
@@ -558,12 +559,13 @@ function marginCellHtml(ticker, which){
 // function that wraps a target URL.
 function proxyChain(){
   const cfg = getConfig();
-  const wrappers = [
-    url => cfg.corsProxy + encodeURIComponent(url),
+  const wrappers = [];
+  if (cfg.corsProxy) wrappers.push(url => cfg.corsProxy + encodeURIComponent(url));
+  wrappers.push(
     url => 'https://corsproxy.io/?url=' + encodeURIComponent(url),
     url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
     url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
-  ];
+  );
   // de-dupe in case the configured proxy is already one of the fallbacks
   const seen = new Set();
   return wrappers.filter(w => { const k = w('__probe__'); if (seen.has(k)) return false; seen.add(k); return true; });
