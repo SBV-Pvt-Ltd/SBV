@@ -557,14 +557,15 @@ function marginCellHtml(ticker, which){
 // Free public proxies are unreliable individually — try the configured one first,
 // then fall back through a couple of others before giving up. Each entry is a
 // function that wraps a target URL.
+/* ============================= CORS PROXY FALLBACK CHAIN ============================= */
 function proxyChain(){
   const cfg = getConfig();
   const wrappers = [];
   if (cfg.corsProxy) wrappers.push(url => cfg.corsProxy + encodeURIComponent(url));
   wrappers.push(
-    url => 'https://corsproxy.io/?url=' + encodeURIComponent(url),
-    url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url),
-    url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url)
+    url => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url),
+    url => 'https://thingproxy.freeboard.io/fetch/' + encodeURIComponent(url),
+    url => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(url)
   );
   // de-dupe in case the configured proxy is already one of the fallbacks
   const seen = new Set();
