@@ -19,8 +19,8 @@
 const ALLOWED_ORIGINS = [
   'https://saharshbhadani.com',
   'https://www.saharshbhadani.com',
-  'http://localhost:8787',   // remove once you're not testing locally
-  'null'                     // remove once you're not opening the file directly
+  'https://www.saharshbhadani.com/stocks_analysis/',
+  'https://www.saharshbhadani.com/stocks_analysis/signal-desk.html'
 ];
 
 const ALLOWED_HOSTS = [
@@ -57,19 +57,31 @@ export default {
     if (!ALLOWED_HOSTS.includes(targetUrl.hostname)) {
       return new Response('Host not allowed: ' + targetUrl.hostname, { status: 403, headers: corsHeaders });
     }
-
     try {
+      // Add standard browser headers to avoid Google News blocking cloud IPs
       const upstream = await fetch(targetUrl.toString(), {
+        method: 'GET',
         headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36'
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Cache-Control': 'no-cache'
         }
       });
+
+      if (!upstream.ok) {
+        return new Response(`Upstream returned HTTP ${upstream.status}`, {
+          status: upstream.status,
+          headers: corsHeaders
+        });
+      }
+
       const body = await upstream.arrayBuffer();
       return new Response(body, {
-        status: upstream.status,
+        status: 200,
         headers: {
           ...corsHeaders,
-          'Content-Type': upstream.headers.get('content-type') || 'text/plain'
+          'Content-Type': upstream.headers.get('content-type') || 'text/xml'
         }
       });
     } catch (err) {
