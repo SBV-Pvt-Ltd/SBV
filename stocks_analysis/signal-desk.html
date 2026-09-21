@@ -673,16 +673,40 @@ function renderNews(items){
     </div>`).join('');
 }
 async function fetchNews(query){
-  const rss = `https://news.google.com/rss/search?q=${encodeURIComponent(query + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
-  const text = await fetchViaProxyChain(rss);
-  const doc = new DOMParser().parseFromString(text, 'text/xml');
-  if (doc.querySelector('parsererror')) throw new Error('could not parse feed');
-  return Array.from(doc.querySelectorAll('item')).slice(0, 8).map(it => ({
-    title: it.querySelector('title')?.textContent || '(untitled)',
-    link: it.querySelector('link')?.textContent || '#',
-    pubDate: it.querySelector('pubDate')?.textContent || ''
+  const rssTarget = `https://news.google.com/rss/search?q=${encodeURIComponent(query + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
+  
+  // Try via your Cloudflare Worker proxy first
+  const cfg = getConfig();
+  if (cfg.corsProxy) {
+    try {
+      const text = await fetchViaProxyChain(rssTarget);
+      const doc = new DOMParser().parseFromString(text, 'text/xml');
+      if (!doc.querySelector('parsererror')) {
+        return Array.from(doc.querySelectorAll('item')).slice(0, 8).map(it => ({
+          title: it.querySelector('title')?.textContent || '(untitled)',
+          link: it.querySelector('link')?.textContent || '#',
+          pubDate: it.querySelector('pubDate')?.textContent || ''
+        }));
+      }
+    } catch (e) {
+      /* Fallback to rss2json if Worker or XML parsing fails */
+    }
+  }
+
+  // Backup: Free RSS-to-JSON API (returns structured JSON directly)
+  const jsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssTarget)}`;
+  const res = await fetch(jsonApi);
+  if (!res.ok) throw new Error(`News fetch failed (HTTP ${res.status})`);
+  const data = await res.json();
+  if (data.status !== 'ok' || !data.items) throw new Error('Could not parse news feed');
+  
+  return data.items.slice(0, 8).map(it => ({
+    title: it.title || '(untitled)',
+    link: it.link || '#',
+    pubDate: it.pubDate || ''
   }));
 }
+
 document.getElementById('drawer-close').addEventListener('click', closeDrawer);
 document.getElementById('overlay').addEventListener('click', closeDrawer);
 function closeDrawer(){
