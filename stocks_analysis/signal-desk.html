@@ -146,12 +146,75 @@
     padding:4px 10px;border-radius:2px;font-size:13px;
   }
   .newsbtn:hover{color:var(--accent);border-color:var(--accent);}
+  .watchbtn{
+    background:transparent;border:1px solid var(--border);color:var(--text-muted);
+    padding:4px 10px;border-radius:2px;font-size:13px;
+  }
+  .watchbtn.active{background:var(--accent);color:#FFF8EC;border-color:var(--accent);}
   .spinner{
     display:inline-block;width:11px;height:11px;border:2px solid var(--border);
     border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;
   }
   @keyframes spin{to{transform:rotate(360deg);}}
   .empty-row td{text-align:center;color:var(--text-muted);padding:40px 0;}
+
+  /* ---------- Horizontal tabs + panes ---------- */
+  .main-layout{display:flex;flex-direction:column;flex:1;overflow:hidden;}
+  .vtabs{
+    display:flex;flex-direction:row;flex-shrink:0;
+    border-bottom:1px solid var(--border);background:var(--surface);padding:0 20px;
+  }
+  .vtab{
+    background:none;border:none;text-align:left;padding:13px 18px;font-size:14px;
+    color:var(--text-muted);cursor:pointer;border-left:none;border-bottom:3px solid transparent;
+  }
+  .vtab:hover{color:var(--text);background:var(--surface-2);}
+  .vtab.active{color:var(--text);font-weight:600;border-bottom-color:var(--accent);background:none;}
+  .tab-content{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .tab-pane{display:none;flex:1;flex-direction:column;overflow:hidden;}
+  .tab-pane.active{display:flex;}
+
+  /* ---------- Wishlist layout (30/70) ---------- */
+  .wishlist-layout{display:flex;flex:1;overflow:hidden;}
+  .wishlist-tiles{
+    flex:0 0 30%;min-width:230px;overflow-y:auto;padding:14px;
+    display:flex;flex-direction:column;gap:10px;background:var(--bg);
+    border-right:1px solid var(--border);
+  }
+  .wishlist-charts{
+    flex:1 1 70%;overflow-y:auto;padding:16px;
+    display:flex;flex-direction:column;gap:18px;background:var(--surface);
+  }
+  .tile{
+    border-radius:6px;padding:12px 14px;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.08);border:2px solid transparent;
+  }
+  .tile.selected{border-color:var(--text);}
+  .tile-ticker{font-weight:700;font-size:15px;margin-bottom:6px;}
+  .tile-row{display:flex;justify-content:space-between;font-size:12.5px;opacity:0.92;gap:14px;}
+  .tile-controls{display:flex;flex-direction:column;gap:4px;}
+  .tile-btn{
+    background:rgba(255,255,255,0.28);border:none;color:inherit;
+    width:22px;height:22px;border-radius:3px;font-size:11px;line-height:1;cursor:pointer;
+  }
+  .tile-btn:disabled{opacity:0.3;cursor:default;}
+
+  /* ---------- Historical / candlestick charts ---------- */
+  .wishlist-ticker-heading{margin-bottom:2px;}
+  .wishlist-ticker-heading a{
+    font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;
+    color:var(--text);text-decoration:none;
+  }
+  .wishlist-ticker-heading a:hover{color:var(--accent);text-decoration:underline;}
+  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+  .chart-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+  .chart-head h3{margin:0;font-size:15px;font-family:'Space Grotesk',sans-serif;}
+  .range-group{display:flex;gap:4px;flex-wrap:wrap;}
+  .range-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:4px 9px;border-radius:3px;font-size:12px;}
+  .range-btn.active{background:var(--accent);color:#FFF8EC;border-color:var(--accent);}
+  .chart-status{color:var(--text-muted);font-size:12.5px;min-height:16px;margin-bottom:4px;}
+  .chart-canvas{width:100%;height:260px;display:block;}
 
   /* ---------- News drawer ---------- */
   #overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;display:none;}
@@ -238,49 +301,105 @@
     </div>
   </header>
 
-  <div class="filterbar">
-    <div class="grp">
-      <label for="filter-signal">Signal</label>
-      <select id="filter-signal">
-        <option value="ALL">All</option>
-        <option value="BUY">Buy</option>
-        <option value="SELL">Sell</option>
-        <option value="ACCUMULATE">Accumulate</option>
-        <option value="NEUTRAL">Neutral</option>
-      </select>
-    </div>
-    <div class="grp">
-      <label for="filter-search">Search</label>
-      <input type="text" id="filter-search" placeholder="ticker or company">
-    </div>
-    <div class="checkgrp">
-      <input type="checkbox" id="filter-showold">
-      <label for="filter-showold" style="margin:0;">Include entries older than <span id="days-label">2</span> days</label>
-    </div>
-    <div class="count" id="row-count"></div>
-  </div>
+  <div class="main-layout">
+    <nav class="vtabs">
+      <button class="vtab active" data-tab="all">All Stocks</button>
+      <button class="vtab" data-tab="wishlist">Wishlist</button>
+    </nav>
+    <div class="tab-content">
 
-  <div class="tablewrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Ticker</th>
-          <th>Signal</th>
-          <th>Pattern</th>
-          <th>Trend</th>
-          <th class="num">Support</th>
-          <th class="num">Resistance</th>
-          <th class="num">Price</th>
-          <th class="num">vs Support</th>
-          <th class="num">vs Resistance</th>
-          <th>Entry</th>
-          <th>News</th>
-        </tr>
-      </thead>
-      <tbody id="table-body">
-        <tr class="empty-row"><td colspan="11">Loading sheet…</td></tr>
-      </tbody>
-    </table>
+      <section id="tab-all" class="tab-pane active">
+        <div class="filterbar">
+          <div class="grp">
+            <label for="filter-signal">Signal</label>
+            <select id="filter-signal">
+              <option value="ALL">All</option>
+              <option value="BUY">Buy</option>
+              <option value="SELL">Sell</option>
+              <option value="ACCUMULATE">Accumulate</option>
+              <option value="NEUTRAL">Neutral</option>
+            </select>
+          </div>
+          <div class="grp">
+            <label for="filter-search">Search</label>
+            <input type="text" id="filter-search" placeholder="ticker or company">
+          </div>
+          <div class="checkgrp">
+            <input type="checkbox" id="filter-showold">
+            <label for="filter-showold" style="margin:0;">Include entries older than <span id="days-label">2</span> days</label>
+          </div>
+          <div class="count" id="row-count"></div>
+        </div>
+
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Ticker</th>
+                <th>Signal</th>
+                <th>Pattern</th>
+                <th>Trend</th>
+                <th class="num">Support</th>
+                <th class="num">Resistance</th>
+                <th class="num">Price</th>
+                <th class="num">vs Support</th>
+                <th class="num">vs Resistance</th>
+                <th>Entry</th>
+                <th>News</th>
+                <th>Watch</th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <tr class="empty-row"><td colspan="12">Loading sheet…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tab-wishlist" class="tab-pane">
+        <div class="wishlist-layout">
+          <div class="wishlist-tiles" id="wishlist-tiles"></div>
+          <div class="wishlist-charts">
+            <div class="wishlist-ticker-heading">
+              <a id="wishlist-ticker-link" href="#" target="_blank" rel="noopener">—</a>
+            </div>
+            <div class="chart-card">
+              <div class="chart-head">
+                <h3>Price History</h3>
+                <div class="range-group" data-chart="line">
+                  <button class="range-btn" data-range="1W">1W</button>
+                  <button class="range-btn active" data-range="1M">1M</button>
+                  <button class="range-btn" data-range="3M">3M</button>
+                  <button class="range-btn" data-range="6M">6M</button>
+                  <button class="range-btn" data-range="1Y">1Y</button>
+                  <button class="range-btn" data-range="3Y">3Y</button>
+                  <button class="range-btn" data-range="5Y">5Y</button>
+                </div>
+              </div>
+              <div class="chart-status" id="line-chart-status">Select a stock from the list to view its chart.</div>
+              <canvas class="chart-canvas" id="line-chart-canvas"></canvas>
+            </div>
+            <div class="chart-card">
+              <div class="chart-head">
+                <h3>Candlestick</h3>
+                <div class="range-group" data-chart="candle">
+                  <button class="range-btn" data-range="1W">1W</button>
+                  <button class="range-btn active" data-range="1M">1M</button>
+                  <button class="range-btn" data-range="3M">3M</button>
+                  <button class="range-btn" data-range="6M">6M</button>
+                  <button class="range-btn" data-range="1Y">1Y</button>
+                  <button class="range-btn" data-range="3Y">3Y</button>
+                  <button class="range-btn" data-range="5Y">5Y</button>
+                </div>
+              </div>
+              <div class="chart-status" id="candle-chart-status">Select a stock from the list to view its chart.</div>
+              <canvas class="chart-canvas" id="candle-chart-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   </div>
 </div>
 
@@ -400,6 +519,50 @@ document.getElementById('btn-logout').addEventListener('click', () => {
   location.reload();
 });
 
+/* ============================= WISHLIST STORAGE ============================= */
+function getWishlist(){
+  try{ return JSON.parse(localStorage.getItem('signalDeskWishlist') || '[]'); }catch(e){ return []; }
+}
+function saveWishlist(arr){ localStorage.setItem('signalDeskWishlist', JSON.stringify(arr)); }
+function isWishlisted(ticker){ return getWishlist().includes(ticker); }
+function toggleWishlist(ticker){
+  const wl = getWishlist();
+  const idx = wl.indexOf(ticker);
+  if (idx >= 0) wl.splice(idx, 1); else wl.push(ticker);
+  saveWishlist(wl);
+}
+function moveWishlistItem(ticker, dir){
+  const wl = getWishlist();
+  const idx = wl.indexOf(ticker);
+  if (idx < 0) return;
+  const swapWith = dir === 'up' ? idx - 1 : idx + 1;
+  if (swapWith < 0 || swapWith >= wl.length) return;
+  [wl[idx], wl[swapWith]] = [wl[swapWith], wl[idx]];
+  saveWishlist(wl);
+}
+
+/* ============================= SIGNAL COLOR / CONTRAST TEXT ============================= */
+const SIGNAL_HEX = { BUY:'#1F9D55', SELL:'#D0393B', ACCUMULATE:'#2F6FED', NEUTRAL:'#6B7280' };
+function contrastText(hex){
+  const clean = hex.replace('#','');
+  const r = parseInt(clean.substring(0,2),16), g = parseInt(clean.substring(2,4),16), b = parseInt(clean.substring(4,6),16);
+  const luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+  return luminance > 0.55 ? '#14171C' : '#FFFFFF';
+}
+
+/* ============================= TABS ============================= */
+let currentTab = 'all';
+function switchTab(tab){
+  currentTab = tab;
+  document.querySelectorAll('.vtab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.toggle('active', p.id === 'tab-' + tab));
+  if (tab === 'wishlist'){
+    renderWishlistTiles();
+    if (selectedWishlistTicker) loadAndRenderCharts();
+  }
+}
+document.querySelectorAll('.vtab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
 /* ============================= INDICES BAR ============================= */
 const INDEX_SYMBOLS = [
   { key: 'sensex',    symbol: '^BSESN'  },
@@ -407,14 +570,10 @@ const INDEX_SYMBOLS = [
   { key: 'banknifty', symbol: '^NSEBANK'}
 ];
 async function fetchIndex(symbol){
-  try{
-    const target = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}`;
-    const text = await fetchViaProxyChain(target);
-    const data = JSON.parse(text);
-    const meta = data?.chart?.result?.[0]?.meta;
-    if (!meta || typeof meta.regularMarketPrice !== 'number') return null;
-    return { price: meta.regularMarketPrice, changePercent: meta.regularMarketChangePercent };
-  }catch(e){ return null; }
+  const result = await fetchYahooChart(symbol);
+  const meta = result && result.meta;
+  if (!meta || typeof meta.regularMarketPrice !== 'number') return null;
+  return { price: meta.regularMarketPrice, changePercent: meta.regularMarketChangePercent };
 }
 function updateIndexCell(key, data){
   const el = document.querySelector(`.index-item[data-index="${key}"]`);
@@ -531,11 +690,12 @@ function render(){
   document.getElementById('row-count').textContent = `${rows.length} of ${allRows.length} signals`;
   const tbody = document.getElementById('table-body');
   if (!rows.length){
-    tbody.innerHTML = '<tr class="empty-row"><td colspan="11">No signals match these filters.</td></tr>';
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="12">No signals match these filters.</td></tr>';
     return;
   }
   tbody.innerHTML = rows.map((r, idx) => {
     const key = r.ticker;
+    const watched = isWishlisted(key);
     return `<tr data-key="${key}">
       <td class="ticker-cell">${r.ticker.replace('NSE:','')}</td>
       <td><span class="badge badge-${r.signal}">${r.signal||'—'}</span></td>
@@ -548,11 +708,23 @@ function render(){
       <td class="num" data-cell="vresist">${marginCellHtml(key,'resistance')}</td>
       <td class="muted">${fmtEntry(r.entryDate)}</td>
       <td><button class="newsbtn" data-news="${key}">Headlines</button></td>
+      <td><button class="watchbtn ${watched?'active':''}" data-watch="${key}">${watched?'Remove':'Add'}</button></td>
     </tr>`;
   }).join('');
 
   document.querySelectorAll('[data-news]').forEach(btn => {
     btn.addEventListener('click', () => openNews(btn.getAttribute('data-news')));
+  });
+  document.querySelectorAll('[data-watch]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ticker = btn.getAttribute('data-watch');
+      toggleWishlist(ticker);
+      const nowWatched = isWishlisted(ticker);
+      btn.textContent = nowWatched ? 'Remove' : 'Add';
+      btn.classList.toggle('active', nowWatched);
+      if (!nowWatched && selectedWishlistTicker === ticker) selectedWishlistTicker = null;
+      if (currentTab === 'wishlist') renderWishlistTiles();
+    });
   });
 
   kickOffPriceFetches(rows);
@@ -562,7 +734,8 @@ function priceCellHtml(ticker){
   const c = priceCache[ticker];
   if (!c) return '<span class="spinner"></span>';
   if (c.error) return '<span class="muted">n/a</span>';
-  return fmtNum(c.price);
+  const tag = c.source === 'nse' ? ' <span class="muted" style="font-size:10px;">NSE</span>' : '';
+  return fmtNum(c.price) + tag;
 }
 function marginCellHtml(ticker, which){
   const c = priceCache[ticker];
@@ -608,25 +781,70 @@ async function fetchViaProxyChain(targetUrl){
   throw new Error(attempts.join(' | '));
 }
 
-/* ============================= PRICE FETCHING (Yahoo via CORS proxy) ============================= */
-async function fetchPriceFor(row){
+/* ============================= PRICE FETCHING (Yahoo via CORS proxy, multi-host) ============================= */
+// Yahoo serves the same data from two independent edge hosts. If one is down,
+// rate-limited, or erroring for a given symbol, the other often still works —
+// so every Yahoo lookup in this app tries both before giving up on that symbol.
+const YAHOO_HOSTS = ['query1.finance.yahoo.com', 'query2.finance.yahoo.com'];
+function yahooCandidates(row){
   const symbolClean = row.ticker.includes(':') ? row.ticker.split(':')[1] : row.ticker;
   const candidates = [];
   if (symbolClean) candidates.push(symbolClean + '.NS');
   if (row.bseCode) candidates.push(row.bseCode + '.BO');
-  for (const sym of candidates){
+  return candidates;
+}
+async function fetchYahooChart(symbol, extraParams){
+  extraParams = extraParams || '';
+  for (const host of YAHOO_HOSTS){
     try{
-      const target = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}`;
+      const target = `https://${host}/v8/finance/chart/${encodeURIComponent(symbol)}${extraParams}`;
       const text = await fetchViaProxyChain(target);
       const data = JSON.parse(text);
-      const price = data?.chart?.result?.[0]?.meta?.regularMarketPrice;
-      if (typeof price === 'number'){
-        priceCache[row.ticker] = { price, ts: Date.now() };
-        return;
-      }
-    }catch(e){ /* try next candidate */ }
+      const result = data && data.chart && data.chart.result && data.chart.result[0];
+      if (result) return result;
+    }catch(e){ /* try next host */ }
+  }
+  return null;
+}
+async function fetchPriceFor(row){
+  const candidates = yahooCandidates(row);
+  for (const sym of candidates){
+    const result = await fetchYahooChart(sym);
+    const price = result && result.meta && result.meta.regularMarketPrice;
+    if (typeof price === 'number'){
+      priceCache[row.ticker] = { price, ts: Date.now() };
+      return;
+    }
+  }
+  // Yahoo had nothing on either host for any symbol variant — last resort:
+  // NSE India's own quote API, via the Worker's dedicated /nse-quote route.
+  const nsePrice = await fetchNsePriceFallback(row);
+  if (typeof nsePrice === 'number'){
+    priceCache[row.ticker] = { price: nsePrice, ts: Date.now(), source: 'nse' };
+    return;
   }
   priceCache[row.ticker] = { error: true, ts: Date.now() };
+}
+function nseQuoteEndpoint(symbol){
+  const cfg = getConfig();
+  if (!cfg.corsProxy) return null; // only works through your own deployed Worker
+  try{
+    const proxyOrigin = new URL(cfg.corsProxy).origin;
+    return `${proxyOrigin}/nse-quote?symbol=${encodeURIComponent(symbol)}`;
+  }catch(e){ return null; }
+}
+async function fetchNsePriceFallback(row){
+  const symbolClean = row.ticker.includes(':') ? row.ticker.split(':')[1] : row.ticker;
+  if (!symbolClean) return null;
+  const url = nseQuoteEndpoint(symbolClean);
+  if (!url) return null;
+  try{
+    const res = await fetch(url);
+    if (!res.ok) return null;
+    const data = await res.json();
+    const price = data && data.priceInfo && data.priceInfo.lastPrice;
+    return typeof price === 'number' ? price : null;
+  }catch(e){ return null; }
 }
 
 let fetchQueueRunning = false;
@@ -638,6 +856,7 @@ async function kickOffPriceFetches(rows){
   for (const row of pending){
     await fetchPriceFor(row);
     updatePriceCells(row.ticker);
+    if (currentTab === 'wishlist' && isWishlisted(row.ticker)) renderWishlistTiles();
     await new Promise(res => setTimeout(res, 250)); // stagger to be gentle on the free proxy
   }
   fetchQueueRunning = false;
@@ -656,6 +875,305 @@ document.getElementById('btn-refresh-prices').addEventListener('click', () => {
   render();
   loadIndices();
 });
+
+/* ============================= WISHLIST TILES ============================= */
+let selectedWishlistTicker = null;
+
+function renderWishlistTiles(){
+  const wl = getWishlist();
+  const container = document.getElementById('wishlist-tiles');
+  if (!wl.length){
+    container.innerHTML = '<div class="drawer-state">No stocks in your wishlist yet — add some from the All Stocks tab.</div>';
+    selectedWishlistTicker = null;
+    clearChartsUI();
+    return;
+  }
+
+  container.innerHTML = wl.map((ticker, i) => {
+    const row = allRows.find(r => r.ticker === ticker);
+    if (!row) return '';
+    const bg = SIGNAL_HEX[row.signal] || SIGNAL_HEX.NEUTRAL;
+    const fg = contrastText(bg);
+    const priceInfo = priceCache[ticker];
+    const priceText = !priceInfo ? '…' : (priceInfo.error ? 'n/a' : fmtNum(priceInfo.price) + (priceInfo.source === 'nse' ? ' (NSE)' : ''));
+    const selectedCls = ticker === selectedWishlistTicker ? ' selected' : '';
+    return `<div class="tile${selectedCls}" data-tile="${ticker}" style="background:${bg};color:${fg};">
+      <div class="tile-main">
+        <div class="tile-ticker">${ticker.replace('NSE:','')}</div>
+        <div class="tile-row"><span>Price</span><span>${priceText}</span></div>
+        <div class="tile-row"><span>Support</span><span>${fmtNum(row.support)}</span></div>
+        <div class="tile-row"><span>Resistance</span><span>${fmtNum(row.resistance)}</span></div>
+      </div>
+      <div class="tile-controls">
+        <button class="tile-btn" data-move="up" data-tile-move="${ticker}" ${i===0?'disabled':''} title="Move up">▲</button>
+        <button class="tile-btn" data-move="down" data-tile-move="${ticker}" ${i===wl.length-1?'disabled':''} title="Move down">▼</button>
+        <button class="tile-btn" data-tile-remove="${ticker}" title="Remove from wishlist">×</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  container.querySelectorAll('[data-tile]').forEach(el => {
+    el.addEventListener('click', e => {
+      if (e.target.closest('.tile-controls')) return;
+      selectedWishlistTicker = el.getAttribute('data-tile');
+      renderWishlistTiles();
+      loadAndRenderCharts();
+    });
+  });
+  container.querySelectorAll('[data-tile-move]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      moveWishlistItem(btn.getAttribute('data-tile-move'), btn.getAttribute('data-move'));
+      renderWishlistTiles();
+    });
+  });
+  container.querySelectorAll('[data-tile-remove]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const ticker = btn.getAttribute('data-tile-remove');
+      toggleWishlist(ticker);
+      if (selectedWishlistTicker === ticker) selectedWishlistTicker = null;
+      renderWishlistTiles();
+      render(); // keep the All Stocks Watch buttons in sync
+    });
+  });
+
+  // Make sure prices are being fetched for wishlisted tickers even if the
+  // All Stocks filters would otherwise hide them.
+  const wlRows = wl.map(t => allRows.find(r => r.ticker === t)).filter(Boolean);
+  kickOffPriceFetches(wlRows);
+
+  if (!selectedWishlistTicker){
+    selectedWishlistTicker = wl[0];
+    loadAndRenderCharts();
+  }
+}
+
+function clearChartsUI(){
+  updateWishlistTickerHeader();
+  ['line','candle'].forEach(kind => {
+    document.getElementById(`${kind}-chart-status`).textContent = 'Select a stock from the list to view its chart.';
+    const canvas = document.getElementById(`${kind}-chart-canvas`);
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  });
+}
+
+/* ============================= HISTORICAL / CANDLESTICK CHARTS ============================= */
+// Fetch daily bars for the past 5 years ONCE per ticker, then slice client-side
+// for whichever range button is selected — avoids Yahoo's flakier intraday (1W)
+// and weekly (3Y/5Y) intervals entirely.
+const RANGE_DAYS = { '1W':7, '1M':31, '3M':93, '6M':186, '1Y':366, '3Y':1097, '5Y':1830 };
+let lineRange = '1M';
+let candleRange = '1M';
+let histCache = {}; // ticker -> full 5y daily points
+
+function sliceRange(points, rangeKey){
+  if (rangeKey === '5Y') return points;
+  const days = RANGE_DAYS[rangeKey] || RANGE_DAYS['1M'];
+  const cutoff = Date.now() - days*24*60*60*1000;
+  const sliced = points.filter(p => p.t >= cutoff);
+  return sliced.length ? sliced : points.slice(-5);
+}
+
+async function fetchHistorical(row){
+  const candidates = yahooCandidates(row);
+  for (const sym of candidates){
+    const result = await fetchYahooChart(sym, '?range=5y&interval=1d');
+    if (!result) continue;
+    const ts = result.timestamp || [];
+    const quote = (result.indicators && result.indicators.quote && result.indicators.quote[0]) || {};
+    const opens = quote.open || [], highs = quote.high || [], lows = quote.low || [], closes = quote.close || [];
+    const points = [];
+    for (let i = 0; i < ts.length; i++){
+      if (closes[i] == null || highs[i] == null || lows[i] == null || opens[i] == null) continue;
+      points.push({ t: ts[i]*1000, o: opens[i], h: highs[i], l: lows[i], c: closes[i] });
+    }
+    if (points.length) return points;
+  }
+  throw new Error('No historical data available');
+}
+async function getHistPoints(row){
+  const cacheKey = row.ticker;
+  if (histCache[cacheKey]) return histCache[cacheKey];
+  const points = await fetchHistorical(row);
+  histCache[cacheKey] = points;
+  return points;
+}
+
+function updateWishlistTickerHeader(){
+  const linkEl = document.getElementById('wishlist-ticker-link');
+  if (!linkEl) return;
+  if (!selectedWishlistTicker){
+    linkEl.textContent = '—';
+    linkEl.removeAttribute('href');
+    return;
+  }
+  const row = allRows.find(r => r.ticker === selectedWishlistTicker);
+  const label = selectedWishlistTicker.replace('NSE:','') + (row && row.company ? ' · ' + row.company : '');
+  linkEl.textContent = label;
+  const candidates = row ? yahooCandidates(row) : [];
+  const ySymbol = candidates[0] || selectedWishlistTicker.replace('NSE:','');
+  linkEl.href = `https://finance.yahoo.com/quote/${encodeURIComponent(ySymbol)}`;
+}
+
+function loadAndRenderCharts(){
+  updateWishlistTickerHeader();
+  if (!selectedWishlistTicker) return;
+  renderLineChart();
+  renderCandleChart();
+}
+async function renderLineChart(){
+  const row = allRows.find(r => r.ticker === selectedWishlistTicker);
+  const statusEl = document.getElementById('line-chart-status');
+  const canvas = document.getElementById('line-chart-canvas');
+  if (!row) return;
+  statusEl.textContent = 'Loading…';
+  try{
+    const full = await getHistPoints(row);
+    const points = sliceRange(full, lineRange);
+    drawLineChart(canvas, points);
+    statusEl.textContent = '';
+  }catch(err){
+    statusEl.textContent = 'Chart unavailable: ' + err.message;
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+async function renderCandleChart(){
+  const row = allRows.find(r => r.ticker === selectedWishlistTicker);
+  const statusEl = document.getElementById('candle-chart-status');
+  const canvas = document.getElementById('candle-chart-canvas');
+  if (!row) return;
+  statusEl.textContent = 'Loading…';
+  try{
+    const full = await getHistPoints(row);
+    const points = sliceRange(full, candleRange);
+    drawCandlestickChart(canvas, points);
+    statusEl.textContent = '';
+  }catch(err){
+    statusEl.textContent = 'Chart unavailable: ' + err.message;
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  }
+}
+
+document.querySelectorAll('.range-group[data-chart="line"] .range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.range-group[data-chart="line"] .range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    lineRange = btn.getAttribute('data-range');
+    renderLineChart();
+  });
+});
+document.querySelectorAll('.range-group[data-chart="candle"] .range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.range-group[data-chart="candle"] .range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    candleRange = btn.getAttribute('data-range');
+    renderCandleChart();
+  });
+});
+
+function getCssVar(name){
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function fmtAxisDate(d){
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short' });
+}
+function setupCanvas(canvas){
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = Math.max(1, rect.width * dpr);
+  canvas.height = Math.max(1, rect.height * dpr);
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return ctx;
+}
+function drawLineChart(canvas, points){
+  const ctx = setupCanvas(canvas);
+  const rect = canvas.getBoundingClientRect();
+  const W = rect.width, H = rect.height;
+  const pad = { top:10, right:10, bottom:20, left:56 };
+  ctx.clearRect(0, 0, W, H);
+  if (!points.length) return;
+  const closes = points.map(p => p.c);
+  const min = Math.min(...closes), max = Math.max(...closes);
+  const spanY = (max - min) || 1;
+  const plotW = W - pad.left - pad.right, plotH = H - pad.top - pad.bottom;
+  const xForI = i => pad.left + (i/((points.length-1)||1)) * plotW;
+  const yForV = v => pad.top + plotH - ((v-min)/spanY) * plotH;
+
+  ctx.strokeStyle = getCssVar('--border');
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '11px IBM Plex Mono, monospace';
+  ctx.lineWidth = 1;
+  [min, (min+max)/2, max].forEach(v => {
+    const y = yForV(v);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W-pad.right, y); ctx.stroke();
+    ctx.fillText(v.toFixed(2), 4, y+4);
+  });
+
+  ctx.beginPath();
+  points.forEach((p,i) => {
+    const x = xForI(i), y = yForV(p.c);
+    if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle = getCssVar('--accent');
+  ctx.lineWidth = 1.6;
+  ctx.stroke();
+
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '10px IBM Plex Mono, monospace';
+  const first = new Date(points[0].t), last = new Date(points[points.length-1].t);
+  ctx.fillText(fmtAxisDate(first), pad.left, H-4);
+  const lastLabel = fmtAxisDate(last);
+  ctx.fillText(lastLabel, W - pad.right - ctx.measureText(lastLabel).width, H-4);
+}
+function drawCandlestickChart(canvas, points){
+  const ctx = setupCanvas(canvas);
+  const rect = canvas.getBoundingClientRect();
+  const W = rect.width, H = rect.height;
+  const pad = { top:10, right:10, bottom:20, left:56 };
+  ctx.clearRect(0, 0, W, H);
+  if (!points.length) return;
+  const highs = points.map(p => p.h), lows = points.map(p => p.l);
+  const min = Math.min(...lows), max = Math.max(...highs);
+  const spanY = (max - min) || 1;
+  const plotW = W - pad.left - pad.right, plotH = H - pad.top - pad.bottom;
+  const n = points.length;
+  const slot = plotW / n;
+  const bodyW = Math.max(1, slot*0.6);
+  const yForV = v => pad.top + plotH - ((v-min)/spanY) * plotH;
+
+  ctx.strokeStyle = getCssVar('--border');
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '11px IBM Plex Mono, monospace';
+  ctx.lineWidth = 1;
+  [min, (min+max)/2, max].forEach(v => {
+    const y = yForV(v);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W-pad.right, y); ctx.stroke();
+    ctx.fillText(v.toFixed(2), 4, y+4);
+  });
+
+  points.forEach((p,i) => {
+    const xCenter = pad.left + slot*i + slot/2;
+    const up = p.c >= p.o;
+    const color = getCssVar(up ? '--buy' : '--sell');
+    ctx.strokeStyle = color; ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(xCenter, yForV(p.h));
+    ctx.lineTo(xCenter, yForV(p.l));
+    ctx.stroke();
+    const yOpen = yForV(p.o), yClose = yForV(p.c);
+    const top = Math.min(yOpen, yClose), h = Math.max(1, Math.abs(yClose-yOpen));
+    ctx.fillRect(xCenter - bodyW/2, top, bodyW, h);
+  });
+
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '10px IBM Plex Mono, monospace';
+  const first = new Date(points[0].t), last = new Date(points[points.length-1].t);
+  ctx.fillText(fmtAxisDate(first), pad.left, H-4);
+  const lastLabel = fmtAxisDate(last);
+  ctx.fillText(lastLabel, W - pad.right - ctx.measureText(lastLabel).width, H-4);
+}
 
 /* ============================= NEWS (Google News RSS via CORS proxy) ============================= */
 function openNews(ticker){
@@ -781,16 +1299,17 @@ async function loadAndRender(){
   const cfg = getConfig();
   document.getElementById('days-label').textContent = cfg.maxAgeDays;
   setStatus('loading sheet…', false);
-  document.getElementById('table-body').innerHTML = '<tr class="empty-row"><td colspan="11">Loading sheet…</td></tr>';
+  document.getElementById('table-body').innerHTML = '<tr class="empty-row"><td colspan="12">Loading sheet…</td></tr>';
   try{
     const resp = await loadSheet(cfg.sheetId, cfg.gid);
     allRows = rowsFromGviz(resp);
     priceCache = {};
     render();
+    if (currentTab === 'wishlist') renderWishlistTiles();
     setStatus('live', true);
   }catch(err){
     document.getElementById('table-body').innerHTML =
-      `<tr class="empty-row"><td colspan="11">${err.message}</td></tr>`;
+      `<tr class="empty-row"><td colspan="12">${err.message}</td></tr>`;
     setStatus('error loading sheet', false);
   }
 }
