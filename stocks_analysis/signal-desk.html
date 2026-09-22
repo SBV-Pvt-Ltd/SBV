@@ -1078,6 +1078,63 @@ function getCssVar(name){
 function fmtAxisDate(d){
   return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short' });
 }
+
+/* ---- Local maxima/minima detection + labeling, shared by both charts ---- */
+function detectExtrema(values, kind, cap){
+  const n = values.length;
+  if (n < 3) return [];
+  const window = Math.max(2, Math.round(n * 0.03));
+  const candidates = [];
+  for (let i = 0; i < n; i++){
+    let ok = true;
+    for (let j = Math.max(0, i-window); j <= Math.min(n-1, i+window); j++){
+      if (j === i) continue;
+      if (kind === 'max' && values[j] > values[i]) { ok = false; break; }
+      if (kind === 'min' && values[j] < values[i]) { ok = false; break; }
+    }
+    if (ok) candidates.push(i);
+  }
+  // Merge runs of adjacent candidates (flat/noisy patches) into one point each.
+  candidates.sort((a,b) => a-b);
+  const merged = [];
+  let clusterStart = 0;
+  for (let i = 1; i <= candidates.length; i++){
+    if (i === candidates.length || candidates[i] - candidates[i-1] > window){
+      const cluster = candidates.slice(clusterStart, i);
+      let best = cluster[0];
+      cluster.forEach(idx => {
+        if (kind === 'max' ? values[idx] > values[best] : values[idx] < values[best]) best = idx;
+      });
+      merged.push(best);
+      clusterStart = i;
+    }
+  }
+  // Keep only the most prominent ones so the chart doesn't get buried in labels.
+  merged.sort((a,b) => kind === 'max' ? values[b]-values[a] : values[a]-values[b]);
+  return merged.slice(0, cap);
+}
+function drawExtremaMarkers(ctx, points, indices, xForI, yForV, valueFn, kind, W, pad){
+  ctx.font = '10px IBM Plex Mono, monospace';
+  const color = getCssVar(kind === 'max' ? '--buy' : '--sell');
+  indices.forEach(i => {
+    const v = valueFn(points[i]);
+    const x = xForI(i), y = yForV(v);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, 2.6, 0, Math.PI*2);
+    ctx.fill();
+
+    const label = `${fmtAxisDate(new Date(points[i].t))} · ${v.toFixed(2)}`;
+    const textW = ctx.measureText(label).width;
+    let textX = x - textW/2;
+    if (textX < pad.left) textX = pad.left;
+    if (textX + textW > W - pad.right) textX = W - pad.right - textW;
+    const textY = kind === 'max' ? Math.max(y - 8, pad.top + 9) : Math.min(y + 15, /* leave room for x-axis labels */ 9999);
+    ctx.fillStyle = getCssVar('--text');
+    ctx.fillText(label, textX, textY);
+  });
+}
+
 function setupCanvas(canvas){
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
@@ -1119,6 +1176,11 @@ function drawLineChart(canvas, points){
   ctx.strokeStyle = getCssVar('--accent');
   ctx.lineWidth = 1.6;
   ctx.stroke();
+
+  const maxima = detectExtrema(closes, 'max', 4);
+  const minima = detectExtrema(closes, 'min', 4);
+  drawExtremaMarkers(ctx, points, maxima, xForI, yForV, p => p.c, 'max', W, pad);
+  drawExtremaMarkers(ctx, points, minima, xForI, yForV, p => p.c, 'min', W, pad);
 
   ctx.fillStyle = getCssVar('--text-muted');
   ctx.font = '10px IBM Plex Mono, monospace';
@@ -1166,6 +1228,12 @@ function drawCandlestickChart(canvas, points){
     const top = Math.min(yOpen, yClose), h = Math.max(1, Math.abs(yClose-yOpen));
     ctx.fillRect(xCenter - bodyW/2, top, bodyW, h);
   });
+
+  const xForI = i => pad.left + slot*i + slot/2;
+  const maxima = detectExtrema(highs, 'max', 4);
+  const minima = detectExtrema(lows, 'min', 4);
+  drawExtremaMarkers(ctx, points, maxima, xForI, yForV, p => p.h, 'max', W, pad);
+  drawExtremaMarkers(ctx, points, minima, xForI, yForV, p => p.l, 'min', W, pad);
 
   ctx.fillStyle = getCssVar('--text-muted');
   ctx.font = '10px IBM Plex Mono, monospace';
