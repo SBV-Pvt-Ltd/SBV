@@ -207,7 +207,15 @@
     color:var(--text);text-decoration:none;
   }
   .wishlist-ticker-heading a:hover{color:var(--accent);text-decoration:underline;}
-  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+  .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;position:relative;}
+  .chart-tooltip{
+    display:none;position:absolute;z-index:20;pointer-events:none;
+    background:var(--surface);border:1px solid var(--border);border-radius:4px;
+    padding:6px 9px;font-size:11.5px;line-height:1.6;box-shadow:0 2px 8px rgba(0,0,0,0.18);
+    max-width:220px;
+  }
+  .tt-row{display:flex;align-items:center;gap:6px;white-space:nowrap;}
+  .tt-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
   .chart-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
   .chart-head h3{margin:0;font-size:15px;font-family:'Space Grotesk',sans-serif;}
   .range-group{display:flex;gap:4px;flex-wrap:wrap;}
@@ -397,6 +405,7 @@
               <div class="chart-status" id="candle-chart-status">Select a stock from the list to view its chart.</div>
               <div class="pattern-legend">Boxes: <span class="pattern-legend-swatch" style="background:var(--buy);"></span>bullish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--sell);"></span>bearish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--text-muted);"></span>neutral / indecision</div>
               <canvas class="chart-canvas" id="candle-chart-canvas"></canvas>
+              <div class="chart-tooltip" id="candle-chart-tooltip"></div>
             </div>
           </div>
         </div>
@@ -959,6 +968,9 @@ function clearChartsUI(){
     const canvas = document.getElementById(`${kind}-chart-canvas`);
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   });
+  candleBoxes = [];
+  const tt = document.getElementById('candle-chart-tooltip');
+  if (tt) tt.style.display = 'none';
 }
 
 /* ============================= HISTORICAL / CANDLESTICK CHARTS ============================= */
@@ -969,6 +981,7 @@ const RANGE_DAYS = { '1W':7, '1M':31, '3M':93, '6M':186, '1Y':366, '3Y':1097, '5
 let lineRange = '1M';
 let candleRange = '1M';
 let histCache = {}; // ticker -> full 5y daily points
+let candleBoxes = []; // detected-pattern box rects (CSS px, canvas-relative) for tooltip hit-testing
 
 function sliceRange(points, rangeKey){
   if (rangeKey === '5Y') return points;
@@ -1078,6 +1091,32 @@ document.querySelectorAll('.range-group[data-chart="candle"] .range-btn').forEac
     renderCandleChart();
   });
 });
+
+/* ---- Pattern box hover tooltip ---- */
+const candleCanvasEl = document.getElementById('candle-chart-canvas');
+const candleTooltipEl = document.getElementById('candle-chart-tooltip');
+candleCanvasEl.addEventListener('mousemove', e => {
+  const rect = candleCanvasEl.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  const hits = candleBoxes.filter(b => mx >= b.x1 && mx <= b.x2 && my >= b.y1 && my <= b.y2);
+  if (!hits.length){ candleTooltipEl.style.display = 'none'; return; }
+
+  candleTooltipEl.innerHTML = hits.map(b =>
+    `<div class="tt-row"><span class="tt-dot" style="background:${b.color};"></span>${b.name}</div>`
+  ).join('');
+  candleTooltipEl.style.display = 'block';
+
+  const cardEl = candleCanvasEl.closest('.chart-card');
+  const cardRect = cardEl.getBoundingClientRect();
+  const offsetX = rect.left - cardRect.left, offsetY = rect.top - cardRect.top;
+  let left = offsetX + mx + 14, top = offsetY + my + 14;
+  const tw = candleTooltipEl.offsetWidth, th = candleTooltipEl.offsetHeight;
+  if (left + tw > cardRect.width - 4) left = offsetX + mx - tw - 14;
+  if (top + th > cardRect.height - 4) top = offsetY + my - th - 14;
+  candleTooltipEl.style.left = Math.max(4, left) + 'px';
+  candleTooltipEl.style.top = Math.max(4, top) + 'px';
+});
+candleCanvasEl.addEventListener('mouseleave', () => { candleTooltipEl.style.display = 'none'; });
 
 function getCssVar(name){
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -1367,11 +1406,9 @@ function detectCandlePatterns(points){
   return out;
 }
 
-function drawPatternBoxes(ctx, points, patterns, pad, slot, yForV, W, H){
-  if (!patterns.length) return;
-  const placed = [];
+function drawPatternBoxes(ctx, points, patterns, pad, slot, yForV){
   const buyColor = getCssVar('--buy'), sellColor = getCssVar('--sell'), neutralColor = getCssVar('--text-muted');
-  ctx.font = '9px IBM Plex Mono, monospace';
+  const boxes = [];
   patterns.forEach(pat => {
     const color = pat.bias === 'bull' ? buyColor : pat.bias === 'bear' ? sellColor : neutralColor;
     let hi = -Infinity, lo = Infinity;
@@ -1383,24 +1420,9 @@ function drawPatternBoxes(ctx, points, patterns, pad, slot, yForV, W, H){
     ctx.strokeStyle = color;
     ctx.lineWidth = 1;
     ctx.strokeRect(xLeft, yTop, Math.max(2, xRight-xLeft), Math.max(2, yBottom-yTop));
-
-    const label = pat.name;
-    const textW = ctx.measureText(label).width;
-    let textX = (xLeft+xRight)/2 - textW/2;
-    textX = Math.max(pad.left, Math.min(textX, W-pad.right-textW));
-    let textY = pat.bias === 'bear' ? yBottom + 11 : yTop - 5;
-    let tries = 0;
-    const overlaps = () => placed.some(r => !(textX+textW < r.x1 || textX > r.x2 || textY-9 > r.y2 || textY < r.y1));
-    while (tries < 6 && overlaps()){
-      textY += (pat.bias === 'bear' ? 11 : -11);
-      tries++;
-    }
-    if (!overlaps() && textY > pad.top+8 && textY < H-14){
-      ctx.fillStyle = color;
-      ctx.fillText(label, textX, textY);
-      placed.push({ x1: textX-2, x2: textX+textW+2, y1: textY-9, y2: textY+2 });
-    }
+    boxes.push({ x1:xLeft, y1:yTop, x2:xRight, y2:yBottom, name:pat.name, bias:pat.bias, color });
   });
+  return boxes;
 }
 
 function drawCandlestickChart(canvas, points, annotatePatterns){
@@ -1449,7 +1471,9 @@ function drawCandlestickChart(canvas, points, annotatePatterns){
 
   if (annotatePatterns){
     const patterns = detectCandlePatterns(points);
-    drawPatternBoxes(ctx, points, patterns, pad, slot, yForV, W, H);
+    candleBoxes = drawPatternBoxes(ctx, points, patterns, pad, slot, yForV);
+  } else {
+    candleBoxes = [];
   }
 
   drawExtremaMarkers(ctx, points, maxima, xForI, yForV, p => p.h, 'max', W, pad);
