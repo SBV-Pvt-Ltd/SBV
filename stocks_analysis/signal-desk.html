@@ -969,6 +969,8 @@ function clearChartsUI(){
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   });
   candleBoxes = [];
+  candleFullPoints = [];
+  candleViewStart = 0; candleViewEnd = 0;
   const tt = document.getElementById('candle-chart-tooltip');
   if (tt) tt.style.display = 'none';
 }
@@ -982,6 +984,8 @@ let lineRange = '1M';
 let candleRange = '1M';
 let histCache = {}; // ticker -> full 5y daily points
 let candleBoxes = []; // detected-pattern box rects (CSS px, canvas-relative) for tooltip hit-testing
+let candleFullPoints = []; // current range-selected (unzoomed) points
+let candleViewStart = 0, candleViewEnd = 0; // scroll-to-zoom window into candleFullPoints
 
 function sliceRange(points, rangeKey){
   if (rangeKey === '5Y') return points;
@@ -1062,17 +1066,29 @@ async function renderCandleChart(){
   statusEl.textContent = 'Loading…';
   try{
     const full = await getHistPoints(row);
-    const points = sliceRange(full, candleRange);
-    const PATTERN_CANDLE_LIMIT = 150; // beyond this, boxes/labels would overlap too much to read
-    const showPatterns = points.length <= PATTERN_CANDLE_LIMIT;
-    drawCandlestickChart(canvas, points, showPatterns);
-    statusEl.textContent = showPatterns
-      ? ''
-      : `Patterns hidden — ${points.length} candles is too many to label clearly here; pick 1W–6M to see them.`;
+    candleFullPoints = sliceRange(full, candleRange);
+    candleViewStart = 0;
+    candleViewEnd = candleFullPoints.length - 1;
+    drawCandleView();
   }catch(err){
     statusEl.textContent = 'Chart unavailable: ' + err.message;
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
+}
+function drawCandleView(){
+  const canvas = document.getElementById('candle-chart-canvas');
+  const statusEl = document.getElementById('candle-chart-status');
+  if (!candleFullPoints.length) return;
+  const view = candleFullPoints.slice(candleViewStart, candleViewEnd + 1);
+  const PATTERN_CANDLE_LIMIT = 150; // beyond this, boxes would overlap too much to be useful on hover
+  const showPatterns = view.length <= PATTERN_CANDLE_LIMIT;
+  drawCandlestickChart(canvas, view, showPatterns);
+
+  const notes = [];
+  if (!showPatterns) notes.push(`Patterns hidden — ${view.length} candles is too many here; zoom in or pick a narrower range.`);
+  if (view.length < candleFullPoints.length) notes.push(`Zoomed to ${view.length} of ${candleFullPoints.length} candles — scroll to zoom out, double-click to reset.`);
+  else if (!notes.length) notes.push('Scroll over the chart to zoom in or out.');
+  statusEl.textContent = notes.join(' ');
 }
 
 document.querySelectorAll('.range-group[data-chart="line"] .range-btn').forEach(btn => {
@@ -1117,6 +1133,40 @@ candleCanvasEl.addEventListener('mousemove', e => {
   candleTooltipEl.style.top = Math.max(4, top) + 'px';
 });
 candleCanvasEl.addEventListener('mouseleave', () => { candleTooltipEl.style.display = 'none'; });
+
+/* ---- Scroll to zoom, centered on the cursor ---- */
+candleCanvasEl.addEventListener('wheel', e => {
+  if (candleFullPoints.length < 2) return;
+  e.preventDefault();
+
+  const rect = candleCanvasEl.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const pad = { left:56, right:10 }; // must match drawCandlestickChart's padding
+  const plotW = rect.width - pad.left - pad.right;
+  const frac = Math.min(1, Math.max(0, (mx - pad.left) / plotW));
+
+  const fullLen = candleFullPoints.length;
+  const currentSize = candleViewEnd - candleViewStart + 1;
+  const MIN_CANDLES = 5;
+  const zoomFactor = e.deltaY < 0 ? 0.85 : (1/0.85); // scroll up = zoom in, scroll down = zoom out
+  let newSize = Math.round(currentSize * zoomFactor);
+  newSize = Math.max(MIN_CANDLES, Math.min(fullLen, newSize));
+  if (newSize === currentSize) return;
+
+  const cursorIndex = candleViewStart + frac * (currentSize - 1);
+  let newStart = Math.round(cursorIndex - frac * (newSize - 1));
+  newStart = Math.max(0, Math.min(fullLen - newSize, newStart));
+
+  candleViewStart = newStart;
+  candleViewEnd = newStart + newSize - 1;
+  drawCandleView();
+});
+candleCanvasEl.addEventListener('dblclick', () => {
+  if (!candleFullPoints.length) return;
+  candleViewStart = 0;
+  candleViewEnd = candleFullPoints.length - 1;
+  drawCandleView();
+});
 
 function getCssVar(name){
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
