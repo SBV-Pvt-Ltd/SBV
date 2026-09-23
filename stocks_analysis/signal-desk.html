@@ -214,6 +214,8 @@
   .range-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:4px 9px;border-radius:3px;font-size:12px;}
   .range-btn.active{background:var(--accent);color:#FFF8EC;border-color:var(--accent);}
   .chart-status{color:var(--text-muted);font-size:12.5px;min-height:16px;margin-bottom:4px;}
+  .pattern-legend{color:var(--text-muted);font-size:11px;margin-bottom:6px;}
+  .pattern-legend-swatch{display:inline-block;width:8px;height:8px;border-radius:2px;margin:0 3px 0 6px;vertical-align:middle;}
   .chart-canvas{width:100%;height:260px;display:block;}
 
   /* ---------- News drawer ---------- */
@@ -393,6 +395,7 @@
                 </div>
               </div>
               <div class="chart-status" id="candle-chart-status">Select a stock from the list to view its chart.</div>
+              <div class="pattern-legend">Boxes: <span class="pattern-legend-swatch" style="background:var(--buy);"></span>bullish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--sell);"></span>bearish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--text-muted);"></span>neutral / indecision</div>
               <canvas class="chart-canvas" id="candle-chart-canvas"></canvas>
             </div>
           </div>
@@ -1047,8 +1050,12 @@ async function renderCandleChart(){
   try{
     const full = await getHistPoints(row);
     const points = sliceRange(full, candleRange);
-    drawCandlestickChart(canvas, points);
-    statusEl.textContent = '';
+    const PATTERN_CANDLE_LIMIT = 150; // beyond this, boxes/labels would overlap too much to read
+    const showPatterns = points.length <= PATTERN_CANDLE_LIMIT;
+    drawCandlestickChart(canvas, points, showPatterns);
+    statusEl.textContent = showPatterns
+      ? ''
+      : `Patterns hidden — ${points.length} candles is too many to label clearly here; pick 1W–6M to see them.`;
   }catch(err){
     statusEl.textContent = 'Chart unavailable: ' + err.message;
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
@@ -1189,7 +1196,214 @@ function drawLineChart(canvas, points){
   const lastLabel = fmtAxisDate(last);
   ctx.fillText(lastLabel, W - pad.right - ctx.measureText(lastLabel).width, H-4);
 }
-function drawCandlestickChart(canvas, points){
+
+/* ---- Candlestick pattern detection ----
+ * Definitions below follow standard technical-analysis conventions (the same
+ * shape/threshold logic most charting libraries use), simplified to relative
+ * thresholds against each candle's own range and a rolling average body/range
+ * so it scales across tickers and timeframes. Trend context (uptrend/downtrend)
+ * uses a short lookback comparison and is required for patterns whose meaning
+ * depends on it (e.g. the same shape is a Hammer in a downtrend but a Hanging
+ * Man in an uptrend). A few less-common patterns (Concealing Baby Swallow,
+ * Unique Three River Bottom) are intricate enough that sources vary on the
+ * exact rule — these are best-effort approximations of the standard definition.
+ */
+function detectCandlePatterns(points){
+  const n = points.length;
+  if (n < 2) return [];
+  const M = points.map(p => {
+    const body = Math.abs(p.c - p.o);
+    const range = Math.max(p.h - p.l, 1e-9);
+    const upper = p.h - Math.max(p.o, p.c);
+    const lower = Math.min(p.o, p.c) - p.l;
+    return { body, range, upper, lower, bull: p.c > p.o, bear: p.c < p.o, mid: (p.o+p.c)/2 };
+  });
+  const LB = 10;
+  const avgBody = new Array(n), avgRange = new Array(n);
+  for (let i = 0; i < n; i++){
+    const s = Math.max(0, i-LB);
+    let sb=0, sr=0, cnt=0;
+    for (let k=s; k<i; k++){ sb += M[k].body; sr += M[k].range; cnt++; }
+    avgBody[i] = cnt ? sb/cnt : (M[i].body || 1);
+    avgRange[i] = cnt ? sr/cnt : (M[i].range || 1);
+  }
+  const trendUp = (i, lb) => { const j=i-lb; return j>=0 && points[i-1] && points[j] && points[i-1].c > points[j].c; };
+  const trendDown = (i, lb) => { const j=i-lb; return j>=0 && points[i-1] && points[j] && points[i-1].c < points[j].c; };
+  const isDoji = i => M[i].body <= 0.1*M[i].range;
+
+  const out = [];
+  const add = (name, start, end, bias) => out.push({ name, start, end, bias });
+
+  for (let i = 0; i < n; i++){
+    const m = M[i];
+
+    /* ---- 1-candle patterns ---- */
+    if (isDoji(i)){
+      if (m.upper <= 0.12*m.range && m.lower >= 0.55*m.range) add('Dragonfly Doji', i, i, 'bull');
+      else if (m.lower <= 0.12*m.range && m.upper >= 0.55*m.range) add('Gravestone Doji', i, i, 'bear');
+      else if (m.upper >= 0.35*m.range && m.lower >= 0.35*m.range) add('Long-Legged Doji', i, i, 'neutral');
+      else add('Standard Doji', i, i, 'neutral');
+    } else if (m.body <= 0.35*m.range && m.lower >= 2.5*m.body && m.upper <= 0.15*m.range){
+      if (trendDown(i,5)) add('Takuri Line', i, i, 'bull');
+    } else if (m.body <= 0.35*m.range && m.lower >= 2*m.body && m.upper <= 0.25*m.body){
+      if (trendDown(i,5)) add('Bullish Hammer', i, i, 'bull');
+      else if (trendUp(i,5)) add('Hanging Man', i, i, 'bear');
+    } else if (m.body <= 0.35*m.range && m.upper >= 2*m.body && m.lower <= 0.25*m.body){
+      if (trendDown(i,5)) add('Inverted Hammer', i, i, 'bull');
+      else if (trendUp(i,5)) add('Bearish Shooting Star', i, i, 'bear');
+    } else if (m.bull && m.lower <= 0.05*m.range && m.body >= 0.7*m.range && trendDown(i,5)){
+      add('Bullish Belt Hold', i, i, 'bull');
+    } else if (m.bear && m.upper <= 0.05*m.range && m.body >= 0.7*m.range && trendUp(i,5)){
+      add('Bearish Belt Hold', i, i, 'bear');
+    } else if (m.body <= 0.3*m.range && m.upper >= 0.32*m.range && m.lower >= 0.32*m.range && m.range >= 1.4*avgRange[i]){
+      add('High Wave Candle', i, i, 'neutral');
+    } else if (m.bull && m.body >= 0.9*m.range){
+      add('Bullish Marubozu', i, i, 'bull');
+    } else if (m.bear && m.body >= 0.9*m.range){
+      add('Bearish Marubozu', i, i, 'bear');
+    } else if (m.body > 0.1*m.range && m.body <= 0.35*m.range && m.upper >= m.body*0.8 && m.lower >= m.body*0.8){
+      add('Spinning Top', i, i, 'neutral');
+    }
+
+    /* ---- 2-candle patterns ---- */
+    if (i >= 1){
+      const p0=points[i-1], p1=points[i], m0=M[i-1], m1=M[i];
+      if (m0.bear && m1.bull && p1.o > p0.o && m0.body >= avgBody[i]*0.8 && m1.body >= avgBody[i]*0.8){
+        add('Bullish Kicker', i-1, i, 'bull');
+      } else if (m0.bull && m1.bear && p1.o < p0.o && m0.body >= avgBody[i]*0.8 && m1.body >= avgBody[i]*0.8){
+        add('Bearish Kicker', i-1, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o <= p0.c && p1.c >= p0.o){
+        add('Bullish Engulfing', i-1, i, 'bull');
+      } else if (m0.bull && m1.bear && p1.o >= p0.c && p1.c <= p0.o){
+        add('Bearish Engulfing', i-1, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o < p0.c && p1.c > m0.mid && p1.c < p0.o){
+        add('Piercing Line', i-1, i, 'bull');
+      } else if (m0.bull && m1.bear && p1.o > p0.c && p1.c < m0.mid && p1.c > p0.o){
+        add('Dark Cloud Cover', i-1, i, 'bear');
+      } else if (m0.bear && Math.max(p1.o,p1.c) < p0.o && Math.min(p1.o,p1.c) > p0.c && m1.body < m0.body*0.65){
+        add('Bullish Harami', i-1, i, 'bull');
+      } else if (m0.bull && Math.max(p1.o,p1.c) < p0.o && Math.min(p1.o,p1.c) > p0.c && m1.body < m0.body*0.65){
+        add('Bearish Harami', i-1, i, 'bear');
+      } else if (Math.abs(p1.l-p0.l) <= 0.12*avgRange[i] && trendDown(i-1,5)){
+        add('Tweezer Bottom', i-1, i, 'bull');
+      } else if (Math.abs(p1.h-p0.h) <= 0.12*avgRange[i] && trendUp(i-1,5)){
+        add('Tweezer Top', i-1, i, 'bear');
+      } else if (m0.bear && m1.bear && Math.abs(p1.c-p0.c) <= 0.06*avgRange[i]){
+        add('Matching Low', i-1, i, 'bull');
+      } else if (m0.bull && m1.bull && Math.abs(p1.c-p0.c) <= 0.06*avgRange[i]){
+        add('Matching High', i-1, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o < p0.l && Math.abs(p1.c-p0.l) <= 0.08*avgRange[i]){
+        add('On-Neck Line', i-1, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o < p0.c && p1.c > p0.c && Math.abs(p1.c-p0.c) <= 0.15*avgRange[i]){
+        add('In-Neck Line', i-1, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o < p0.c && p1.c > p0.c && p1.c <= m0.mid){
+        add('Thrusting Line', i-1, i, 'bear');
+      } else if (Math.abs(p1.o-p0.o) <= 0.06*avgRange[i] && m0.bear && m1.bull && trendUp(i-1,5)){
+        add('Separating Lines', i-1, i, 'bull');
+      } else if (Math.abs(p1.o-p0.o) <= 0.06*avgRange[i] && m0.bull && m1.bear && trendDown(i-1,5)){
+        add('Separating Lines', i-1, i, 'bear');
+      }
+    }
+
+    /* ---- 3-candle patterns ---- */
+    if (i >= 2){
+      const p0=points[i-2], p1=points[i-1], p2=points[i];
+      const m0=M[i-2], m1=M[i-1], m2=M[i];
+      const mid0 = m0.mid;
+      if (m0.bear && m1.body < 0.5*m0.body && m2.bull && p2.c > mid0){
+        add(isDoji(i-1) ? 'Morning Doji Star' : 'Morning Star', i-2, i, 'bull');
+      } else if (m0.bull && m1.body < 0.5*m0.body && m2.bear && p2.c < mid0){
+        add(isDoji(i-1) ? 'Evening Doji Star' : 'Evening Star', i-2, i, 'bear');
+      } else if (m0.bear && isDoji(i-1) && p1.h < p0.l && m2.bull && p2.l > p1.h){
+        add('Bullish Abandoned Baby', i-2, i, 'bull');
+      } else if (m0.bull && isDoji(i-1) && p1.l > p0.h && m2.bear && p2.h < p1.l){
+        add('Bearish Abandoned Baby', i-2, i, 'bear');
+      } else if (m0.bear && m1.bull && p1.o<=p0.c && p1.c>=p0.o && m2.bull && p2.c > p1.c && trendDown(i-2,5)){
+        add('Three Outside Up', i-2, i, 'bull');
+      } else if (m0.bull && m1.bear && p1.o>=p0.c && p1.c<=p0.o && m2.bear && p2.c < p1.c && trendUp(i-2,5)){
+        add('Three Outside Down', i-2, i, 'bear');
+      } else if (m0.bear && Math.max(p1.o,p1.c)<p0.o && Math.min(p1.o,p1.c)>p0.c && m2.bull && p2.c > p1.h && trendDown(i-2,5)){
+        add('Three Inside Up', i-2, i, 'bull');
+      } else if (m0.bull && Math.max(p1.o,p1.c)<p0.o && Math.min(p1.o,p1.c)>p0.c && m2.bear && p2.c < p1.l && trendUp(i-2,5)){
+        add('Three Inside Down', i-2, i, 'bear');
+      } else if (m0.bull && m1.bull && m2.bull && p1.o>p0.o && p1.o<p0.c && p1.c>p0.c && p2.o>p1.o && p2.o<p1.c && p2.c>p1.c
+                 && m0.upper<=0.3*m0.body && m1.upper<=0.3*m1.body && m2.upper<=0.3*m2.body){
+        add('Three White Soldiers', i-2, i, 'bull');
+      } else if (m0.bear && m1.bear && m2.bear && p1.o<p0.o && p1.o>p0.c && p1.c<p0.c && p2.o<p1.o && p2.o>p1.c && p2.c<p1.c
+                 && m0.lower<=0.3*m0.body && m1.lower<=0.3*m1.body && m2.lower<=0.3*m2.body){
+        add('Three Black Crows', i-2, i, 'bear');
+      } else if (m0.bear && m1.bear && p1.l < p0.l && Math.max(p1.o,p1.c) < p0.o && m1.body < m0.body && m2.bull && p2.c < p1.c && p2.l > p1.l){
+        add('Unique Three River Bottom', i-2, i, 'bull');
+      }
+    }
+
+    /* ---- 4-candle patterns ---- */
+    if (i >= 3){
+      const p0=points[i-3], p1=points[i-2], p2=points[i-1], p3=points[i];
+      const m0=M[i-3], m1=M[i-2], m2=M[i-1], m3=M[i];
+      if (m0.bear && m1.bear && p1.c<p0.c && m2.bear && p2.c<p1.c && m3.bull && p3.o<=p2.c && p3.c>p0.o){
+        add('Bullish Three Line Strike', i-3, i, 'bull');
+      } else if (m0.bull && m1.bull && p1.c>p0.c && m2.bull && p2.c>p1.c && m3.bear && p3.o>=p2.c && p3.c<p0.o){
+        add('Bearish Three Line Strike', i-3, i, 'bear');
+      } else if (m0.bear && m0.body>=0.8*m0.range && m1.bear && m1.body>=0.8*m1.range && p1.c<p0.c &&
+                 m2.bear && p2.o<p1.c && m2.upper>=1.5*m2.body && Math.max(p2.o,p2.c)<=p1.o &&
+                 m3.bear && p3.h>=p2.h && p3.l<=p2.l && p3.c<p2.c){
+        add('Concealing Baby Swallow', i-3, i, 'bull');
+      }
+    }
+
+    /* ---- 5-candle patterns ---- */
+    if (i >= 4){
+      const p0 = points[i-4], p4 = points[i];
+      const m0 = M[i-4], m4 = M[i];
+      let contained = true;
+      for (let k=i-3; k<=i-1; k++){ if (points[k].h > p0.h || points[k].l < p0.l){ contained=false; break; } }
+      if (contained && m0.body>=0.6*m0.range && m4.body>=0.5*avgBody[i]){
+        if (m0.bull && m4.bull && p4.c > p0.c) add('Rising Three Methods', i-4, i, 'bull');
+        else if (m0.bear && m4.bear && p4.c < p0.c) add('Falling Three Methods', i-4, i, 'bear');
+      }
+    }
+  }
+  return out;
+}
+
+function drawPatternBoxes(ctx, points, patterns, pad, slot, yForV, W, H){
+  if (!patterns.length) return;
+  const placed = [];
+  const buyColor = getCssVar('--buy'), sellColor = getCssVar('--sell'), neutralColor = getCssVar('--text-muted');
+  ctx.font = '9px IBM Plex Mono, monospace';
+  patterns.forEach(pat => {
+    const color = pat.bias === 'bull' ? buyColor : pat.bias === 'bear' ? sellColor : neutralColor;
+    let hi = -Infinity, lo = Infinity;
+    for (let k = pat.start; k <= pat.end; k++){ hi = Math.max(hi, points[k].h); lo = Math.min(lo, points[k].l); }
+    const xLeft = pad.left + slot*pat.start + 1;
+    const xRight = pad.left + slot*(pat.end+1) - 1;
+    const yTop = yForV(hi) - 4;
+    const yBottom = yForV(lo) + 4;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(xLeft, yTop, Math.max(2, xRight-xLeft), Math.max(2, yBottom-yTop));
+
+    const label = pat.name;
+    const textW = ctx.measureText(label).width;
+    let textX = (xLeft+xRight)/2 - textW/2;
+    textX = Math.max(pad.left, Math.min(textX, W-pad.right-textW));
+    let textY = pat.bias === 'bear' ? yBottom + 11 : yTop - 5;
+    let tries = 0;
+    const overlaps = () => placed.some(r => !(textX+textW < r.x1 || textX > r.x2 || textY-9 > r.y2 || textY < r.y1));
+    while (tries < 6 && overlaps()){
+      textY += (pat.bias === 'bear' ? 11 : -11);
+      tries++;
+    }
+    if (!overlaps() && textY > pad.top+8 && textY < H-14){
+      ctx.fillStyle = color;
+      ctx.fillText(label, textX, textY);
+      placed.push({ x1: textX-2, x2: textX+textW+2, y1: textY-9, y2: textY+2 });
+    }
+  });
+}
+
+function drawCandlestickChart(canvas, points, annotatePatterns){
   const ctx = setupCanvas(canvas);
   const rect = canvas.getBoundingClientRect();
   const W = rect.width, H = rect.height;
@@ -1232,6 +1446,12 @@ function drawCandlestickChart(canvas, points){
   const xForI = i => pad.left + slot*i + slot/2;
   const maxima = detectExtrema(highs, 'max', 4);
   const minima = detectExtrema(lows, 'min', 4);
+
+  if (annotatePatterns){
+    const patterns = detectCandlePatterns(points);
+    drawPatternBoxes(ctx, points, patterns, pad, slot, yForV, W, H);
+  }
+
   drawExtremaMarkers(ctx, points, maxima, xForI, yForV, p => p.h, 'max', W, pad);
   drawExtremaMarkers(ctx, points, minima, xForI, yForV, p => p.l, 'min', W, pad);
 
