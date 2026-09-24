@@ -339,6 +339,7 @@
       <button class="vtab" data-tab="wishlist">Wishlist</button>
       <button class="vtab" data-tab="compare">Compare</button>
       <button class="vtab" data-tab="recommendation">Recommendation</button>
+      <button class="vtab" data-tab="signal-history">Signal History</button>
     </nav>
     <div class="tab-content">
 
@@ -487,6 +488,24 @@
         </div>
       </section>
 
+      <section id="tab-signal-history" class="tab-pane">
+        <div class="wishlist-layout">
+          <div class="compare-list-panel">
+            <div class="compare-scroll" id="signal-history-scroll">
+              <div class="compare-section-label">Loading tickers…</div>
+            </div>
+            <div class="compare-btn-wrap">
+              <button class="btn-primary" id="btn-show-history" style="width:100%;">Show History</button>
+            </div>
+          </div>
+          <div class="wishlist-charts">
+            <div class="wishlist-ticker-heading" id="signal-history-heading"><span>Select tickers and click Show History</span></div>
+            <div class="chart-status" id="signal-history-status">Loading…</div>
+            <div class="tablewrap" id="signal-history-tablewrap"></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
 </div>
@@ -530,6 +549,10 @@
       <input type="text" id="cfg-gid" placeholder="e.g. 0">
     </div>
     <div class="field">
+      <label>History sheet gid (for the Signal History tab)</label>
+      <input type="text" id="cfg-history-gid" placeholder="e.g. 1695190862">
+    </div>
+    <div class="field">
       <label>CORS proxy — your Cloudflare Worker URL (see cloudflare-worker-proxy.js)</label>
       <input type="text" id="cfg-proxy" placeholder="https://signal-desk-proxy.saharshbhadaniventure.workers.dev/?url=">
     </div>
@@ -549,6 +572,7 @@
 const DEFAULT_CONFIG = {
   sheetId: '1PyLCMjgDzMnCv_na-fNCnUr5tD6MwKL-bUmzHQrgFaE',
   gid: '',
+  historyGid: '1695190862',
   corsProxy: 'https://signal-desk-proxy.saharshbhadaniventure.workers.dev/?url=',
   maxAgeDays: 2
 };
@@ -649,6 +673,8 @@ function switchTab(tab){
     if (selectedWishlistTicker) loadAndRenderCharts();
   } else if (tab === 'recommendation'){
     loadRecommendations();
+  } else if (tab === 'signal-history'){
+    loadSignalHistory();
   }
 }
 document.querySelectorAll('.vtab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
@@ -689,7 +715,8 @@ async function loadIndices(){
 }
 
 /* ============================= SHEET LOADING (JSONP against gviz) ============================= */
-function loadSheet(sheetId, gid){
+function loadSheet(sheetId, gid, opts){
+  opts = opts || {};
   return new Promise((resolve, reject) => {
     const cbName = 'sd_cb_' + Math.random().toString(36).slice(2);
     let settled = false;
@@ -700,6 +727,10 @@ function loadSheet(sheetId, gid){
     };
     let url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json;responseHandler:${cbName}`;
     if (gid) url += `&gid=${encodeURIComponent(gid)}`;
+    // headers:0 tells gviz not to guess which row is a header — needed for the
+    // History sheet, where row 1 is ticker names and gviz's auto-detection
+    // could otherwise misjudge it given the mixed date/text columns below it.
+    if (opts.headers === 0) url += `&headers=0`;
     const script = document.createElement('script');
     script.src = url;
     script.onerror = () => { if(!settled){ settled = true; reject(new Error('Could not load the sheet. Check the Sheet ID / gid and make sure sharing is set to "Anyone with the link — Viewer".')); cleanup(); } };
@@ -1084,6 +1115,8 @@ let indexHistCache = {}; // 'sensex'|'nifty' -> full 5y daily points
 let compareSeries = []; // [{key,label,color,points}] after Compare is clicked
 let compareRange = '1M';
 let compareExtremaPoints = []; // for hover tooltip on the compare chart
+let historyData = null; // { tickers:[...], rows:[{date, signals:{ticker:signal}}] } from the History sheet
+let historyLoading = false;
 
 function sliceRange(points, rangeKey){
   if (rangeKey === '5Y') return points;
@@ -1389,6 +1422,104 @@ function renderRecoSection(containerId, list){
   if (!list.length){ el.innerHTML = '<div class="drawer-state">No matches (yet).</div>'; return; }
   el.innerHTML = list.map(({r,p}) => recoTileHtml(r,p)).join('');
 }
+
+/* ============================= SIGNAL HISTORY TAB ============================= */
+// The History sheet is a grid: row 1 = ticker names (col A blank), col A from
+// row 2 down = dates, and each other cell = that ticker's signal on that date.
+// Fetched with headers:0 so gviz returns every row verbatim rather than
+// guessing which row is a header — this sheet's own row 1 IS the header we want,
+// just not in the format gviz's auto-detection is built around.
+function parseHistorySheet(resp){
+  const rows = (resp && resp.table && resp.table.rows) || [];
+  if (!rows.length) return { tickers: [], rows: [] };
+  const headerCells = (rows[0] && rows[0].c) || [];
+  const tickerCols = [];
+  for (let i = 1; i < headerCells.length; i++){
+    const v = headerCells[i] && headerCells[i].v;
+    if (v !== undefined && v !== null && String(v).trim() !== '') tickerCols.push({ col:i, ticker:String(v).trim() });
+  }
+  const dataRows = [];
+  for (let r = 1; r < rows.length; r++){
+    const c = (rows[r] && rows[r].c) || [];
+    const date = parseGvizDate(c[0] && c[0].v);
+    if (!date) continue;
+    const signals = {};
+    tickerCols.forEach(tc => {
+      const cell = c[tc.col];
+      signals[tc.ticker] = (cell && cell.v != null) ? String(cell.v).trim() : '';
+    });
+    dataRows.push({ date, signals });
+  }
+  dataRows.sort((a,b) => b.date - a.date); // most recent first
+  return { tickers: tickerCols.map(tc => tc.ticker), rows: dataRows };
+}
+function fmtHistoryDate(d){
+  return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+}
+async function loadSignalHistory(){
+  const statusEl = document.getElementById('signal-history-status');
+  const scroll = document.getElementById('signal-history-scroll');
+  if (historyData){ populateSignalHistoryList(); return; }
+  if (historyLoading) return;
+  historyLoading = true;
+  scroll.innerHTML = '<div class="compare-section-label">Loading tickers…</div>';
+  statusEl.textContent = 'Loading signal history…';
+  try{
+    const cfg = getConfig();
+    const resp = await loadSheet(cfg.sheetId, cfg.historyGid, { headers: 0 });
+    historyData = parseHistorySheet(resp);
+    populateSignalHistoryList();
+    statusEl.textContent = historyData.rows.length
+      ? `Loaded ${historyData.rows.length} day(s) of history for ${historyData.tickers.length} ticker(s). Select tickers and click Show History.`
+      : 'History sheet loaded, but no dated rows were found.';
+  }catch(err){
+    scroll.innerHTML = `<div class="compare-section-label">${err.message}</div>`;
+    statusEl.textContent = 'Could not load the History sheet — check the History sheet gid in Settings.';
+  }
+  historyLoading = false;
+}
+function populateSignalHistoryList(){
+  const scroll = document.getElementById('signal-history-scroll');
+  if (!scroll || !historyData) return;
+  if (!historyData.tickers.length){
+    scroll.innerHTML = '<div class="compare-section-label">No tickers found in the History sheet.</div>';
+    return;
+  }
+  scroll.innerHTML = historyData.tickers.map(t =>
+    `<label class="compare-row"><input type="checkbox" class="signal-history-check" value="${t}"> ${t}</label>`
+  ).join('');
+}
+function runShowHistory(){
+  const statusEl = document.getElementById('signal-history-status');
+  const headingEl = document.getElementById('signal-history-heading');
+  if (!historyData){ statusEl.textContent = 'Still loading the History sheet — try again in a moment.'; return; }
+  const selected = Array.from(document.querySelectorAll('.signal-history-check:checked')).map(el => el.value);
+  if (!selected.length){
+    statusEl.textContent = 'Pick at least one ticker.';
+    return;
+  }
+  headingEl.innerHTML = `<span>Signal history: ${selected.join(', ')}</span>`;
+  renderSignalHistoryTable(selected);
+}
+function renderSignalHistoryTable(selectedTickers){
+  const wrap = document.getElementById('signal-history-tablewrap');
+  if (!historyData || !historyData.rows.length){
+    wrap.innerHTML = '<div class="drawer-state">No history data available.</div>';
+    return;
+  }
+  const KNOWN_SIGNALS = ['BUY','SELL','ACCUMULATE','NEUTRAL'];
+  const thead = `<tr><th>Date</th>${selectedTickers.map(t => `<th>${t}</th>`).join('')}</tr>`;
+  const tbody = historyData.rows.map(row => {
+    const cells = selectedTickers.map(t => {
+      const sig = (row.signals[t] || '').toUpperCase();
+      if (!sig) return '<td class="muted">—</td>';
+      return KNOWN_SIGNALS.includes(sig) ? `<td><span class="badge badge-${sig}">${sig}</span></td>` : `<td>${sig}</td>`;
+    }).join('');
+    return `<tr><td class="muted">${fmtHistoryDate(row.date)}</td>${cells}</tr>`;
+  }).join('');
+  wrap.innerHTML = `<table><thead>${thead}</thead><tbody>${tbody}</tbody></table>`;
+}
+document.getElementById('btn-show-history').addEventListener('click', runShowHistory);
 
 function updateWishlistTickerHeader(){
   const linkEl = document.getElementById('wishlist-ticker-link');
@@ -1993,6 +2124,7 @@ document.getElementById('btn-settings').addEventListener('click', () => {
   const cfg = getConfig();
   document.getElementById('cfg-sheet-id').value = cfg.sheetId;
   document.getElementById('cfg-gid').value = cfg.gid;
+  document.getElementById('cfg-history-gid').value = cfg.historyGid;
   document.getElementById('cfg-proxy').value = cfg.corsProxy;
   document.getElementById('cfg-days').value = cfg.maxAgeDays;
   document.getElementById('settings-overlay').classList.add('visible');
@@ -2004,12 +2136,14 @@ document.getElementById('settings-save').addEventListener('click', () => {
   const cfg = {
     sheetId: document.getElementById('cfg-sheet-id').value.trim(),
     gid: document.getElementById('cfg-gid').value.trim(),
+    historyGid: document.getElementById('cfg-history-gid').value.trim(),
     corsProxy: document.getElementById('cfg-proxy').value.trim(),
     maxAgeDays: Number(document.getElementById('cfg-days').value) || 2
   };
   saveConfig(cfg);
   document.getElementById('settings-overlay').classList.remove('visible');
   document.getElementById('days-label').textContent = cfg.maxAgeDays;
+  historyData = null; // config changed — force a fresh fetch next time History is opened
   loadAndRender();
 });
 
