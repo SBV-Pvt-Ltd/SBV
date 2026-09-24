@@ -200,6 +200,21 @@
   }
   .tile-btn:disabled{opacity:0.3;cursor:default;}
 
+  /* ---------- Compare tab ---------- */
+  .compare-list-panel{
+    flex:0 0 30%;min-width:230px;border-right:1px solid var(--border);
+    background:var(--bg);display:flex;flex-direction:column;overflow:hidden;
+  }
+  .compare-scroll{flex:1;overflow-y:auto;padding:14px 14px 0;}
+  .compare-btn-wrap{padding:12px 14px;border-top:1px solid var(--border);flex-shrink:0;}
+  .compare-section-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:10px 0 4px;}
+  .compare-section-label:first-child{margin-top:0;}
+  .compare-row{display:flex;align-items:center;gap:8px;padding:5px 2px;font-size:13px;cursor:pointer;}
+  .compare-row:hover{color:var(--accent);}
+  .chart-legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);}
+  .legend-swatch{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0;}
+
   /* ---------- Historical / candlestick charts ---------- */
   .wishlist-ticker-heading{margin-bottom:2px;}
   .wishlist-ticker-heading a{
@@ -315,6 +330,7 @@
     <nav class="vtabs">
       <button class="vtab active" data-tab="all">All Stocks</button>
       <button class="vtab" data-tab="wishlist">Wishlist</button>
+      <button class="vtab" data-tab="compare">Compare</button>
     </nav>
     <div class="tab-content">
 
@@ -406,6 +422,40 @@
               <div class="pattern-legend">Boxes: <span class="pattern-legend-swatch" style="background:var(--buy);"></span>bullish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--sell);"></span>bearish pattern &nbsp; <span class="pattern-legend-swatch" style="background:var(--text-muted);"></span>neutral / indecision</div>
               <canvas class="chart-canvas" id="candle-chart-canvas"></canvas>
               <div class="chart-tooltip" id="candle-chart-tooltip"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-compare" class="tab-pane">
+        <div class="wishlist-layout">
+          <div class="compare-list-panel">
+            <div class="compare-scroll" id="compare-scroll">
+              <div class="compare-section-label">Loading tickers…</div>
+            </div>
+            <div class="compare-btn-wrap">
+              <button class="btn-primary" id="btn-run-compare" style="width:100%;">Compare</button>
+            </div>
+          </div>
+          <div class="wishlist-charts">
+            <div class="wishlist-ticker-heading" id="compare-heading"><span>Select stocks and/or indices, then click Compare</span></div>
+            <div class="chart-card">
+              <div class="chart-head">
+                <h3>Price Comparison (% change)</h3>
+                <div class="range-group" data-chart="compare">
+                  <button class="range-btn" data-range="1W">1W</button>
+                  <button class="range-btn active" data-range="1M">1M</button>
+                  <button class="range-btn" data-range="3M">3M</button>
+                  <button class="range-btn" data-range="6M">6M</button>
+                  <button class="range-btn" data-range="1Y">1Y</button>
+                  <button class="range-btn" data-range="3Y">3Y</button>
+                  <button class="range-btn" data-range="5Y">5Y</button>
+                </div>
+              </div>
+              <div class="chart-status" id="compare-chart-status">Select stocks/indices on the left and click Compare.</div>
+              <div class="chart-legend" id="compare-legend"></div>
+              <canvas class="chart-canvas" id="compare-chart-canvas"></canvas>
+              <div class="chart-tooltip" id="compare-chart-tooltip"></div>
             </div>
           </div>
         </div>
@@ -986,6 +1036,10 @@ let histCache = {}; // ticker -> full 5y daily points
 let candleBoxes = []; // detected-pattern box rects (CSS px, canvas-relative) for tooltip hit-testing
 let candleFullPoints = []; // current range-selected (unzoomed) points
 let candleViewStart = 0, candleViewEnd = 0; // scroll-to-zoom window into candleFullPoints
+let indexHistCache = {}; // 'sensex'|'nifty' -> full 5y daily points
+let compareSeries = []; // [{key,label,color,points}] after Compare is clicked
+let compareRange = '1M';
+let compareExtremaPoints = []; // for hover tooltip on the compare chart
 
 function sliceRange(points, rangeKey){
   if (rangeKey === '5Y') return points;
@@ -1019,6 +1073,213 @@ async function getHistPoints(row){
   histCache[cacheKey] = points;
   return points;
 }
+async function getIndexHistPoints(key){
+  if (indexHistCache[key]) return indexHistCache[key];
+  const symbol = key === 'sensex' ? '^BSESN' : '^NSEI';
+  const result = await fetchYahooChart(symbol, '?range=5y&interval=1d');
+  if (!result) throw new Error('No historical data available');
+  const ts = result.timestamp || [];
+  const quote = (result.indicators && result.indicators.quote && result.indicators.quote[0]) || {};
+  const opens = quote.open || [], highs = quote.high || [], lows = quote.low || [], closes = quote.close || [];
+  const points = [];
+  for (let i = 0; i < ts.length; i++){
+    if (closes[i] == null || highs[i] == null || lows[i] == null || opens[i] == null) continue;
+    points.push({ t: ts[i]*1000, o: opens[i], h: highs[i], l: lows[i], c: closes[i] });
+  }
+  if (!points.length) throw new Error('No historical data available');
+  indexHistCache[key] = points;
+  return points;
+}
+
+/* ============================= COMPARE TAB ============================= */
+const COMPARE_PALETTE = ['#2F6FED','#D0393B','#1F9D55','#B9790A','#8B5CF6','#0EA5B0','#E4589A','#5B6470','#C2410C','#0891B2'];
+
+function populateCompareList(){
+  const scroll = document.getElementById('compare-scroll');
+  if (!scroll) return;
+  const stockRows = allRows.map(r =>
+    `<label class="compare-row"><input type="checkbox" class="compare-stock-check" value="${r.ticker}"> ${r.ticker.replace('NSE:','')}</label>`
+  ).join('');
+  scroll.innerHTML = `
+    <div class="compare-section-label">Indices</div>
+    <label class="compare-row"><input type="checkbox" class="compare-index-check" value="sensex"> SENSEX</label>
+    <label class="compare-row"><input type="checkbox" class="compare-index-check" value="nifty"> NIFTY 50</label>
+    <div class="compare-section-label">Stocks</div>
+    ${stockRows || '<div class="compare-section-label">No stocks loaded yet.</div>'}
+  `;
+}
+
+async function runCompare(){
+  const statusEl = document.getElementById('compare-chart-status');
+  const headingEl = document.getElementById('compare-heading');
+  const selectedIndices = Array.from(document.querySelectorAll('.compare-index-check:checked')).map(el => el.value);
+  const selectedTickers = Array.from(document.querySelectorAll('.compare-stock-check:checked')).map(el => el.value);
+
+  if (!selectedIndices.length && !selectedTickers.length){
+    statusEl.textContent = 'Pick at least one stock or index to compare.';
+    return;
+  }
+  statusEl.textContent = 'Fetching 5 years of daily data…';
+  document.getElementById('compare-legend').innerHTML = '';
+
+  const newSeries = [];
+  let colorIdx = 0;
+  for (const key of selectedIndices){
+    try{
+      const points = await getIndexHistPoints(key);
+      newSeries.push({ key, label: key === 'sensex' ? 'SENSEX' : 'NIFTY 50', color: COMPARE_PALETTE[colorIdx % COMPARE_PALETTE.length], points });
+    }catch(e){ /* skip this one, keep going */ }
+    colorIdx++;
+  }
+  for (const ticker of selectedTickers){
+    const row = allRows.find(r => r.ticker === ticker);
+    if (!row) continue;
+    try{
+      const points = await getHistPoints(row);
+      newSeries.push({ key: ticker, label: ticker.replace('NSE:',''), color: COMPARE_PALETTE[colorIdx % COMPARE_PALETTE.length], points });
+    }catch(e){ /* skip this one, keep going */ }
+    colorIdx++;
+  }
+
+  compareSeries = newSeries;
+  if (!compareSeries.length){
+    statusEl.textContent = 'Could not fetch data for any of the selected items.';
+    headingEl.innerHTML = '<span>Select stocks and/or indices, then click Compare</span>';
+    return;
+  }
+  const failedCount = (selectedIndices.length + selectedTickers.length) - compareSeries.length;
+  headingEl.innerHTML = `<span>Comparison: ${compareSeries.map(s => s.label).join(', ')}</span>`;
+  statusEl.textContent = failedCount ? `${failedCount} selection(s) had no data and were skipped.` : '';
+  renderCompareChart();
+}
+
+function renderCompareChart(){
+  const canvas = document.getElementById('compare-chart-canvas');
+  const legendEl = document.getElementById('compare-legend');
+  if (!compareSeries.length) return;
+  legendEl.innerHTML = compareSeries.map(s =>
+    `<span class="legend-item"><span class="legend-swatch" style="background:${s.color};"></span>${s.label}</span>`
+  ).join('');
+  drawCompareChart(canvas, compareSeries, compareRange);
+}
+
+function drawCompareChart(canvas, series, rangeKey){
+  const ctx = setupCanvas(canvas);
+  const rect = canvas.getBoundingClientRect();
+  const W = rect.width, H = rect.height;
+  const pad = { top:10, right:10, bottom:20, left:56 };
+  ctx.clearRect(0, 0, W, H);
+  compareExtremaPoints = [];
+
+  // Normalize each series to % change from its first point in the selected
+  // range — this is what makes a ₹250 stock and an ~80,000-point index
+  // comparable on the same chart.
+  const normalized = series.map(s => {
+    const sliced = sliceRange(s.points, rangeKey);
+    if (!sliced.length) return { ...s, norm: [] };
+    const base = sliced[0].c;
+    return { ...s, norm: sliced.map(p => ({ t: p.t, v: ((p.c-base)/base)*100 })) };
+  }).filter(s => s.norm.length);
+  if (!normalized.length) return;
+
+  let minT=Infinity, maxT=-Infinity, minV=Infinity, maxV=-Infinity;
+  normalized.forEach(s => s.norm.forEach(p => {
+    minT = Math.min(minT, p.t); maxT = Math.max(maxT, p.t);
+    minV = Math.min(minV, p.v); maxV = Math.max(maxV, p.v);
+  }));
+  if (minV === maxV){ minV -= 1; maxV += 1; }
+  const vPad = (maxV-minV)*0.08 || 1;
+  minV -= vPad; maxV += vPad;
+
+  const plotW = W-pad.left-pad.right, plotH = H-pad.top-pad.bottom;
+  const xForT = t => pad.left + ((t-minT)/((maxT-minT)||1))*plotW;
+  const yForV = v => pad.top + plotH - ((v-minV)/((maxV-minV)||1))*plotH;
+
+  ctx.strokeStyle = getCssVar('--border');
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '11px IBM Plex Mono, monospace';
+  ctx.lineWidth = 1;
+  [minV, 0, maxV].forEach(v => {
+    if (v < minV || v > maxV) return;
+    const y = yForV(v);
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(W-pad.right, y); ctx.stroke();
+    ctx.fillText((v>=0?'+':'') + v.toFixed(1) + '%', 4, y+4);
+  });
+
+  normalized.forEach(s => {
+    ctx.beginPath();
+    s.norm.forEach((p,i) => {
+      const x = xForT(p.t), y = yForV(p.v);
+      if (i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = 1.6;
+    ctx.stroke();
+  });
+
+  // Local maxima/minima per series — dots only (no inline text, since with
+  // several overlapping series text would collide); hover shows the values.
+  normalized.forEach(s => {
+    const values = s.norm.map(p => p.v);
+    const maxima = detectExtrema(values, 'max', 3);
+    const minima = detectExtrema(values, 'min', 3);
+    [...maxima, ...minima].forEach(idx => {
+      const p = s.norm[idx];
+      const x = xForT(p.t), y = yForV(p.v);
+      ctx.fillStyle = s.color;
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle = getCssVar('--surface');
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      compareExtremaPoints.push({ x, y, seriesLabel: s.label, color: s.color, value: p.v, date: new Date(p.t) });
+    });
+  });
+
+  ctx.fillStyle = getCssVar('--text-muted');
+  ctx.font = '10px IBM Plex Mono, monospace';
+  const first = new Date(minT), last = new Date(maxT);
+  ctx.fillText(fmtAxisDate(first), pad.left, H-4);
+  const lastLabel = fmtAxisDate(last);
+  ctx.fillText(lastLabel, W - pad.right - ctx.measureText(lastLabel).width, H-4);
+}
+
+document.getElementById('btn-run-compare').addEventListener('click', runCompare);
+document.querySelectorAll('.range-group[data-chart="compare"] .range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.range-group[data-chart="compare"] .range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    compareRange = btn.getAttribute('data-range');
+    if (compareSeries.length) renderCompareChart();
+  });
+});
+
+const compareCanvasEl = document.getElementById('compare-chart-canvas');
+const compareTooltipEl = document.getElementById('compare-chart-tooltip');
+compareCanvasEl.addEventListener('mousemove', e => {
+  const rect = compareCanvasEl.getBoundingClientRect();
+  const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+  const HIT_R = 6;
+  const hits = compareExtremaPoints.filter(p => Math.hypot(p.x-mx, p.y-my) <= HIT_R);
+  if (!hits.length){ compareTooltipEl.style.display = 'none'; return; }
+
+  compareTooltipEl.innerHTML = hits.map(p =>
+    `<div class="tt-row"><span class="tt-dot" style="background:${p.color};"></span>${p.seriesLabel}: ${fmtAxisDate(p.date)} · ${(p.value>=0?'+':'')}${p.value.toFixed(2)}%</div>`
+  ).join('');
+  compareTooltipEl.style.display = 'block';
+
+  const cardEl = compareCanvasEl.closest('.chart-card');
+  const cardRect = cardEl.getBoundingClientRect();
+  const offsetX = rect.left - cardRect.left, offsetY = rect.top - cardRect.top;
+  let left = offsetX + mx + 14, top = offsetY + my + 14;
+  const tw = compareTooltipEl.offsetWidth, th = compareTooltipEl.offsetHeight;
+  if (left + tw > cardRect.width - 4) left = offsetX + mx - tw - 14;
+  if (top + th > cardRect.height - 4) top = offsetY + my - th - 14;
+  compareTooltipEl.style.left = Math.max(4, left) + 'px';
+  compareTooltipEl.style.top = Math.max(4, top) + 'px';
+});
+compareCanvasEl.addEventListener('mouseleave', () => { compareTooltipEl.style.display = 'none'; });
 
 function updateWishlistTickerHeader(){
   const linkEl = document.getElementById('wishlist-ticker-link');
@@ -1668,6 +1929,7 @@ async function loadAndRender(){
     priceCache = {};
     render();
     if (currentTab === 'wishlist') renderWishlistTiles();
+    populateCompareList();
     setStatus('live', true);
   }catch(err){
     document.getElementById('table-body').innerHTML =
