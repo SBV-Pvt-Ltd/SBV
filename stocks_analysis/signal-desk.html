@@ -253,6 +253,8 @@
   }
   .tt-row{display:flex;align-items:center;gap:6px;white-space:nowrap;}
   .tt-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .tt-link{color:var(--text);text-decoration:none;}
+  .tt-link:hover{color:var(--accent);text-decoration:underline;}
   .chart-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
   .chart-head h3{margin:0;font-size:15px;font-family:'Space Grotesk',sans-serif;}
   .range-group{display:flex;gap:4px;flex-wrap:wrap;}
@@ -1515,12 +1517,25 @@ function renderConfidenceTooltip(tooltip, entry){
   const det = detractors.length
     ? detractors.map(e => `<div class="tt-row"><span class="tt-dot" style="background:${sell};"></span>${e}</div>`).join('')
     : '<div class="tt-row">None</div>';
+
+  const newsBlock = (d.pipeline_breakdown && d.pipeline_breakdown.news_sentiment) || {};
+  const usedHeadlines = (newsBlock.headlines || []).filter(h => h.relevant && h.matched_terms && h.matched_terms.length).slice(0, 5);
+  const newsSection = usedHeadlines.length ? `
+    <div style="font-weight:600;margin:6px 0 2px;">News Evidence Used</div>
+    ${usedHeadlines.map(h => {
+      const dotColor = h.score > 0 ? buy : h.score < 0 ? sell : getCssVar('--text-muted');
+      const safeLink = h.link ? h.link.replace(/"/g, '&quot;') : '#';
+      return `<div class="tt-row"><span class="tt-dot" style="background:${dotColor};"></span><a class="tt-link" href="${safeLink}" target="_blank" rel="noopener">${h.title}</a></div>`;
+    }).join('')}
+  ` : '';
+
   tooltip.innerHTML = `
     <div style="font-weight:700;color:${levelColor};margin-bottom:6px;">${d.confidence_score}/100 — ${String(d.confidence_level).replace(/_/g,' ')}</div>
     <div style="font-weight:600;margin:4px 0 2px;">Top Enhancers</div>
     ${enh}
     <div style="font-weight:600;margin:6px 0 2px;">Top Detractors</div>
     ${det}
+    ${newsSection}
   `;
 }
 function positionRecoTooltip(e, tile){
