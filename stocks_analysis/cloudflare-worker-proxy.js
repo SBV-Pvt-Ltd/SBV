@@ -34,7 +34,8 @@ const ALLOWED_ORIGINS = [
 const ALLOWED_HOSTS = [
   'query1.finance.yahoo.com',
   'query2.finance.yahoo.com',
-  'news.google.com'
+  'news.google.com',
+  'script.google.com'
 ];
 
 const BROWSER_HEADERS = {
