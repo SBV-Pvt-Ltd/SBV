@@ -16,6 +16,8 @@
   // >>> EDIT THIS to your deployed Worker URL (keep the /chat at the end) <<<
   var ENDPOINT = 'https://signal-desk-proxy.saharshbhadaniventure.workers.dev/chat';
 
+  var CONTACT_URL = 'https://www.saharshbhadani.com/page-aboutUs.html#contact';
+
   var TITLE = 'Ask us anything';
   var GREETING = "Hi! I can answer questions about Saharsh Bhadani Venture Private Limited and our services. What would you like to know?";
   var PLACEHOLDER = 'Type your question…';
@@ -47,6 +49,27 @@
     return n;
   }
 
+  /* ---------- clickable links (built with DOM nodes, never innerHTML) ---------- */
+  function appendLinked(parent, text) {
+    var re = /(https?:\/\/[^\s<>"']+)/g;
+    var last = 0, m;
+    while ((m = re.exec(text)) !== null) {
+      var url = m[1], trail = '';
+      var t = url.match(/[.,;:!?)\]]+$/);          // keep sentence punctuation outside the link
+      if (t) { trail = t[0]; url = url.slice(0, -trail.length); }
+      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+      var a = document.createElement('a');
+      a.href = url;
+      a.textContent = url === CONTACT_URL ? 'Contact us' : url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      parent.appendChild(a);
+      if (trail) parent.appendChild(document.createTextNode(trail));
+      last = m.index + m[1].length;
+    }
+    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+  }
+
   /* ---------- styles ---------- */
   var css = [
     '.sbvc-root,.sbvc-root *{box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}',
@@ -69,6 +92,8 @@
     '.sbvc-send{border:0;background:var(--a);color:#fff;border-radius:10px;padding:0 14px;font-size:14px;font-weight:600;cursor:pointer}',
     '.sbvc-send:disabled{opacity:.55;cursor:not-allowed}',
     '.sbvc-note{font-size:11px;color:var(--mut);text-align:center;padding:0 10px 8px;background:var(--bg)}',
+    '.sbvc-note a{color:var(--a);font-weight:600;text-decoration:underline}',
+    '.sbvc-msg a{color:inherit;font-weight:600;text-decoration:underline;word-break:break-all}',
     '@media (max-width:480px){.sbvc-root{right:8px;bottom:8px}.sbvc-panel{width:calc(100vw - 16px);height:calc(100vh - 90px)}}'
   ].join('\n');
 
@@ -107,7 +132,14 @@
     form.appendChild(input);
     form.appendChild(sendBtn);
 
-    var note = el('div', 'sbvc-note', 'AI assistant \u2014 answers may be inaccurate.');
+    var note = el('div', 'sbvc-note');
+    note.appendChild(document.createTextNode('AI assistant \u2014 answers may be inaccurate. '));
+    var contactLink = document.createElement('a');
+    contactLink.href = CONTACT_URL;
+    contactLink.textContent = 'Contact us';
+    contactLink.target = '_blank';
+    contactLink.rel = 'noopener noreferrer';
+    note.appendChild(contactLink);
 
     panel.appendChild(head);
     panel.appendChild(log);
@@ -123,7 +155,8 @@
     document.body.appendChild(root);
 
     function addMsg(role, text) {
-      var m = el('div', 'sbvc-msg ' + (role === 'user' ? 'sbvc-user' : 'sbvc-bot'), text);
+      var m = el('div', 'sbvc-msg ' + (role === 'user' ? 'sbvc-user' : 'sbvc-bot'));
+      appendLinked(m, String(text));
       log.appendChild(m);
       log.scrollTop = log.scrollHeight;
       return m;
@@ -180,8 +213,8 @@
           var reply = res.data && res.data.reply;
           if (!reply) {
             reply = res.status === 429
-              ? 'Too many messages \u2014 please wait a few minutes and try again.'
-              : 'Sorry, something went wrong. Please try again in a moment.';
+              ? 'Too many messages \u2014 please wait a few minutes and try again, or contact us here: ' + CONTACT_URL
+              : 'Sorry, something went wrong. Please try again in a moment, or contact us here: ' + CONTACT_URL;
           }
           typing.remove();
           addMsg('assistant', reply);
@@ -190,7 +223,7 @@
         })
         .catch(function () {
           typing.remove();
-          addMsg('assistant', 'Connection problem. Please check your internet and try again.');
+          addMsg('assistant', 'Connection problem. Please check your internet and try again, or contact us here: ' + CONTACT_URL);
           history.pop(); save();
         })
         .finally(function () {
