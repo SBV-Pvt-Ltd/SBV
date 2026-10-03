@@ -1,5 +1,5 @@
 /**
- * SBV website chat widget — drop-in, no dependencies.
+ * Saharsh Bhadani Venture website chat widget — drop-in, no dependencies.
  *
  * Host this file at the root of your GitHub Pages repo, then add to every page
  * just before </body>:
@@ -16,8 +16,8 @@
   // >>> EDIT THIS to your deployed Worker URL (keep the /chat at the end) <<<
   var ENDPOINT = 'https://signal-desk-proxy.saharshbhadaniventure.workers.dev/chat';
 
-  var TITLE = 'Ask Me';
-  var GREETING = "Hi! I can answer questions about services offered. What would you like to know?";
+  var TITLE = 'Ask us anything';
+  var GREETING = "Hi! I can answer questions about Saharsh Bhadani Venture Private Limited and our services. What would you like to know?";
   var PLACEHOLDER = 'Type your question…';
   var ACCENT = '#2563eb';
   var MAX_HISTORY = 6;       // must be <= server MAX_HISTORY
