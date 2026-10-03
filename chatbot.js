@@ -14,7 +14,7 @@
   window.__sbvChatLoaded = true;
 
   // >>> EDIT THIS to your deployed Worker URL (keep the /chat at the end) <<<
-  var ENDPOINT = 'https://signal-desk-proxy.YOUR-SUBDOMAIN.workers.dev/chat';
+  var ENDPOINT = 'https://signal-desk-proxy.saharshbhadaniventure.workers.dev/chat';
 
   var TITLE = 'Ask Me';
   var GREETING = "Hi! I can answer questions about services offered. What would you like to know?";
